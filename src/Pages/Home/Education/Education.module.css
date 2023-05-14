@@ -1,0 +1,23 @@
+.EducationRoot {
+  background-color: #0d2b60;
+  border-top: solid 0.4vh #000000;
+  border-bottom: solid 0.4vh #000000;
+  padding: 3vh 0;
+  width: 100%;
+}
+
+.EducationTitleContainer{
+  transform: skew(-14deg);
+  background-color: #031739;
+  margin: 0 2vw;
+}
+
+.EducationTitle {
+  font-size: 3.5vw;
+  transform: skew(7deg);
+  color: white;
+  margin-left: 2vw;
+  font-weight: 500;
+  /* text-shadow: 0 0 0.4vw white; */
+  padding: 0.5vh 0;
+}

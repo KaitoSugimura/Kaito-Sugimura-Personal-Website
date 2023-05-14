@@ -1,5 +1,6 @@
 .ProjectDescRoot {
   position: relative;
+  border: none;
 }
 
 .descContainer {
@@ -17,13 +18,14 @@
 
   color: white;
   font-size: 2vw;
-  border: none;
+  border: 3px solid rgba(141, 141, 141, 0);
   font-family: "Roboto", sans-serif;
 }
 
 .desc {
   padding: calc(50% + 2vh) 3vh 0 3vh;
   font-size: 3vh;
+  border: none;
 }
 
 .youtubeVideo {

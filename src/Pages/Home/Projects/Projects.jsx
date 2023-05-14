@@ -7,6 +7,8 @@ import Immortal from "/Home/Projects/Immortal.jpg";
 import NoLongerMe from "/Home/Projects/NoLongerMe.jpg";
 import PythonBasics from "/Home/Projects/HackYourLearning.jpg";
 import Blender from "/Home/Projects/BlenderModel.jpg";
+import BruhGame from "/Home/Projects/BruhGame.jpg"
+import ScuffedRPGAdventures from "/Home/Projects/ScuffedRPGAdventures.jpg";
 
 export default function Projects() {
   const containerRef = useRef(null);
@@ -55,19 +57,19 @@ export default function Projects() {
     },
     {
       bSelected: false,
-      software: "",
-      name: "",
-      date: "",
-      image: NoLongerMe,
-      type: "",
+      software: "Unity",
+      name: "Bruh Game",
+      date: "09/2021 – 09/2021",
+      image: BruhGame,
+      type: "Personal Project",
     },
     {
       bSelected: false,
-      software: "",
-      name: "",
-      date: "",
-      image: NoLongerMe,
-      type: "",
+      software: "Unity",
+      name: "RPG Adventures",
+      date: "09/2021 – 09/2021",
+      image: ScuffedRPGAdventures,
+      type: "Personal Project",
     },
     {
       bSelected: false,
@@ -156,10 +158,10 @@ export default function Projects() {
                     fontSize:
                       project.name.length > 12
                         ? `${
-                            2.6 -
-                            Math.floor((project.name.length - 10) / 1.25) / 10
-                          }vw`
-                        : "2.6vw",
+                            5 -
+                            Math.floor((project.name.length - 10) / 0.8) / 10
+                          }vh`
+                        : "5vh",
                   }}
                 >
                   {project.name}

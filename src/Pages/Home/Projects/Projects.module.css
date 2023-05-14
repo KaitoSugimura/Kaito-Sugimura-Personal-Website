@@ -13,7 +13,7 @@
 }
 
 .projectsTitle {
-  font-size: 3.5vw;
+  font-size: 7vh;
   transform: skew(7deg);
   color: white;
   margin-left: 2vw;
@@ -55,13 +55,14 @@
 }
 
 .parallelogram {
-  min-width: 22vw;
+  min-width: 45vh;
   height: 100%;
+  /* aspect-ratio: 1/1.5; */
   transform: skewX(-7deg);
   
   /* background-color: rgb(0, 0, 0); */
-  border-radius: 0.5vw;
-  margin-left: 1.5vw;
+  border-radius: 1vh;
+  margin-left: 2vh;
   overflow: hidden;
 
   /* box-shadow: 0px 0px 1vw #cdfffd; */
@@ -70,6 +71,7 @@
   drop-shadow(0vw 0vw 0.1vh #ddf6fc91); */
   /* border: solid 0.125vw black; */
   cursor: pointer;
+  box-shadow: 0.8vh 1vh 1.4vh rgba(0, 0, 0, 0.151);
 }
 
 /* .parallelogram:hover:after {
@@ -83,7 +85,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  box-shadow: inset 0 0 1.3vw #00030788;
+  box-shadow: inset 0 0 2.6vh #00030788;
   z-index: 1;
   transition: all 0.2s;
   -moz-user-select: -moz-none;
@@ -95,7 +97,7 @@
 }
 
 .selected.parallelogram:after {
-  box-shadow: inset 0 0 1.3vw #000f2d2e;
+  box-shadow: inset 0 0 2.6vh #000f2d2e;
 }
 
 .parallelogram .unskewed {
@@ -103,15 +105,20 @@
   top: 0;
   right: 0;
   transform: skewX(7deg);
-  width: 22vw;
+  width: 100%;
   height: 100%;
+  transition: all 0.3s;
+}
+
+.parallelogram:has(.ProjectType:hover) .unskewed {
+  opacity: 0;
 }
 
 .backgroundIMG {
   position: absolute;
   top: 0;
-  left: 0;
-  transform: translateX(-31%) skewX(7deg);
+  left: 50%;
+  transform: translateX(-50%) skewX(7deg);
   width: auto;
   height: 100%;
   z-index: -1;
@@ -145,7 +152,7 @@
   color: rgb(255, 255, 255);
   display: block;
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 2.4vh;
   transform: translateX(3vh);
   font-weight: 400;
   z-index: 2;
@@ -155,21 +162,22 @@
 
 .parallelogram .unskewed h2 {
   color: #68e5fe;
-  text-shadow: 0 0 0.3vw hsl(190, 100%, 40%);
+  text-shadow: 0 0 10px hsl(190, 100%, 40%);
   text-align: center;
   transform: translateX(3vh);
   font-weight: 500;
   z-index: 2;
   margin-top: 0.25vh;
+
   /* font-size: 2.5vw; SET IN Home.jsx*/
-  /* white-space: nowrap; */
+  white-space: nowrap;
 }
 
 .parallelogram .unskewed .date {
   color: rgb(255, 240, 109);
   display: block;
   text-align: center;
-  font-size: 1.25vw;
+  font-size: 2vh;
   margin-left: 6vh;
   font-weight: 400;
   z-index: 2;
@@ -180,9 +188,9 @@
   position: absolute;
   bottom: 2vh;
   left: calc(50% - 3vh);
-  font-size: 1.2vw;
+  font-size: 2vh;
   background-color: rgb(172, 220, 75);  font-weight: 500;
   transform: translateX(-50%);
   white-space: nowrap;
-  padding: 0.5vh 0.5vw;
+  padding: 0.5vh 1vh;
 }
