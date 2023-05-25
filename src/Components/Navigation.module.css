@@ -13,15 +13,6 @@
   transition: all 0.2s;
 }
 
-.NoUserSelect {
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  pointer-events: none;
-}
-
 .TopbarContainer{
   position: fixed;
   top: 0;
@@ -60,16 +51,17 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
-  background-color: rgba(0, 11, 26, 0.435);
+  background: linear-gradient(to right, #000000, #00000024)
 }
 
 .Title {
   color: white;
-  -webkit-text-stroke-width: 0.3vw;
+  -webkit-text-stroke-width: 0.15vw;
   -webkit-text-stroke-color: rgb(0, 0, 0);
   padding-left: 4vw;
   padding-top: 5vh;
   transition: all 0.4s;
+  font-weight: 700;
 }
 
 .list {
@@ -82,20 +74,34 @@
 }
 
 .listItem {
-  display: inline-block;
-  background-color: rgba(29, 34, 36, 0.727);
+  position: relative;
+  display: flex;
+  background-color:#11303f68;
   width: 150%;
   white-space: nowrap;
   padding-left: 4vw;
+  padding-bottom: 0.3vh;
   cursor: pointer;
   transition: all 0.4s;
-  border: 0.15vw solid white;
+  border: 0.15vw solid #71cdf8f1;
   border-left: none;
+  justify-content: start;
+  align-items: center;
+}
+
+.listItem:after{
+  content: "";
+  position: absolute;
+  top: 5%;
+  right: 0.2vw;
+  width: 0;
+  height: 90%;
+  border-right: 0.3vw solid #5bb5dff1;
 }
 
 .listItem:hover {
   display: inline-block;
-  background-color: rgba(16, 120, 161, 0.927);
+  background-color: #5591acd0;
   width: 150%;
   white-space: nowrap;
   padding-left: 4vw;

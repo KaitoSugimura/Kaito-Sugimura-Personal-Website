@@ -3,9 +3,10 @@ import styles from "./Navigation.module.css";
 import SettingsIcon from "/Home/Icons/Settings.svg";
 import Close from "/Home/Icons/Close.svg";
 import Menu from "/Home/Icons/Menu.svg";
+import Sections from "../Pages/Home/HomeTableOfContents.jsx";
 
 export default function Navigation() {
-  const [navIsOpen, setNavIsOpen] = useState(true);
+  const [navIsOpen, setNavIsOpen] = useState(false);
   const rootRef = useRef(null);
 
   // useEffect(() => {
@@ -23,18 +24,21 @@ export default function Navigation() {
   //   };
   // }, [navIsOpen]);
 
-  const scrollTo = (sectionName) => {
-    switch(sectionName) {
-      case "Projects":
-        document.getElementById("Projects").scrollIntoView({behavior: "smooth"});
-        break;
-      case "Education":
-        document.getElementById("Education").scrollIntoView({behavior: "smooth"});
-        break;
-      default:
-        break;
+  // useEffect(() => {
+  //   function handleClick(event) {
+  //     setNavIsOpen(false);
+  //   }
 
-    }
+  //   if (rootRef.current) rootRef.current.addEventListener("click", handleClick);
+
+  //   return () => {
+  //     if (rootRef.current)
+  //       rootRef.current.removeEventListener("click", handleClick);
+  //   };
+  // }, [navIsOpen]);
+
+  const scrollTo = (sectionName) => {
+    document.getElementById(sectionName).scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -56,7 +60,7 @@ export default function Navigation() {
       </div>
       <div
         className={`${styles.navigationRootContainer} ${
-          navIsOpen ? "" : styles.NoUserSelect
+          navIsOpen ? "" : "NoUserSelect"
         }`}
         style={{
           opacity: navIsOpen ? "1" : "0",
@@ -77,22 +81,18 @@ export default function Navigation() {
               transform: navIsOpen ? "translateX(0)" : "translateX(-100%)",
             }}
           >
-            <li className={`${styles.NavItem} ${styles.listItem}`} onClick={()=>{
-              scrollTo("Education");
-            }}>
-              Education
-            </li>
-            <li className={`${styles.NavItem} ${styles.listItem}`} onClick={()=>{
-              scrollTo("Projects");
-            }}>Projects</li>
-            <li
+            {Sections.map((section, index) => (
+              <li
               className={`${styles.NavItem} ${styles.listItem}`}
               onClick={() => {
+                scrollTo(section.title);
                 setNavIsOpen(false);
               }}
+              key={index}
             >
-              Close
+              {section.title}
             </li>
+            ))}
           </ul>
           <ul
             className={`${styles.credList} ${styles.list}`}

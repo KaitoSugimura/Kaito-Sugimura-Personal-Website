@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Projects.module.css";
 import ProjectDesc from "./ProjectDesc";
+import Sections from "../HomeTableOfContents.jsx";
 
 import CoinDozer from "/Home/Projects/CoinDozerGame.jpg";
 import Immortal from "/Home/Projects/Immortal.jpg";
 import NoLongerMe from "/Home/Projects/NoLongerMe.jpg";
 import PythonBasics from "/Home/Projects/HackYourLearning.jpg";
 import Blender from "/Home/Projects/BlenderModel.jpg";
-import BruhGame from "/Home/Projects/BruhGame.jpg"
+import BruhGame from "/Home/Projects/BruhGame.jpg";
 import ScuffedRPGAdventures from "/Home/Projects/ScuffedRPGAdventures.jpg";
 
 export default function Projects() {
@@ -88,7 +89,6 @@ export default function Projects() {
       type: "",
     },
   ]);
-  
 
   const [descRefs, setDescRefs] = useState(
     new Array(projects.length).fill(React.createRef())
@@ -136,7 +136,12 @@ export default function Projects() {
       <div className={styles.projectsTitleContainer}>
         <h1 className={styles.projectsTitle}>PROJECTS</h1>
       </div>
-      <div className={styles.parallelograms} ref={containerRef}>
+      <div
+        className={styles.parallelograms}
+        ref={containerRef}
+        // onMouseDown={deviceIsTouch ? null : handleMouseDown}
+        // onTouchStart={deviceIsTouch ? handleMouseDown : null}
+      >
         {projects.map((project, index) => (
           <div className={styles.mapRoot} key={index}>
             <div
@@ -152,8 +157,11 @@ export default function Projects() {
               </div>
 
               <div className={styles.unskewed}>
-                <p className={styles.software}>{project.software}</p>
+                <p className={`${styles.software} NoUserSelect`}>
+                  {project.software}
+                </p>
                 <h2
+                  className="NoUserSelect"
                   style={{
                     fontSize:
                       project.name.length > 12
@@ -166,9 +174,11 @@ export default function Projects() {
                 >
                   {project.name}
                 </h2>
-                <span className={styles.date}>{project.date}</span>
+                <span className={`${styles.date} NoUserSelect`}>
+                  {project.date}
+                </span>
 
-                <div className={styles.ProjectType}>{project.type}</div>
+                <div className={`${styles.ProjectType}`}>{project.type}</div>
               </div>
             </div>
             <ProjectDesc

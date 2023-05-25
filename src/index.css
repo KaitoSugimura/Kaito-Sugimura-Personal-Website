@@ -85,3 +85,14 @@ body::-webkit-scrollbar-track {
     background-color: transparent;
     border: none;
 }
+
+
+/** GLOBAL **/
+.NoUserSelect {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+  }
