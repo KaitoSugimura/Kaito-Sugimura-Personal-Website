@@ -10,9 +10,11 @@ import PythonBasics from "/Home/Projects/HackYourLearning.jpg";
 import Blender from "/Home/Projects/BlenderModel.jpg";
 import BruhGame from "/Home/Projects/BruhGame.jpg";
 import ScuffedRPGAdventures from "/Home/Projects/ScuffedRPGAdventures.jpg";
+import XDragScroller from "../../../Tools/XDragScroller";
 
 export default function Projects() {
-  const containerRef = useRef(null);
+  // const containerRef = useRef(null);]
+  const [isDragging, setIsDragging] = useState(false);
 
   const [projects, setProjects] = useState([
     {
@@ -94,31 +96,31 @@ export default function Projects() {
     new Array(projects.length).fill(React.createRef())
   );
 
-  useEffect(() => {
-    containerRef.current.scrollLeft = 30; // Start with left scroll a bit
+  // useEffect(() => {
+  //   containerRef.current.scrollLeft = 30; // Start with left scroll a bit
 
-    function handleWheel(event) {
-      if (containerRef.current.contains(event.target)) {
-        if (
-          (containerRef.current.scrollLeft > 5 && event.deltaY < 0) ||
-          (containerRef.current.scrollLeft + 5 <
-            containerRef.current.scrollWidth -
-              containerRef.current.offsetWidth &&
-            event.deltaY > 0)
-        ) {
-          event.preventDefault();
-          containerRef.current.scrollLeft += event.deltaY;
-        }
-      }
-    }
+  //   function handleWheel(event) {
+  //     if (containerRef.current.contains(event.target)) {
+  //       if (
+  //         (containerRef.current.scrollLeft > 5 && event.deltaY < 0) ||
+  //         (containerRef.current.scrollLeft + 5 <
+  //           containerRef.current.scrollWidth -
+  //             containerRef.current.offsetWidth &&
+  //           event.deltaY > 0)
+  //       ) {
+  //         event.preventDefault();
+  //         containerRef.current.scrollLeft += event.deltaY;
+  //       }
+  //     }
+  //   }
 
-    containerRef.current.addEventListener("wheel", handleWheel);
+  //   containerRef.current.addEventListener("wheel", handleWheel);
 
-    return () => {
-      if (containerRef.current)
-        containerRef.current.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
+  //   return () => {
+  //     if (containerRef.current)
+  //       containerRef.current.removeEventListener("wheel", handleWheel);
+  //   };
+  // }, []);
 
   const clickSubs = useRef(new Array(projects.length));
   const clickEventSub = (f, index) => {
@@ -136,9 +138,13 @@ export default function Projects() {
       <div className={styles.projectsTitleContainer}>
         <h1 className={styles.projectsTitle}>PROJECTS</h1>
       </div>
-      <div
-        className={styles.parallelograms}
-        ref={containerRef}
+      <XDragScroller
+        style={{
+          width: "100vw",
+          height: "70vh",
+        }}
+        setIsDragging={setIsDragging}
+        // ref={containerRef}
         // onMouseDown={deviceIsTouch ? null : handleMouseDown}
         // onTouchStart={deviceIsTouch ? handleMouseDown : null}
       >
@@ -147,9 +153,12 @@ export default function Projects() {
             <div
               className={`${styles.parallelogram} ${
                 project.bSelected && styles.selected
-              }`}
+              } ${isDragging ? styles.Dragging : ""}`}
               onClick={() => {
-                clickSubs.current[index]();
+                if (!isDragging) {
+                  clickSubs.current[index]();
+                }
+                setIsDragging(false);
               }}
             >
               <div className={styles.foregroundMask}>
@@ -178,7 +187,9 @@ export default function Projects() {
                   {project.date}
                 </span>
 
-                <div className={`${styles.ProjectType}`}>{project.type}</div>
+                <div className={`${styles.ProjectType}`}>
+                  <p>{project.type}</p>
+                </div>
               </div>
             </div>
             <ProjectDesc
@@ -190,7 +201,7 @@ export default function Projects() {
             />
           </div>
         ))}
-      </div>
+      </XDragScroller>
     </div>
   );
 }

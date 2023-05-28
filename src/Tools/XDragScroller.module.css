@@ -1,0 +1,201 @@
+.DragRoot {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  overflow: hidden;
+}
+
+.DragArea {
+  font-size: 2vw;
+  display: flex;
+  /* gap: 1.5vw; */
+  margin-top: 1vh;
+  padding: 1vh 0;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.DragArea::-webkit-scrollbar {
+  height: 1.2vh;
+  background-color: transparent;
+  border: none;
+}
+
+.DragArea::-webkit-scrollbar-thumb {
+  background-color: #bdbcbc;
+  border-radius: 10px;
+}
+
+.DragArea::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: none;
+}
+
+.DragAreaPos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.DragAnimContainer {
+  position: absolute;
+  bottom: 8%;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+
+  animation: 1s ease-in anim;
+}
+
+@keyframes anim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* .ArrowImage {
+  width: 50%;
+  height: 80px;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+
+  animation: 2.2s infinite ease-in-out expand;
+
+  filter: drop-shadow(0px 4px 0px rgb(0, 0, 0));
+}
+
+@keyframes expand {
+  0% {
+    transform: scale(0.98);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(0.98);
+  }
+
+} */
+
+.MouseLineContainer{
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+
+  filter: drop-shadow(0px 1px 2px rgb(0, 0, 0));
+}
+
+.MouseLineContainer span{
+  background-color: #ffffff;
+  height: 4px;
+}
+
+.leftSpan{
+  animation: 4s infinite ease-in-out leftSpanAnim;
+  margin-right: 10px;
+}
+
+@keyframes leftSpanAnim {
+  0% {
+    width: 35%;
+  }
+  50% {
+    width: 95%;
+  }
+  100% {
+    width: 35%;
+  }
+
+}
+
+.rightSpan{
+  animation: 4s infinite ease-in-out rightSpanAnim;
+  margin-left: 10px;
+}
+
+@keyframes rightSpanAnim {
+  0% {
+    width: 95%;
+  }
+  50% {
+    width: 35%;
+  }
+  100% {
+    width: 95%;
+  }
+
+}
+
+.MouseImage{
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+
+  width: 5%;
+  transform: scale(1.2);
+  filter: invert(1);
+  /* animation: 5s infinite ease-in-out drag; */
+}
+
+@keyframes drag {
+  0% {
+    margin-left: 30%;
+    margin-right: 0%;
+  }
+  50% {
+    margin-left: 0%;
+    margin-right: 30%;
+  }
+  100% {
+    margin-left: 30%;
+    margin-right: 0%;
+  }
+
+}

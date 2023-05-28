@@ -92,7 +92,7 @@ export default function WebsiteProjects() {
       >
         <div className={styles.WebsiteOuterFrame}>
           {Contents.map((content, index) => (
-            <divs
+            <div
               className={styles.FrameContainer}
               style={{
                 zIndex: Math.round(-(getAbsPosIndex(index) * 400)),
@@ -131,7 +131,7 @@ export default function WebsiteProjects() {
                   ></img>
                 </div>
               </div>
-            </divs>
+            </div>
           ))}
         </div>
       </div>

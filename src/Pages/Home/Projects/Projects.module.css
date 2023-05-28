@@ -27,12 +27,11 @@
   display: flex;
 }
 
-.parallelograms {
+/* .parallelograms {
   width: 100vw;
   height: 70vh;
   font-size: 2vw;
   display: flex;
-  /* gap: 1.5vw; */
   margin-top: 1vh;
   padding: 1vh 0;
   overflow-x: scroll;
@@ -55,26 +54,30 @@
 .parallelograms::-webkit-scrollbar-track {
   background-color: transparent;
   border: none;
-}
+} */
 
 .parallelogram {
   min-width: 45vh;
   height: 100%;
   /* aspect-ratio: 1/1.5; */
   transform: skewX(-7deg);
-  
-  /* background-color: rgb(0, 0, 0); */
+  /* To get rid of edges on chrome */
+  -webkit-backface-visibility: hidden; 
+
   border-radius: 1vh;
   margin-left: 2vh;
   overflow: hidden;
 
-  /* box-shadow: 0px 0px 1vw #cdfffd; */
   z-index: 10;
-  /* filter: drop-shadow(0vw 0vw 0.4vh #ffffff)
-  drop-shadow(0vw 0vw 0.1vh #ddf6fc91); */
-  /* border: solid 0.125vw black; */
   cursor: pointer;
   box-shadow: 0.8vh 1vh 1.4vh rgba(0, 0, 0, 0.151);
+}
+
+.Dragging{
+  cursor: move; 
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
 }
 
 /* .parallelogram:hover:after {
@@ -126,6 +129,13 @@
   height: 100%;
   z-index: -1;
   border: none;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .foregroundMask {
@@ -138,6 +148,13 @@
   background-color: #00041124;
 
   transition: all 0.4s;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .parallelogram:hover .foregroundMask {
@@ -196,4 +213,14 @@
   transform: translateX(-50%);
   white-space: nowrap;
   padding: 0.5vh 1vh;
+  
+}
+
+.ProjectType p{
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
