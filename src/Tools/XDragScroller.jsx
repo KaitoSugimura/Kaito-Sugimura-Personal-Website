@@ -51,7 +51,7 @@ export default function XDragScroller({ style, children, setIsDragging }) {
     setFalseTimeoutRef.current = setTimeout(() => {
       setFalseTimeoutRef.current = null;
       setClickedOnce(false);
-    }, 5000);
+    }, 15000);
   };
 
   return (

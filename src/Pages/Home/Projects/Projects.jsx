@@ -135,9 +135,9 @@ export default function Projects() {
 
   return (
     <div className={styles.projectsContainer}>
-      <div className={styles.projectsTitleContainer}>
+      {/* <div className={styles.projectsTitleContainer}>
         <h1 className={styles.projectsTitle}>PROJECTS</h1>
-      </div>
+      </div> */}
       <XDragScroller
         style={{
           width: "100vw",

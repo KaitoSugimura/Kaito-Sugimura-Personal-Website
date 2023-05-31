@@ -1,0 +1,113 @@
+.cameraUIRoot {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cameraUIContainer {
+  position: relative;
+  width: calc(100% - 10rem);
+  height: calc(100% - 10rem);
+  top: 0;
+  left: 0;
+  background-color: transparent;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.cameraUIMainContainer {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  transform: translateY(-2.5rem);
+
+  color: white;
+  font-size: 6rem;
+}
+
+.MainNameText{
+  display: inline;
+  font-size: 3rem;
+}
+
+.MainSection {
+  position: relative;
+  display: inline;
+  width: 55rem;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MainSectionBackground {
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  background-color: rgba(0, 0, 0, 0.473);
+  z-index: -1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 600;
+}
+
+.MainSectionText {
+  display: inline;
+}
+
+.cameraUITopRightContainer{
+  position: absolute;
+  width: 100%;
+  top: 1.5rem;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex-direction: column;
+
+  margin-right: 2.5rem;
+
+
+  color: white;
+  font-size: 4rem;
+}
+
+.cameraUIBottomLeftContainer{
+  position: absolute;
+  width: 100%;
+  bottom: 1rem;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+
+  margin-left: 1.5rem;
+
+
+  color: white;
+  font-size: 2.5rem;
+}

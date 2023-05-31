@@ -78,10 +78,6 @@ export default function WebsiteProjects() {
 
   return (
     <div className={styles.WebsiteProjectsRoot}>
-      <div className={styles.WebsiteProjectsTitleContainer}>
-        <h1 className={styles.WebsiteProjectsTitle}>Website Projects</h1>
-      </div>
-
       <div
         className={styles.WebsiteFrameContainer}
         onMouseDown={deviceIsTouch ? null : handleMouseDown}

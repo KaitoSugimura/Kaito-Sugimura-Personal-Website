@@ -5,8 +5,9 @@ import Education from "./Education/Education";
 import Sections from "./HomeTableOfContents.jsx";
 
 export default function Home() {
+
   return (
-    <>
+    <div>
       <img
         className={styles.backgroundImage}
         src="/Backgrounds/Sphere.png"
@@ -22,6 +23,6 @@ export default function Home() {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }

@@ -1,0 +1,96 @@
+.ButtonsContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 1.5rem;
+  z-index: 10;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  transition: transform 0.4s;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+
+
+.OpenNavButton {
+  width: 8.5rem;
+  height: 8.5rem;
+  cursor: pointer;
+  transition: all 0.4s;
+  background-color: transparent;
+  border: none;
+  position: relative;
+
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+}
+
+.TopLeft,
+.TopRight,
+.BottomLeft,
+.BottomRight {
+  position: absolute;
+  transition: all 0.3s;
+}
+
+.OpenNavButton:hover .TopLeft {
+  transform: translate(-0.2rem, -0.2rem);
+}
+.OpenNavButton:hover .TopRight {
+  transform: translate(0.2rem, -0.2rem);
+}
+.OpenNavButton:hover .BottomLeft {
+  transform: translate(-0.2rem, 0.2rem);
+}
+.OpenNavButton:hover .BottomRight {
+  transform: translate(0.2rem, 0.2rem);
+}
+
+.TopLeft {
+  top: 0;
+  left: 0;
+  border-top: 0.3rem solid rgb(255, 255, 255);
+  border-left: 0.3rem solid rgb(255, 255, 255);
+}
+
+.TopRight {
+  top: 0;
+  right: 0;
+  border-top: 0.3rem solid rgb(255, 255, 255);
+  border-right: 0.3rem solid rgb(255, 255, 255);
+}
+
+.BottomLeft {
+  bottom: 0;
+  left: 0;
+  border-bottom: 0.3rem solid rgb(255, 255, 255);
+  border-left: 0.3rem solid rgb(255, 255, 255);
+}
+
+.BottomRight {
+  bottom: 0;
+  right: 0;
+  border-bottom: 0.3rem solid rgb(255, 255, 255);
+  border-right: 0.3rem solid rgb(255, 255, 255);
+}
+
+
+.SettingsIcon {
+  width: 6rem;
+  height: 6rem;
+  filter: invert(100%);
+}

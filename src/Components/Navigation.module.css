@@ -1,96 +1,36 @@
 .navigationRoot {
   position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
   z-index: 1000;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
 
-.navigationRootContainer {
+.navigationContainer {
   position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
+  z-index: 0;
+
   font-size: 5rem;
   transition: all 0.2s;
-}
 
-.TopbarContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 10vh;
-  /* background-color: rgba(0, 0, 0, 0.5); */
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  z-index: 1001;
-  transition: transform 0.4s;
-  padding: 0 1vw;
-}
-
-.OpenNavButton {
-  width: 8.5rem;
-  height: 8.5rem;
-  cursor: pointer;
-  transition: all 0.4s;
-  background-color: transparent;
-  border: none;
-  position: relative;
-}
-
-.TopLeft,
-.TopRight,
-.BottomLeft,
-.BottomRight {
-  position: absolute;
-  transition: all 0.3s;
-}
-
-.OpenNavButton:hover .TopLeft {
-  transform: translate(-0.2rem, -0.2rem);
-}
-.OpenNavButton:hover .TopRight {
-  transform: translate(0.2rem, -0.2rem);
-}
-.OpenNavButton:hover .BottomLeft {
-  transform: translate(-0.2rem, 0.2rem);
-}
-.OpenNavButton:hover .BottomRight {
-  transform: translate(0.2rem, 0.2rem);
-}
-
-.TopLeft {
-  top: 0;
-  left: 0;
-  border-top: 0.3rem solid rgb(255, 255, 255);
-  border-left: 0.3rem solid rgb(255, 255, 255);
-}
-
-.TopRight {
-  top: 0;
-  right: 0;
-  border-top: 0.3rem solid rgb(255, 255, 255);
-  border-right: 0.3rem solid rgb(255, 255, 255);
-}
-
-.BottomLeft {
-  bottom: 0;
-  left: 0;
-  border-bottom: 0.3rem solid rgb(255, 255, 255);
-  border-left: 0.3rem solid rgb(255, 255, 255);
-}
-
-.BottomRight {
-  bottom: 0;
-  right: 0;
-  border-bottom: 0.3rem solid rgb(255, 255, 255);
-  border-right: 0.3rem solid rgb(255, 255, 255);
-}
-
-.SettingsIcon {
-  width: 6rem;
-  height: 6rem;
-  filter: invert(100%);
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
 }
 
 .sidebarContainer {
@@ -98,25 +38,36 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: start;
   background: linear-gradient(to right, #000000, #00000024);
 }
 
 .Title {
+  position: absolute;
+  top: 0;
+  left: 0;
+
   color: white;
-  -webkit-text-stroke-width: 0.15vw;
+  -webkit-text-stroke-width: 0.4rem;
+  font-size: 12rem;
   -webkit-text-stroke-color: rgb(0, 0, 0);
-  padding-left: 4vw;
-  padding-top: 5vh;
+  padding-left: 8rem;
+  padding-top: 4rem;
   transition: all 0.4s;
   font-weight: 700;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 2vh;
 
   color: white;
   transition: all 0.4s;
@@ -125,36 +76,48 @@
 
 .listItem {
   position: relative;
-  display: flex;
-  background-color: #11303f68;
   width: 100%;
-  white-space: nowrap;
-  padding-left: 4vw;
-  padding-bottom: 0.3vh;
+  padding: 1rem 0;
   cursor: pointer;
+}
+
+.listInside {
+  position: relative;
+  width: 100%;
+  background-color: #11303f68;
+  white-space: nowrap;
+  padding-left: 8rem;
+  padding-bottom: 0.3rem;
   transition: all 0.4s;
-  border: 0.15vw solid #71cdf8f1;
+  border: 0.3rem solid #71cdf8f1;
   border-left: none;
   justify-content: start;
   align-items: center;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
 
-.listItem:after {
+.listInside:after {
   content: "";
   position: absolute;
   top: 5%;
-  right: 0.2vw;
+  right: 0.5rem;
   width: 0;
   height: 90%;
-  border-right: 0.3vw solid #5bb5dff1;
+  border-right: 0.6rem solid #5bb5dff1;
 }
 
-.listItem:hover {
+.listItem:hover .listInside {
   display: inline-block;
   background-color: #5591acd0;
   width: 100%;
   white-space: nowrap;
-  padding-left: 4vw;
+  padding-left: 10rem;
 }
 
 .NavList {
@@ -164,7 +127,14 @@
 }
 
 .credList {
-  padding-bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+
+  color: white;
+  transition: all 0.4s;
+  width: 90%;
+  padding-left: 6rem;
+  padding-bottom: 5rem;
 }
 
 .credItem {
