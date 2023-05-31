@@ -1,5 +1,15 @@
-.HeroRoot{
+.HeroRoot {
   width: 100vw;
   height: 100vh;
 }
 
+.backgroundImage {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/Backgrounds/Sphere.png");
+  border: none;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

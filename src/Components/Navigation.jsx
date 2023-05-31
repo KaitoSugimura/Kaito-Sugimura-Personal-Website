@@ -13,6 +13,7 @@ export default function Navigation() {
     document.getElementById(sectionName).scrollIntoView({ behavior: "smooth" });
   };
 
+
   return (
     <div className={styles.navigationRoot} ref={rootRef}>
       <CameraUI navIsOpen={navIsOpen} />
