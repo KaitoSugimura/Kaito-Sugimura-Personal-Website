@@ -8,6 +8,8 @@ import Sections from "../Pages/Home/HomeTableOfContents.jsx";
 export default function Navigation() {
   const [navIsOpen, setNavIsOpen] = useState(false);
   const rootRef = useRef(null);
+  const navButtonUnOpenWidth = "30%";
+  const navButtonOpenWidth = "15%";
 
   // useEffect(() => {
   //   function handleWheel(event) {
@@ -56,6 +58,34 @@ export default function Navigation() {
           }}
         >
           <img src={navIsOpen ? Close : Menu} className={styles.SettingsIcon} />
+          <span
+            className={styles.TopLeft}
+            style={{
+              width: navIsOpen ? navButtonOpenWidth : navButtonUnOpenWidth,
+              height: navIsOpen ? navButtonOpenWidth : navButtonUnOpenWidth,
+            }}
+          ></span>
+          <span
+            className={styles.TopRight}
+            style={{
+              width: navIsOpen ? navButtonOpenWidth : navButtonUnOpenWidth,
+              height: navIsOpen ? navButtonOpenWidth : navButtonUnOpenWidth,
+            }}
+          ></span>
+          <span
+            className={styles.BottomLeft}
+            style={{
+              width: navIsOpen ? navButtonOpenWidth : navButtonUnOpenWidth,
+              height: navIsOpen ? navButtonOpenWidth : navButtonUnOpenWidth,
+            }}
+          ></span>
+          <span
+            className={styles.BottomRight}
+            style={{
+              width: navIsOpen ? navButtonOpenWidth : navButtonUnOpenWidth,
+              height: navIsOpen ? navButtonOpenWidth : navButtonUnOpenWidth,
+            }}
+          ></span>
         </button>
       </div>
       <div
@@ -83,15 +113,15 @@ export default function Navigation() {
           >
             {Sections.map((section, index) => (
               <li
-              className={`${styles.NavItem} ${styles.listItem}`}
-              onClick={() => {
-                scrollTo(section.title);
-                setNavIsOpen(false);
-              }}
-              key={index}
-            >
-              {section.title}
-            </li>
+                className={`${styles.NavItem} ${styles.listItem}`}
+                onClick={() => {
+                  scrollTo(section.title);
+                  setNavIsOpen(false);
+                }}
+                key={index}
+              >
+                {section.title}
+              </li>
             ))}
           </ul>
           <ul

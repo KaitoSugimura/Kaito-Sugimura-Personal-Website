@@ -1,6 +1,6 @@
 .navigationRoot {
   position: fixed;
-  z-index: 10000;
+  z-index: 1000;
 }
 
 .navigationRootContainer {
@@ -9,11 +9,11 @@
   height: 100vh;
   top: 0;
   left: 0;
-  font-size: 3vw;
+  font-size: 5rem;
   transition: all 0.2s;
 }
 
-.TopbarContainer{
+.TopbarContainer {
   position: fixed;
   top: 0;
   left: 0;
@@ -23,24 +23,73 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  z-index: 10001;
-  transition: all 0.4s;
+  z-index: 1001;
+  transition: transform 0.4s;
   padding: 0 1vw;
 }
 
 .OpenNavButton {
-  width: 3vw;
-  height: 3vw;
+  width: 8.5rem;
+  height: 8.5rem;
   cursor: pointer;
   transition: all 0.4s;
   background-color: transparent;
-  border: 0.15vw solid rgb(255, 255, 255);
-  border-radius: 0.2vw;
+  border: none;
+  position: relative;
 }
 
-.SettingsIcon{
-  width: 100%;
-  height: 100%;
+.TopLeft,
+.TopRight,
+.BottomLeft,
+.BottomRight {
+  position: absolute;
+  transition: all 0.3s;
+}
+
+.OpenNavButton:hover .TopLeft {
+  transform: translate(-0.2rem, -0.2rem);
+}
+.OpenNavButton:hover .TopRight {
+  transform: translate(0.2rem, -0.2rem);
+}
+.OpenNavButton:hover .BottomLeft {
+  transform: translate(-0.2rem, 0.2rem);
+}
+.OpenNavButton:hover .BottomRight {
+  transform: translate(0.2rem, 0.2rem);
+}
+
+.TopLeft {
+  top: 0;
+  left: 0;
+  border-top: 0.3rem solid rgb(255, 255, 255);
+  border-left: 0.3rem solid rgb(255, 255, 255);
+}
+
+.TopRight {
+  top: 0;
+  right: 0;
+  border-top: 0.3rem solid rgb(255, 255, 255);
+  border-right: 0.3rem solid rgb(255, 255, 255);
+}
+
+.BottomLeft {
+  bottom: 0;
+  left: 0;
+  border-bottom: 0.3rem solid rgb(255, 255, 255);
+  border-left: 0.3rem solid rgb(255, 255, 255);
+}
+
+.BottomRight {
+  bottom: 0;
+  right: 0;
+  border-bottom: 0.3rem solid rgb(255, 255, 255);
+  border-right: 0.3rem solid rgb(255, 255, 255);
+}
+
+.SettingsIcon {
+  width: 6rem;
+  height: 6rem;
   filter: invert(100%);
 }
 
@@ -51,7 +100,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
-  background: linear-gradient(to right, #000000, #00000024)
+  background: linear-gradient(to right, #000000, #00000024);
 }
 
 .Title {
@@ -71,13 +120,14 @@
 
   color: white;
   transition: all 0.4s;
+  width: 80rem;
 }
 
 .listItem {
   position: relative;
   display: flex;
-  background-color:#11303f68;
-  width: 150%;
+  background-color: #11303f68;
+  width: 100%;
   white-space: nowrap;
   padding-left: 4vw;
   padding-bottom: 0.3vh;
@@ -89,7 +139,7 @@
   align-items: center;
 }
 
-.listItem:after{
+.listItem:after {
   content: "";
   position: absolute;
   top: 5%;
@@ -102,10 +152,9 @@
 .listItem:hover {
   display: inline-block;
   background-color: #5591acd0;
-  width: 150%;
+  width: 100%;
   white-space: nowrap;
   padding-left: 4vw;
-
 }
 
 .NavList {

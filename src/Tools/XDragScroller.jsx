@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import styles from "./XDragScroller.module.css";
-import { clear } from "localforage";
+import MouseIcon from "/Tools/Mouse.svg";
 
 export default function XDragScroller({ style, children, setIsDragging }) {
   const MouseXPrevRef = useRef(0);
@@ -47,8 +47,8 @@ export default function XDragScroller({ style, children, setIsDragging }) {
       handleMouseMove.current
     );
     setClickedOnce(true);
-    clearTimeout(setFalseTimeoutRef.current );
-    setFalseTimeoutRef.current = setTimeout(()=>{
+    clearTimeout(setFalseTimeoutRef.current);
+    setFalseTimeoutRef.current = setTimeout(() => {
       setFalseTimeoutRef.current = null;
       setClickedOnce(false);
     }, 5000);
@@ -60,9 +60,15 @@ export default function XDragScroller({ style, children, setIsDragging }) {
         <div className={styles.DragAreaPos}>
           <div className={styles.DragAnimContainer}>
             <div className={styles.MouseLineContainer}>
-              <span className={styles.leftSpan}></span>
-              <img className={styles.MouseImage} src="/Tools/Mouse.svg"></img>
-              <span className={styles.rightSpan}></span>
+              <div className={styles.leftSpan}></div>
+              <div className={styles.MouseImageContainer}>
+                {!deviceIsTouch && (
+                  <img className={styles.MouseImage} src={MouseIcon}></img>
+                )}
+
+                <p>DRAG</p>
+              </div>
+              <div className={styles.rightSpan}></div>
             </div>
           </div>
         </div>

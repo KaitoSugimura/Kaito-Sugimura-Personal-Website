@@ -1,0 +1,28 @@
+:root {
+  --heading-color: #444;
+  --text-color: #999;
+  --textbox-color: rgb(223, 227, 230);
+  --primary-color: #4ba3cc;
+  --section-tc: #0d2b60b7;
+  --bg-color: rgb(240, 248, 255);
+}
+
+.scrapLater {
+
+  /* nav highlighted selection */
+  --highlight-color: #0080ff;
+  --secondaryHighlight-color: #d2e8fd;
+
+  /* chat */
+  --secondary-color: hsl(144, 56%, 55%);
+  --bg-secondary-color: hsl(143, 100%, 97%);
+  --tertiary-color: hsl(11, 56%, 55%);
+  --bg-tertiary-color: hsl(11, 100%, 97%);
+  --gray-color: hsl(0, 0%, 55%);
+
+  /* Home */
+  --particle-color: #faf8c1;
+  --home-outer-color: hsl(218, 49%, 44%);
+  --home-inner-color: #91ffff;
+  --banner-highlight: hsla(68, 55%, 87%, 0.865);
+}

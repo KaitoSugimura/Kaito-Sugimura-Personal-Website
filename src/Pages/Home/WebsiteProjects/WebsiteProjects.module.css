@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(255, 221, 221);
+  background-color: var(--section-tc);
   
   cursor: move; 
   cursor: grab;
