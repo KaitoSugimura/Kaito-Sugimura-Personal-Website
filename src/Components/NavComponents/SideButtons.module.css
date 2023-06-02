@@ -1,0 +1,61 @@
+.sideButtonsRoot {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  right: 4rem;
+  z-index: 9;
+
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex-direction: column;
+  gap: 0.7rem;
+
+  transition: transform 0.4s;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.sectionButton {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  border: 0.2rem solid rgba(255, 255, 255, 0.649);
+  background-color: transparent;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+
+  cursor: pointer;
+}
+
+.selected,
+.sectionButton:hover {
+  border: 0.2rem solid rgba(255, 255, 255, 0.95);
+  background-color: transparent;
+}
+
+.ButtonInnerColor {
+  background-color: rgba(255, 255, 255, 0.649);
+  width: 80%;
+  height: 80%;
+  border-radius: 2rem;
+}
+
+.selected .ButtonInnerColor,
+.sectionButton:hover .ButtonInnerColor {
+  background-color: rgba(255, 255, 255, 0.95);
+}

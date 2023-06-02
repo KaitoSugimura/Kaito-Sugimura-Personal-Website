@@ -1,14 +1,15 @@
 .ButtonsContainer {
   position: fixed;
-  width: 100vw;
+  /* width: 30vw; */
   height: 100vh;
   top: 0;
   left: 1.5rem;
   z-index: 10;
 
   display: flex;
-  justify-content: start;
-  align-items: center;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
 
   transition: transform 0.4s;
 

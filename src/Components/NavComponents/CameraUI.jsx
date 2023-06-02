@@ -1,7 +1,8 @@
 import styles from "./CameraUI.module.css";
 import CornerBorder from "./CornerBorder";
+import Sections from "../../Pages/Home/HomeTableOfContents.jsx";
 
-export default function CameraUI({ navIsOpen }) {
+export default function CameraUI({ navIsOpen, currentSectionIndex }) {
   const BorderStyle = {
     width: navIsOpen ? "5%" : "30%",
     height: navIsOpen ? "5%" : "30%",
@@ -21,12 +22,12 @@ export default function CameraUI({ navIsOpen }) {
           <div className={styles.MainSection}>
             <CornerBorder style={StaticBorder} />
             <div className={styles.MainSectionBackground}>
-              <p className={styles.MainSectionText}>HOME</p>
+              <p className={styles.MainSectionText}>{Sections[currentSectionIndex].title}</p>
             </div>
           </div>
         </div>}
         <div className={styles.cameraUITopRightContainer}>
-          <p>Page 1/7</p>
+          <p>Page {currentSectionIndex+1}/{Sections.length}</p>
         </div>
         <div className={styles.cameraUIBottomLeftContainer}>
           <p>Developed from scratch using: REACT, JS, CSS, HTML</p>

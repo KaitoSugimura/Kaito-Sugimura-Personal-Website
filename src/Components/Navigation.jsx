@@ -4,20 +4,17 @@ import SettingsIcon from "/Home/Icons/Settings.svg";
 import Sections from "../Pages/Home/HomeTableOfContents.jsx";
 import CameraUI from "./NavComponents/CameraUI";
 import NavButtons from "./NavComponents/NavButtons";
+import SideButtons from "./NavComponents/SideButtons";
 
-export default function Navigation() {
+export default function Navigation({ scrollTo, currentSectionIndex }) {
   const [navIsOpen, setNavIsOpen] = useState(false);
   const rootRef = useRef(null);
 
-  const scrollTo = (sectionName) => {
-    document.getElementById(sectionName).scrollIntoView({ behavior: "smooth" });
-  };
-
-
   return (
     <div className={styles.navigationRoot} ref={rootRef}>
-      <CameraUI navIsOpen={navIsOpen} />
+      <CameraUI navIsOpen={navIsOpen} currentSectionIndex={currentSectionIndex}  />
       <NavButtons navIsOpen={navIsOpen} setNavIsOpen={setNavIsOpen} />
+      <SideButtons navIsOpen={navIsOpen} scrollTo={scrollTo} currentSectionIndex={currentSectionIndex} />
       <div
         className={`${styles.navigationContainer} ${
           navIsOpen ? "" : "NoUserSelect"
@@ -45,7 +42,7 @@ export default function Navigation() {
               <li
                 className={`${styles.NavItem} ${styles.listItem}`}
                 onClick={() => {
-                  scrollTo(section.title);
+                  scrollTo(index);
                   setNavIsOpen(false);
                 }}
                 key={index}
