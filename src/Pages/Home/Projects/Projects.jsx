@@ -11,6 +11,7 @@ import Blender from "/Home/Projects/BlenderModel.jpg";
 import BruhGame from "/Home/Projects/BruhGame.jpg";
 import ScuffedRPGAdventures from "/Home/Projects/ScuffedRPGAdventures.jpg";
 import XDragScroller from "../../../Tools/XDragScroller";
+import SectionContainer from "../../../Components/SectionContainer";
 
 export default function Projects() {
   // const containerRef = useRef(null);]
@@ -134,74 +135,70 @@ export default function Projects() {
   };
 
   return (
-    <div className={styles.projectsContainer}>
-      {/* <div className={styles.projectsTitleContainer}>
-        <h1 className={styles.projectsTitle}>PROJECTS</h1>
-      </div> */}
-      <XDragScroller
-        style={{
-          width: "100vw",
-          height: "70vh",
-        }}
-        setIsDragging={setIsDragging}
-        // ref={containerRef}
-        // onMouseDown={deviceIsTouch ? null : handleMouseDown}
-        // onTouchStart={deviceIsTouch ? handleMouseDown : null}
-      >
-        {projects.map((project, index) => (
-          <div className={styles.mapRoot} key={index}>
-            <div
-              className={`${styles.parallelogram} ${
-                project.bSelected && styles.selected
-              } ${isDragging ? styles.Dragging : ""}`}
-              onClick={() => {
-                if (!isDragging) {
-                  clickSubs.current[index]();
-                }
-                setIsDragging(false);
-              }}
-            >
-              <div className={styles.foregroundMask}>
-                <img className={styles.backgroundIMG} src={project.image} />
-              </div>
+    <SectionContainer image={"/Backgrounds/DarkFlames.png"}>
+      <div className={styles.projectsContainer}>
+        <XDragScroller
+          style={{
+            width: "100vw",
+            height: "60vh",
+          }}
+          setIsDragging={setIsDragging}
+        >
+          {projects.map((project, index) => (
+            <div className={styles.mapRoot} key={index}>
+              <div
+                className={`${styles.parallelogram} ${
+                  project.bSelected && styles.selected
+                } ${isDragging ? styles.Dragging : ""}`}
+                onClick={() => {
+                  if (!isDragging) {
+                    clickSubs.current[index]();
+                  }
+                  setIsDragging(false);
+                }}
+              >
+                <div className={styles.foregroundMask}>
+                  <img className={styles.backgroundIMG} src={project.image} />
+                </div>
 
-              <div className={styles.unskewed}>
-                <p className={`${styles.software} NoUserSelect`}>
-                  {project.software}
-                </p>
-                <h2
-                  className="NoUserSelect"
-                  style={{
-                    fontSize:
-                      project.name.length > 12
-                        ? `${
-                            5 -
-                            Math.floor((project.name.length - 10) / 0.8) / 10
-                          }vh`
-                        : "5vh",
-                  }}
-                >
-                  {project.name}
-                </h2>
-                <span className={`${styles.date} NoUserSelect`}>
-                  {project.date}
-                </span>
+                <div className={styles.unskewed}>
+                  <p className={`${styles.software} NoUserSelect`}>
+                    {project.software}
+                  </p>
+                  <h2
+                    className="NoUserSelect"
+                    style={{
+                      fontSize:
+                        project.name.length > 12
+                          ? `${
+                              5 -
+                              Math.floor((project.name.length - 10) / 0.8) / 10
+                            }vh`
+                          : "5vh",
+                    }}
+                  >
+                    {project.name}
+                  </h2>
+                  <span className={`${styles.date} NoUserSelect`}>
+                    {project.date}
+                  </span>
 
-                <div className={`${styles.ProjectType}`}>
-                  <p>{project.type}</p>
+                  <div className={`${styles.ProjectType}`}>
+                    <p>{project.type}</p>
+                  </div>
                 </div>
               </div>
+              <ProjectDesc
+                clickEventSub={clickEventSub}
+                index={index}
+                clickEventRef={descRefs[index]}
+                setSelectionAtIndex={setSelectionAtIndex}
+                desc={project.desc}
+              />
             </div>
-            <ProjectDesc
-              clickEventSub={clickEventSub}
-              index={index}
-              clickEventRef={descRefs[index]}
-              setSelectionAtIndex={setSelectionAtIndex}
-              desc={project.desc}
-            />
-          </div>
-        ))}
-      </XDragScroller>
-    </div>
+          ))}
+        </XDragScroller>
+      </div>
+    </SectionContainer>
   );
 }

@@ -11,6 +11,7 @@ export default function CameraUI({ navIsOpen, currentSectionIndex }) {
     width: "2rem",
     height: "2rem",
     borderColor: "#fffd",
+    borderWidth: "0.15rem"
   };
 
   return (

@@ -1,6 +1,7 @@
 import styles from "./WebsiteProjects.module.css";
 import Contents from "./WebsiteContents";
 import { useEffect, useRef, useState } from "react";
+import SectionContainer from "../../../Components/SectionContainer";
 
 export default function WebsiteProjects() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -77,60 +78,66 @@ export default function WebsiteProjects() {
   };
 
   return (
-    <div className={styles.WebsiteProjectsRoot}>
-      <div
-        className={styles.WebsiteFrameContainer}
-        onMouseDown={deviceIsTouch ? null : handleMouseDown}
-        onTouchStart={deviceIsTouch ? handleMouseDown : null}
-        onDrag={() => {
-          handleMouseUp();
-        }}
-      >
-        <div className={styles.WebsiteOuterFrame}>
-          {Contents.map((content, index) => (
-            <div
-              className={styles.FrameContainer}
-              style={{
-                zIndex: Math.round(-(getAbsPosIndex(index) * 400)),
-                transition: mouseIsDown.current
-                  ? "none"
-                  : `z-index 0.3s ease-in-out`,
-              }}
-              key={index}
-            >
+    <SectionContainer image={"/Backgrounds/Desk.png"}>
+      <div className={styles.WebsiteProjectsRoot}>
+        <div
+          className={styles.WebsiteFrameContainer}
+          onMouseDown={deviceIsTouch ? null : handleMouseDown}
+          onTouchStart={deviceIsTouch ? handleMouseDown : null}
+          onDrag={() => {
+            handleMouseUp();
+          }}
+        >
+          <div className={styles.WebsiteOuterFrame}>
+            {Contents.map((content, index) => (
               <div
-                className={`${styles.FrameInner}`}
+                className={styles.FrameContainer}
                 style={{
-                  transform: `translate3d(${getPosIndex(index) * 100}%, 0, ${-(
-                    getAbsPosIndex(index) * 400
-                  )}px) rotateX(0deg) rotateY(${-getPosIndex(index) * 20}deg)`,
+                  zIndex: Math.round(-(getAbsPosIndex(index) * 400)),
                   transition: mouseIsDown.current
                     ? "none"
-                    : `transform 0.3s ease-in-out`,
+                    : `z-index 0.3s ease-in-out`,
                 }}
-                onClick={() => {
-                  if (!isDragging.current) {
-                    setCurrentIndex(index);
-                  }
-                }}
+                key={index}
               >
-                <div>
-                  {/* Put inside div because this stupid thing wont stop dragging */}
-                  <img
-                    draggable={false}
-                    src={`/Home/WebsiteProjects/${content.imageFileName}`}
-                    style={{
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  ></img>
+                <div
+                  className={`${styles.FrameInner}`}
+                  style={{
+                    transform: `translate3d(${
+                      getPosIndex(index) * 100
+                    }%, 0, ${-(
+                      getAbsPosIndex(index) * 400
+                    )}px) rotateX(0deg) rotateY(${
+                      -getPosIndex(index) * 20
+                    }deg)`,
+                    transition: mouseIsDown.current
+                      ? "none"
+                      : `transform 0.3s ease-in-out`,
+                  }}
+                  onClick={() => {
+                    if (!isDragging.current) {
+                      setCurrentIndex(index);
+                    }
+                  }}
+                >
+                  <div>
+                    {/* Put inside div because this stupid thing wont stop dragging */}
+                    <img
+                      draggable={false}
+                      src={`/Home/WebsiteProjects/${content.imageFileName}`}
+                      style={{
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    ></img>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </SectionContainer>
   );
 }

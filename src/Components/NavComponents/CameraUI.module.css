@@ -37,11 +37,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
 
-  transform: translateY(-2.5rem);
+  transform: translateY(-3rem);
 
   color: white;
-  font-size: 6rem;
 }
 
 .MainNameText{
@@ -52,8 +52,8 @@
 .MainSection {
   position: relative;
   display: inline;
-  width: 55rem;
-  height: 10rem;
+  width: 52rem;
+  height: 9rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,14 +62,19 @@
 .MainSectionBackground {
   width: calc(100% - 2rem);
   height: calc(100% - 2rem);
-  background-color: rgba(0, 0, 0, 0.473);
+  background-color: rgba(236, 0, 0, 0.495);
   z-index: -1;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 5.2rem;
+  font-family: 'Roboto', sans-serif;
+
+
+  
 }
 
 .MainSectionText {
