@@ -17,7 +17,7 @@
   background-size: cover;
   background-position: center;
 
-  filter: grayscale(60%);
+  filter: grayscale(40%);
 
 }
 
@@ -30,8 +30,8 @@
   overflow: hidden;
   z-index: 1;
   
-  background: rgba(0, 0, 0, 0.45);
-  background-image: radial-gradient(rgba(203, 203, 203, 0.674) 1.5px, transparent 0);
-  background-size: 20px 20px;
+  background: rgba(0, 0, 0, 0.35);
+  background-image: radial-gradient(rgba(224, 224, 224, 0.504)  ,1.25px, transparent 0);
+  background-size: 10px 10px;
 
 }

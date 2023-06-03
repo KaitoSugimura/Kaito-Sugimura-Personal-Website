@@ -1,50 +1,60 @@
-.WebsiteProjectsRoot{
+.WebsiteProjectsRoot {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
+
+/* .WebsiteProjectsCenterRelative {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+} */
 
 .WebsiteFrameContainer {
   width: 100%;
-  height: 100%;
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
   /* background-color: var(--section-tc); */
 
-  cursor: move; 
+  cursor: move;
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
 }
 
 .WebsiteOuterFrame {
-  width: 1vh;
-  height: 50vh;
+  width: 0;
+  height: 33.65vh;
   position: relative;
   z-index: 0;
 }
 
 .FrameContainer {
   position: absolute;
-  top: 20%;
+  top: 0;
   left: 0;
-  transform: translate(-50%);
+  transform: translateX(-50%);
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  -webkit-perspective: 150vh;
-  perspective: 150vh;
+  -webkit-perspective: 140vh;
+  perspective: 125vh;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
 
 .FrameInner {
   width: 60vh;
-  height: 30vh;
+  height: 33.65vh;
   border: 0.2vw solid rgb(0, 32, 72);
 }
 
@@ -61,3 +71,105 @@
   pointer-events: none;
   z-index: 0;
 }
+
+.SelectContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  bottom: 8rem;
+}
+
+.SelectButton {
+  height: 7vh;
+  width: 30vh;
+
+  border-top: white ridge 0.2rem;
+  border-bottom: white ridge 0.2rem;
+  border-left: white solid 0.4rem;
+  border-right: white solid 0.4rem;
+
+  background: none;
+  color: white;
+  font-size: 2.2rem;
+
+  cursor: pointer;
+
+  position: relative;
+  box-shadow: 0rem 0rem 1rem rgb(0, 0, 0);
+}
+
+.SelectButton::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: linear-gradient(rgba(0, 0, 0, 0.184), rgba(0, 0, 0, 0.896));
+  transition: all 0.3s ease-in-out;
+}
+
+.SelectButton::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: linear-gradient(
+    rgba(69, 122, 136, 0.184),
+    rgba(69, 122, 136, 0.896)
+  );
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.SelectButton:hover::before {
+  opacity: 0;
+}
+.SelectButton:hover::after {
+  opacity: 1;
+}
+
+.SelectButton p {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.leftTriangle {
+  width: 0;
+  height: 0;
+  border-top: 1rem solid transparent;
+  border-bottom: 1rem solid transparent;
+
+  border-left: 1rem solid rgb(255, 255, 255);
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.rightTriangle {
+  width: 0;
+  height: 0;
+  border-top: 1rem solid transparent;
+  border-bottom: 1rem solid transparent;
+
+  border-right: 1rem solid rgb(255, 255, 255);
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+

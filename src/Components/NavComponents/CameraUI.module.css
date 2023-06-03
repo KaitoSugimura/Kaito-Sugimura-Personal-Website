@@ -37,14 +37,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  
 
-  transform: translateY(-3rem);
+  transform: translateY(-2.5rem);
 
   color: white;
 }
 
-.MainNameText{
+.MainNameText {
   display: inline;
   font-size: 3rem;
 }
@@ -62,7 +61,8 @@
 .MainSectionBackground {
   width: calc(100% - 2rem);
   height: calc(100% - 2rem);
-  background-color: rgba(236, 0, 0, 0.495);
+  /* background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.495)); */
+  /* background: linear-gradient(rgba(0, 0, 0, 0.184), rgba(0, 0, 0, 0.709)); */
   z-index: -1;
 
   display: flex;
@@ -71,20 +71,18 @@
 
   font-weight: 500;
   font-size: 5.2rem;
-  font-family: 'Roboto', sans-serif;
-
-
-  
+  font-family: "Roboto", sans-serif;
 }
 
 .MainSectionText {
+  text-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.133);
   display: inline;
 }
 
-.cameraUITopRightContainer{
+.cameraUITopRightContainer {
   position: absolute;
   width: 100%;
-  top: 1.5rem;
+  top: 2rem;
   right: 0;
 
   display: flex;
@@ -92,17 +90,16 @@
   align-items: end;
   flex-direction: column;
 
-  margin-right: 2.5rem;
-
+  margin-right: 3rem;
 
   color: white;
   font-size: 4rem;
 }
 
-.cameraUIBottomLeftContainer{
+.cameraUIBottomLeftContainer {
   position: absolute;
   width: 100%;
-  bottom: 1rem;
+  bottom: 2.5rem;
   left: 0;
 
   display: flex;
@@ -110,9 +107,8 @@
   align-items: start;
   flex-direction: column;
 
-  margin-left: 1.5rem;
+  margin-left: 3rem;
 
-
-  color: white;
+  color: rgb(213, 213, 213);
   font-size: 2.5rem;
 }

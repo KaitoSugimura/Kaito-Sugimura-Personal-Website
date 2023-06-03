@@ -2,6 +2,8 @@ import styles from "./WebsiteProjects.module.css";
 import Contents from "./WebsiteContents";
 import { useEffect, useRef, useState } from "react";
 import SectionContainer from "../../../Components/SectionContainer";
+import CornerBorder from "../../../Components/NavComponents/CornerBorder";
+import SelectedView from "./SelectedView";
 
 export default function WebsiteProjects() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -13,8 +15,14 @@ export default function WebsiteProjects() {
     "ontouchstart" in window ||
     navigator.maxTouchPoints > 0 ||
     navigator.msMaxTouchPoints > 0;
+  const cachedIndex = useRef(-1);
+  const cachedDif = useRef(0);
+  const [selectedView, setSelectedView] = useState(false);
 
   const getPosIndex = (index) => {
+    if (cachedIndex.current === index) {
+      return cachedDif.current;
+    }
     let dif = index - currentIndex;
     const div2 = Contents.length / 2;
     if (dif > div2) {
@@ -22,6 +30,8 @@ export default function WebsiteProjects() {
     } else if (dif < -div2) {
       dif += Contents.length;
     }
+    cachedIndex.current = index;
+    cachedDif.current = +dif;
     return +dif;
   };
 
@@ -61,6 +71,7 @@ export default function WebsiteProjects() {
   };
 
   const handleMouseDown = (event) => {
+    if (selectedView) return;
     mouseIsDown.current = true;
     isDragging.current = false;
     const { clientX } = (event.touches && event.touches[0]) || event;
@@ -90,54 +101,93 @@ export default function WebsiteProjects() {
         >
           <div className={styles.WebsiteOuterFrame}>
             {Contents.map((content, index) => (
-              <div
-                className={styles.FrameContainer}
-                style={{
-                  zIndex: Math.round(-(getAbsPosIndex(index) * 400)),
-                  transition: mouseIsDown.current
-                    ? "none"
-                    : `z-index 0.3s ease-in-out`,
-                }}
-                key={index}
-              >
-                <div
-                  className={`${styles.FrameInner}`}
-                  style={{
-                    transform: `translate3d(${
-                      getPosIndex(index) * 100
-                    }%, 0, ${-(
-                      getAbsPosIndex(index) * 400
-                    )}px) rotateX(0deg) rotateY(${
-                      -getPosIndex(index) * 20
-                    }deg)`,
-                    transition: mouseIsDown.current
-                      ? "none"
-                      : `transform 0.3s ease-in-out`,
-                  }}
-                  onClick={() => {
-                    if (!isDragging.current) {
-                      setCurrentIndex(index);
-                    }
-                  }}
-                >
-                  <div>
-                    {/* Put inside div because this stupid thing wont stop dragging */}
-                    <img
-                      draggable={false}
-                      src={`/Home/WebsiteProjects/${content.imageFileName}`}
+              <>
+                {getPosIndex(index) == 0 && selectedView && (
+                  <SelectedView index={index} />
+                )}
+                {getAbsPosIndex(index) <= 4 && (
+                  <div
+                    className={styles.FrameContainer}
+                    style={{
+                      zIndex: Math.round(-(getAbsPosIndex(index) * 400)),
+                      transition: mouseIsDown.current
+                        ? "none"
+                        : `z-index 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out`,
+                      transform: selectedView
+                        ? "translateX(calc(-50% + -26vw))"
+                        : "translateX(-50%)",
+                      opacity:
+                        selectedView && getAbsPosIndex(index) > 0 ? "0" : "1",
+                    }}
+                    key={index}
+                  >
+                    <div
+                      className={`${styles.FrameInner}`}
                       style={{
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
+                        transform: `translate3d(${
+                          getPosIndex(index) * 100
+                        }%, 0, ${-(
+                          getAbsPosIndex(index) * 400
+                        )}px) rotateX(0deg) rotateY(${
+                          -getPosIndex(index) * 25
+                        }deg)`,
+                        transition: mouseIsDown.current
+                          ? "none"
+                          : `transform 0.3s ease-in-out`,
+                        filter: `brightness(${
+                          1 - Math.max(0, Math.min(getAbsPosIndex(index), 0.5))
+                        })`,
                       }}
-                    ></img>
+                      onClick={() => {
+                        if (!isDragging.current) {
+                          if (currentIndex == index) {
+                            setSelectedView((prev) => {
+                              console.log(prev);
+                              return !prev;
+                            });
+                          }
+                          if (!selectedView) {
+                            setCurrentIndex(index);
+                          }
+                        }
+                      }}
+                    >
+                      <div>
+                        {/* Put inside div because this stupid thing wont stop dragging */}
+                        <img
+                          draggable={false}
+                          src={`/Home/WebsiteProjects/${content.imageFileName}`}
+                          style={{
+                            backgroundRepeat: "no-repeat",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                          }}
+                        ></img>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                )}
+              </>
             ))}
           </div>
         </div>
+        <div className={styles.SelectContainer}>
+          <button
+            className={styles.SelectButton}
+            onClick={() => {
+              setSelectedView((prev) => {
+                return !prev;
+              });
+            }}
+          >
+            <p>{selectedView ? "Close View" : "View Selected"}</p>
+            <span className={styles.leftTriangle}></span>
+            <span className={styles.rightTriangle}></span>
+          </button>
+        </div>
       </div>
+      A RPG coin dozer game completely made from scratch in Unreal Engine 5! I
+      tried to implement m
     </SectionContainer>
   );
 }

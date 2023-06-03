@@ -6,6 +6,7 @@ import CameraUI from "./NavComponents/CameraUI";
 import NavButtons from "./NavComponents/NavButtons";
 import SideButtons from "./NavComponents/SideButtons";
 
+
 export default function Navigation({ scrollTo, currentSectionIndex }) {
   const [navIsOpen, setNavIsOpen] = useState(false);
   const rootRef = useRef(null);

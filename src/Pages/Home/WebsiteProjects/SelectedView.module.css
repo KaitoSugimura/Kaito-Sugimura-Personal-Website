@@ -1,0 +1,57 @@
+.SelectedViewRoot {
+  position: fixed;
+  top: 50%;
+  left: 26%;
+  width: 65vw;
+  height: 65vh;
+
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.607);
+
+  animation: fadeIn 0.3s ease-in;
+
+  border: white solid 0.2rem;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-10%, -60%) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, -50%) scale(1);
+  }
+}
+
+.id {
+  position: absolute;
+  bottom: 4vh;
+  left: 4vw;
+
+  color: white;
+  margin: 1rem;
+  background-color: rgba(35, 255, 255, 0.431);
+  width: fit-content;
+  height: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.id span {
+  font-size: 4vw;
+  transform: translateY(10%);
+  padding: 0 2vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.id h1 {
+  font-size: 2vw;
+  transform: translateY(10%);
+  padding: 0 2vw;
+}
