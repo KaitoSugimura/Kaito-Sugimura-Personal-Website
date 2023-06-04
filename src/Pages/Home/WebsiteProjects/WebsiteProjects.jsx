@@ -17,7 +17,9 @@ export default function WebsiteProjects() {
     navigator.msMaxTouchPoints > 0;
   const cachedIndex = useRef(-1);
   const cachedDif = useRef(0);
+  // Do not use setter her, please use toggleSelectedView
   const [selectedView, setSelectedView] = useState(false);
+  const canToggleSelectedView = useRef(true);
 
   const getPosIndex = (index) => {
     if (cachedIndex.current === index) {
@@ -37,6 +39,18 @@ export default function WebsiteProjects() {
 
   const getAbsPosIndex = (index) => {
     return Math.abs(getPosIndex(index));
+  };
+
+  const toggleSelectedView = () => {
+    if (canToggleSelectedView.current) {
+      canToggleSelectedView.current = false;
+      setSelectedView((prev) => {
+        return !prev;
+      });
+      setTimeout(() => {
+        canToggleSelectedView.current = true;
+      }, 200);
+    }
   };
 
   const handleMouseMove = useRef((event) => {
@@ -92,7 +106,9 @@ export default function WebsiteProjects() {
     <SectionContainer image={"/Backgrounds/Desk.png"}>
       <div className={styles.WebsiteProjectsRoot}>
         <div
-          className={styles.WebsiteFrameContainer}
+          className={`${styles.WebsiteFrameContainer} ${
+            selectedView ? "NoUserSelect" : ""
+          }`}
           onMouseDown={deviceIsTouch ? null : handleMouseDown}
           onTouchStart={deviceIsTouch ? handleMouseDown : null}
           onDrag={() => {
@@ -107,7 +123,9 @@ export default function WebsiteProjects() {
                 )}
                 {getAbsPosIndex(index) <= 4 && (
                   <div
-                    className={styles.FrameContainer}
+                    className={`${styles.FrameContainer}  ${
+                      getPosIndex(index) == 0 ? "forceUserSelect" : ""
+                    }`}
                     style={{
                       zIndex: Math.round(-(getAbsPosIndex(index) * 400)),
                       transition: mouseIsDown.current
@@ -141,10 +159,7 @@ export default function WebsiteProjects() {
                       onClick={() => {
                         if (!isDragging.current) {
                           if (currentIndex == index) {
-                            setSelectedView((prev) => {
-                              console.log(prev);
-                              return !prev;
-                            });
+                            toggleSelectedView();
                           }
                           if (!selectedView) {
                             setCurrentIndex(index);
@@ -175,9 +190,7 @@ export default function WebsiteProjects() {
           <button
             className={styles.SelectButton}
             onClick={() => {
-              setSelectedView((prev) => {
-                return !prev;
-              });
+              toggleSelectedView();
             }}
           >
             <p>{selectedView ? "Close View" : "View Selected"}</p>

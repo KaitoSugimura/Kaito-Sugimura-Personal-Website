@@ -6,14 +6,6 @@
   justify-content: center;
 }
 
-/* .WebsiteProjectsCenterRelative {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-} */
 
 .WebsiteFrameContainer {
   width: 100%;
@@ -55,7 +47,7 @@
 .FrameInner {
   width: 60vh;
   height: 33.65vh;
-  border: 0.2vw solid rgb(0, 32, 72);
+  border: 0.2rem solid rgb(0, 32, 72);
 }
 
 .FrameInner img,
