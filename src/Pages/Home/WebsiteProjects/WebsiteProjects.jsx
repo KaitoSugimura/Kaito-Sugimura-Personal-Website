@@ -199,8 +199,6 @@ export default function WebsiteProjects() {
           </button>
         </div>
       </div>
-      A RPG coin dozer game completely made from scratch in Unreal Engine 5! I
-      tried to implement m
     </SectionContainer>
   );
 }
