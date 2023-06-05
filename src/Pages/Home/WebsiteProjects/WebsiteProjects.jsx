@@ -127,7 +127,7 @@ export default function WebsiteProjects() {
                       getPosIndex(index) == 0 ? "forceUserSelect" : ""
                     }`}
                     style={{
-                      zIndex: Math.round(-(getAbsPosIndex(index) * 400)),
+                      zIndex: Math.round(-(getAbsPosIndex(index) * 10)),
                       transition: mouseIsDown.current
                         ? "none"
                         : `z-index 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out`,

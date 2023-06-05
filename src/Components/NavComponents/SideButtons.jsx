@@ -10,18 +10,21 @@ export default function SideButtons({
     <div className={`${styles.sideButtonsRoot}`}>
       {!navIsOpen &&
         Sections.map((section, index) => (
-          <button
-            className={`${styles.sectionButton} ${
-              index == currentSectionIndex ? styles.selected : ""
-            }`}
-            onClick={() => {
-              console.log(section.title);
-              scrollTo(index);
-            }}
-            key={index}
-          >
-            <span className={styles.ButtonInnerColor}></span>
-          </button>
+          <div className={styles.flex}>
+            <button className={styles.buttonPaddingWrapper} onClick={() => {
+                  scrollTo(index);
+                }}>
+              <div
+                className={`${styles.sectionButtonBorder} ${
+                  index == currentSectionIndex ? styles.selected : ""
+                }`}
+                key={index}
+              >
+                <span className={styles.ButtonInnerColor}></span>
+              </div>
+            </button>
+            <div className={styles.sectionName}>{Sections[index].title} </div>
+          </div>
         ))}
     </div>
   );

@@ -11,7 +11,6 @@
 
   animation: fadeIn 0.3s ease-in;
 
-
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
@@ -32,33 +31,10 @@
   }
 }
 
-.youtubeVideo {
-  position: absolute;
-  top: 10%;
-  left: 25%;
-  padding-bottom: 33.75%; /* 16:9 */
-  width: 60%;
-  z-index: 10;
-}
-
-.youtubeVideo iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -moz-user-select: -moz-all !important;
-  -khtml-user-select: all !important;
-  -webkit-user-select: all !important;
-  -ms-user-select: all !important;
-  user-select: all !important;
-  pointer-events: all !important;
-}
-
 .id {
   position: absolute;
   bottom: 4vh;
-  left: 3vw;
+  left: -1vw;
 
   color: white;
   margin: 1rem;
@@ -105,11 +81,8 @@
 
 .showcaseGeneral {
   position: absolute;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
   border: solid rgba(0, 156, 217, 0.916) 0.2rem;
-
 }
 
 .showcaseImage1 {
@@ -130,9 +103,96 @@
 
 .showcaseImage3 {
   bottom: 3.5%;
-  left: 41%;
-  width: 38%;
+  left: 40%;
+  width: 40%;
   height: 42%;
   transform: translateX(-50%);
   z-index: 1;
+}
+
+.videoContainer {
+  position: absolute;
+
+  bottom: 16%;
+  right: 0%;
+
+  width: 45%;
+  height: 18%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.35) 20%,
+    rgba(0, 0, 0, 0.926)
+  );
+
+  z-index: 10;
+
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+
+  cursor: pointer;
+}
+
+.videoContainer:hover{
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.3) 20%,
+    rgba(0, 0, 0, 0.87)
+  );
+}
+
+
+.videoContainerRemoveSelect {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.videoImage {
+  height: 85%;
+  aspect-ratio: 16/9;
+  margin-left: 2%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.videoTextContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-left: 1.8vw;
+  margin-right: auto;
+}
+
+.videoText {
+  font-size: 1.8vw;
+  color: white;
+}
+
+.playVideoIcon {
+  filter: invert(1) drop-shadow(0px 0px 0.2vw rgb(0, 0, 0));
+}
+
+.playMovieIcon {
+  filter: invert(1);
+  margin-right: 0.3vw;
 }

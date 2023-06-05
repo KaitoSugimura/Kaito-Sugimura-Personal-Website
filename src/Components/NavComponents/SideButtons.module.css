@@ -9,7 +9,6 @@
   justify-content: center;
   align-items: end;
   flex-direction: column;
-  gap: 0.7rem;
 
   transition: transform 0.4s;
 
@@ -21,16 +20,62 @@
   pointer-events: none;
 }
 
-.sectionButton {
+.sectionButtonBorder {
   width: 2rem;
   height: 2rem;
   border-radius: 2rem;
   border: 0.2rem solid rgba(255, 255, 255, 0.649);
-  background-color: transparent;
 
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.selected,
+.buttonPaddingWrapper:hover .sectionButtonBorder {
+  border: 0.2rem solid rgba(255, 255, 255, 0.95);
+}
+
+.ButtonInnerColor {
+  background-color: rgba(255, 255, 255, 0.609);
+  width: 75%;
+  height: 75%;
+  border-radius: 2rem;
+  display: none;
+}
+
+.buttonPaddingWrapper:hover .ButtonInnerColor {
+  display: block;
+}
+
+.selected .ButtonInnerColor {
+  display: block;
+  background-color: rgba(255, 255, 255, 0.996);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  flex-direction: row-reverse;
+}
+
+.sectionName {
+  margin-right: 0.3vw;
+  color: rgba(255, 255, 255, 0.761);
+  display: none;
+}
+
+.buttonPaddingWrapper:hover + .sectionName {
+  display: block;
+}
+
+.buttonPaddingWrapper {
+  padding: 0.4rem 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 
   -moz-user-select: -moz-all;
   -khtml-user-select: all;
@@ -38,25 +83,4 @@
   -ms-user-select: all;
   user-select: all;
   pointer-events: all;
-
-  cursor: pointer;
 }
-
-.selected,
-.sectionButton:hover {
-  border: 0.2rem solid rgba(255, 255, 255, 0.95);
-  background-color: transparent;
-}
-
-.ButtonInnerColor {
-  background-color: rgba(255, 255, 255, 0.609);
-  width: 75%;
-  height: 75%;
-  border-radius: 2rem;  
-}
-
-.selected .ButtonInnerColor,
-.sectionButton:hover .ButtonInnerColor {
-  background-color: rgba(255, 255, 255, 0.996);
-}
-
