@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./SelectedView.module.css";
-import Contents from "./WebsiteContents";
+import Contents from "../WebsiteContents";
 
 import PlayVideoIcon from "/Home/Icons/PlayVideo.svg";
 import MovieIcon from "/Home/Icons/Movie.svg";

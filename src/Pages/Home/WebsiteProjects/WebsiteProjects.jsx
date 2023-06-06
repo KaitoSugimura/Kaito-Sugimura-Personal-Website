@@ -1,9 +1,8 @@
 import styles from "./WebsiteProjects.module.css";
 import Contents from "./WebsiteContents";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import SectionContainer from "../../../Components/SectionContainer";
-import CornerBorder from "../../../Components/NavComponents/CornerBorder";
-import SelectedView from "./SelectedView";
+import SelectedView from "./Window/SelectedView";
 
 export default function WebsiteProjects() {
   const [currentIndex, setCurrentIndex] = useState(0);

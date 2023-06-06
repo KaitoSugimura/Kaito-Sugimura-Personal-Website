@@ -10,10 +10,13 @@ export default function SideButtons({
     <div className={`${styles.sideButtonsRoot}`}>
       {!navIsOpen &&
         Sections.map((section, index) => (
-          <div className={styles.flex}>
-            <button className={styles.buttonPaddingWrapper} onClick={() => {
-                  scrollTo(index);
-                }}>
+          <div className={styles.flex} key={index}>
+            <button
+              className={styles.buttonPaddingWrapper}
+              onClick={() => {
+                scrollTo(index);
+              }}
+            >
               <div
                 className={`${styles.sectionButtonBorder} ${
                   index == currentSectionIndex ? styles.selected : ""

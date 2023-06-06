@@ -82,7 +82,7 @@
 .showcaseGeneral {
   position: absolute;
   object-fit: cover;
-  border: solid rgba(0, 156, 217, 0.916) 0.2rem;
+  border: solid rgb(0, 32, 72) 0.2rem;
 }
 
 .showcaseImage1 {
