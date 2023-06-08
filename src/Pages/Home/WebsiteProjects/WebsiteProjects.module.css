@@ -23,7 +23,7 @@
 
 .WebsiteOuterFrame {
   width: 0;
-  height: 33.65vh;
+  height: 0;
   position: relative;
   z-index: 0;
 }
@@ -32,11 +32,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateX(-50%);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  transform: translate(-50%, -50%);
 
   -webkit-perspective: 140vh;
   perspective: 125vh;
@@ -44,14 +40,21 @@
   transform-style: preserve-3d;
 }
 
+
 .FrameInner {
-  width: 60vh;
-  height: 33.65vh;
-  border: 0.2rem solid rgb(0, 32, 72);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  
 }
 
-.FrameInner img,
-.FrameInner div {
+
+
+.frameImage,
+.frameCont {
   width: 100%;
   height: 100%;
   border: none;

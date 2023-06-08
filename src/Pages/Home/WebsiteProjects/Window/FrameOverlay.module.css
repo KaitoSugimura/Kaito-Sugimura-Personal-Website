@@ -1,0 +1,38 @@
+.FrameOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  border: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+.Ribbon {
+  position: absolute;
+  top: 2vw;
+  left: -2.5vw;
+  font-size: 1vw;
+  font-weight: 600;
+  padding: 0.3vw 4vw;
+  transform: rotate(-45deg);
+
+  color: white;
+}
+
+.Ribbon:has(.Newest) {
+  background-color: #ff0000b3;
+}
+
+.Ribbon:has(.Oldest) {
+  background-color: #00aeffb2;
+}

@@ -1,8 +1,9 @@
 import styles from "./WebsiteProjects.module.css";
 import Contents from "./WebsiteContents";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SectionContainer from "../../../Components/SectionContainer";
 import SelectedView from "./Window/SelectedView";
+import FrameOverlay from "./Window/FrameOverlay";
 
 export default function WebsiteProjects() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,6 +20,24 @@ export default function WebsiteProjects() {
   // Do not use setter her, please use toggleSelectedView
   const [selectedView, setSelectedView] = useState(false);
   const canToggleSelectedView = useRef(true);
+
+  //RATIO CALCULATION
+  const sectionDefaultWidth = 70; // Specify width
+  const [sectionRatio, setSectionRatio] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    // Ratio is 16:9
+    let width = sectionDefaultWidth;
+    let height = sectionDefaultWidth * 0.5625;
+    const ratio = window.innerHeight / window.innerWidth;
+    if (ratio < 0.5625) {
+      width = width * (ratio / 0.5625);
+      height = width * 0.5625;
+    }
+
+    setSectionRatio({ width: width, height: height });
+  }, []);
+  //RATIO CALCULATION END
 
   const getPosIndex = (index) => {
     if (cachedIndex.current === index) {
@@ -55,7 +74,7 @@ export default function WebsiteProjects() {
   const handleMouseMove = useRef((event) => {
     const { clientX } = (event.touches && event.touches[0]) || event;
     const diff = clientX - MouseXInitialRef.current;
-    if (Math.abs(diff) > 100) {
+    if (Math.abs(diff) > 50) {
       isDragging.current = true;
     }
     let newIndex =
@@ -103,7 +122,7 @@ export default function WebsiteProjects() {
   };
 
   return (
-    <SectionContainer image={"/Backgrounds/Ai.jpg"}>
+    <SectionContainer image={"/Backgrounds/DarkFlames.png"}>
       <div className={styles.WebsiteProjectsRoot}>
         <div
           className={`${styles.WebsiteFrameContainer} ${
@@ -119,7 +138,7 @@ export default function WebsiteProjects() {
             {Contents.map((content, index) => (
               <>
                 {getPosIndex(index) == 0 && selectedView && (
-                  <SelectedView index={index} />
+                  <SelectedView index={index} sectionRatio={sectionRatio} />
                 )}
                 {getAbsPosIndex(index) <= 4 && (
                   <div
@@ -129,13 +148,25 @@ export default function WebsiteProjects() {
                     style={{
                       zIndex: Math.round(-(getAbsPosIndex(index) * 10)),
                       transition: mouseIsDown.current
-                        ? "none"
-                        : `z-index 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out`,
+                        ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
+                        : `z-index 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
                       transform: selectedView
-                        ? "translateX(calc(-50% + -26vw))"
-                        : "translateX(-50%)",
+                        ? `translate(calc(-50% - ${
+                            sectionRatio.width / 2.2
+                          }vw), -50%)`
+                        : "translate(-50%, -50%)",
                       opacity:
                         selectedView && getAbsPosIndex(index) > 0 ? "0" : "1",
+                      width: `${
+                        selectedView || getPosIndex(index) != 0
+                          ? `${sectionRatio.width / 2}vw`
+                          : `${sectionRatio.width / 1.35}vw`
+                      }`,
+                      height: `${
+                        selectedView || getPosIndex(index) != 0
+                          ? `${sectionRatio.height / 2}vw`
+                          : `${sectionRatio.height / 1.35}vw`
+                      }`,
                     }}
                     key={index}
                   >
@@ -148,7 +179,7 @@ export default function WebsiteProjects() {
                           getAbsPosIndex(index) * 400
                         )}px) rotateX(0deg) rotateY(${
                           -getPosIndex(index) * 25
-                        }deg)`,
+                        }deg) `,
                         transition: mouseIsDown.current
                           ? "none"
                           : `transform 0.3s ease-in-out`,
@@ -167,11 +198,17 @@ export default function WebsiteProjects() {
                         }
                       }}
                     >
-                      <div>
+                      <FrameOverlay
+                        index={index}
+                        lastIndex={Contents.length-1}
+                        selectedView={selectedView}
+                      />
+                      <div className={styles.frameCont}>
                         {/* Put inside div because this stupid thing wont stop dragging */}
                         <img
                           draggable={false}
-                          src={`/Home/WebsiteProjects/Archive/${content.imageFileName}`}
+                          className={styles.frameImage}
+                          src={`/Home/WebsiteProjects/${content.imageFileName}`}
                           style={{
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
