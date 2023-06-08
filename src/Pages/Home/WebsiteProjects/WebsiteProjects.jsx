@@ -79,14 +79,15 @@ export default function WebsiteProjects() {
 
     mouseIsDown.current = false;
     setCurrentIndex((prev) => {
-      return Math.round(prev);
+      return Math.round(prev) % Contents.length;
     });
   };
 
   const handleMouseDown = (event) => {
+    isDragging.current = false;
     if (selectedView) return;
     mouseIsDown.current = true;
-    isDragging.current = false;
+
     const { clientX } = (event.touches && event.touches[0]) || event;
     MouseXInitialRef.current = clientX;
     initialIndexRef.current = currentIndex;
@@ -102,7 +103,7 @@ export default function WebsiteProjects() {
   };
 
   return (
-    <SectionContainer image={"/Backgrounds/Desk.png"}>
+    <SectionContainer image={"/Backgrounds/Ai.jpg"}>
       <div className={styles.WebsiteProjectsRoot}>
         <div
           className={`${styles.WebsiteFrameContainer} ${
@@ -170,7 +171,7 @@ export default function WebsiteProjects() {
                         {/* Put inside div because this stupid thing wont stop dragging */}
                         <img
                           draggable={false}
-                          src={`/Home/WebsiteProjects/${content.imageFileName}`}
+                          src={`/Home/WebsiteProjects/Archive/${content.imageFileName}`}
                           style={{
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",

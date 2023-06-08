@@ -4,8 +4,8 @@ import Sections from "../../Pages/Home/HomeTableOfContents.jsx";
 
 export default function CameraUI({ navIsOpen, currentSectionIndex }) {
   const BorderStyle = {
-    width: navIsOpen ? "22vh" : "22vh",
-    height: navIsOpen ? "22vh" : "22vh",
+    width: navIsOpen ? "12vh" : "22vh",
+    height: navIsOpen ? "12vh" : "22vh",
   };
   const StaticBorder = {
     width: "2rem",

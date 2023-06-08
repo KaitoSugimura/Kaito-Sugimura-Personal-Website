@@ -44,18 +44,17 @@ export default function SelectedView({ index }) {
         </div>
 
         <img
-          src={`/Home/WebsiteProjects/Extra/${extraImages[0]}`}
+          src={`/Home/WebsiteProjects/Archive/Extra/${extraImages[0]}`}
           className={`${styles.showcaseGeneral} ${styles.showcaseImage1}`}
         ></img>
         <img
-          src={`/Home/WebsiteProjects/Extra/${extraImages[1]}`}
+          src={`/Home/WebsiteProjects/Archive/Extra/${extraImages[1]}`}
           className={`${styles.showcaseGeneral} ${styles.showcaseImage2}`}
         ></img>
         <img
-          src={`/Home/WebsiteProjects/Extra/${extraImages[2]}`}
+          src={`/Home/WebsiteProjects/Archive/Extra/${extraImages[2]}`}
           className={`${styles.showcaseGeneral} ${styles.showcaseImage3}`}
         ></img>
-        <p className={styles.description}>{Contents[index].desc}</p>
         <div className={styles.id}>
           <span>
             0{index}

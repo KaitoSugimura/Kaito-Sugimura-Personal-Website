@@ -14,7 +14,7 @@ export default [
     title: "Aqua Hoshino",
     youtubeID: "0saw1cGIl1A",
     desc: "Description",
-    extraImages: ["1a.jpg", "1b.jpg", "1c.jpg"],
+    extraImages: ["z.gif", "z.gif", "z.gif"],
   },
   {
     imageFileName: "3.png",
@@ -42,7 +42,7 @@ export default [
     title: "Mem-Cho",
     youtubeID: "0saw1cGIl1A",
     desc: "Description",
-    extraImages: ["1a.jpg", "1b.jpg", "1c.jpg"],
+    extraImages: ["5a.jpg", "5b.jpg", "5c.jpg"],
   },
   {
     imageFileName: "7.jpg",

@@ -7,6 +7,6 @@ export default [
   { title: "Home", XML: <Hero /> },
   { title: "Education", XML: <Education />},
   { title: "Projects", XML: <Projects /> },
-  { title: "Oshi no ko", XML: <WebsiteProjects /> },
+  { title: "Project", XML: <WebsiteProjects /> },
   
 ];
