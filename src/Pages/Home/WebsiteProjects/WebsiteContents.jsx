@@ -4,13 +4,16 @@
 export default [
   {
     imageFileName: "ImSlimeMain.jpg",
+    logoPath: "React.png",
     title: "I'm Slime",
     youtubeID: "F0mAtFBdw5w",
-    desc: "Description",
+    desc: "Online Multiplayer Game",
     extraImages: ["ImSlimeE1.jpg", "ImSlimeE2.jpg", "ImSlimeE3.jpg"],
   },
   {
     imageFileName: "2.jpg",
+    logoPath: "UEWhite.png",
+    title: "I'm Slime",
     imageFileName: "ImSlimeMain.jpg",
     youtubeID: "0saw1cGIl1A",
     desc: "Description",
@@ -18,20 +21,26 @@ export default [
   },
   {
     imageFileName: "3.png",
+    logoPath: "UEWhite.png",
+    title: "Zekka",
     imageFileName: "CoinDozerGame.jpg",
     youtubeID: "0saw1cGIl1A",
-    desc: "Description",
+    desc: "RPG coin dozer with events",
     extraImages: ["2a.jpg", "2b.jpg", "2c.jpg"],
   },
   {
     imageFileName: "4.jpg",
+    logoPath: "UEWhite.png",
+    title: "I'm Slime",
     imageFileName: "Immortal.jpg",
     youtubeID: "0saw1cGIl1A",
-    desc: "Description",
+    desc: "Description Description Description Description Description Description",
     extraImages: ["3a.jpg", "3b.jpg", "3c.jpg"],
   },
   {
     imageFileName: "5.jpg",
+    logoPath: "UEWhite.png",
+    title: "I'm Slime",
     imageFileName: "NoLongerMe.webp",
     youtubeID: "0saw1cGIl1A",
     desc: "Description",
@@ -39,6 +48,8 @@ export default [
   },
   {
     imageFileName: "6.jpg",
+    logoPath: "Unity.png",
+    title: "Python Basics",
     imageFileName: "HackYourLearningMain.jpg",
     youtubeID: "0saw1cGIl1A",
     desc: "Description",
@@ -46,6 +57,8 @@ export default [
   },
   {
     imageFileName: "7.jpg",
+    logoPath: "Blender.png",
+    title: "I'm Slime",
     imageFileName: "BlenderModel.jpg",
     youtubeID: "PgBvV9ofjmA",
     desc: "Description",
@@ -53,6 +66,8 @@ export default [
   },
   {
     imageFileName: "8.jpg",
+    logoPath: "UEWhite.png",
+    title: "I'm Slime",
     imageFileName: "ImSlimeMain.jpg",
     youtubeID: "PgBvV9ofjmA",
     desc: "Description",
@@ -60,6 +75,8 @@ export default [
   },
   {
     imageFileName: "9.jpg",
+    logoPath: "UEWhite.png",
+    title: "I'm Slime",
     imageFileName: "ImSlimeMain.jpg",
     youtubeID: "PgBvV9ofjmA",
     desc: "Description",

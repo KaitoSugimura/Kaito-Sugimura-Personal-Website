@@ -121,6 +121,18 @@ export default function WebsiteProjects() {
     );
   };
 
+  const getSelectedWidth = (index) => {
+    return selectedView || getPosIndex(index) != 0
+      ? sectionRatio.width / 2
+      : sectionRatio.width / 1.35;
+  };
+
+  const getSelectedHeight = (index) => {
+    return selectedView || getPosIndex(index) != 0
+      ? sectionRatio.height / 2
+      : sectionRatio.height / 1.35;
+  };
+
   return (
     <SectionContainer image={"/Backgrounds/DarkFlames.png"}>
       <div className={styles.WebsiteProjectsRoot}>
@@ -133,6 +145,9 @@ export default function WebsiteProjects() {
           onDrag={() => {
             handleMouseUp();
           }}
+          onDragStart={(e) => {
+            e.preventDefault();
+          }}
         >
           <div className={styles.WebsiteOuterFrame}>
             {Contents.map((content, index) => (
@@ -142,9 +157,7 @@ export default function WebsiteProjects() {
                 )}
                 {getAbsPosIndex(index) <= 4 && (
                   <div
-                    className={`${styles.FrameContainer}  ${
-                      getPosIndex(index) == 0 ? "forceUserSelect" : ""
-                    }`}
+                    className={styles.FrameContainer}
                     style={{
                       zIndex: Math.round(-(getAbsPosIndex(index) * 10)),
                       transition: mouseIsDown.current
@@ -157,16 +170,8 @@ export default function WebsiteProjects() {
                         : "translate(-50%, -50%)",
                       opacity:
                         selectedView && getAbsPosIndex(index) > 0 ? "0" : "1",
-                      width: `${
-                        selectedView || getPosIndex(index) != 0
-                          ? `${sectionRatio.width / 2}vw`
-                          : `${sectionRatio.width / 1.35}vw`
-                      }`,
-                      height: `${
-                        selectedView || getPosIndex(index) != 0
-                          ? `${sectionRatio.height / 2}vw`
-                          : `${sectionRatio.height / 1.35}vw`
-                      }`,
+                      width: `${getSelectedWidth(index)}vw`,
+                      height: `${getSelectedHeight(index)}vw`,
                     }}
                     key={index}
                   >
@@ -187,23 +192,30 @@ export default function WebsiteProjects() {
                           1 - Math.max(0, Math.min(getAbsPosIndex(index), 0.5))
                         })`,
                       }}
-                      onClick={() => {
-                        if (!isDragging.current) {
-                          if (currentIndex == index) {
-                            toggleSelectedView();
-                          }
-                          if (!selectedView) {
-                            setCurrentIndex(index);
-                          }
-                        }
-                      }}
                     >
+                      <div
+                        className={styles.clickArea}
+                        style={{
+                          width: `${selectedView ? 100 : 85}%`,
+                          height: `${selectedView ? 100 : 85}%`,
+                        }}
+                        onClick={() => {
+                          if (!isDragging.current) {
+                            if (currentIndex == index) {
+                              toggleSelectedView();
+                            }
+                            if (!selectedView) {
+                              setCurrentIndex(index);
+                            }
+                          }
+                        }}
+                      ></div>
                       <FrameOverlay
                         index={index}
-                        lastIndex={Contents.length-1}
+                        currentIndex={currentIndex}
                         selectedView={selectedView}
                       />
-                      <div className={styles.frameCont}>
+                      <div className={styles.frameCont} draggable={false}>
                         {/* Put inside div because this stupid thing wont stop dragging */}
                         <img
                           draggable={false}
@@ -213,8 +225,29 @@ export default function WebsiteProjects() {
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
                             backgroundPosition: "center",
+                            width: `${selectedView ? 100 : 85}%`,
+                            height: `${selectedView ? 100 : 85}%`,
                           }}
-                        ></img>
+                          onDragStart={(e) => {
+                            e.preventDefault();
+                          }}
+                        />
+                        {!selectedView && (
+                          <div className={styles.frameLogoCenterer}>
+                          <img
+                            draggable={false}
+                            className={styles.frameLogo}
+                            src={`/Home/WebsiteProjects/Logos/${content.logoPath}`}
+                            style={{
+                              backgroundRepeat: "no-repeat",
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                            }}
+                            onDragStart={(e) => {
+                              e.preventDefault();
+                            }}
+                          /></div>
+                        )}
                       </div>
                     </div>
                   </div>

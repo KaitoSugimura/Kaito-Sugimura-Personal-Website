@@ -14,7 +14,19 @@
   user-select: none;
   pointer-events: none;
 
+  -webkit-perspective: 125vh;
+  perspective: 125vh;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.overflowHidden {
   overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .Ribbon {
@@ -35,4 +47,67 @@
 
 .Ribbon:has(.Oldest) {
   background-color: #00aeffb2;
+}
+
+.leftBottom {
+  position: absolute;
+  bottom: 10%;
+  left: -0.5%;
+  width: 65%;
+
+  color: white;
+  border-left: solid 0.3vw rgba(255, 255, 255, 0.85);
+  padding-left: 1vw;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5) , rgba(0, 0, 0, 0) 80%);
+
+  animation: fadeIn 0.3s ease-in;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: start;
+  align-items: center;
+
+  transition: transform 0.3s ease-in-out;
+  transform: rotateY(20deg);
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.title {
+  font-size: 2.5vw;
+  font-weight: 600;
+}
+
+.desc {
+  font-size: 1.25vw;
+  font-weight: 400;
+}
+
+.leftTriangle {
+  width: 0;
+  height: 0;
+  border-top: 0.6vw solid transparent;
+  border-bottom: 0.6vw solid transparent;
+
+  border-left: 0.6vw solid rgba(255, 255, 255, 0.85);
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
 }
