@@ -5,8 +5,8 @@ import Hero from "./Hero/Hero";
 
 export default [
   { title: "Home", XML: <Hero /> },
+  { title: "Projects", XML: <WebsiteProjects /> },
   { title: "Education", XML: <Education />},
-  { title: "Projects", XML: <Projects /> },
-  { title: "Project", XML: <WebsiteProjects /> },
+  { title: "ex", XML: <Projects /> },
   
 ];

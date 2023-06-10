@@ -26,16 +26,23 @@ export default function WebsiteProjects() {
   const [sectionRatio, setSectionRatio] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    // Ratio is 16:9
-    let width = sectionDefaultWidth;
-    let height = sectionDefaultWidth * 0.5625;
-    const ratio = window.innerHeight / window.innerWidth;
-    if (ratio < 0.5625) {
-      width = width * (ratio / 0.5625);
-      height = width * 0.5625;
+    function handleResize() {
+      // Ratio is 16:9
+      let width = sectionDefaultWidth;
+      let height = sectionDefaultWidth * 0.5625;
+      const ratio = window.innerHeight / window.innerWidth;
+      if (ratio < 0.5625) {
+        width = width * (ratio / 0.5625);
+        height = width * 0.5625;
+      }
+      setSectionRatio({ width: width, height: height });
     }
+    window.addEventListener("resize", handleResize);
+    handleResize();
 
-    setSectionRatio({ width: width, height: height });
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
   //RATIO CALCULATION END
 
@@ -74,7 +81,7 @@ export default function WebsiteProjects() {
   const handleMouseMove = useRef((event) => {
     const { clientX } = (event.touches && event.touches[0]) || event;
     const diff = clientX - MouseXInitialRef.current;
-    if (Math.abs(diff) > 50) {
+    if (Math.abs(diff) > 25) {
       isDragging.current = true;
     }
     let newIndex =
@@ -122,13 +129,13 @@ export default function WebsiteProjects() {
   };
 
   const getSelectedWidth = (index) => {
-    return selectedView || getPosIndex(index) != 0
+    return mouseIsDown.current || selectedView || getAbsPosIndex(index) > 0.1
       ? sectionRatio.width / 2
       : sectionRatio.width / 1.35;
   };
 
   const getSelectedHeight = (index) => {
-    return selectedView || getPosIndex(index) != 0
+    return mouseIsDown.current || selectedView || getAbsPosIndex(index) > 0.1
       ? sectionRatio.height / 2
       : sectionRatio.height / 1.35;
   };
@@ -142,9 +149,6 @@ export default function WebsiteProjects() {
           }`}
           onMouseDown={deviceIsTouch ? null : handleMouseDown}
           onTouchStart={deviceIsTouch ? handleMouseDown : null}
-          onDrag={() => {
-            handleMouseUp();
-          }}
           onDragStart={(e) => {
             e.preventDefault();
           }}
@@ -189,15 +193,23 @@ export default function WebsiteProjects() {
                           ? "none"
                           : `transform 0.3s ease-in-out`,
                         filter: `brightness(${
-                          1 - Math.max(0, Math.min(getAbsPosIndex(index), 0.5))
+                          1 - Math.max(0, Math.min(getAbsPosIndex(index), 0.4))
                         })`,
                       }}
                     >
+                      <FrameOverlay
+                        index={index}
+                        content={content}
+                        lastIndex={Contents.length - 1}
+                        currentIndex={currentIndex}
+                        selectedView={selectedView}
+                      />
                       <div
-                        className={styles.clickArea}
+                        className={styles.clickWrapper}
                         style={{
                           width: `${selectedView ? 100 : 85}%`,
                           height: `${selectedView ? 100 : 85}%`,
+                          left: selectedView ? "0%" : "7.5%",
                         }}
                         onClick={() => {
                           if (!isDragging.current) {
@@ -209,45 +221,28 @@ export default function WebsiteProjects() {
                             }
                           }
                         }}
-                      ></div>
-                      <FrameOverlay
-                        index={index}
-                        currentIndex={currentIndex}
-                        selectedView={selectedView}
-                      />
-                      <div className={styles.frameCont} draggable={false}>
-                        {/* Put inside div because this stupid thing wont stop dragging */}
+                      >
+                        {!selectedView && (
+                          <>
+                            {index == 0 && (
+                              <div className={styles.Ribbon}>
+                                <p className={styles.Newest}>Newest</p>
+                              </div>
+                            )}
+                            {index == Contents.length - 1 && (
+                              <div className={styles.Ribbon}>
+                                <p className={styles.Oldest}>Oldest</p>
+                              </div>
+                            )}
+                          </>
+                        )}
                         <img
-                          draggable={false}
                           className={styles.frameImage}
                           src={`/Home/WebsiteProjects/${content.imageFileName}`}
-                          style={{
-                            backgroundRepeat: "no-repeat",
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                            width: `${selectedView ? 100 : 85}%`,
-                            height: `${selectedView ? 100 : 85}%`,
-                          }}
                           onDragStart={(e) => {
                             e.preventDefault();
                           }}
                         />
-                        {!selectedView && (
-                          <div className={styles.frameLogoCenterer}>
-                          <img
-                            draggable={false}
-                            className={styles.frameLogo}
-                            src={`/Home/WebsiteProjects/Logos/${content.logoPath}`}
-                            style={{
-                              backgroundRepeat: "no-repeat",
-                              backgroundSize: "cover",
-                              backgroundPosition: "center",
-                            }}
-                            onDragStart={(e) => {
-                              e.preventDefault();
-                            }}
-                          /></div>
-                        )}
                       </div>
                     </div>
                   </div>

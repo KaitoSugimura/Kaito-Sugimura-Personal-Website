@@ -1,26 +1,33 @@
 import styles from "./FrameOverlay.module.css";
-import Contents from "../WebsiteContents";
 
-export default function FrameOverlay({ index, selectedView, currentIndex }) {
-  const lastIndex = Contents.length - 1;
+export default function FrameOverlay({
+  index,
+  content,
+  lastIndex,
+  selectedView,
+  currentIndex,
+}) {
   return (
     <>
       {!selectedView && (
         <div className={styles.FrameOverlay}>
-          {(index == 0 || index == lastIndex) && (
-            <div className={styles.overflowHidden}>
-            <div className={styles.Ribbon}>
-              {index == 0 && <p className={styles.Newest}>Newest</p>}
-              {index == lastIndex && <p className={styles.Oldest}>Oldest</p>}
-            </div></div>
-          )}
           {index == currentIndex && (
             <div className={styles.leftBottom}>
               <span className={styles.leftTriangle}></span>
-              <h1 className={styles.title}>{Contents[index].title}</h1>
-              <p className={styles.desc}>{Contents[index].desc}</p>
+              <h1 className={styles.title}>{content.title}</h1>
+              <p className={styles.desc}>{content.desc}</p>
             </div>
           )}
+
+          <div className={styles.frameLogoCenterer}>
+            <img
+              className={styles.frameLogo}
+              src={`/Home/WebsiteProjects/Logos/${content.logoPath}`}
+              onDragStart={(e) => {
+                e.preventDefault();
+              }}
+            />
+          </div>
         </div>
       )}
     </>
