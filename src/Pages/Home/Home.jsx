@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Home.module.css";
-import Projects from "./Projects/Projects";
-import Education from "./Education/Education";
 import Sections from "./HomeTableOfContents.jsx";
 import Navigation from "../../Components/Navigation";
 

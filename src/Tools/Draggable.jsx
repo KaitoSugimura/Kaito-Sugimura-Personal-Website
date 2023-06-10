@@ -1,7 +1,12 @@
 import { useRef, useState } from "react";
 import styles from "./Draggable.module.css";
 
-export default function Draggable({ children, getNextZIndex, centerCoords }) {
+export default function Draggable({
+  children,
+  getNextZIndex,
+  centerCoords,
+  isArtifact,
+}) {
   const initialPos = useRef({ x: 0, y: 0 });
   const initialContPos = useRef({ x: 0, y: 0 });
   const dragRootRef = useRef(null);
@@ -17,12 +22,22 @@ export default function Draggable({ children, getNextZIndex, centerCoords }) {
     const newX = clientX - initialPos.current.x + initialContPos.current.x;
     const newY = clientY - initialPos.current.y + initialContPos.current.y;
     dragCont.style.left = `${Math.max(
-      0,
-      Math.min(newX, window.innerWidth - dragCont.offsetWidth)
+      isArtifact ? 0 : -dragCont.offsetWidth + 50,
+      Math.min(
+        newX,
+        isArtifact
+          ? window.innerWidth - dragCont.offsetWidth
+          : window.innerWidth - 50
+      )
     )}px`;
     dragCont.style.top = `${Math.max(
-      0,
-      Math.min(newY, window.innerHeight - dragCont.offsetHeight)
+      isArtifact ? 0 : -dragCont.offsetHeight + 50,
+      Math.min(
+        newY,
+        isArtifact
+          ? window.innerHeight - dragCont.offsetHeight
+          : window.innerHeight - 50
+      )
     )}px`;
   });
 
@@ -61,6 +76,7 @@ export default function Draggable({ children, getNextZIndex, centerCoords }) {
     const right = left + dragRef.offsetWidth;
     const bottom = top + dragRef.offsetHeight;
     if (
+      isArtifact &&
       centerCoords.x > left &&
       centerCoords.x < right &&
       centerCoords.y > top &&
