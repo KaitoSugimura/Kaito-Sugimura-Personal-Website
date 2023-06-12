@@ -1,0 +1,93 @@
+.SoundSetting {
+  position: absolute;
+  /* 
+  Declare in Navigation.jsx
+  top: 6.5rem;
+  left: 7rem; */
+  z-index: 100;
+
+  /* transition: top 0.3s ease-in-out, left 0.3s ease-in-out; */
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.SoundButton {
+  width: 5rem;
+  height: 5rem;
+  border: none;
+  cursor: pointer;
+  background: none;
+
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+}
+
+.SoundIcon {
+  width: 5rem;
+  height: 5rem;
+  filter: invert(100%) drop-shadow(0 0 1rem rgb(24, 24, 24));
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.SoundSetting:hover .SoundSliderCont {
+  display: flex;
+}
+
+.SoundSliderCont {
+  display: none;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-left: 1rem;
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+}
+
+.input {
+  height: 100%;
+  aspect-ratio: 3 / 1;
+  background-color: aliceblue;
+
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+}
+
+.amount {
+  color: white;
+  font-size: 2rem;
+  padding-left: 1rem;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}

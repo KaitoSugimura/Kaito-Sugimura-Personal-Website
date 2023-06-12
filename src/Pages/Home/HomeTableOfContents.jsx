@@ -4,9 +4,8 @@ import WebsiteProjects from "./WebsiteProjects/WebsiteProjects";
 import Hero from "./Hero/Hero";
 
 export default [
-  { title: "Home", XML: <Hero /> },
-  { title: "Projects", XML: <WebsiteProjects /> },
-  { title: "Profile", XML: <Profile />},
-  { title: "ex", XML: <Projects /> },
-  
+  { title: "Home", XML: <Hero />, music: null },
+  { title: "Projects", XML: <WebsiteProjects />, music: null },
+  { title: "Profile", XML: <Profile />, music: null },
+  { title: "ex", XML: <Projects />, music: null },
 ];

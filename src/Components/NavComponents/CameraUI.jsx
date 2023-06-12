@@ -6,6 +6,7 @@ export default function CameraUI({ navIsOpen, currentSectionIndex }) {
   const BorderStyle = {
     width: navIsOpen ? "12vh" : "22vh",
     height: navIsOpen ? "12vh" : "22vh",
+    borderWidth: "0.15rem",
   };
   const StaticBorder = {
     width: "2rem",

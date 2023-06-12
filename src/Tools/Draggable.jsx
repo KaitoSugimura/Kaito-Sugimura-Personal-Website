@@ -1,20 +1,38 @@
 import { useRef, useState } from "react";
 import styles from "./Draggable.module.css";
+import CornerBorder from "../Components/NavComponents/CornerBorder";
+import forms from "../Pages/Home/Profile/Forms";
 
 export default function Draggable({
   children,
   getNextZIndex,
-  centerCoords,
-  isArtifact,
+  isArtifact = false,
+  centerCoords = null,
+  artifactID = null,
+  setOverlapID = (doNothing) => {},
+  setOpenForms = (doNothing) => {},
+  id,
+  getSetSpawnOffset = (returnZero) => {
+    return 0;
+  },
+  artifactSetHandle = (doNothing) => {},
 }) {
   const initialPos = useRef({ x: 0, y: 0 });
   const initialContPos = useRef({ x: 0, y: 0 });
+  const spawnOffset = useRef(getSetSpawnOffset(-1));
   const dragRootRef = useRef(null);
   const deviceIsTouch =
     "ontouchstart" in window ||
     navigator.maxTouchPoints > 0 ||
     navigator.msMaxTouchPoints > 0;
   const [thisZIndex, setThisZIndex] = useState(getNextZIndex());
+  const [isDragging, setIsDragging] = useState(false);
+
+  const StaticBorder = {
+    width: "5vmin",
+    height: "5vmin",
+    borderWidth: "2px",
+  };
 
   const handleMouseMove = useRef((event) => {
     const dragCont = dragRootRef.current;
@@ -58,6 +76,8 @@ export default function Draggable({
       handleMouseMove.current
     );
     setThisZIndex(getNextZIndex());
+    setOverlapID(null);
+    setIsDragging(true);
   };
 
   const handleMouseUp = (event) => {
@@ -84,23 +104,52 @@ export default function Draggable({
     ) {
       dragRef.style.left = `${centerCoords.x - dragRef.offsetWidth / 2}px`;
       dragRef.style.top = `${centerCoords.y - dragRef.offsetHeight / 2}px`;
+      setOverlapID(artifactID);
+      setOpenForms((prev) => {
+        return { ...prev, [`${Date.now()}`]: artifactID };
+      });
+      artifactSetHandle();
     }
+    setIsDragging(false);
   };
 
   return (
     <div
       className={styles.DraggableContainer}
+      key={id}
       ref={dragRootRef}
-      onMouseDown={deviceIsTouch ? null : handleMouseDown}
-      onTouchStart={deviceIsTouch ? handleMouseDown : null}
       onDragStart={(e) => {
         e.preventDefault();
       }}
       style={{
         zIndex: thisZIndex,
+        top: `${8 + spawnOffset.current * 2}%`,
+        left: `${4 + spawnOffset.current}%`,
+        // border: isDragging ? "2px solid #00ff00" : "2px solid #00000000",
       }}
     >
-      {children}
+      {!isArtifact && !isDragging && (
+        <button
+          className={styles.deleteButton}
+          onClick={(e) => {
+            setOpenForms((prev) => {
+              delete prev[id];
+              return { ...prev };
+            });
+            getSetSpawnOffset(spawnOffset.current);
+          }}
+        >
+          <p>X</p>
+        </button>
+      )}
+      <div
+        className={styles.dragArea}
+        onMouseDown={deviceIsTouch ? null : handleMouseDown}
+        onTouchStart={deviceIsTouch ? handleMouseDown : null}
+      >
+        {isDragging && <CornerBorder style={StaticBorder} />}
+        {children}
+      </div>
     </div>
   );
 }

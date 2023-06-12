@@ -1,16 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Home.module.css";
 import Sections from "./HomeTableOfContents.jsx";
 import Navigation from "../../Components/Navigation";
+import { SoundContext } from "../../Context/SoundContext";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState(0);
+  const { playMusic } = useContext(SoundContext);
   const blockScroll = useRef(false);
   const TouchMoveStartY = useRef(0);
   const TouchMoveStartTime = useRef(0);
   const scrollTo = (index) => {
     setCurrentSection(index);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      playMusic(Sections[currentSection].music);
+    }, 300);
+  }, [currentSection]);
 
   useEffect(() => {
     const handleScroll = (event) => {
@@ -46,7 +54,7 @@ export default function Home() {
         setCurrentSection((prev) => {
           if (velocityY < 0.5) {
             return Math.min(Math.max(++prev, 0), Sections.length - 1);
-          } else if(velocityY > 0.5) {
+          } else if (velocityY > 0.5) {
             return Math.min(Math.max(--prev, 0), Sections.length - 1);
           }
         });

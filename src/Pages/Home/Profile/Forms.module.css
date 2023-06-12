@@ -1,0 +1,55 @@
+
+.form {
+  position: relative;
+  width: 35vw;
+  height: 45vw;
+  background: url("/Home/Profile/Form.png");
+
+  background-repeat: none;
+  background-size: cover;
+  background-color: rgba(8, 105, 147, 0.692);
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+
+  padding-top: 3vw;
+  padding-left: 1.5vw;
+
+  color: white;
+
+  font-weight: 500;
+}
+
+.backgroundLogo {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  height: 35%;
+  opacity: 1;
+  z-index: -1;
+  filter: grayscale(1);
+}
+
+.title {
+  border: none;
+
+  font-size: 2vw;
+}
+
+.subtitle {
+  font-size: 1vw;
+  font-weight: 700;
+  margin-top: 1vw;
+}
+
+.University {
+  font-size: 1vw;
+}
+
+.date {
+  font-size: 0.7vw;
+}

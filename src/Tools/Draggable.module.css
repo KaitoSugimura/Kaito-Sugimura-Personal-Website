@@ -1,13 +1,37 @@
 .DraggableContainer {
   position: absolute;
-  top: 15%;
-  left: 12.5%;
   width: fit-content;
   height: fit-content;
+}
 
+.dragArea {
   border: none;
   cursor: move;
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
+  padding: 10px;
+  z-index: 0;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2vw;
+  height: 2vw;
+  border: none;
+  background-color: rgba(255, 0, 0, 0.877);
+  cursor: pointer;
+  z-index: 10000;
+  font-size: 1vw;
+}
+
+.deleteButton p {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
