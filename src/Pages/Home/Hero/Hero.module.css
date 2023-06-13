@@ -2,12 +2,62 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+
+  overflow: hidden;
+
+  animation: init 10s forwards;
 }
+
+@keyframes init {
+  0% {
+    background-color: transparent;
+  }
+  15% {
+    background-color: transparent;
+  }
+  25% {
+    background-color: rgba(0, 0, 0, 0.589);
+  }
+
+  75% {
+    background-color: rgba(0, 0, 0, 0.589);
+  }
+
+  80% {
+    background-color: transparent;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* .animCont{
+  animation: rotate 0.1s forwards;
+  animation-delay: 1.6s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+
+@keyframes rotate {
+  0% {
+
+  }
+  100%{
+    transform: rotate(-10deg) scale(0.9);
+  }
+
+} */
 
 .backgroundImage {
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   background-image: url("/Backgrounds/Sphere.png");
@@ -16,13 +66,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  z-index: -1;
+  z-index: -10;
 }
 
-.name{
+.name {
   position: absolute;
-  top:16vh;
-  left:8vw;
+  top: 16vh;
+  left: 8vw;
 
   font-size: 6vw;
   color: white;
@@ -30,13 +80,242 @@
   z-index: 1;
 }
 
-.catchphrase{
+.catchphrase {
   position: absolute;
-  top:32vh;
-  left:12vw;
+  top: 32vh;
+  left: 12vw;
   font-size: 3vw;
   color: white;
   text-justify: right;
 
   z-index: 1;
+}
+
+/* Init */
+.commandPrompt {
+  position: absolute;
+  top: 20vh;
+  left: 30vw;
+  width: 40vw;
+  height: 60vh;
+
+  color: white;
+  font-size: 2vh;
+  line-height: 1.5;
+
+  padding-left: 2vh;
+
+  animation: remove 0.3s forwards;
+  animation-delay: 7.5s;
+}
+
+@keyframes remove {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.cmdLine {
+  width: 0;
+  animation: typing 0.2s steps(12) forwards;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* .cmdT1 {
+  animation: println1 1.2s steps(12) forwards;
+  animation-delay: 2.2s;
+  overflow: hidden;
+  height: 0;
+  display: block;
+}
+
+@keyframes println1 {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 35.5vh;
+  }
+} */
+
+.progressBar {
+  width: 15vw;
+  height: 1.8vw;
+  margin: 0.5vw 0.4vw;
+  border: 2px solid white;
+  opacity: 0;
+  display: block;
+  animation: appear 0.2s forwards;
+  animation-delay: 4.6s;
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.progressFill {
+  background-color: white;
+  animation: fill 1.2s forwards;
+  animation-delay: 4.8s;
+  width: 0%;
+  height: 100%;
+}
+
+@keyframes fill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* .cmdT2 {
+  animation: println2 0.8s steps(6) forwards;
+  animation-delay: 5.2s;
+  overflow: hidden;
+  height: 0;
+}
+
+@keyframes println2 {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 18vh;
+  }
+} */
+
+.Warning {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24vw;
+  height: 13vw;
+
+  transform: translate(-50%, -50%);
+  background-color: rgb(228, 228, 228);
+  border-top: 2vw solid rgb(170, 170, 170);
+
+  color: black;
+
+  z-index: -2;
+
+  animation: warningInit 1s forwards;
+}
+
+@keyframes warningInit {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  50% {
+    width: 48vw;
+    height: 26vw;
+  }
+
+  100% {
+    width: 48vw;
+    height: 13vw;
+  }
+}
+
+.WarningInnerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 2vw;
+
+  font-size: 2vw;
+  white-space: nowrap;
+  z-index: -1;
+
+  animation: warningInnerInit 0.5s forwards;
+}
+
+.Warning img {
+  width: 2vw;
+  height: 2vw;
+  margin-right: 1vw;
+}
+
+@keyframes warningInnerInit {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0%);
+  }
+  50% {
+    opacity: 0;
+    transform: translate(-50%, 0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.unknownUser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: unknownUser 0.5s forwards;
+  animation-delay: 7.6s;
+  transform: translate(-50%, 0);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes unknownUser {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50%, -2vw);
+  }
+}
+
+.Authenticated {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: authenticated 0.5s forwards;
+  animation-delay: 7.6s;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes authenticated {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 2vw);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%, 0);
+  }
 }

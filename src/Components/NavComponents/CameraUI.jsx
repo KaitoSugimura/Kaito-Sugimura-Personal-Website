@@ -48,25 +48,25 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
           </div>
         )}
         <div className={styles.cameraUITopRightContainer}>
-          <p>
-            {initDone
-              ? `Page ${currentSectionIndex + 1}/${Sections.length}`
-              : ""}
-          </p>
+          {initDone && (
+            <p className={styles.fadeInAnim}>
+              Page {currentSectionIndex + 1}/{Sections.length}
+            </p>
+          )}
         </div>
         <div className={styles.cameraUIBottomLeftContainer}>
           {initDone ? (
             <>
-              <p>Developed from scratch using: REACT JS, CSS, HTML</p>
-              <p>By: Kaito Sugimura</p>
+              <p className={styles.fadeInAnim}>Developed from scratch using: REACT JS, CSS, HTML</p>
+              <p className={styles.fadeInAnim}>By: Kaito Sugimura</p>
             </>
           ) : (
             <>
               <div className={styles.typingWrapping1}>
-                <p>Accessing Kernel...</p>
+                <p>Administrator</p>
               </div>
               <div className={styles.typingWrapping2}>
-                <p>System all clear</p>
+                <p>System access granted</p>
               </div>
             </>
           )}

@@ -4,6 +4,7 @@ import Sections from "./HomeTableOfContents.jsx";
 import Navigation from "../../Components/Navigation";
 import { SoundContext } from "../../Context/SoundContext";
 import DialogMain from "../../Components/Dialog/DialogMain";
+import InitHero from "./Hero/InitHero";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -29,7 +30,7 @@ export default function Home() {
   const handleEventFinished = () => {
     setCurrentDialogID(null);
     setScrollable(true);
-    if (!initDone){
+    if (!initDone) {
       setTimeout(() => {
         setInitDone(true);
       }, 5000);
@@ -151,19 +152,23 @@ export default function Home() {
         />
       )}
       <div className={styles.HomeRoot}>
-        {Sections.map((section, index) => (
-          <div
-            className={styles.SectionContainer}
-            id={section.title}
-            key={index}
-            style={{
-              transform: `translateY(-${currentSection * 100}vh)`,
-              transition: "transform 0.3s ease-in-out",
-            }}
-          >
-            {section.XML}
-          </div>
-        ))}
+        {Sections.map((section, index) =>
+          !initDone && index == 0 ? (
+            <InitHero currentDialogID={currentDialogID} />
+          ) : (
+            <div
+              className={styles.SectionContainer}
+              id={section.title}
+              key={index}
+              style={{
+                transform: `translateY(-${currentSection * 100}vh)`,
+                transition: "transform 0.3s ease-in-out",
+              }}
+            >
+              {section.XML}
+            </div>
+          )
+        )}
       </div>
     </div>
   );

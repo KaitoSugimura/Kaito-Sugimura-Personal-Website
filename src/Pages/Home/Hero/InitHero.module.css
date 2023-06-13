@@ -1,0 +1,59 @@
+.HeroRoot {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+
+  font-size: 6vw;
+  color: white;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/Backgrounds/Sphere.png");
+  border: none;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+/* Init */
+.commandPrompt{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  animation: init 5s forwards;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes init {
+  0% {
+    background-color: transparent;  backdrop-filter: blur(0rem);
+
+  }
+  20% {
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(0.3rem);
+  }
+  60% {
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(0.3rem);
+  }
+  100% {
+    background-color: transparent;
+    backdrop-filter: blur(0rem);
+  }
+}
