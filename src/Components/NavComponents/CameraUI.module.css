@@ -27,6 +27,29 @@
   pointer-events: none;
 }
 
+.UIanim {
+  animation: initiation 3s ease-in-out;
+}
+
+@keyframes initiation {
+  0% {
+    width: 0%;
+    height: 0%;
+  }
+  35% {
+    width: 25%;
+    height: 25%;
+  }
+  70% {
+    width: 25%;
+    height: 25%;
+  }
+  100% {
+    width: calc(100% - 10rem);
+    height: calc(100% - 10rem);
+  }
+}
+
 .cameraUIMainContainer {
   position: absolute;
   width: 100%;
@@ -41,6 +64,24 @@
   transform: translateY(-2.5rem);
 
   color: white;
+
+}
+
+.mainAnim{
+  animation: initiationMainUI 3s ease-in-out 0s forwards;
+}
+
+@keyframes initiationMainUI {
+  0% {
+    top: 1vh;
+  }
+
+  70% {
+    top: 1vh;
+  }
+  100% {
+    top: 0;
+  }
 }
 
 .MainNameText {
@@ -51,11 +92,31 @@
 .MainSection {
   position: relative;
   display: inline;
-  width: 52rem;
+  width: 5rem;
   height: 9rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.MainSectionDefault{
+  width: 35rem;
+  height: 9rem;
+}
+
+.MainSectionAnim{
+  animation: initiationTitle 1.5s ease-in-out 3s forwards;
+}
+
+@keyframes initiationTitle {
+  0% {
+    width: 5rem;
+    height: 9rem;
+  }
+  100% {
+    width: 35rem;
+    height: 9rem;
+  }
 }
 
 .MainSectionBackground {
@@ -111,4 +172,33 @@
 
   color: rgba(255, 255, 255, 0.867);
   font-size: 2.5rem;
+}
+
+.typingWrapping1,
+.typingWrapping2 {
+  animation: typing 0.45s steps(30, end) forwards;
+  overflow: hidden;
+  width: 0;
+}
+
+.typingWrapping1 p,
+.typingWrapping2 p {
+  white-space: nowrap;
+}
+
+.typingWrapping1 {
+  animation-delay: 0.9s;
+}
+
+.typingWrapping2 {
+  animation-delay: 1.75s;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }

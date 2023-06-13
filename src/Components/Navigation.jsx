@@ -6,28 +6,31 @@ import NavButtons from "./NavComponents/NavButtons";
 import SideButtons from "./NavComponents/SideButtons";
 import SoundSetting from "../Tools/SoundSetting";
 
-export default function Navigation({ scrollTo, currentSectionIndex }) {
+export default function Navigation({ scrollTo, currentSectionIndex, initDone }) {
   const [navIsOpen, setNavIsOpen] = useState(false);
   const rootRef = useRef(null);
 
   return (
     <div className={styles.navigationRoot} ref={rootRef}>
-      <SoundSetting
+     {initDone &&  <SoundSetting
         style={{
           top: `6.5rem`,
           left: `7rem`,
         }}
-      />
+      />}
+
       <CameraUI
         navIsOpen={navIsOpen}
         currentSectionIndex={currentSectionIndex}
+        initDone={initDone}
       />
-      <NavButtons navIsOpen={navIsOpen} setNavIsOpen={setNavIsOpen} />
-      <SideButtons
+
+      {initDone && <NavButtons navIsOpen={navIsOpen} setNavIsOpen={setNavIsOpen} />}
+      {initDone && <SideButtons
         navIsOpen={navIsOpen}
         scrollTo={scrollTo}
         currentSectionIndex={currentSectionIndex}
-      />
+      />}
       <div
         className={`${styles.navigationContainer} ${
           navIsOpen ? "" : "NoUserSelect"

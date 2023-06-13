@@ -4,7 +4,7 @@ import Sections from "../../Pages/Home/HomeTableOfContents.jsx";
 export default function SideButtons({
   navIsOpen,
   scrollTo,
-  currentSectionIndex,
+  currentSectionIndex
 }) {
   return (
     <div className={`${styles.sideButtonsRoot}`}>

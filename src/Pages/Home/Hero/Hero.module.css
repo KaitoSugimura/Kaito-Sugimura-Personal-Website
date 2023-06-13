@@ -1,9 +1,13 @@
 .HeroRoot {
+  position: relative;
   width: 100vw;
   height: 100vh;
 }
 
 .backgroundImage {
+  position: absolute;
+  top:0;
+  left:0;
   width: 100vw;
   height: 100vh;
   background-image: url("/Backgrounds/Sphere.png");
@@ -12,4 +16,27 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  z-index: -1;
+}
+
+.name{
+  position: absolute;
+  top:16vh;
+  left:8vw;
+
+  font-size: 6vw;
+  color: white;
+
+  z-index: 1;
+}
+
+.catchphrase{
+  position: absolute;
+  top:32vh;
+  left:12vw;
+  font-size: 3vw;
+  color: white;
+  text-justify: right;
+
+  z-index: 1;
 }

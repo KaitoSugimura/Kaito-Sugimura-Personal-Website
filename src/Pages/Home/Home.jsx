@@ -17,6 +17,8 @@ export default function Home() {
   const [currentDialogID, setCurrentDialogID] = useState("Home1");
   const events = useRef({ Profile1: true, Project1: true });
 
+  const [initDone, setInitDone] = useState(false);
+
   const OpenDialogWithDelay = (DialogID) => {
     setScrollable(false);
     setTimeout(() => {
@@ -27,6 +29,11 @@ export default function Home() {
   const handleEventFinished = () => {
     setCurrentDialogID(null);
     setScrollable(true);
+    if (!initDone){
+      setTimeout(() => {
+        setInitDone(true);
+      }, 5000);
+    }
   };
 
   const setScrollable = (value) => {
@@ -50,7 +57,7 @@ export default function Home() {
 
   // Scroll
   const scrollTo = (index) => {
-    if (isScrollable.current) {
+    if (isScrollable.current && initDone) {
       setCurrentSection(index);
     }
   };
@@ -64,7 +71,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = (event) => {
-      if (!blockScroll.current && isScrollable.current) {
+      if (!blockScroll.current && isScrollable.current && initDone) {
         setCurrentSection((prev) => {
           if (event.deltaY > 0) {
             return Math.min(Math.max(++prev, 0), Sections.length - 1);
@@ -95,7 +102,8 @@ export default function Home() {
       if (
         isScrollable.current &&
         Math.abs(velocityY) > 0.5 &&
-        !blockScroll.current
+        !blockScroll.current &&
+        initDone
       ) {
         setCurrentSection((prev) => {
           if (velocityY < 0.5) {
@@ -126,7 +134,7 @@ export default function Home() {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchstart", handleTouchStart);
     };
-  }, []);
+  }, [initDone]);
 
   return (
     <div className={styles.HomeScroller}>
@@ -136,7 +144,11 @@ export default function Home() {
           eventFinishedCallback={handleEventFinished}
         />
       ) : (
-        <Navigation scrollTo={scrollTo} currentSectionIndex={currentSection} />
+        <Navigation
+          scrollTo={scrollTo}
+          currentSectionIndex={currentSection}
+          initDone={initDone}
+        />
       )}
       <div className={styles.HomeRoot}>
         {Sections.map((section, index) => (
