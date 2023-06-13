@@ -1,7 +1,7 @@
 .SoundSetting {
   position: absolute;
   /* 
-  Declare in Navigation.jsx
+  Declared in respective files
   top: 6.5rem;
   left: 7rem; */
   z-index: 100;
@@ -43,12 +43,8 @@
   pointer-events: none;
 }
 
-.SoundSetting:hover .SoundSliderCont {
-  display: flex;
-}
-
 .SoundSliderCont {
-  display: none;
+  display: flex;
 
   position: absolute;
   top: 0;
@@ -58,25 +54,6 @@
   align-items: center;
   height: 100%;
   padding-left: 1rem;
-  -moz-user-select: -moz-all;
-  -khtml-user-select: all;
-  -webkit-user-select: all;
-  -ms-user-select: all;
-  user-select: all;
-  pointer-events: all;
-}
-
-.input {
-  height: 100%;
-  aspect-ratio: 3 / 1;
-  background-color: aliceblue;
-
-  -moz-user-select: -moz-all;
-  -khtml-user-select: all;
-  -webkit-user-select: all;
-  -ms-user-select: all;
-  user-select: all;
-  pointer-events: all;
 }
 
 .amount {
@@ -90,4 +67,41 @@
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+}
+
+.input {
+  height: 15px;
+  width: 6vw;
+  background-color: aliceblue;
+
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+
+  -webkit-appearance: none;
+  appearance: none;
+  background: #d3d3d381;
+  outline: none;
+  border-radius: 18px;
+}
+
+.input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  background: #ffffffc2;
+  cursor: pointer;
+}
+
+.input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  background: #ffffffc2;
+  cursor: pointer;
 }

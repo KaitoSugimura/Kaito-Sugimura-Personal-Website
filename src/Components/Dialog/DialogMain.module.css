@@ -1,9 +1,10 @@
 .DialogRoot {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 100;
 
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -13,6 +14,25 @@
   pointer-events: none;
 }
 
+.SkipButton {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  width: 5rem;
+  height: 5rem;
+  background: transparent;
+  filter: invert(100%) drop-shadow(0 0 1rem rgb(24, 24, 24));
+  border: none;
+  z-index: 100;
+  cursor: pointer;
+
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+}
 
 .DialogClickArea {
   position: absolute;

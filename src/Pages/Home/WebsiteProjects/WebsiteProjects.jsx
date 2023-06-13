@@ -155,7 +155,7 @@ export default function WebsiteProjects() {
         >
           <div className={styles.WebsiteOuterFrame}>
             {Contents.map((content, index) => (
-              <>
+              <div key={index}>
                 {getPosIndex(index) == 0 && selectedView && (
                   <SelectedView index={index} sectionRatio={sectionRatio} />
                 )}
@@ -247,7 +247,7 @@ export default function WebsiteProjects() {
                     </div>
                   </div>
                 )}
-              </>
+              </div>
             ))}
           </div>
         </div>

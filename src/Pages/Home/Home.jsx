@@ -3,18 +3,60 @@ import styles from "./Home.module.css";
 import Sections from "./HomeTableOfContents.jsx";
 import Navigation from "../../Components/Navigation";
 import { SoundContext } from "../../Context/SoundContext";
+import DialogMain from "../../Components/Dialog/DialogMain";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState(0);
   const { playMusic } = useContext(SoundContext);
   const blockScroll = useRef(false);
+  const isScrollable = useRef(false);
   const TouchMoveStartY = useRef(0);
   const TouchMoveStartTime = useRef(0);
-  const scrollTo = (index) => {
-    setCurrentSection(index);
+
+  // Dialog
+  const [currentDialogID, setCurrentDialogID] = useState("Home1");
+  const events = useRef({ Profile1: true, Project1: true });
+
+  const OpenDialogWithDelay = (DialogID) => {
+    setScrollable(false);
+    setTimeout(() => {
+      setCurrentDialogID(DialogID);
+    }, 300);
+  };
+
+  const handleEventFinished = () => {
+    setCurrentDialogID(null);
+    setScrollable(true);
+  };
+
+  const setScrollable = (value) => {
+    isScrollable.current = value;
+  };
+
+  const scrollEventHandler = (sectionNo) => {
+    if (events.current.Project1 && Sections[sectionNo].title == "Projects") {
+      events.current.Project1 = false;
+      OpenDialogWithDelay("Projects1");
+    }
+    if (events.current.Profile1 && Sections[sectionNo].title == "Profile") {
+      events.current.Profile1 = false;
+      OpenDialogWithDelay("Profile1");
+    }
   };
 
   useEffect(() => {
+    scrollEventHandler(currentSection);
+  }, [currentSection]);
+
+  // Scroll
+  const scrollTo = (index) => {
+    if (isScrollable.current) {
+      setCurrentSection(index);
+    }
+  };
+
+  useEffect(() => {
+    // Most likely not going to play music with this method (deprecated)
     setTimeout(() => {
       playMusic(Sections[currentSection].music);
     }, 300);
@@ -22,7 +64,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = (event) => {
-      if (!blockScroll.current) {
+      if (!blockScroll.current && isScrollable.current) {
         setCurrentSection((prev) => {
           if (event.deltaY > 0) {
             return Math.min(Math.max(++prev, 0), Sections.length - 1);
@@ -50,7 +92,11 @@ export default function Home() {
       TouchMoveStartY.current = touch.pageY;
       TouchMoveStartTime.current = currentTime;
 
-      if (Math.abs(velocityY) > 0.5 && !blockScroll.current) {
+      if (
+        isScrollable.current &&
+        Math.abs(velocityY) > 0.5 &&
+        !blockScroll.current
+      ) {
         setCurrentSection((prev) => {
           if (velocityY < 0.5) {
             return Math.min(Math.max(++prev, 0), Sections.length - 1);
@@ -84,7 +130,14 @@ export default function Home() {
 
   return (
     <div className={styles.HomeScroller}>
-      <Navigation scrollTo={scrollTo} currentSectionIndex={currentSection} />
+      {currentDialogID != null ? (
+        <DialogMain
+          DialogID={currentDialogID}
+          eventFinishedCallback={handleEventFinished}
+        />
+      ) : (
+        <Navigation scrollTo={scrollTo} currentSectionIndex={currentSection} />
+      )}
       <div className={styles.HomeRoot}>
         {Sections.map((section, index) => (
           <div

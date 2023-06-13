@@ -24,6 +24,8 @@
   font-size: 5rem;
   transition: all 0.2s;
 
+  z-index: 101;
+
   -moz-user-select: -moz-all;
   -khtml-user-select: all;
   -webkit-user-select: all;
