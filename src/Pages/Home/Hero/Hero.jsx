@@ -16,6 +16,7 @@ export default function Hero() {
       <div className={styles.blackBackground}></div>
       {UserAuthenticated ? (
         <>
+        <div className={styles.grid}>
           <video
             className={styles.backgroundVideo}
             src={BGVideo}
@@ -23,6 +24,7 @@ export default function Hero() {
             muted
             loop
           />
+</div>
           <h1 className={styles.name}>Kaito Sugimura</h1>
           <p className={styles.catchphrase}>
             Unleashing Immersive Worlds through Programming and Creativity

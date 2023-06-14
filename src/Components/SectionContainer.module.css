@@ -17,7 +17,7 @@
   background-size: cover;
   background-position: center;
 
-  filter: grayscale(40%);
+  /* filter: grayscale(40%); */
 }
 
 .textureImageCover {
@@ -28,9 +28,19 @@
   height: 100%;
   overflow: hidden;
   z-index: 1;
+}
 
-  background: rgba(0, 0, 0, 0.20);
-  background-position: contain;
-  background-image: url("/Plus.png");
-  background-size: 64px 64px;
+.textureImageCover:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(0, 0, 0, 0.2); */
+  /* background-position: contain; */
+  background-image: url("/Grid.png");
+  background-size: 4px 4px;
+  opacity: 0.6;
+  z-index: -10;
 }
