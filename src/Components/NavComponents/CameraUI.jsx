@@ -10,10 +10,10 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
     borderWidth: "0.15rem",
   };
   const StaticBorder = {
-    width: "2rem",
-    height: "2rem",
+    width: "1.5rem",
+    height: "1.5rem",
     borderColor: "#fffd",
-    borderWidth: "0.2rem",
+    borderWidth: "0.1rem",
   };
 
   return (
@@ -30,7 +30,6 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
               initDone ? "" : styles.mainAnim
             }`}
           >
-            {/* <p className={styles.MainNameText}>Kaito Sugimura</p> */}
             <div
               className={`${styles.MainSection} ${
                 initDone ? styles.MainSectionDefault : styles.MainSectionAnim

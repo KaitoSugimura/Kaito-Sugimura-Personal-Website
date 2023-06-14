@@ -27,8 +27,8 @@
 }
 
 .SoundButton {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   border: none;
   cursor: pointer;
   background: none;
@@ -42,8 +42,8 @@
 }
 
 .SoundIcon {
-  width: 5rem;
-  height: 5rem;
+  width: 100%;
+  height: 100%;
   filter: invert(100%) drop-shadow(0 0 1rem rgb(24, 24, 24));
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -68,7 +68,7 @@
 
 .amount {
   color: white;
-  font-size: 2rem;
+  font-size: 1.75rem;
   padding-left: 1rem;
 
   -moz-user-select: -moz-none;
@@ -80,8 +80,8 @@
 }
 
 .input {
-  height: 15px;
-  width: 6vw;
+  height: 10px;
+  width: 125px;
   background-color: aliceblue;
 
   -moz-user-select: -moz-all;
@@ -101,21 +101,17 @@
 .input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   border-radius: 100%;
   background: #ffffffc2;
   cursor: pointer;
 }
 
 .input::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   border-radius: 100%;
   background: #ffffffc2;
   cursor: pointer;
-}
-
-.input::-moz-range-thumb {
-  background: red;
 }

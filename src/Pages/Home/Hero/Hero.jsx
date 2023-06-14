@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
+import BGVideo from "/Backgrounds/HeroBGVideo.mp4";
 
 export default function Hero() {
   const [UserAuthenticated, setUserAuthenticated] = useState(false);
@@ -12,19 +13,24 @@ export default function Hero() {
 
   return (
     <div className={styles.HeroRoot}>
-      {/* <div className={styles.animCont}> */}
-      <div className={styles.backgroundImage}></div>
-
+      <div className={styles.blackBackground}></div>
       {UserAuthenticated ? (
         <>
+          <video
+            className={styles.backgroundVideo}
+            src={BGVideo}
+            autoPlay
+            muted
+            loop
+          />
           <h1 className={styles.name}>Kaito Sugimura</h1>
-          {/* <p className={styles.catchphrase}>
-            Unleashing Immersive Worlds <br />
-            through Programming and Creativity
-          </p> */}
+          <p className={styles.catchphrase}>
+            Unleashing Immersive Worlds through Programming and Creativity
+          </p>
         </>
       ) : (
         <>
+          <div className={styles.backgroundImage}></div>
           <div className={styles.Warning}></div>
           {/* Seperated to make things stable */}
           <p className={styles.WarningInnerText}>
@@ -139,7 +145,6 @@ export default function Hero() {
           </div>
         </>
       )}
-      {/* </div> */}
     </div>
   );
 }

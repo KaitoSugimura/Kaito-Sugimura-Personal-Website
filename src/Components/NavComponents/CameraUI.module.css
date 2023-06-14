@@ -64,6 +64,7 @@
   transform: translateY(-2.5rem);
 
   color: white;
+  text-transform: uppercase;
 }
 
 .mainAnim {
@@ -72,35 +73,30 @@
 
 @keyframes initiationMainUI {
   0% {
-    top: 1vh;
+    top: 5vh;
   }
 
   70% {
-    top: 1vh;
+    top: 5vh;
   }
   100% {
     top: 0;
   }
 }
 
-.MainNameText {
-  display: inline;
-  font-size: 3rem;
-}
-
 .MainSection {
   position: relative;
   display: inline;
   width: 5rem;
-  height: 9rem;
+  height: 3.6vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.MainSectionDefault {
-  width: 35rem;
-  height: 9rem;
+.MainSection.MainSectionDefault {
+  width: 30vw;
+  height: 3.6vw;
 }
 
 .MainSectionAnim {
@@ -110,28 +106,27 @@
 @keyframes initiationTitle {
   0% {
     width: 5rem;
-    height: 9rem;
+    height: 3.6vw;
   }
   100% {
-    width: 35rem;
-    height: 9rem;
+    width: 30vw;
+    height: 3.6vw;
   }
 }
 
 .MainSectionBackground {
   width: calc(100% - 2rem);
   height: calc(100% - 2rem);
-  /* background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.495)); */
-  /* background: linear-gradient(rgba(0, 0, 0, 0.184), rgba(0, 0, 0, 0.709)); */
   z-index: -1;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  font-weight: 500;
-  font-size: 5.2rem;
-  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 2.6vw;
+  letter-spacing: 0.2em;
+  font-family: "Blender Pro", sans-serif;
 }
 
 .MainSectionText {
@@ -142,7 +137,7 @@
 .cameraUITopRightContainer {
   position: absolute;
   width: 100%;
-  top: 2rem;
+  top: 1.75rem;
   right: 0;
 
   display: flex;
@@ -150,33 +145,37 @@
   align-items: end;
   flex-direction: column;
 
-  margin-right: 3rem;
+  margin-right: 2.5rem;
 
   color: rgba(255, 255, 255, 0.888);
-  font-size: 2.5rem;
+  font-size: 2.25rem;
 }
 
 .cameraUIBottomLeftContainer {
   position: absolute;
   width: 100%;
-  bottom: 2.5rem;
-  left: 0;
+  bottom: 1.5rem;
+  left: 2.5rem;
 
   display: flex;
   justify-content: center;
   align-items: start;
   flex-direction: column;
 
-  margin-left: 3rem;
-
   color: rgba(255, 255, 255, 0.867);
-  font-size: 2.5rem;
+  font-size: 14px; 
+  letter-spacing: 0.15em;
+  line-height: 1.8;
+  -webkit-font-smoothing: auto;
 }
 
 .typingWrapping1,
 .typingWrapping2 {
   overflow: hidden;
   width: 0;
+  font-size: 1vw;
+  font-weight: 300;  line-height: 1.4;
+  font-family: "Ubuntu", monospace;
 }
 
 .typingWrapping1 p,
@@ -220,7 +219,7 @@
   }
 }
 
-.fadeInAnim{
+.fadeInAnim {
   animation: fadeIn 0.3s forwards;
 }
 

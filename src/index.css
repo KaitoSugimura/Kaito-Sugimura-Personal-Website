@@ -82,3 +82,122 @@ body::-webkit-scrollbar-track {
   user-select: all !important;
   pointer-events: all !important;
 }
+
+/* FONTS */
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("/Fonts/BlenderPro/BlenderPro-Medium.eot");
+  src: local("Blender Pro Medium"), local("BlenderPro-Medium"),
+    url("/Fonts/BlenderPro/BlenderPro-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/BlenderPro/BlenderPro-Medium.woff2") format("woff2"),
+    url("/Fonts/BlenderPro/BlenderPro-Medium.woff") format("woff"),
+    url("/Fonts/BlenderPro/BlenderPro-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("/Fonts/BlenderPro/BlenderPro-ThinItalic.eot");
+  src: local("Blender Pro Thin Italic"), local("BlenderPro-ThinItalic"),
+    url("/Fonts/BlenderPro/BlenderPro-ThinItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/BlenderPro/BlenderPro-ThinItalic.woff2") format("woff2"),
+    url("/Fonts/BlenderPro/BlenderPro-ThinItalic.woff") format("woff"),
+    url("/Fonts/BlenderPro/BlenderPro-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("/Fonts/BlenderPro/BlenderPro-Heavy.eot");
+  src: local("Blender Pro Heavy"), local("BlenderPro-Heavy"),
+    url("/Fonts/BlenderPro/BlenderPro-Heavy.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/BlenderPro/BlenderPro-Heavy.woff2") format("woff2"),
+    url("/Fonts/BlenderPro/BlenderPro-Heavy.woff") format("woff"),
+    url("/Fonts/BlenderPro/BlenderPro-Heavy.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Blender Pro Book";
+  src: url("/Fonts/BlenderPro/BlenderPro-BookItalic.eot");
+  src: local("Blender Pro Book Italic"), local("BlenderPro-BookItalic"),
+    url("/Fonts/BlenderPro/BlenderPro-BookItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/BlenderPro/BlenderPro-BookItalic.woff2") format("woff2"),
+    url("/Fonts/BlenderPro/BlenderPro-BookItalic.woff") format("woff"),
+    url("/Fonts/BlenderPro/BlenderPro-BookItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Blender Pro Book";
+  src: url("/Fonts/BlenderPro/BlenderPro-Book.eot");
+  src: local("Blender Pro Book"), local("BlenderPro-Book"),
+    url("/Fonts/BlenderPro/BlenderPro-Book.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/BlenderPro/BlenderPro-Book.woff2") format("woff2"),
+    url("/Fonts/BlenderPro/BlenderPro-Book.woff") format("woff"),
+    url("/Fonts/BlenderPro/BlenderPro-Book.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("/Fonts/BlenderPro/BlenderPro-Bold.eot");
+  src: local("Blender Pro Bold"), local("BlenderPro-Bold"),
+    url("/Fonts/BlenderPro/BlenderPro-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/BlenderPro/BlenderPro-Bold.woff2") format("woff2"),
+    url("/Fonts/BlenderPro/BlenderPro-Bold.woff") format("woff"),
+    url("/Fonts/BlenderPro/BlenderPro-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("/Fonts/BlenderPro/BlenderPro-Thin.eot");
+  src: local("Blender Pro Thin"), local("BlenderPro-Thin"),
+    url("/Fonts/BlenderPro/BlenderPro-Thin.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/BlenderPro/BlenderPro-Thin.woff2") format("woff2"),
+    url("/Fonts/BlenderPro/BlenderPro-Thin.woff") format("woff"),
+    url("/Fonts/BlenderPro/BlenderPro-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("/Fonts/BlenderPro/BlenderPro-MediumItalic.eot");
+  src: local("Blender Pro Medium Italic"), local("BlenderPro-MediumItalic"),
+    url("/Fonts/BlenderPro/BlenderPro-MediumItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/BlenderPro/BlenderPro-MediumItalic.woff2") format("woff2"),
+    url("/Fonts/BlenderPro/BlenderPro-MediumItalic.woff") format("woff"),
+    url("/Fonts/BlenderPro/BlenderPro-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("/Fonts/BlenderPro/BlenderPro-BoldItalic.eot");
+  src: local("Blender Pro Bold Italic"), local("BlenderPro-BoldItalic"),
+    url("/Fonts/BlenderPro/BlenderPro-BoldItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/BlenderPro/BlenderPro-BoldItalic.woff2") format("woff2"),
+    url("/Fonts/BlenderPro/BlenderPro-BoldItalic.woff") format("woff"),
+    url("/Fonts/BlenderPro/BlenderPro-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}

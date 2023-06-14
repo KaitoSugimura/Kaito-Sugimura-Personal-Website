@@ -6,6 +6,9 @@
   overflow: hidden;
 
   animation: init 10s forwards;
+
+  font-weight: 400;
+  font-family: "Roboto", monospace;
 }
 
 @keyframes init {
@@ -32,27 +35,16 @@
   }
 }
 
-/* .animCont{
-  animation: rotate 0.1s forwards;
-  animation-delay: 1.6s;
-  position: absolute;
+.blackBackground {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+
+  background-color: black;
+  z-index: -11;
 }
-
-
-
-@keyframes rotate {
-  0% {
-
-  }
-  100%{
-    transform: rotate(-10deg) scale(0.9);
-  }
-
-} */
 
 .backgroundImage {
   position: absolute;
@@ -69,26 +61,51 @@
   z-index: -10;
 }
 
+.backgroundVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  animation: appear2 1s forwards;
+  object-fit: cover;
+}
+
+@keyframes appear2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
 .name {
   position: absolute;
-  top: 16vh;
-  left: 8vw;
+  bottom: 12vh;
+  left: 7vw;
 
-  font-size: 6vw;
-  color: white;
+  font-size: 10vw;
+  color: rgba(255, 255, 255, 0.502);
 
   z-index: 1;
+  font-weight: 100;
+  font-family: "Blender Pro", sans-serif;
 }
 
 .catchphrase {
   position: absolute;
-  top: 32vh;
-  left: 12vw;
+  bottom: 15vh;
+  left: 10.5vw;
   font-size: 3vw;
   color: white;
   text-justify: right;
 
   z-index: 1;
+
+  font-weight: 100;
+  font-family: "Blender Pro", sans-serif;
 }
 
 /* Init */
