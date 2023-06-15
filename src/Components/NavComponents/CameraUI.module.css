@@ -13,8 +13,8 @@
 
 .cameraUIContainer {
   position: relative;
-  width: calc(100% - 10rem);
-  height: calc(100% - 10rem);
+  width: calc(100% - 10vmin);
+  height: calc(100% - 10vmin);
   top: 0;
   left: 0;
   background-color: transparent;
@@ -45,23 +45,21 @@
     height: 25%;
   }
   100% {
-    width: calc(100% - 10rem);
-    height: calc(100% - 10rem);
+    width: calc(100% - 10vmin);
+    height: calc(100% - 10vmin);
   }
 }
 
 .cameraUIMainContainer {
   position: absolute;
   width: 100%;
-  top: 0;
+  top: -2.5vmin;
   left: 0;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  transform: translateY(-2.5rem);
 
   color: white;
   text-transform: uppercase;
@@ -73,21 +71,21 @@
 
 @keyframes initiationMainUI {
   0% {
-    top: 5vh;
+    top: 3vmin;
   }
 
   70% {
-    top: 5vh;
+    top: 3vmin;
   }
   100% {
-    top: 0;
+    top: -2.5vmin;
   }
 }
 
 .MainSection {
   position: relative;
   display: inline;
-  width: 5rem;
+  width: 2vw;
   height: 3.6vw;
   display: flex;
   justify-content: center;
@@ -105,7 +103,7 @@
 
 @keyframes initiationTitle {
   0% {
-    width: 5rem;
+    width: 2vw;
     height: 3.6vw;
   }
   100% {
@@ -115,8 +113,8 @@
 }
 
 .MainSectionBackground {
-  width: calc(100% - 2rem);
-  height: calc(100% - 2rem);
+  width: 100%;
+  height: 100%;
   z-index: -1;
 
   display: flex;
@@ -130,25 +128,23 @@
 }
 
 .MainSectionText {
-  text-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.133);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.133);
   display: inline;
 }
 
 .cameraUITopRightContainer {
   position: absolute;
   width: 100%;
-  top: 1.75rem;
-  right: 0;
+  top: 2vh;
+  right: 3vh;
 
   display: flex;
   justify-content: center;
   align-items: end;
   flex-direction: column;
 
-  margin-right: 2.5rem;
-
   color: rgba(255, 255, 255, 0.888);
-  font-size: 2.25rem;
+  font-size: 2.25vmin
 }
 
 .cameraUIBottomLeftContainer {
@@ -163,7 +159,7 @@
   flex-direction: column;
 
   color: rgba(255, 255, 255, 0.867);
-  font-size: 14px; 
+  font-size: 14px;
   letter-spacing: 0.15em;
   line-height: 1.8;
   -webkit-font-smoothing: auto;
@@ -174,7 +170,8 @@
   overflow: hidden;
   width: 0;
   font-size: 1vw;
-  font-weight: 300;  line-height: 1.4;
+  font-weight: 300;
+  line-height: 1.4;
   font-family: "Ubuntu", monospace;
 }
 

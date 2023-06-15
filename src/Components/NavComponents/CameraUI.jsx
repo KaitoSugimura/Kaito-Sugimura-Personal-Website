@@ -5,15 +5,15 @@ import { useEffect, useState } from "react";
 
 export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
   const BorderStyle = {
-    width: navIsOpen ? "12vh" : "22vh",
-    height: navIsOpen ? "12vh" : "22vh",
-    borderWidth: "0.15rem",
+    width: navIsOpen ? "12vmin" : "22vmin",
+    height: navIsOpen ? "12vmin" : "22vmin",
+    borderWidth: "1.5px",
   };
   const StaticBorder = {
-    width: "1.5rem",
-    height: "1.5rem",
+    width: "1.5vmin",
+    height: "1.5vmin",
     borderColor: "#fffd",
-    borderWidth: "0.1rem",
+    borderWidth: "1px",
   };
 
   return (
@@ -56,8 +56,8 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
         <div className={styles.cameraUIBottomLeftContainer}>
           {initDone ? (
             <>
-              <p className={styles.fadeInAnim}>Developed from scratch using: REACT JS, CSS, HTML</p>
-              <p className={styles.fadeInAnim}>By: Kaito Sugimura</p>
+              {/* <p className={styles.fadeInAnim}>Developed from scratch using: REACT JS, CSS, HTML</p>
+              <p className={styles.fadeInAnim}>By: Kaito Sugimura</p> */}
             </>
           ) : (
             <>

@@ -6,6 +6,8 @@ export default function NavButtons({ navIsOpen, setNavIsOpen }) {
   const BorderStyle = {
     width: navIsOpen ? "15%" : "30%",
     height: navIsOpen ? "15%" : "30%",
+    borderWidth: "1px",
+
   };
 
   return (
@@ -17,7 +19,7 @@ export default function NavButtons({ navIsOpen, setNavIsOpen }) {
         }}
         style={{
           transform: navIsOpen
-            ? "translateX(calc(97vw - 100%))"
+            ? "translateX(calc(96vw - 100%))"
             : "translateX(0)",
         }}
       >

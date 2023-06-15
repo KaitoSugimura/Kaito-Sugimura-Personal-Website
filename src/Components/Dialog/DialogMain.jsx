@@ -36,18 +36,19 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
     <div className={styles.DialogRoot}>
       <SoundSetting
         style={{
-          top: "3rem",
-          left: "3rem",
+          top: "4vh",
+          left: "4vh",
         }}
       />
-      <button className={styles.SkipButton} onClick={skipDialog}>
+      <button className={styles.SkipContainer} onClick={skipDialog}>
+        Skip
         <img
-          className={styles.SoundIcon}
+          className={styles.SkipIcon}
           src="/Home/Icons/Skip.svg"
           onDrag={(e) => {
             e.preventDefault();
           }}
-        />
+          />
       </button>
       <div className={styles.DialogClickArea} onClick={handleDialogClick}>
         <div className={styles.DialogContainer}>

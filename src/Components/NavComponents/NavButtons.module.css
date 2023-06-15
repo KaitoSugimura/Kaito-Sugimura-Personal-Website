@@ -3,7 +3,7 @@
   /* width: 30vw; */
   height: 100vh;
   top: 0;
-  left: 1vw;
+  left: 1.5vmin;
   z-index: 102;
 
   gap: 2rem;
@@ -34,13 +34,16 @@
 }
 
 .OpenNavButton {
-  width: 7.5rem;
-  height: 7.5rem;
+  width: max(7vmin, 4rem);
+  height: max(7vmin, 4rem);
   cursor: pointer;
   transition: all 0.4s;
   background-color: transparent;
   border: none;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.31));
 
@@ -50,6 +53,12 @@
   -ms-user-select: all;
   user-select: all;
   pointer-events: all;
+}
+
+.SettingsIcon {
+  width: 80%;
+  height: 80%;
+  filter: invert(100%);
 }
 
 .TopLeft,
@@ -99,10 +108,4 @@
   right: 0;
   border-bottom: 0.25rem solid rgb(255, 255, 255);
   border-right: 0.25rem solid rgb(255, 255, 255);
-}
-
-.SettingsIcon {
-  width: 5.5rem;
-  height: 5.5rem;
-  filter: invert(100%);
 }

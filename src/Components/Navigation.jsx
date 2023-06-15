@@ -6,18 +6,24 @@ import NavButtons from "./NavComponents/NavButtons";
 import SideButtons from "./NavComponents/SideButtons";
 import SoundSetting from "../Tools/SoundSetting";
 
-export default function Navigation({ scrollTo, currentSectionIndex, initDone }) {
+export default function Navigation({
+  scrollTo,
+  currentSectionIndex,
+  initDone,
+}) {
   const [navIsOpen, setNavIsOpen] = useState(false);
   const rootRef = useRef(null);
 
   return (
     <div className={styles.navigationRoot} ref={rootRef}>
-     {initDone &&  <SoundSetting
-        style={{
-          top: `6.5rem`,
-          left: `7rem`,
-        }}
-      />}
+      {initDone && (
+        <SoundSetting
+          style={{
+            top: `7vmin`,
+            left: `8vmin`,
+          }}
+        />
+      )}
 
       <CameraUI
         navIsOpen={navIsOpen}
@@ -25,12 +31,16 @@ export default function Navigation({ scrollTo, currentSectionIndex, initDone }) 
         initDone={initDone}
       />
 
-      {initDone && <NavButtons navIsOpen={navIsOpen} setNavIsOpen={setNavIsOpen} />}
-      {initDone && <SideButtons
-        navIsOpen={navIsOpen}
-        scrollTo={scrollTo}
-        currentSectionIndex={currentSectionIndex}
-      />}
+      {initDone && (
+        <NavButtons navIsOpen={navIsOpen} setNavIsOpen={setNavIsOpen} />
+      )}
+      {initDone && (
+        <SideButtons
+          navIsOpen={navIsOpen}
+          scrollTo={scrollTo}
+          currentSectionIndex={currentSectionIndex}
+        />
+      )}
       <div
         className={`${styles.navigationContainer} ${
           navIsOpen ? "" : "NoUserSelect"
@@ -67,6 +77,10 @@ export default function Navigation({ scrollTo, currentSectionIndex, initDone }) 
               </li>
             ))}
           </ul>
+        </div>
+        <div className={styles.credList}>
+          <p>Developed from scratch using: REACT JS, CSS, HTML</p>
+          <p>By: Kaito Sugimura</p>
         </div>
       </div>
     </div>

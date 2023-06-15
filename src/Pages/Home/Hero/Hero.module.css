@@ -103,7 +103,7 @@
 
 .name {
   position: absolute;
-  bottom: 12vh;
+  bottom: 7vh;
   left: 7vw;
 
   font-size: 10vw;
@@ -116,7 +116,7 @@
 
 .catchphrase {
   position: absolute;
-  bottom: 15vh;
+  bottom: 10vh;
   left: 10.5vw;
   font-size: 3vw;
   color: white;

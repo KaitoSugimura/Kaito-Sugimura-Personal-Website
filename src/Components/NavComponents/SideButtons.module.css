@@ -2,7 +2,7 @@
   position: fixed;
   height: 100vh;
   top: 0;
-  right: 4rem;
+  right: calc(5vmin - 1rem);
   z-index: 9;
 
   display: flex;
@@ -10,7 +10,6 @@
   align-items: end;
   flex-direction: column;
 
-  transition: transform 0.4s;
   animation: init 0.3s forwards;
 
   -moz-user-select: -moz-none;
@@ -32,7 +31,7 @@
   width: 2rem;
   height: 2rem;
   border-radius: 2rem;
-  border: 0.2rem solid rgba(255, 255, 255, 0.649);
+  border: 2px solid rgba(255, 255, 255, 0.649);
 
   display: flex;
   justify-content: center;
@@ -41,7 +40,7 @@
 
 .selected,
 .buttonPaddingWrapper:hover .sectionButtonBorder {
-  border: 0.2rem solid rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.95);
 }
 
 .ButtonInnerColor {
@@ -80,7 +79,7 @@
 }
 
 .buttonPaddingWrapper {
-  padding: 0.4rem 0;
+  padding: 4px 0;
   background-color: transparent;
   border: none;
   cursor: pointer;
