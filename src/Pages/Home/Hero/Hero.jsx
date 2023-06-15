@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 import BGVideo from "/Backgrounds/HeroBGVideo.mp4";
+import LoadingScreen from "../../../Components/LoadingScreen";
 
 export default function Hero() {
   const [UserAuthenticated, setUserAuthenticated] = useState(false);
+  const [BGVideoIsLoading, setBGVideoIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setUserAuthenticated(true);
+      setTimeout(() => {
+        setBGVideoIsLoading(false); // In case the video is still loading after 8 seconds
+      }, 8000);
     }, 8500);
   }, []);
 
@@ -16,15 +21,19 @@ export default function Hero() {
       <div className={styles.blackBackground}></div>
       {UserAuthenticated ? (
         <>
-        <div className={styles.grid}>
-          <video
-            className={styles.backgroundVideo}
-            src={BGVideo}
-            autoPlay
-            muted
-            loop
-          />
-</div>
+          {BGVideoIsLoading && <LoadingScreen />}
+          <div className={styles.grid}>
+            <video
+              className={styles.backgroundVideo}
+              onLoadedData={() => {
+                setBGVideoIsLoading(false);
+              }}
+              src={BGVideo}
+              autoPlay
+              muted
+              loop
+            />
+          </div>
           <h1 className={styles.name}>Kaito Sugimura</h1>
           <p className={styles.catchphrase}>
             Unleashing Immersive Worlds through Programming and Creativity

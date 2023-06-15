@@ -16,6 +16,10 @@
 .loadingText {
   font-size: 3.5vw;
   text-align: center;
+
+  font-weight: 100;
+  letter-spacing: 0.2em;
+  font-family: "Blender Pro", sans-serif;
 }
 
 .loadingText span {
@@ -25,7 +29,7 @@
 }
 
 .loadingText span {
-  animation: loadingAnim 1.4s infinite alternate;
+  animation: loadingAnim 1.2s infinite alternate;
 }
 
 @keyframes loadingAnim {
