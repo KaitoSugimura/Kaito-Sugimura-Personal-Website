@@ -41,7 +41,7 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
         }}
       />
       <button className={styles.SkipContainer} onClick={skipDialog}>
-        Skip
+        <span>Skip</span>
         <img
           className={styles.SkipIcon}
           src="/Home/Icons/Skip.svg"
