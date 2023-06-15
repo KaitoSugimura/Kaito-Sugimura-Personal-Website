@@ -1,0 +1,28 @@
+.HoriRoot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 999999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  font-size: 6vw;
+  text-align: center;
+  color: white;
+}
+
+.message {
+  padding: 4vh 2vw 0 2vw;
+}
+
+.HoriRoot .Image {
+  width: 30vw;
+  height: auto;
+  filter: invert(1);
+}

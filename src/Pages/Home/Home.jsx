@@ -5,6 +5,7 @@ import Navigation from "../../Components/Navigation";
 import { SoundContext } from "../../Context/SoundContext";
 import DialogMain from "../../Components/Dialog/DialogMain";
 import InitHero from "./Hero/InitHero";
+import HorizontalEnjoyer from "../../Tools/HorizontalEnjoyer";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -139,6 +140,7 @@ export default function Home() {
 
   return (
     <div className={styles.HomeScroller}>
+      <HorizontalEnjoyer />
       {currentDialogID != null ? (
         <DialogMain
           DialogID={currentDialogID}
