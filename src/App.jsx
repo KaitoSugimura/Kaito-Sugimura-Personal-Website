@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, HashRouter } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Nav from "./Components/Navigation";
 import LoadingScreen from "./Components/LoadingScreen";
@@ -29,14 +29,14 @@ const RootLayout = () => {
 
 function App() {
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<RootLayout />}>
-    //       <Route index element={<Home />} />
-    //     </Route>
-    //   </Routes>
-    // </BrowserRouter>
-    <Home />
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
+    </HashRouter>
+    // <Home />
   );
 }
 
