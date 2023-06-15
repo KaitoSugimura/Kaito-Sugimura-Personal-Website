@@ -6,10 +6,12 @@ export default function HorizontalEnjoyer() {
     window.innerWidth < window.innerHeight
   );
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth < window.innerHeight) {
-      setIsVertical(true);
-    }
+  // window.addEventListener("resize", () => {
+  //   setIsVertical(window.innerWidth < window.innerHeight);
+  // });
+
+  screen.orientation.addEventListener("change", function (e) {
+    setIsVertical(window.innerWidth < window.innerHeight);
   });
 
   return (
