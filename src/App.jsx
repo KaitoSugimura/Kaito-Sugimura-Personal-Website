@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route, Outlet, HashRouter } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  HashRouter,
+} from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Nav from "./Components/Navigation";
 import LoadingScreen from "./Components/LoadingScreen";
@@ -36,7 +42,6 @@ function App() {
         </Route>
       </Routes>
     </HashRouter>
-    // <Home />
   );
 }
 
