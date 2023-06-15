@@ -5,7 +5,7 @@ import "./index.css";
 import "./Colors.css";
 import { SoundContextProvider } from "./Context/SoundContext.jsx";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <SoundContextProvider>
       <App />
