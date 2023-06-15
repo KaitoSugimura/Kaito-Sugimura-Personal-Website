@@ -1,8 +1,8 @@
 {
+  "homepage": "https://kaitosugimura.github.io/Kaito-Sugimura-Personal-Website",
   "name": "kaitosugimura",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://kaitosugimura.github.io/Kaito-Sugimura-Personal-Website",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
