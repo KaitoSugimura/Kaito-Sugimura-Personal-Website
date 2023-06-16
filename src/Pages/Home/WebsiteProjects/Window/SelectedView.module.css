@@ -1,4 +1,4 @@
-.centerer{
+/* .centerer{
   position: fixed;
   top: 0%;
   left: 0%;
@@ -15,11 +15,13 @@
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
-}
+} */
 
 .SelectedViewRoot {
-  position: relative;
-  left: 11%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-31%, -50%);
 
   animation: fadeIn 0.3s ease-in;
 
@@ -34,12 +36,12 @@
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translate(-10%, -10%) scale(0.9);
+    transform: translate(-41%, -60%) scale(0.9);
   }
 
   100% {
     opacity: 1;
-    transform: translate(0%, 0%) scale(1);
+    transform: translate(-31%, -50%) scale(1);
   }
 }
 
@@ -97,7 +99,7 @@
 }
 
 .showcaseImage1 {
-  top: 1.5%;
+  top: 0;
   left: 4%;
   width: 52%;
   height: 52%;
@@ -114,7 +116,7 @@
 
 .showcaseImage3 {
   bottom: 4.5%;
-  left: 12%;
+  left: 12.5%;
   width: 46%;
   height: 46%;
   z-index: 1;

@@ -130,26 +130,26 @@
   align-items: center;
 
   position: absolute;
-  bottom: 8rem;
+  bottom: 8.25vh;
 }
 
 .SelectButton {
   height: 7vh;
   width: 30vh;
 
-  border-top: white ridge 0.2rem;
-  border-bottom: white ridge 0.2rem;
-  border-left: white solid 0.4rem;
-  border-right: white solid 0.4rem;
+  border-top: white ridge 0.2vh;
+  border-bottom: white ridge 0.2vh;
+  border-left: white solid 0.4vh;
+  border-right: white solid 0.4vh;
 
   background: none;
   color: white;
-  font-size: 2.2rem;
+  font-size: 2.4vh;
 
   cursor: pointer;
 
   position: relative;
-  box-shadow: 0rem 0rem 1rem rgb(0, 0, 0);
+  box-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
 .SelectButton::before {
@@ -204,10 +204,10 @@
 .leftTriangle {
   width: 0;
   height: 0;
-  border-top: 1rem solid transparent;
-  border-bottom: 1rem solid transparent;
+  border-top: 1.25vh solid transparent;
+  border-bottom: 1.25vh solid transparent;
 
-  border-left: 1rem solid rgb(255, 255, 255);
+  border-left: 1.25vh solid rgb(255, 255, 255);
 
   position: absolute;
   top: 50%;
@@ -218,10 +218,10 @@
 .rightTriangle {
   width: 0;
   height: 0;
-  border-top: 1rem solid transparent;
-  border-bottom: 1rem solid transparent;
+  border-top: 1.25vh solid transparent;
+  border-bottom: 1.25vh solid transparent;
 
-  border-right: 1rem solid rgb(255, 255, 255);
+  border-right: 1.25vh solid rgb(255, 255, 255);
 
   position: absolute;
   top: 50%;

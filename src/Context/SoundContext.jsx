@@ -3,6 +3,7 @@ import DialogClick from "/Dialog/Sound/DialogClick.wav";
 import defaultBGM from "/Dialog/Music/Anima_Circulation.mp3";
 import profileBGM from "/Dialog/Music/Flutter.mp3";
 import projectsBGM from "/Dialog/Music/Bouquet.mp3";
+import ClickButton from "/Dialog/Sound/click-button.mp3";
 
 export const SoundContext = createContext();
 
@@ -28,6 +29,12 @@ export const SoundContextProvider = ({ children }) => {
     audio.play();
   };
 
+  const playButtonClick = () => {
+    const audio = new Audio(ClickButton);
+    audio.volume = volume*0.8;
+    audio.play();
+  }
+
   const playMusic = (musicName) => {
     if (musicName == null || audioRef.current == null) {
       return;
@@ -50,7 +57,7 @@ export const SoundContextProvider = ({ children }) => {
 
   return (
     <SoundContext.Provider
-      value={{ volume, setVolume, playDialogClick, playMusic }}
+      value={{ volume, setVolume, playDialogClick, playButtonClick, playMusic }}
     >
       <audio
         src={defaultBGM}

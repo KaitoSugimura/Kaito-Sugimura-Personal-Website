@@ -24,7 +24,6 @@ export default function SelectedView({ index, sectionRatio }) {
       {showModal && (
         <PopUpContainer handleCloseModal={handleCloseModal} videoId={videoId} />
       )}
-      <div className={styles.centerer}>
         <div
           className={styles.SelectedViewRoot}
           style={{
@@ -69,7 +68,6 @@ export default function SelectedView({ index, sectionRatio }) {
             </span>
           </div>
         </div>
-      </div>
     </>
   );
 }
