@@ -7,7 +7,7 @@ import FrameOverlay from "./Window/FrameOverlay";
 import { SoundContext } from "../../../Context/SoundContext";
 
 export default function WebsiteProjects() {
-  const { playButtonClick, playDialogClick } = useContext(SoundContext);
+  const { playSFX } = useContext(SoundContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const initialIndexRef = useRef(0);
   const MouseXInitialRef = useRef(0);
@@ -72,6 +72,8 @@ export default function WebsiteProjects() {
     if (canToggleSelectedView.current) {
       canToggleSelectedView.current = false;
       setSelectedView((prev) => {
+        if (!prev) playSFX("PaperFlip");
+        else playSFX("Spray");
         return !prev;
       });
       setTimeout(() => {
@@ -94,8 +96,8 @@ export default function WebsiteProjects() {
     }
     setCurrentIndex((prev) => {
       if (Math.floor(prev) != Math.floor(newIndex)) {
-        playButtonClick();
-        console.log(prev, newIndex, Math.floor(prev), Math.floor(newIndex))
+        playSFX("ButtonClick");
+        console.log(prev, newIndex, Math.floor(prev), Math.floor(newIndex));
       }
       return newIndex;
     });
@@ -224,15 +226,13 @@ export default function WebsiteProjects() {
                           }}
                           onClick={() => {
                             if (!isDragging.current) {
-                              playButtonClick();
                               if (currentIndex == index) {
                                 toggleSelectedView();
-                              }
-                              if (!selectedView) {
+                              } else if (!selectedView) {
                                 setCurrentIndex(index);
+                                playSFX("ButtonClick");
                               }
                             }
-                    
                           }}
                         >
                           {!selectedView && (
@@ -269,7 +269,7 @@ export default function WebsiteProjects() {
             className={styles.SelectButton}
             onClick={() => {
               toggleSelectedView();
-              playDialogClick();
+              playSFX("DialogClick");
             }}
           >
             <p>{selectedView ? "Close View" : "View Selected"}</p>

@@ -5,11 +5,11 @@ import { SoundContext } from "../../Context/SoundContext";
 import SoundSetting from "../../Tools/SoundSetting";
 
 export default function DialogMain({ DialogID, eventFinishedCallback }) {
-  const { playDialogClick, playMusic } = useContext(SoundContext);
+  const { playSFX, playMusic } = useContext(SoundContext);
   const [currentTextNo, setCurrentTextNo] = useState(0);
 
   const handleDialogClick = () => {
-    playDialogClick();
+    playSFX("DialogClick");
     if (currentTextNo + 1 == Dialogs[DialogID].length) {
       eventFinishedCallback();
     } else {
