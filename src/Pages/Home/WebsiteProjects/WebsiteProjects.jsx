@@ -88,6 +88,7 @@ export default function WebsiteProjects() {
     if (Math.abs(diff) > 25) {
       isDragging.current = true;
     }
+
     let newIndex =
       (initialIndexRef.current - (diff / window.innerWidth) * 5) %
       Contents.length;
@@ -95,16 +96,14 @@ export default function WebsiteProjects() {
       newIndex = Contents.length + newIndex;
     }
     setCurrentIndex((prev) => {
-      if (Math.floor(prev) != Math.floor(newIndex)) {
+      if (Math.floor(prev) != Math.floor(newIndex) && isDragging.current) {
         playSFX("ButtonClick");
-        console.log(prev, newIndex, Math.floor(prev), Math.floor(newIndex));
       }
       return newIndex;
     });
-    // setCurrentIndex(newIndex);
   });
 
-  const handleMouseUp = (event) => {
+  const handleMouseUp = (event) => { 
     document.removeEventListener(
       deviceIsTouch ? "touchmove" : "mousemove",
       handleMouseMove.current
@@ -122,6 +121,7 @@ export default function WebsiteProjects() {
 
   const handleMouseDown = (event) => {
     isDragging.current = false;
+    if (!canToggleSelectedView.current) return;
     if (selectedView) return;
     mouseIsDown.current = true;
 
@@ -140,13 +140,13 @@ export default function WebsiteProjects() {
   };
 
   const getSelectedWidth = (index) => {
-    return mouseIsDown.current || selectedView || getAbsPosIndex(index) > 0.1
+    return (mouseIsDown.current && isDragging.current) || selectedView || getAbsPosIndex(index) > 0.5
       ? sectionRatio.width / 2
       : sectionRatio.width / 1.35;
   };
 
   const getSelectedHeight = (index) => {
-    return mouseIsDown.current || selectedView || getAbsPosIndex(index) > 0.1
+    return (mouseIsDown.current && isDragging.current) || selectedView || getAbsPosIndex(index) > 0.5
       ? sectionRatio.height / 2
       : sectionRatio.height / 1.35;
   };
@@ -213,9 +213,9 @@ export default function WebsiteProjects() {
                         <FrameOverlay
                           index={index}
                           content={content}
-                          lastIndex={Contents.length - 1}
-                          currentIndex={currentIndex}
+                          currentABSPos={getAbsPosIndex(index)}
                           selectedView={selectedView}
+                          mouseDownAndDragging={mouseIsDown.current && isDragging.current}
                         />
                         <div
                           className={styles.clickWrapper}

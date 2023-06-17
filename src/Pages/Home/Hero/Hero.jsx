@@ -44,12 +44,12 @@ export default function Hero() {
           <div className={styles.backgroundImage}></div>
           <div className={styles.Warning}></div>
           {/* Seperated to make things stable */}
-          <p className={styles.WarningInnerText}>
+          <div className={styles.WarningInnerText}>
             <p className={styles.unknownUser}>
               <img src="/Home/Icons/Warning.svg"></img>Unknown User
             </p>
             <p className={styles.Authenticated}>Authenticated</p>
-          </p>
+          </div>
           <div className={styles.commandPrompt}>
             <div className={styles.cmdT1}>
               <p

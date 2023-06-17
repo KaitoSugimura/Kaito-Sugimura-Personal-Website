@@ -15,6 +15,20 @@ export default function Profile() {
   const spawnOffset = useRef(-1);
   const offsetReservations = useRef([]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setOverlapCoords({
+        x: window.innerWidth * (8 / 10),
+        y: window.innerHeight / 2,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const artifactSetHandle = () => {
     ++spawnOffset.current;
   };

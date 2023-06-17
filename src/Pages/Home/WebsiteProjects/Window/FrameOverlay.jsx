@@ -3,15 +3,15 @@ import styles from "./FrameOverlay.module.css";
 export default function FrameOverlay({
   index,
   content,
-  lastIndex,
   selectedView,
-  currentIndex,
+  currentABSPos,
+  mouseDownAndDragging,
 }) {
   return (
     <>
       {!selectedView && (
         <div className={styles.FrameOverlay}>
-          {index == currentIndex && (
+          {!mouseDownAndDragging && 0 == Math.round(currentABSPos) && (
             <div className={styles.leftBottom}>
               <span className={styles.leftTriangle}></span>
               <h1 className={styles.title}>{content.title}</h1>

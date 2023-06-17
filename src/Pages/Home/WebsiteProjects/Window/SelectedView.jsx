@@ -1,21 +1,25 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./SelectedView.module.css";
 import Contents from "../WebsiteContents";
 
 import PlayVideoIcon from "/Home/Icons/PlayVideo.svg";
 import MovieIcon from "/Home/Icons/Movie.svg";
 import PopUpContainer from "./VideoPopup";
+import { SoundContext } from "../../../../Context/SoundContext";
 
 export default function SelectedView({ index, sectionRatio }) {
+  const { stopMusic,playMusic  } = useContext(SoundContext);
   const videoId = Contents[index].youtubeID;
   const extraImages = Contents[index].extraImages;
   const [showModal, setShowModal] = useState(false);
 
   const handleCloseModal = () => {
+    playMusic("resume");
     setShowModal(false);
   };
 
   const handleOpenModal = () => {
+    stopMusic();
     setShowModal(true);
   };
 

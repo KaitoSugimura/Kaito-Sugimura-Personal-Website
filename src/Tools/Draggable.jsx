@@ -76,7 +76,12 @@ export default function Draggable({
       handleMouseMove.current
     );
     setThisZIndex(getNextZIndex());
-    setOverlapID(null);
+    setOverlapID((prev)=>{
+      if(prev === artifactID){
+        return null;
+      }
+      return prev;
+    });
     setIsDragging(true);
   };
 
@@ -105,9 +110,9 @@ export default function Draggable({
       dragRef.style.left = `${centerCoords.x - dragRef.offsetWidth / 2}px`;
       dragRef.style.top = `${centerCoords.y - dragRef.offsetHeight / 2}px`;
       setOverlapID(artifactID);
-      setOpenForms((prev) => {
-        return { ...prev, [`${Date.now()}`]: artifactID };
-      });
+      // setOpenForms((prev) => {
+      //   return { ...prev, [`${Date.now()}`]: artifactID };
+      // });
       artifactSetHandle();
     }
     setIsDragging(false);

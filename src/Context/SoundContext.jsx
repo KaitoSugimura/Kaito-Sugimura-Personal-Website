@@ -57,8 +57,13 @@ export const SoundContextProvider = ({ children }) => {
   const playMusic = (musicName) => {
     if (musicName == null || audioRef.current == null) {
       return;
-    }
+    } 
     audioRef.current.volume = volume;
+    if (musicName === "resume") {
+      audioRef.current.currentTime = currentTimeRef.current;
+      audioRef.current.play();
+      return;
+    }
     switch (musicName) {
       case "main":
         audioRef.current.src = defaultBGM;
@@ -74,12 +79,20 @@ export const SoundContextProvider = ({ children }) => {
     audioRef.current.play();
   };
 
+  const stopMusic = () => {
+    if (audioRef.current == null) {
+      return;
+    }
+    audioRef.current.pause();
+  }
+
   return (
     <SoundContext.Provider
       value={{
         volume,
         setVolume,
         playMusic,
+        stopMusic,
         playSFX,
       }}
     >
