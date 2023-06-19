@@ -76,8 +76,9 @@ export default function Draggable({
       handleMouseMove.current
     );
     setThisZIndex(getNextZIndex());
-    setOverlapID((prev)=>{
-      if(prev === artifactID){
+    setOverlapID((prev) => {
+      if (prev === artifactID) {
+        console.log("set bnull");
         return null;
       }
       return prev;
@@ -102,18 +103,24 @@ export default function Draggable({
     const bottom = top + dragRef.offsetHeight;
     if (
       isArtifact &&
-      centerCoords.x > left &&
-      centerCoords.x < right &&
-      centerCoords.y > top &&
-      centerCoords.y < bottom
+      centerCoords.x > left + 25 &&
+      centerCoords.x < right - 25 &&
+      centerCoords.y > top + 25 &&
+      centerCoords.y < bottom - 25
     ) {
-      dragRef.style.left = `${centerCoords.x - dragRef.offsetWidth / 2}px`;
-      dragRef.style.top = `${centerCoords.y - dragRef.offsetHeight / 2}px`;
-      setOverlapID(artifactID);
-      // setOpenForms((prev) => {
-      //   return { ...prev, [`${Date.now()}`]: artifactID };
-      // });
-      artifactSetHandle();
+      // Dropped artifact
+      setOverlapID((prev) => {
+        if (prev === null) {
+          dragRef.style.left = `${centerCoords.x - dragRef.offsetWidth / 2}px`;
+          dragRef.style.top = `${centerCoords.y - dragRef.offsetHeight / 2}px`;
+          // setOpenForms((prev) => {
+          //   return { ...prev, [`${Date.now()}`]: artifactID };
+          // });
+          artifactSetHandle();
+          return artifactID;
+        }
+        return prev;
+      });
     }
     setIsDragging(false);
   };

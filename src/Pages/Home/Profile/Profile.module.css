@@ -40,7 +40,7 @@
 
 .rippleEffect {
   position: absolute;
-  --Color: #0023a092;
+  --Color: #111c4cb7;
 
   background: radial-gradient(
     circle at 50%,
@@ -58,7 +58,117 @@
     height: 0;
   }
   100% {
-    width: 100%;
-    height: 100%;
+    width: 150%;
+    height: 150%;
   }
+}
+
+.mainTextContainer {
+  position: absolute;
+  top: 30vh;
+  left: 24vw;
+
+  background-color: rgba(229, 229, 229, 0.24);
+
+  width: 28vw;
+  height: 3vw;
+
+  border: none;
+  z-index: 1;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  color: white;
+}
+
+.title {
+  position: absolute;
+  bottom: 110%;
+  left: 1vw;
+
+  font-size: 2.2vw;
+}
+
+.subTitle {
+  font-size: 1.2vw;
+  white-space: nowrap;
+  padding-left: 1vw;
+}
+
+.date {
+  position: absolute;
+  bottom: -0.6vw;
+  right: 0.2vw;
+
+  font-size: 1vw;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.whiteSquare {
+  position: absolute;
+  top: 26vh;
+  left: 56vw;
+
+  background-color: rgba(229, 229, 229, 0.24);
+
+  width: 18vw;
+  height: 50vh;
+
+  border: none;
+  z-index: 1;
+
+  color: white;
+}
+
+.WSTitle {
+  position: absolute;
+  top: -1vw;
+  left: 1vw;
+
+  font-size: 1.5vw;
+  white-space: nowrap;
+}
+
+.desc {
+  font-size: 2rem;
+  padding: 2.5vw 0.6vw;
+}
+
+.decoLineHorizontal {
+  position: absolute;
+  top: 1.5vw;
+  left: 5%;
+
+  width: 160%;
+  height: 2px;
+
+  background-color: rgb(202, 202, 202);
+}
+
+.decoLineVertical {
+  position: absolute;
+  top: -5%;
+  left: 150%;
+
+  width: 2px;
+  height: 80%;
+
+  background-color: rgb(202, 202, 202);
+}
+
+.subjectPicture {
+  position: absolute;
+  bottom: 5%;
+  left: 35%;
+
+  width: 20vw;
+  height: 25vh;
+
+  object-fit: cover;
+
+  border: none;
+  z-index: 1;
 }

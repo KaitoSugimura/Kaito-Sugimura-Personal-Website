@@ -7,20 +7,20 @@ import forms from "./Forms";
 export default function Profile() {
   const nextZIndex = useRef(0);
   const [overlapID, setOverlapID] = useState(null);
-  const [overlapCoords, setOverlapCoords] = useState({
-    x: window.innerWidth * (8 / 10),
-    y: window.innerHeight / 2,
-  });
+  const getOverlapCoords = () => {
+    return {
+      x: window.innerWidth * (3 / 20),
+      y: window.innerHeight / 2,
+    };
+  };
+  const [overlapCoords, setOverlapCoords] = useState(getOverlapCoords());
   const [openForms, setOpenForms] = useState({});
   const spawnOffset = useRef(-1);
   const offsetReservations = useRef([]);
 
   useEffect(() => {
     const handleResize = () => {
-      setOverlapCoords({
-        x: window.innerWidth * (8 / 10),
-        y: window.innerHeight / 2,
-      });
+      setOverlapCoords(getOverlapCoords());
     };
 
     window.addEventListener("resize", handleResize);
@@ -62,6 +62,25 @@ export default function Profile() {
   return (
     <SectionContainer image={"Backgrounds/Classroom.png"}>
       <div className={styles.ProfileRoot}>
+        {/* Development */}
+        <div>
+          <div className={styles.mainTextContainer}>
+            <h1 className={styles.title}>
+              Bachelor of Science <br />
+              in Software Engineering
+            </h1>
+            <h2 className={styles.subTitle}>Grade: 3.957/4 GPA, 4th year</h2>
+            <span className={styles.date}>09/2020 — 04/2024</span>
+          </div>
+          <div className={styles.whiteSquare}>
+            <span className={styles.decoLineHorizontal}></span>
+            <span className={styles.decoLineVertical}></span>
+            <h2 className={styles.WSTitle}>University of Calgary</h2>
+            <p className={styles.desc}>Finished my 3rd year this winter 2023 and will be going into my 4th this fall. I am currently looking for Internships to gain experience!!</p>
+            <img className={styles.subjectPicture} src="/Photos/UofC.jpg"></img>
+          </div>
+        </div>
+        {/*  */}
         <div
           className={styles.OverLapAreaForArtifact}
           style={{

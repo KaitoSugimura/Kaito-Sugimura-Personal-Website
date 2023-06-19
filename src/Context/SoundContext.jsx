@@ -50,15 +50,14 @@ export const SoundContextProvider = ({ children }) => {
     }
 
     const audio = new Audio(playPath);
-    audio.volume = volume;
+    audio.volume = audioRef.current.volume;
     audio.play();
   };
 
   const playMusic = (musicName) => {
     if (musicName == null || audioRef.current == null) {
       return;
-    } 
-    audioRef.current.volume = volume;
+    }
     if (musicName === "resume") {
       audioRef.current.currentTime = currentTimeRef.current;
       audioRef.current.play();
@@ -84,7 +83,7 @@ export const SoundContextProvider = ({ children }) => {
       return;
     }
     audioRef.current.pause();
-  }
+  };
 
   return (
     <SoundContext.Provider

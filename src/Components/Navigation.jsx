@@ -16,6 +16,7 @@ export default function Navigation({
 
   return (
     <div className={styles.navigationRoot} ref={rootRef}>
+      <div className={styles.BackgroundPannel}></div>
       {initDone && (
         <SoundSetting
           style={{
@@ -49,13 +50,21 @@ export default function Navigation({
           opacity: navIsOpen ? "1" : "0", // This is for the fade in/out animation
         }}
       >
+        {navIsOpen && (
+          <div
+            className={styles.backgroundPanel}
+            onClick={() => {
+              setNavIsOpen(false);
+            }}
+          ></div>
+        )}
         <h1
           className={styles.Title}
           style={{
             transform: navIsOpen ? "translateX(0)" : "translateX(-100%)",
           }}
         >
-          Kaito Sugimura
+          Kaito Sugimura's Portfolio
         </h1>
         <div className={styles.sidebarContainer}>
           <ul
@@ -78,7 +87,12 @@ export default function Navigation({
             ))}
           </ul>
         </div>
-        <div className={styles.credList}>
+        <div
+          className={styles.credList}
+          style={{
+            transform: navIsOpen ? "translateX(0)" : "translateX(-100%)",
+          }}
+        >
           <p>Developed from scratch using: REACT JS, CSS, HTML</p>
           <p>By: Kaito Sugimura</p>
         </div>
