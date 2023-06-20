@@ -10,3 +10,19 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
+
+// Triangle
+  .leftTriangle {
+  width: 0;
+  height: 0;
+  border-top: 1.25vh solid transparent;
+  border-bottom: 1.25vh solid transparent;
+
+  border-left: 1.25vh solid rgb(255, 255, 255);
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}

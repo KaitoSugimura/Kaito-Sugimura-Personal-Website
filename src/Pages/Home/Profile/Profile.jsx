@@ -63,7 +63,7 @@ export default function Profile() {
     <SectionContainer image={"Backgrounds/Classroom.png"}>
       <div className={styles.ProfileRoot}>
         {/* Development */}
-        <div>
+        <div className={styles.informationContainer}>
           <div className={styles.mainTextContainer}>
             <h1 className={styles.title}>
               Bachelor of Science <br />
@@ -72,15 +72,29 @@ export default function Profile() {
             <h2 className={styles.subTitle}>Grade: 3.957/4 GPA, 4th year</h2>
             <span className={styles.date}>09/2020 — 04/2024</span>
           </div>
+
+          <ul className={styles.NavListContainer}>
+            <li className={styles.NavListItem}>About</li>
+            <li className={styles.NavListItem}>Software and Computer</li>
+            <li className={styles.NavListItem}>Electrical and Circuits</li>
+            <li className={styles.NavListItem}>Physics and Chemistry</li>
+            <li className={styles.NavListItem}>Mathematics</li>
+            <li className={styles.NavListItem}>Art</li>
+            <li className={styles.NavListItem}>Other</li>
+          </ul>
+
           <div className={styles.whiteSquare}>
             <span className={styles.decoLineHorizontal}></span>
             <span className={styles.decoLineVertical}></span>
             <h2 className={styles.WSTitle}>University of Calgary</h2>
-            <p className={styles.desc}>Finished my 3rd year this winter 2023 and will be going into my 4th this fall. I am currently looking for Internships to gain experience!!</p>
+            <p className={styles.desc}>
+              Finished my 3rd year this winter 2023. I am currently looking for
+              Internships to gain experience!!
+            </p>
             <img className={styles.subjectPicture} src="/Photos/UofC.jpg"></img>
           </div>
         </div>
-        {/*  */}
+
         <div
           className={styles.OverLapAreaForArtifact}
           style={{
