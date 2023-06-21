@@ -68,8 +68,6 @@
   top: 0;
   left: 26vw;
 
-  background-color: rgba(255, 0, 0, 0.24);
-
   width: 125rem;
   height: 100vh;
 
@@ -83,6 +81,33 @@
   align-items: end;
 
   color: white;
+
+  animation: animSlow 1.5s forwards linear;
+}
+
+@keyframes animSlow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.errorMessage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  color: white;
+  font-size: 2vw;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: animSlow 1.5s forwards linear;
 }
 
 .mainTextContainer {
@@ -127,7 +152,6 @@
 
 .NavListContainer {
   align-self: start;
-  background-color: rgba(229, 229, 229, 0.24);
 
   border: none;
 
@@ -135,6 +159,14 @@
 
   display: flex;
   flex-direction: column;
+
+  padding-left: 5%;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .NavListItem {
@@ -148,7 +180,12 @@
 }
 
 .NavListItem:hover {
-  padding-left: 2vh;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.25) 40%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .NavListItem:after {
@@ -165,79 +202,32 @@
   left: 0;
   transform: translateY(-50%);
   opacity: 0;
-
 }
 
-.NavListItem:hover:after {
+/* .NavListItem:hover:after {
+  opacity: 1;
+} */
+
+.selected {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.selected.NavListItem:after {
   opacity: 1;
 }
 
-.whiteSquare {
-  position: relative;
-  /* top: 26vh;
-  left: 56vw; */
+.selected.NavListItem {
+  padding-left: 2vh;
+}
 
+.contentBox {
   margin-left: 5rem;
   align-self: center;
   grid-row: 1/3;
   grid-column: 2/3;
-
-  background-color: rgba(229, 229, 229, 0.24);
-
-  width: 18vw;
-  height: 50vh;
-
-  border: none;
-
-  color: white;
-}
-
-.WSTitle {
-  position: absolute;
-  top: 0.2vw;
-  left: 1vw;
-
-  font-size: 2.5rem;
-  white-space: nowrap;
-}
-
-.desc {
-  font-size: 2rem;
-  padding: 2.5vw 0.6vw;
-}
-
-.decoLineHorizontal {
-  position: absolute;
-  top: 2.5vw;
-  left: 5%;
-
-  width: 160%;
-  height: 2px;
-
-  background-color: rgb(202, 202, 202);
-}
-
-.decoLineVertical {
-  position: absolute;
-  top: 0%;
-  left: 150%;
-
-  width: 2px;
-  height: 80%;
-
-  background-color: rgb(202, 202, 202);
-}
-
-.subjectPicture {
-  position: absolute;
-  bottom: 5%;
-  left: 35%;
-
-  width: 20vw;
-  height: 25vh;
-
-  object-fit: cover;
-
-  border: none;
-  z-index: 1;
 }

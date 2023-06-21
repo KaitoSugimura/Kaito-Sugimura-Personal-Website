@@ -1,0 +1,74 @@
+.aboutRoot {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+  justify-content: center;
+}
+
+.whiteSquare {
+  position: relative;
+  /* top: 26vh;
+  left: 56vw; */
+  margin-right: 7.5vw;
+
+  background-color: rgba(229, 229, 229, 0.24);
+
+  width: 18vw;
+  height: 50vh;
+
+  border: none;
+
+  color: white;
+}
+
+.WSTitle {
+  position: absolute;
+  top: 0.2vw;
+  left: 1vw;
+
+  font-size: 2.5rem;
+  white-space: nowrap;
+}
+
+.desc {
+  font-size: 2rem;
+  padding: 2.5vw 0.6vw;
+}
+
+.decoLineHorizontal {
+  position: absolute;
+  top: 2.5vw;
+  left: 5%;
+
+  width: 160%;
+  height: 2px;
+
+  background-color: rgb(202, 202, 202);
+}
+
+.decoLineVertical {
+  position: absolute;
+  top: 0%;
+  left: 150%;
+
+  width: 2px;
+  height: 80%;
+
+  background-color: rgb(202, 202, 202);
+}
+
+.subjectPicture {
+  position: absolute;
+  bottom: 5%;
+  left: 35%;
+
+  width: 20vw;
+  height: 25vh;
+
+  object-fit: cover;
+
+  border: none;
+  z-index: 1;
+}

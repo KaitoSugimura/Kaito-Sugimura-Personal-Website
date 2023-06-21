@@ -3,6 +3,7 @@ import SectionContainer from "../../../Components/SectionContainer";
 import styles from "./Profile.module.css";
 import Draggable from "../../../Tools/Draggable";
 import forms from "./Forms";
+import PContents from "./ProfileContents";
 
 export default function Profile() {
   const nextZIndex = useRef(0);
@@ -15,6 +16,7 @@ export default function Profile() {
   };
   const [overlapCoords, setOverlapCoords] = useState(getOverlapCoords());
   const [openForms, setOpenForms] = useState({});
+  const [currentContent, setCurrentContent] = useState("About");
   const spawnOffset = useRef(-1);
   const offsetReservations = useRef([]);
 
@@ -63,37 +65,41 @@ export default function Profile() {
     <SectionContainer image={"Backgrounds/Classroom.png"}>
       <div className={styles.ProfileRoot}>
         {/* Development */}
-        <div className={styles.informationContainer}>
-          <div className={styles.mainTextContainer}>
-            <h1 className={styles.title}>
-              Bachelor of Science <br />
-              in Software Engineering
-            </h1>
-            <h2 className={styles.subTitle}>Grade: 3.957/4 GPA, 4th year</h2>
-            <span className={styles.date}>09/2020 — 04/2024</span>
-          </div>
+        {overlapID &&
+          (PContents[overlapID] && PContents[overlapID].contents ? (
+            <div className={styles.informationContainer}>
+              <div className={styles.mainTextContainer}>
+                <h1 className={styles.title}>{PContents[overlapID].title}</h1>
+                <h2 className={styles.subTitle}>
+                  {PContents[overlapID].subTitle}
+                </h2>
+                <span className={styles.date}>{PContents[overlapID].date}</span>
+              </div>
 
-          <ul className={styles.NavListContainer}>
-            <li className={styles.NavListItem}>About</li>
-            <li className={styles.NavListItem}>Software and Computer</li>
-            <li className={styles.NavListItem}>Electrical and Circuits</li>
-            <li className={styles.NavListItem}>Physics and Chemistry</li>
-            <li className={styles.NavListItem}>Mathematics</li>
-            <li className={styles.NavListItem}>Art</li>
-            <li className={styles.NavListItem}>Other</li>
-          </ul>
+              <ul className={styles.NavListContainer}>
+                {Object.entries(PContents[overlapID].contents).map(
+                  (content) => (
+                    <li
+                      className={`${styles.NavListItem} ${
+                        content[0] == currentContent && styles.selected
+                      }`}
+                      onClick={() => {
+                        setCurrentContent(content[0]);
+                      }}
+                    >
+                      {content[0]}
+                    </li>
+                  )
+                )}
+              </ul>
 
-          <div className={styles.whiteSquare}>
-            <span className={styles.decoLineHorizontal}></span>
-            <span className={styles.decoLineVertical}></span>
-            <h2 className={styles.WSTitle}>University of Calgary</h2>
-            <p className={styles.desc}>
-              Finished my 3rd year this winter 2023. I am currently looking for
-              Internships to gain experience!!
-            </p>
-            <img className={styles.subjectPicture} src="/Photos/UofC.jpg"></img>
-          </div>
-        </div>
+              <div className={styles.contentBox}>
+                {PContents[overlapID].contents[currentContent]}
+              </div>
+            </div>
+          ) : (
+            <div className={styles.errorMessage}>Error loading contents</div>
+          ))}
 
         <div
           className={styles.OverLapAreaForArtifact}
