@@ -26,9 +26,7 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
         <CornerBorder style={BorderStyle} />
         {!navIsOpen && (
           <div
-            className={`${styles.cameraUIMainContainer} ${
-              initDone ? "" : styles.mainAnim
-            }`}
+            className={`${styles.cameraUIMainContainer}`}
           >
             <div
               className={`${styles.MainSection} ${
