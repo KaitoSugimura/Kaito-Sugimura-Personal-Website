@@ -98,8 +98,10 @@
 }
 
 .MainSectionAnim {
-  top: 3vmin;
-  animation: initiationTitle 1.5s ease-in-out 3s forwards;
+  top: 3.5vmin;
+  width: 2vw;
+  height: 3.6vw;
+  animation: initiationTitle 4.5s ease-in-out forwards;
 }
 
 @keyframes initiationTitle {
@@ -107,6 +109,14 @@
     width: 2vw;
     height: 3.6vw;
     top: 3.5vmin;
+  }
+  50%{
+    top: 3.5vmin;
+  }
+  60% {
+    width: 2vw;
+    height: 3.6vw;
+    top: 0vmin;
   }
   100% {
     width: 30vw;
@@ -147,7 +157,7 @@
   flex-direction: column;
 
   color: rgba(255, 255, 255, 0.888);
-  font-size: 2.25vmin
+  font-size: 2.25vmin;
 }
 
 .cameraUIBottomLeftContainer {

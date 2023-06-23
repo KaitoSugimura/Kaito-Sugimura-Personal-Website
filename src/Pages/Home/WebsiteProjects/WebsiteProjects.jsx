@@ -103,7 +103,7 @@ export default function WebsiteProjects() {
     });
   });
 
-  const handleMouseUp = (event) => { 
+  const handleMouseUp = (event) => {
     document.removeEventListener(
       deviceIsTouch ? "touchmove" : "mousemove",
       handleMouseMove.current
@@ -140,13 +140,17 @@ export default function WebsiteProjects() {
   };
 
   const getSelectedWidth = (index) => {
-    return (mouseIsDown.current && isDragging.current) || selectedView || getAbsPosIndex(index) > 0.5
+    return (mouseIsDown.current && isDragging.current) ||
+      selectedView ||
+      getAbsPosIndex(index) > 0.5
       ? sectionRatio.width / 2
       : sectionRatio.width / 1.35;
   };
 
   const getSelectedHeight = (index) => {
-    return (mouseIsDown.current && isDragging.current) || selectedView || getAbsPosIndex(index) > 0.5
+    return (mouseIsDown.current && isDragging.current) ||
+      selectedView ||
+      getAbsPosIndex(index) > 0.5
       ? sectionRatio.height / 2
       : sectionRatio.height / 1.35;
   };
@@ -170,96 +174,96 @@ export default function WebsiteProjects() {
                 {getPosIndex(index) == 0 && selectedView && (
                   <SelectedView index={index} sectionRatio={sectionRatio} />
                 )}
-                {getAbsPosIndex(index) <= 4 &&
-                  (selectedView ? getPosIndex(index) == 0 : true) && (
+                {(selectedView ? getPosIndex(index) == 0 : true) && (
+                  <div
+                    className={styles.FrameContainer}
+                    style={{
+                      zIndex: Math.round(-(getAbsPosIndex(index) * 10)),
+                      transition: mouseIsDown.current
+                        ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
+                        : `z-index 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
+                      transform: selectedView
+                        ? `translate(calc(-50% - ${
+                            sectionRatio.width / 2.25
+                          }vw), -50%)`
+                        : "translate(-50%, -50%)",
+                      // opacity:
+                      //   selectedView && getAbsPosIndex(index) > 0 ? "0" : "1",
+                      width: `${getSelectedWidth(index)}vw`,
+                      height: `${getSelectedHeight(index)}vw`,
+                    }}
+                    key={index}
+                  >
                     <div
-                      className={styles.FrameContainer}
+                      className={`${styles.FrameInner}`}
                       style={{
-                        zIndex: Math.round(-(getAbsPosIndex(index) * 10)),
+                        transform: `translate3d(${
+                          getPosIndex(index) * 100
+                        }%, 0, ${-(
+                          getAbsPosIndex(index) * 400
+                        )}px) rotateX(0deg) rotateY(${
+                          -getPosIndex(index) * 25
+                        }deg) `,
                         transition: mouseIsDown.current
-                          ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
-                          : `z-index 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
-                        transform: selectedView
-                          ? `translate(calc(-50% - ${
-                              sectionRatio.width / 2.25
-                            }vw), -50%)`
-                          : "translate(-50%, -50%)",
-                        // opacity:
-                        //   selectedView && getAbsPosIndex(index) > 0 ? "0" : "1",
-                        width: `${getSelectedWidth(index)}vw`,
-                        height: `${getSelectedHeight(index)}vw`,
+                          ? "none"
+                          : `transform 0.3s ease-in-out`,
+                        filter: `brightness(${
+                          1 - Math.max(0, Math.min(getAbsPosIndex(index), 0.4))
+                        })`,
                       }}
-                      key={index}
                     >
+                      <FrameOverlay
+                        index={index}
+                        content={content}
+                        currentABSPos={getAbsPosIndex(index)}
+                        selectedView={selectedView}
+                        mouseDownAndDragging={
+                          mouseIsDown.current && isDragging.current
+                        }
+                      />
                       <div
-                        className={`${styles.FrameInner}`}
+                        className={styles.clickWrapper}
                         style={{
-                          transform: `translate3d(${
-                            getPosIndex(index) * 100
-                          }%, 0, ${-(
-                            getAbsPosIndex(index) * 400
-                          )}px) rotateX(0deg) rotateY(${
-                            -getPosIndex(index) * 25
-                          }deg) `,
-                          transition: mouseIsDown.current
-                            ? "none"
-                            : `transform 0.3s ease-in-out`,
-                          filter: `brightness(${
-                            1 -
-                            Math.max(0, Math.min(getAbsPosIndex(index), 0.4))
-                          })`,
+                          width: `${selectedView ? 100 : 85}%`,
+                          height: `${selectedView ? 100 : 85}%`,
+                          left: selectedView ? "0%" : "7.5%",
+                        }}
+                        onClick={() => {
+                          if (!isDragging.current) {
+                            if (currentIndex == index) {
+                              toggleSelectedView();
+                            } else if (!selectedView) {
+                              setCurrentIndex(index);
+                              playSFX("ButtonClick");
+                            }
+                          }
                         }}
                       >
-                        <FrameOverlay
-                          index={index}
-                          content={content}
-                          currentABSPos={getAbsPosIndex(index)}
-                          selectedView={selectedView}
-                          mouseDownAndDragging={mouseIsDown.current && isDragging.current}
+                        {!selectedView && (
+                          <>
+                            {index == 0 && (
+                              <div className={styles.Ribbon}>
+                                <p className={styles.Newest}>Newest</p>
+                              </div>
+                            )}
+                            {index == Contents.length - 1 && (
+                              <div className={styles.Ribbon}>
+                                <p className={styles.Oldest}>Oldest</p>
+                              </div>
+                            )}
+                          </>
+                        )}
+                        <img
+                          className={styles.frameImage}
+                          src={`/Home/WebsiteProjects/${content.imageFileName}`}
+                          onDragStart={(e) => {
+                            e.preventDefault();
+                          }}
                         />
-                        <div
-                          className={styles.clickWrapper}
-                          style={{
-                            width: `${selectedView ? 100 : 85}%`,
-                            height: `${selectedView ? 100 : 85}%`,
-                            left: selectedView ? "0%" : "7.5%",
-                          }}
-                          onClick={() => {
-                            if (!isDragging.current) {
-                              if (currentIndex == index) {
-                                toggleSelectedView();
-                              } else if (!selectedView) {
-                                setCurrentIndex(index);
-                                playSFX("ButtonClick");
-                              }
-                            }
-                          }}
-                        >
-                          {!selectedView && (
-                            <>
-                              {index == 0 && (
-                                <div className={styles.Ribbon}>
-                                  <p className={styles.Newest}>Newest</p>
-                                </div>
-                              )}
-                              {index == Contents.length - 1 && (
-                                <div className={styles.Ribbon}>
-                                  <p className={styles.Oldest}>Oldest</p>
-                                </div>
-                              )}
-                            </>
-                          )}
-                          <img
-                            className={styles.frameImage}
-                            src={`/Home/WebsiteProjects/${content.imageFileName}`}
-                            onDragStart={(e) => {
-                              e.preventDefault();
-                            }}
-                          />
-                        </div>
                       </div>
                     </div>
-                  )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
