@@ -152,7 +152,7 @@ export default function WebsiteProjects() {
   };
 
   return (
-    <SectionContainer image={"/Backgrounds/DarkFlames.png"}>
+    <SectionContainer image={"/Backgrounds/DarkFlames.jpg"}>
       <div className={styles.WebsiteProjectsRoot}>
         <div
           className={`${styles.WebsiteFrameContainer} ${

@@ -135,7 +135,7 @@ export default function Projects() {
   };
 
   return (
-    <SectionContainer image={"/Backgrounds/DarkFlames.png"}>
+    <SectionContainer image={"/Backgrounds/DarkFlames.jpg"}>
       <div className={styles.projectsContainer}>
         <XDragScroller
           style={{
