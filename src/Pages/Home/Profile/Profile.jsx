@@ -4,6 +4,7 @@ import styles from "./Profile.module.css";
 import Draggable from "../../../Tools/Draggable";
 import forms from "./Forms";
 import PContents from "./ProfileContents";
+import MouseIcon from "/Tools/Mouse.svg";
 
 export default function Profile() {
   const nextZIndex = useRef(0);
@@ -19,6 +20,16 @@ export default function Profile() {
   const [currentContent, setCurrentContent] = useState("About");
   const spawnOffset = useRef(-1);
   const offsetReservations = useRef([]);
+  const mainRef = useRef(null);
+
+  const [finishedFirstQuest, setFinishedFirstQuest] = useState(false);
+  const [showIndicator, setShowIndicator] = useState(true);
+  const [mainArtifactCoords, setMainArtifactCoords] = useState({
+    left: window.innerWidth / 1.4,
+    top: window.innerHeight / 2 - window.innerWidth / 20,
+    width: window.innerWidth / 10,
+    height: window.innerWidth / 10,
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,7 +43,8 @@ export default function Profile() {
   }, []);
 
   const artifactSetHandle = () => {
-    ++spawnOffset.current;
+    // ++spawnOffset.current;
+    setFinishedFirstQuest(true);
   };
 
   const getSetSpawnOffset = (offset) => {
@@ -59,6 +71,36 @@ export default function Profile() {
 
   const getNextZIndex = () => {
     return ++nextZIndex.current;
+  };
+
+  const onDragEnd = () => {
+    if (!finishedFirstQuest) {
+      setMainArtifactCoords(mainRef.current.getBoundingClientRect());
+      setShowIndicator(true);
+    }
+  };
+
+  const onDragStart = () => {
+    if (!finishedFirstQuest) {
+      setShowIndicator(false);
+    }
+    setCurrentContent("About");
+  };
+
+  const getDragRotation = () => {
+    const angle =
+      Math.atan(
+        (window.innerHeight / 2 -
+          mainArtifactCoords.top -
+          mainArtifactCoords.width / 2) /
+          (mainArtifactCoords.left - overlapCoords.x)
+      ) *
+      (-180 / Math.PI);
+
+    if (mainArtifactCoords.left - overlapCoords.x < 0) {
+      return angle + 180;
+    }
+    return angle;
   };
 
   return (
@@ -111,16 +153,32 @@ export default function Profile() {
           <div className={styles.indicatorCont}></div>
           {overlapID && <div className={styles.rippleEffect}></div>}
         </div>
+
+        {overlapID == null && (
+          <div className={styles.artifactsContainer}>
+            <p className={styles.artifactsText}>Education</p>
+            <p className={styles.artifactsText}>Self Study</p>
+            <p className={styles.artifactsText}>Achievements</p>
+            <p className={styles.artifactsText}>Skills</p>
+          </div>
+        )}
+
         <Draggable
           getNextZIndex={getNextZIndex}
           isArtifact={true}
+          artifactStartingPos={{
+            x: `${mainArtifactCoords.left}px`,
+            y: `${mainArtifactCoords.top}px`,
+          }}
           centerCoords={overlapCoords}
           artifactID={"UofC"}
           setOverlapID={setOverlapID}
           setOpenForms={setOpenForms}
           artifactSetHandle={artifactSetHandle}
+          onDragEnd={onDragEnd}
+          onDragStart={onDragStart}
         >
-          <div className={styles.UofCItemRoot}>
+          <div className={styles.UofCItemRoot} ref={mainRef}>
             <img
               src="/Home/Icons/School.svg"
               className={styles.UofCLogoImage}
@@ -130,22 +188,81 @@ export default function Profile() {
             ></img>
           </div>
         </Draggable>
-        <Draggable
-          getNextZIndex={getNextZIndex}
-          isArtifact={true}
-          centerCoords={overlapCoords}
-          artifactID={"SelfStudy"}
-          setOverlapID={setOverlapID}
-          setOpenForms={setOpenForms}
-          artifactSetHandle={artifactSetHandle}
-        >
-          <div className={styles.UofCItemRoot}>
-            <img
-              src="/Home/Profile/Items/SelfStudy.png"
-              className={styles.UofCLogoImage}
-            ></img>
-          </div>
-        </Draggable>
+        {(overlapID == null || overlapID == "SelfStudy") && (
+          <Draggable
+            getNextZIndex={getNextZIndex}
+            isArtifact={true}
+            artifactStartingPos={{
+              x: `${window.innerWidth / 10}px`,
+              y: `${window.innerHeight / 2 + window.innerWidth / 10}px`,
+            }}
+            centerCoords={overlapCoords}
+            artifactID={"SelfStudy"}
+            setOverlapID={setOverlapID}
+            setOpenForms={setOpenForms}
+            artifactSetHandle={artifactSetHandle}
+          >
+            <div className={styles.UofCItemRoot}>
+              <img
+                src="/Home/Icons/SelfStudy.svg"
+                className={styles.UofCLogoImage}
+                onDrag={(event) => {
+                  event.preventDefault();
+                }}
+              ></img>
+            </div>
+          </Draggable>
+        )}
+        {(overlapID == null || overlapID == "SelfStudy") && (
+          <Draggable
+            getNextZIndex={getNextZIndex}
+            isArtifact={true}
+            artifactStartingPos={{
+              x: `${window.innerWidth / 10}px`,
+              y: `${window.innerHeight / 2 + window.innerWidth / 10}px`,
+            }}
+            centerCoords={overlapCoords}
+            artifactID={"SelfStudy"}
+            setOverlapID={setOverlapID}
+            setOpenForms={setOpenForms}
+            artifactSetHandle={artifactSetHandle}
+          >
+            <div className={styles.UofCItemRoot}>
+              <img
+                src="/Home/Icons/SelfStudy.svg"
+                className={styles.UofCLogoImage}
+                onDrag={(event) => {
+                  event.preventDefault();
+                }}
+              ></img>
+            </div>
+          </Draggable>
+        )}
+        {(overlapID == null || overlapID == "SelfStudy") && (
+          <Draggable
+            getNextZIndex={getNextZIndex}
+            isArtifact={true}
+            artifactStartingPos={{
+              x: `${window.innerWidth / 10}px`,
+              y: `${window.innerHeight / 2 + window.innerWidth / 10}px`,
+            }}
+            centerCoords={overlapCoords}
+            artifactID={"SelfStudy"}
+            setOverlapID={setOverlapID}
+            setOpenForms={setOpenForms}
+            artifactSetHandle={artifactSetHandle}
+          >
+            <div className={styles.UofCItemRoot}>
+              <img
+                src="/Home/Icons/SelfStudy.svg"
+                className={styles.UofCLogoImage}
+                onDrag={(event) => {
+                  event.preventDefault();
+                }}
+              ></img>
+            </div>
+          </Draggable>
+        )}
         {Object.entries(openForms).map((formPair) => (
           <Draggable
             getNextZIndex={getNextZIndex}
@@ -158,6 +275,41 @@ export default function Profile() {
             {forms[formPair[1]]}
           </Draggable>
         ))}
+
+        {!finishedFirstQuest && showIndicator && (
+          <div
+            className={styles.dragIndicator}
+            style={{
+              top: `${overlapCoords.y}px`,
+              left: `${overlapCoords.x}px`,
+              width: `${Math.abs(mainArtifactCoords.left - overlapCoords.x)}px`,
+              transform: `rotate(${getDragRotation()}deg)`,
+            }}
+          >
+            <div className={styles.glowCont}>
+              <div className={styles.glow}></div>
+              <div
+                className={styles.glow}
+                style={{
+                  animationDelay: "0.5s",
+                }}
+              ></div>
+              <div
+                className={styles.glow}
+                style={{
+                  animationDelay: "1s",
+                }}
+              ></div>
+              <div
+                className={styles.glow}
+                style={{
+                  animationDelay: "1.5s",
+                }}
+              ></div>
+            </div>
+            <img className={styles.MouseImage} src={MouseIcon}></img>
+          </div>
+        )}
       </div>
     </SectionContainer>
   );

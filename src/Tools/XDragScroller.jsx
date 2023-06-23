@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import styles from "./XDragScroller.module.css";
 import MouseIcon from "/Tools/Mouse.svg";
 
+
 export default function XDragScroller({ style, children, setIsDragging }) {
   const MouseXPrevRef = useRef(0);
   const containerRef = useRef(null);

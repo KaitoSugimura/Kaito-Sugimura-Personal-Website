@@ -7,6 +7,7 @@ export default function Draggable({
   children,
   getNextZIndex,
   isArtifact = false,
+  artifactStartingPos = { x: 0, y: 0 },
   centerCoords = null,
   artifactID = null,
   setOverlapID = (doNothing) => {},
@@ -16,6 +17,8 @@ export default function Draggable({
     return 0;
   },
   artifactSetHandle = (doNothing) => {},
+  onDragEnd = () => {},
+  onDragStart = () => {},
 }) {
   const initialPos = useRef({ x: 0, y: 0 });
   const initialContPos = useRef({ x: 0, y: 0 });
@@ -84,6 +87,7 @@ export default function Draggable({
       return prev;
     });
     setIsDragging(true);
+    onDragStart();
   };
 
   const handleMouseUp = (event) => {
@@ -101,12 +105,13 @@ export default function Draggable({
     const top = dragRef.offsetTop;
     const right = left + dragRef.offsetWidth;
     const bottom = top + dragRef.offsetHeight;
+
     if (
       isArtifact &&
-      centerCoords.x > left + 25 &&
-      centerCoords.x < right - 25 &&
-      centerCoords.y > top + 25 &&
-      centerCoords.y < bottom - 25
+      centerCoords.x > left &&
+      centerCoords.x < right &&
+      centerCoords.y > top &&
+      centerCoords.y < bottom
     ) {
       // Dropped artifact
       setOverlapID((prev) => {
@@ -121,6 +126,8 @@ export default function Draggable({
         }
         return prev;
       });
+    } else {
+      onDragEnd();
     }
     setIsDragging(false);
   };
@@ -135,8 +142,12 @@ export default function Draggable({
       }}
       style={{
         zIndex: thisZIndex,
-        top: `${8 + spawnOffset.current * 2}%`,
-        left: `${4 + spawnOffset.current}%`,
+        top: isArtifact
+          ? artifactStartingPos.y
+          : `${8 + spawnOffset.current * 2}%`,
+        left: isArtifact
+          ? artifactStartingPos.x
+          : `${4 + spawnOffset.current}%`,
         // border: isDragging ? "2px solid #00ff00" : "2px solid #00000000",
       }}
     >

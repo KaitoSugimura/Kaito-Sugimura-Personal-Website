@@ -10,10 +10,19 @@
 }
 
 .UofCLogoImage {
-  height: 10vmax;
-  width: auto;
+  height: 8.5vw;
+  width: 8.5vw;
   border: none;
   opacity: 0.95;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+
+  filter: drop-shadow(0 0 5px rgb(255, 255, 255));
 }
 
 .indicatorCont {
@@ -230,4 +239,159 @@
   align-self: center;
   grid-row: 1/3;
   grid-column: 2/3;
+}
+
+.dragIndicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+
+  margin-left: 0vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+
+  transform-origin: left;
+
+  animation: animSlow 1s forwards linear;
+}
+
+.glowCont {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: left top, left bottom;
+}
+
+.glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.728) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  animation: silk 2s infinite linear;
+  /* filter: blur(2px) brightness(1.2); */
+  opacity: 0;
+}
+
+@keyframes silk {
+  0% {
+    opacity: 1;
+    left: 100%;
+  }
+  100% {
+    opacity: 1;
+    left: -40%;
+  }
+}
+
+.MouseImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5vh;
+  width: auto;
+  transform: translateY(-20%);
+  filter: invert(1);
+
+  animation: mouse 3s infinite ease-in-out;
+}
+
+@keyframes mouse {
+  0% {
+    left: 110%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 0%;
+    opacity: 0;
+  }
+}
+
+.artifactsContainer {
+  position: absolute;
+  top: 50%;
+  right: 15vw;
+
+  width: 25vw;
+  height: 50vh;
+
+  transform: translateY(-50%);
+
+  background-color: rgba(255, 255, 255, 0.249);
+  animation: animSlow 0.5s forwards linear;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.artifactsText {
+  font-size: 1.5vw;
+  color: white;
+
+  justify-self: center;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.dragText{
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100%;
+
+
+  font-size: 1.5vw;
+  color: white;
+  text-align: center;
+
 }

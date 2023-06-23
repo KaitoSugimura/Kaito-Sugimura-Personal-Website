@@ -1,6 +1,8 @@
 import About from "./Layouts/About";
 import Topic from "./Layouts/Topic";
 
+// THE MAIN PAGE SHOULD BE CALL About
+
 export default {
   UofC: {
     title: (
