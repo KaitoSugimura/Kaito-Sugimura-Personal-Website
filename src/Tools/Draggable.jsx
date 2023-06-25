@@ -12,13 +12,11 @@ export default function Draggable({
   artifactID = null,
   setOverlapID = (doNothing) => {},
   setOpenForms = (doNothing) => {},
-  id,
   getSetSpawnOffset = (returnZero) => {
     return 0;
   },
-  artifactSetHandle = (doNothing) => {},
-  onDragEnd = () => {},
-  onDragStart = () => {},
+  onDragEnd = (doNothing, dn, d) => {},
+  onDragStart = (doNothing, dn) => {},
 }) {
   const initialPos = useRef({ x: 0, y: 0 });
   const initialContPos = useRef({ x: 0, y: 0 });
@@ -81,13 +79,12 @@ export default function Draggable({
     setThisZIndex(getNextZIndex());
     setOverlapID((prev) => {
       if (prev === artifactID) {
-        console.log("set bnull");
         return null;
       }
       return prev;
     });
     setIsDragging(true);
-    onDragStart();
+    onDragStart(dragRootRef.current, artifactID);
   };
 
   const handleMouseUp = (event) => {
@@ -121,13 +118,13 @@ export default function Draggable({
           // setOpenForms((prev) => {
           //   return { ...prev, [`${Date.now()}`]: artifactID };
           // });
-          artifactSetHandle();
+          onDragEnd(dragRootRef.current, artifactID, true);
           return artifactID;
         }
         return prev;
       });
     } else {
-      onDragEnd();
+      onDragEnd(dragRootRef.current, artifactID, false);
     }
     setIsDragging(false);
   };
@@ -135,7 +132,6 @@ export default function Draggable({
   return (
     <div
       className={styles.DraggableContainer}
-      key={id}
       ref={dragRootRef}
       onDragStart={(e) => {
         e.preventDefault();

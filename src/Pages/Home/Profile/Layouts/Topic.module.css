@@ -173,10 +173,10 @@
 .whiteSquare {
   position: absolute;
   top: 37%;
-  left: 21vh;
+  left: 25%;
   font-size: 2.2vh;
   line-height: 1.5;
-  width: 100%;
+  width: 80%;
 
   border: none;
 
@@ -188,6 +188,15 @@
   overflow: hidden;
   width: 0;
   animation: typing2 0.1s ease-in forwards;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.listItem span{
+  color: rgb(235, 235, 235);
+  font-size: 1.8vh;
 }
 
 @keyframes typing2 {

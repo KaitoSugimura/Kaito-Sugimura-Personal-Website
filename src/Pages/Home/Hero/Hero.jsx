@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 import BGVideo from "/Backgrounds/HeroBGVideo.mp4";
 import LoadingScreen from "../../../Components/LoadingScreen";
+import coverPhoto from "/Dialog/Pictures/Cover.png";
 
 export default function Hero() {
   const [UserAuthenticated, setUserAuthenticated] = useState(false);
@@ -22,6 +23,7 @@ export default function Hero() {
       {UserAuthenticated ? (
         <>
           {BGVideoIsLoading && <LoadingScreen />}
+          <img src={coverPhoto} className={styles.coverPhoto}></img>
           <div className={styles.grid}>
             <video
               className={styles.backgroundVideo}

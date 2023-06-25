@@ -3,15 +3,43 @@
   height: 100%;
   border: none;
   position: relative;
+
+  --EducationColor: #111c4cb7;
+  --SelfStudyColor: #22a364b7;
+  --ExperienceColor: #730039b7;
+  --AchievementsColor: #ba9a32b7;
+}
+
+.education{
+  background-color: var(--EducationColor);
+}
+
+.selfStudy{
+  background-color: var(--SelfStudyColor);
+}
+
+.experience{
+  background-color: var(--ExperienceColor);
+}
+
+.achievements{
+  background-color: var(--AchievementsColor);
 }
 
 .UofCItemRoot {
   border: none;
+  border: 1px solid white;
+  height: 8.5vw;
+  width: 8.5vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .UofCLogoImage {
-  height: 8.5vw;
-  width: 8.5vw;
+  height: 7.5vw;
+  width: 7.5vw;
   border: none;
   opacity: 0.95;
 
@@ -49,12 +77,11 @@
 
 .rippleEffect {
   position: absolute;
-  --Color: #111c4cb7;
 
   background: radial-gradient(
     circle at 50%,
-    var(--Color),
-    var(--Color) 10%,
+    var(--EducationColor),
+    var(--EducationColor) 10%,
     #ff000000 75%
   );
   animation: ripple 1s ease-in forwards;
@@ -133,6 +160,7 @@
   align-items: center;
 
   color: white;
+  
 }
 
 .title {
@@ -253,7 +281,7 @@
   justify-content: center;
   align-items: center;
 
-  z-index: 1;
+  z-index: 1000;
 
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -353,27 +381,23 @@
 
 .artifactsContainer {
   position: absolute;
-  top: 50%;
+  top: 55%;
   right: 15vw;
 
-  width: 25vw;
+  width: 30vw;
   height: 50vh;
 
   transform: translateY(-50%);
 
-  background-color: rgba(255, 255, 255, 0.249);
+  /* background-color: rgba(255, 255, 255, 0.249); */
   animation: animSlow 0.5s forwards linear;
+  column-gap: 3vw;
+  row-gap: 10vh;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-}
-
-.artifactsText {
-  font-size: 1.5vw;
-  color: white;
-
-  justify-self: center;
+  align-items: end;
 
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -383,15 +407,49 @@
   pointer-events: none;
 }
 
-.dragText{
+.artifactTextCont {
+  position: relative;
+  height: 1.5vw;
+  width: 100%;
+}
+
+.pos {
+  position: absolute;
+  bottom: 35%;
+  left: 0.6vw;
+  gap: 0.6vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Blender Pro";
+}
+
+.artifactsNum {
+  font-size: 2.25vw;
+  line-height: 1;
+  color: white;
+}
+
+.artifactsText {
+  font-size: 1.75vw;
+  line-height: 1;
+  color: white;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.dragText {
   position: absolute;
   top: -10%;
   left: 0;
   width: 100%;
 
-
   font-size: 1.5vw;
   color: white;
   text-align: center;
-
 }

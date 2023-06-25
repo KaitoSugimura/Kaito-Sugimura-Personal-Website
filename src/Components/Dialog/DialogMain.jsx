@@ -22,7 +22,7 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
 
   const skipDialog = () => {
     let musicToPlay = null;
-    for (let i = currentTextNo+1; i < Dialogs[DialogID].length; ++i) {
+    for (let i = currentTextNo + 1; i < Dialogs[DialogID].length; ++i) {
       const obj = Dialogs[DialogID][i];
       if (obj.music) {
         musicToPlay = obj.music;
@@ -48,7 +48,7 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
           onDrag={(e) => {
             e.preventDefault();
           }}
-          />
+        />
       </button>
       <div className={styles.DialogClickArea} onClick={handleDialogClick}>
         <div className={styles.DialogContainer}>
@@ -60,6 +60,15 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
             </p>
           )}
         </div>
+        {currentTextNo < Dialogs[DialogID].length && Dialogs[DialogID][currentTextNo].image && (
+          <img
+            src={`/Dialog/Pictures/${Dialogs[DialogID][currentTextNo].image}`}
+            className={styles.DialogImage}
+            onDrag={(e) => {
+              e.preventDefault();
+            }}
+          ></img>
+        )}
       </div>
     </div>
   );

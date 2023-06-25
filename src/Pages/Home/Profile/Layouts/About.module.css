@@ -25,7 +25,7 @@
 
 .WSTitle {
   position: absolute;
-  top: 0.2vw;
+  top: 0.5vw;
   left: 1vw;
 
   font-size: 2.5rem;
@@ -34,7 +34,7 @@
 
 .desc {
   font-size: 2rem;
-  padding: 2.5vw 0.6vw;
+  padding: 3vw 1vw;
 }
 
 .decoLineHorizontal {
