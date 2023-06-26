@@ -53,7 +53,7 @@ export default function Home() {
     if (!initDone) {
       setTimeout(() => {
         setInitDone(true);
-      }, 5000);
+      }, 15000);
     }
   };
 
@@ -181,19 +181,17 @@ export default function Home() {
               !initDone && index == 0 ? (
                 <InitHero currentDialogID={currentDialogID} key={index} />
               ) : (
-                (GlobalLoadedOk || index != 0) && (
-                  <div
-                    className={styles.SectionContainer}
-                    id={section.title}
-                    key={section.title}
-                    style={{
-                      transform: `translateY(-${currentSection * 100}vh)`,
-                      transition: "transform 0.3s ease-in-out",
-                    }}
-                  >
-                    {section.XML}
-                  </div>
-                )
+                <div
+                  className={styles.SectionContainer}
+                  id={section.title}
+                  key={section.title}
+                  style={{
+                    transform: `translateY(-${currentSection * 100}vh)`,
+                    transition: "transform 0.3s ease-in-out",
+                  }}
+                >
+                  {section.XML}
+                </div>
               )
             )}
           </div>
