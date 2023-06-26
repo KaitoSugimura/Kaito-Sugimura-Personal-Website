@@ -116,12 +116,8 @@ export default {
   },
 
   SelfStudy: {
-    title: (
-      <>
-        Self-Taught Developer
-      </>
-    ),
-    subTitle: <>3 years of dedication</>,
+    title: <>Self-Taught Developer</>,
+    subTitle: <>3 years of dedication, more to come</>,
     date: <>09/2020 — now</>,
     icon: "/Home/Icons/SelfStudy.svg",
     coords: {
@@ -131,44 +127,107 @@ export default {
     contents: {
       ["About"]: (
         <About
-          title={"University of Calgary"}
+          title={"Ongoing Journey"}
           desc={`I self learn using various resources such as books, online courses, and youtube videos. This file contains some of the online courses I have taken.`}
-          image={"/Photos/UofC.jpg"}
+          image={"/Home/Profile/About/KaitoMain.jpg"}
         />
       ),
       ["Web Development"]: (
         <Topic
           title={"Web Development"}
-          subtitle={"Udemy"}
+          subtitle={"Codecademy & Udemy"}
           topic={"Courses Taken"}
-          img={"/Home/Icons/Topic/Art.svg"}
-          list={["HTML and CSS", "Digital Sculpture"]}
-          dates={["Codecademy | 07/2021 – 07/2021", "07/2021 – 07/2021"]}
+          img={"/Home/Icons/Topic/Web.svg"}
+          list={[
+            "HTML and CSS",
+            "JavaScript",
+            "Real-World Websites",
+            "React & Firebase",
+          ]}
+          dates={[
+            "Codecademy | 07/2021 – 07/2021",
+            "Codecademy | 08/2021 – 08/2021",
+            "Udemy | 10/2022 – 10/2022",
+            "Udemy | 02/2023 – 05/2023",
+          ]}
         />
       ),
       ["Game Development"]: (
         <Topic
-          title={"Art"}
+          title={"Game Development"}
+          subtitle={"Unity Learn & Udemy"}
+          topic={"Courses Taken"}
+          img={"/Home/Icons/Topic/Game.svg"}
+          list={[
+            "C#",
+            "Unity Junior Programmer",
+            "UE5 C++ Developer Course",
+            "Level Design",
+            "Went into focused development after",
+          ]}
+          dates={[
+            "Codecademy | 08/2021 – 08/2021",
+            "Unity Learn | 09/2021 – 09/2021",
+            "Udemy | 04/2022 – 05/2022",
+            "Udemy | 06/2022 – 06/2022",
+            "now",
+          ]}
+        />
+      ),
+      ["General Programming"]: (
+        <Topic
+          title={"General Programming"}
+          subtitle={"Codecademy & Mosh Hamedani"}
+          topic={"Courses Taken"}
+          img={"/Home/Icons/Topic/File.svg"}
+          list={["Python 3", "Java", "Data Structures & Algorithms"]}
+          dates={[
+            "Codecademy | 08/2021 – 08/2021",
+            "Mosh | 01/2022 – 02/2022",
+            "Mosh | 02/2022 – 04/2022",
+          ]}
+        />
+      ),
+      ["Source Control"]: (
+        <Topic
+          title={"Source Control"}
           subtitle={"Udemy"}
           topic={"Courses Taken"}
-          img={"/Home/Icons/Topic/Art.svg"}
-          list={["History of Video Games", "Digital Sculpture"]}
+          img={"/Home/Icons/Topic/Git.svg"}
+          list={["The Ultimate Git Course"]}
+          dates={["Udemy | 06/2022 – 06/2022"]}
         />
       ),
     },
   },
 
   Experience: {
-    title: <>Work Experience</>,
-    subTitle: <>Grade: 3.957/4 GPA, 4th year</>,
-    date: <>09/2020 — 04/2024</>,
+    title: <>Work experience</>,
+    subTitle: <>Part time, Full time, and Volunteering</>,
+    date: <></>,
     icon: "/Home/Icons/BriefCase.svg",
     coords: {
       x: window.innerWidth / 1.75,
       y: window.innerHeight / 1.88,
     },
     contents: {
-      ["About"]: <About />,
+      ["About"]: (
+        <About
+          title={"Positive energy"}
+          desc={`Although I take pride in my own work, I value the relationships I build with my coworkers more than anything. I love telling jokes to lighten up the damp morning mood.`}
+          image={"/Home/Profile/About/Volunteer.jpg"}
+        />
+      ),
+      ["Matrix Orbital"]: (
+        <Topic
+          title={"PCB soldering and Product packaging"}
+          subtitle={"Matrix Orbital"}
+          topic={"Courses Taken"}
+          img={"/Home/Icons/Topic/Git.svg"}
+          list={["The Ultimate Git Course"]}
+          dates={["Udemy | 06/2022 – 06/2022"]}
+        />
+      ),
     },
   },
 
@@ -182,7 +241,11 @@ export default {
       y: window.innerHeight / 1.88,
     },
     contents: {
-      ["About"]: <About />,
+      ["About"]: <About
+      title={`"Try everything"`}
+          desc={`My mother always says "The reason you can't do it is because you haven't tried it yet". It's a motto I live by.`}
+          image={"/Home/Profile/About/Volunteer.jpg"}
+      />,
     },
   },
 };

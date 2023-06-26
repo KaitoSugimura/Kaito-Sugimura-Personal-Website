@@ -36,7 +36,7 @@ export default function Topic({
               >
       
                   {index + 1}. {item}{" "}
-                  <span>{dates && `[${dates[index]}]`}</span>
+                  <span>{dates && dates[index] && `[${dates[index]}]`}</span>
           
               </li>
             ))}
