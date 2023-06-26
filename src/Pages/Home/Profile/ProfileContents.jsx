@@ -218,7 +218,27 @@ export default {
           image={"/Home/Profile/About/Volunteer.jpg"}
         />
       ),
-      ["Matrix Orbital"]: (
+      ["PCB soldering and Product packaging"]: (
+        <Topic
+          title={"PCB soldering and Product packaging"}
+          subtitle={"Matrix Orbital"}
+          topic={"Courses Taken"}
+          img={"/Home/Icons/Topic/Git.svg"}
+          list={["The Ultimate Git Course"]}
+          dates={["Udemy | 06/2022 – 06/2022"]}
+        />
+      ),
+      ["Retail Clerk"]: (
+        <Topic
+          title={"PCB soldering and Product packaging"}
+          subtitle={"Matrix Orbital"}
+          topic={"Courses Taken"}
+          img={"/Home/Icons/Topic/Git.svg"}
+          list={["The Ultimate Git Course"]}
+          dates={["Udemy | 06/2022 – 06/2022"]}
+        />
+      ),
+      ["Summer camp volunteering"]: (
         <Topic
           title={"PCB soldering and Product packaging"}
           subtitle={"Matrix Orbital"}

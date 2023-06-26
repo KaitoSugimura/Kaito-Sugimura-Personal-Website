@@ -12,14 +12,19 @@ import { SoundContext } from "../../Context/SoundContext";
 import DialogMain from "../../Components/Dialog/DialogMain";
 import InitHero from "./Hero/InitHero";
 import HorizontalEnjoyer from "../../Tools/HorizontalEnjoyer";
+import LoadingScreen from "../../Components/LoadingScreen";
 
 export const scrollContext = createContext();
+export const LoadContext = createContext();
 
 export default function Home() {
+  // Contexts (May be moved to a separate file if needed)
+  const isScrollable = useRef(false);
+  const [GlobalLoadedOk, setGlobalLoadedOk] = useState(false);
+
   const [currentSection, setCurrentSection] = useState(0);
   const { playMusic } = useContext(SoundContext);
   const blockScroll = useRef(false);
-  const isScrollable = useRef(false);
   const TouchMoveStartY = useRef(0);
   const TouchMoveStartTime = useRef(0);
 
@@ -147,41 +152,43 @@ export default function Home() {
   }, [initDone]);
 
   return (
-    <scrollContext.Provider value={{ isScrollable }}>
-      <div className={styles.HomeScroller}>
-        <HorizontalEnjoyer />
-        {currentDialogID != null ? (
-          <DialogMain
-            DialogID={currentDialogID}
-            eventFinishedCallback={handleEventFinished}
-          />
-        ) : (
-          <Navigation
-            scrollTo={scrollTo}
-            currentSectionIndex={currentSection}
-            initDone={initDone}
-          />
-        )}
-        <div className={styles.HomeRoot}>
-          {Sections.map((section, index) =>
-            !initDone && index == 0 ? (
-              <InitHero currentDialogID={currentDialogID} key={index} />
-            ) : (
-              <div
-                className={styles.SectionContainer}
-                id={section.title}
-                key={section.title}
-                style={{
-                  transform: `translateY(-${currentSection * 100}vh)`,
-                  transition: "transform 0.3s ease-in-out",
-                }}
-              >
-                {section.XML}
-              </div>
-            )
+    <LoadContext.Provider value={{ GlobalLoadedOk }}>
+      <scrollContext.Provider value={{ isScrollable }}>
+        <div className={styles.HomeScroller}>
+          <HorizontalEnjoyer />
+          {currentDialogID != null ? (
+            <DialogMain
+              DialogID={currentDialogID}
+              eventFinishedCallback={handleEventFinished}
+            />
+          ) : (
+            <Navigation
+              scrollTo={scrollTo}
+              currentSectionIndex={currentSection}
+              initDone={initDone}
+            />
           )}
+          <div className={styles.HomeRoot}>
+            {Sections.map((section, index) =>
+              !initDone && index == 0 ? (
+                  <InitHero currentDialogID={currentDialogID} key={index} />
+              ) : (
+                <div
+                  className={styles.SectionContainer}
+                  id={section.title}
+                  key={section.title}
+                  style={{
+                    transform: `translateY(-${currentSection * 100}vh)`,
+                    transition: "transform 0.3s ease-in-out",
+                  }}
+                >
+                  {section.XML}
+                </div>
+              )
+            )}
+          </div>
         </div>
-      </div>
-    </scrollContext.Provider>
+      </scrollContext.Provider>
+    </LoadContext.Provider>
   );
 }

@@ -9,7 +9,7 @@ export default {
     },
     { text: "Hey, you there!", music: "main", image: "20.png" },
     { text: "Yes, you!", music: null, image: "20.png" },
-    { text: "I'm glad you're here.", music: null, image: "9.png"},
+    { text: "I'm glad you're here.", music: null, image: "9.png" },
     { text: "I've been waiting for you.", music: null, image: "w.png" },
     { text: "My name is Kaito Sugimura.", music: null, image: "43.png" },
     {
@@ -27,7 +27,7 @@ export default {
       music: null,
       image: "3.png",
     },
-    { text: "From scratch!", music: null, image: null, image: "4.png" },
+    { text: "From scratch!", music: null, image: "4.png" },
     { text: "Anyways, that's enough talk.", music: null, image: "10.png" },
     { text: "Welcome to my website!", music: null, image: "w.png" },
     {
