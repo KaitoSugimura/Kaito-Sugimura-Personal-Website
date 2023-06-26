@@ -22,6 +22,12 @@ export default function Home() {
   const isScrollable = useRef(false);
   const [GlobalLoadedOk, setGlobalLoadedOk] = useState(false);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setGlobalLoadedOk(true);
+    }, 10000);
+  }, []);
+
   const [currentSection, setCurrentSection] = useState(0);
   const { playMusic } = useContext(SoundContext);
   const blockScroll = useRef(false);
@@ -171,7 +177,11 @@ export default function Home() {
           <div className={styles.HomeRoot}>
             {Sections.map((section, index) =>
               !initDone && index == 0 ? (
+                GlobalLoadedOk ? (
                   <InitHero currentDialogID={currentDialogID} key={index} />
+                ) : (
+                  <LoadingScreen key={index} />
+                )
               ) : (
                 <div
                   className={styles.SectionContainer}
