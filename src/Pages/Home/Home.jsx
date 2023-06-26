@@ -167,33 +167,33 @@ export default function Home() {
               DialogID={currentDialogID}
               eventFinishedCallback={handleEventFinished}
             />
-          ) : (
+          ) : GlobalLoadedOk ? (
             <Navigation
               scrollTo={scrollTo}
               currentSectionIndex={currentSection}
               initDone={initDone}
             />
+          ) : (
+            <LoadingScreen />
           )}
           <div className={styles.HomeRoot}>
             {Sections.map((section, index) =>
               !initDone && index == 0 ? (
-                GlobalLoadedOk ? (
-                  <InitHero currentDialogID={currentDialogID} key={index} />
-                ) : (
-                  <LoadingScreen key={index} />
-                )
+                <InitHero currentDialogID={currentDialogID} key={index} />
               ) : (
-                <div
-                  className={styles.SectionContainer}
-                  id={section.title}
-                  key={section.title}
-                  style={{
-                    transform: `translateY(-${currentSection * 100}vh)`,
-                    transition: "transform 0.3s ease-in-out",
-                  }}
-                >
-                  {section.XML}
-                </div>
+                (GlobalLoadedOk || index != 0) && (
+                  <div
+                    className={styles.SectionContainer}
+                    id={section.title}
+                    key={section.title}
+                    style={{
+                      transform: `translateY(-${currentSection * 100}vh)`,
+                      transition: "transform 0.3s ease-in-out",
+                    }}
+                  >
+                    {section.XML}
+                  </div>
+                )
               )
             )}
           </div>
