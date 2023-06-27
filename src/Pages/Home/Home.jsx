@@ -12,34 +12,12 @@ import { SoundContext } from "../../Context/SoundContext";
 import DialogMain from "../../Components/Dialog/DialogMain";
 import InitHero from "./Hero/InitHero";
 import HorizontalEnjoyer from "../../Tools/HorizontalEnjoyer";
-import LoadingScreen from "../../Components/LoadingScreen";
 
 export const scrollContext = createContext();
-export const HomeLoadContext = createContext();
 
 export default function Home() {
   // Context variables (May be moved to a separate file if needed)
   const isScrollable = useRef(false);
-  const [HomeLoadOk, setHomeLoadOk] = useState(false);
-  const loadingObjectsSet = useRef(new Set(["initDialog"]));
-
-  const addLoadObj = (obj) => {
-    loadingObjectsSet.current.add(obj);
-  };
-
-  const markLoadObj = (obj) => {
-    loadingObjectsSet.current.delete(obj);
-    if (loadingObjectsSet.current.size == 0) {
-      onAllFilesLoaded();
-    }
-  };
-
-  const onAllFilesLoaded = () => {
-    setHomeLoadOk(true);
-    setTimeout(() => {
-      setInitDone(true);
-    }, 5000);
-  };
 
   const [currentSection, setCurrentSection] = useState(0);
   const { playMusic } = useContext(SoundContext);
@@ -63,7 +41,11 @@ export default function Home() {
   const handleEventFinished = () => {
     setCurrentDialogID(null);
     setScrollable(true);
-    markLoadObj("initDialog");
+    if (!initDone) {
+      setTimeout(() => {
+        setInitDone(true);
+      }, 5000);
+    }
   };
 
   const setScrollable = (value) => {
@@ -167,45 +149,41 @@ export default function Home() {
   }, [initDone]);
 
   return (
-    <HomeLoadContext.Provider value={{ addLoadObj, markLoadObj }}>
-      <scrollContext.Provider value={{ isScrollable }}>
-        <div className={styles.HomeScroller}>
-          <HorizontalEnjoyer />
-          {currentDialogID != null ? (
-            <DialogMain
-              DialogID={currentDialogID}
-              eventFinishedCallback={handleEventFinished}
-            />
-          ) : HomeLoadOk ? (
-            <Navigation
-              scrollTo={scrollTo}
-              currentSectionIndex={currentSection}
-              initDone={initDone}
-            />
-          ) : (
-            <LoadingScreen />
+    <scrollContext.Provider value={{ isScrollable }}>
+      <div className={styles.HomeScroller}>
+        <HorizontalEnjoyer />
+        {currentDialogID != null ? (
+          <DialogMain
+            DialogID={currentDialogID}
+            eventFinishedCallback={handleEventFinished}
+          />
+        ) : (
+          <Navigation
+            scrollTo={scrollTo}
+            currentSectionIndex={currentSection}
+            initDone={initDone}
+          />
+        )}
+        <div className={styles.HomeRoot}>
+          {Sections.map((section, index) =>
+            !initDone && index == 0 ? (
+              <InitHero currentDialogID={currentDialogID} key={index} />
+            ) : (
+              <div
+                className={styles.SectionContainer}
+                id={section.title}
+                key={section.title}
+                style={{
+                  transform: `translateY(-${currentSection * 100}vh)`,
+                  transition: "transform 0.3s ease-in-out",
+                }}
+              >
+                {section.XML}
+              </div>
+            )
           )}
-          <div className={styles.HomeRoot}>
-            {Sections.map((section, index) =>
-              !initDone && index == 0 ? (
-                <InitHero currentDialogID={currentDialogID} key={index} />
-              ) : (
-                <div
-                  className={styles.SectionContainer}
-                  id={section.title}
-                  key={section.title}
-                  style={{
-                    transform: `translateY(-${currentSection * 100}vh)`,
-                    transition: "transform 0.3s ease-in-out",
-                  }}
-                >
-                  {section.XML}
-                </div>
-              )
-            )}
-          </div>
         </div>
-      </scrollContext.Provider>
-    </HomeLoadContext.Provider>
+      </div>
+    </scrollContext.Provider>
   );
 }

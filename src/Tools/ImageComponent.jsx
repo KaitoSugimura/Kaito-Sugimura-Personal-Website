@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { HomeLoadContext } from "../Pages/Home/Home";
 
+//Scrapped
+
 const ImageComponent = ({ src, alt = "Image", style = null, className }) => {
   const { addLoadObj, markLoadObj } = useContext(HomeLoadContext);
 
