@@ -8,7 +8,7 @@ import MouseIcon from "/Tools/Mouse.svg";
 import { scrollContext } from "../Home";
 
 export default function Profile() {
-  const { isScrollable } = useContext(scrollContext);
+  const { setScrollable } = useContext(scrollContext);
   const nextZIndex = useRef(0);
   const [overlapID, setOverlapID] = useState(null);
   const getOverlapCoords = () => {
@@ -64,7 +64,7 @@ export default function Profile() {
   };
 
   const onDragEnd = (draggable, artifactID, hasSet) => {
-    isScrollable.current = true;
+    setScrollable(true);
     if (hasSet) {
       setFinishedFirstQuest(true);
     } else if (!finishedFirstQuest) {
@@ -83,7 +83,7 @@ export default function Profile() {
   };
 
   const onDragStart = (draggable, artifactID) => {
-    isScrollable.current = false;
+    setScrollable(false);
     setCurrentContent("About");
   };
 
@@ -178,7 +178,9 @@ export default function Profile() {
                 <p className={styles.artifactsText}>Experience</p>
               </div>
             </div>
-            <div className={`${styles.artifactTextCont} ${styles.achievements}`}>
+            <div
+              className={`${styles.artifactTextCont} ${styles.achievements}`}
+            >
               <div className={styles.pos}>
                 <span className={styles.artifactsNum}>03</span>
                 <p className={styles.artifactsText}>Achievements</p>

@@ -15,18 +15,31 @@ import HorizontalEnjoyer from "../../Tools/HorizontalEnjoyer";
 import LoadingScreen from "../../Components/LoadingScreen";
 
 export const scrollContext = createContext();
-export const LoadContext = createContext();
+export const HomeLoadContext = createContext();
 
 export default function Home() {
-  // Contexts (May be moved to a separate file if needed)
+  // Context variables (May be moved to a separate file if needed)
   const isScrollable = useRef(false);
-  const [GlobalLoadedOk, setGlobalLoadedOk] = useState(false);
+  const [HomeLoadOk, setHomeLoadOk] = useState(false);
+  const loadingObjectsSet = useRef(new Set());
 
-  useEffect(() => {
+  const addLoadObj = (obj) => {
+    loadingObjectsSet.current.add(obj);
+  };
+
+  const markLoadObj = (obj) => {
+    loadingObjectsSet.current.delete(obj);
+    if(loadingObjectsSet.current.size == 0) {
+      onAllFilesLoaded();
+    }
+  };
+
+  const onAllFilesLoaded = () => {
+    setHomeLoadOk(true);
     setTimeout(() => {
-      setGlobalLoadedOk(true);
-    }, 10000);
-  }, []);
+      setInitDone(true);
+    }, 5000);
+  };
 
   const [currentSection, setCurrentSection] = useState(0);
   const { playMusic } = useContext(SoundContext);
@@ -50,11 +63,6 @@ export default function Home() {
   const handleEventFinished = () => {
     setCurrentDialogID(null);
     setScrollable(true);
-    if (!initDone) {
-      setTimeout(() => {
-        setInitDone(true);
-      }, 15000);
-    }
   };
 
   const setScrollable = (value) => {
@@ -158,7 +166,7 @@ export default function Home() {
   }, [initDone]);
 
   return (
-    <LoadContext.Provider value={{ GlobalLoadedOk }}>
+    <HomeLoadContext.Provider value={{ addLoadObj, markLoadObj }}>
       <scrollContext.Provider value={{ isScrollable }}>
         <div className={styles.HomeScroller}>
           <HorizontalEnjoyer />
@@ -167,7 +175,7 @@ export default function Home() {
               DialogID={currentDialogID}
               eventFinishedCallback={handleEventFinished}
             />
-          ) : GlobalLoadedOk ? (
+          ) : HomeLoadOk ? (
             <Navigation
               scrollTo={scrollTo}
               currentSectionIndex={currentSection}
@@ -197,6 +205,6 @@ export default function Home() {
           </div>
         </div>
       </scrollContext.Provider>
-    </LoadContext.Provider>
+    </HomeLoadContext.Provider>
   );
 }
