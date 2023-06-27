@@ -26,18 +26,11 @@
 }
 
 /* Init */
-.commandPrompt{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+.backFilter{
+  width: 100%;
+  height: 100%;
 
   animation: init 5s forwards;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 @keyframes init {
