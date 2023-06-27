@@ -149,7 +149,7 @@ export default function Home() {
   }, [initDone]);
 
   return (
-    <scrollContext.Provider value={{ isScrollable }}>
+    <scrollContext.Provider value={{ setScrollable }}>
       <div className={styles.HomeScroller}>
         <HorizontalEnjoyer />
         {currentDialogID != null ? (

@@ -7,14 +7,31 @@ import PContents from "./ProfileContents";
 import MouseIcon from "/Tools/Mouse.svg";
 import { scrollContext } from "../Home";
 
+  // Input in units of vw
+  const VWtoPX = (width) => {
+    return width * window.innerWidth * 0.01;
+  };
+  // Input in units of vh
+  const VHtoPX = (height) => {
+    return height * window.innerHeight * 0.01;
+  };
+  // Input in units of px
+  const PXtoVW = (width) => {
+    return width / window.innerWidth * 100;
+  }
+  // Input in units of px
+  const PXtoVH = (height) => {
+    return height / window.innerHeight * 100;
+  }
+
 export default function Profile() {
   const { setScrollable } = useContext(scrollContext);
   const nextZIndex = useRef(0);
   const [overlapID, setOverlapID] = useState(null);
   const getOverlapCoords = () => {
     return {
-      x: window.innerWidth * (3 / 20),
-      y: window.innerHeight / 2,
+      x: VWtoPX(15),
+      y: VHtoPX(50),
     };
   };
   const [overlapCoords, setOverlapCoords] = useState(getOverlapCoords());
@@ -77,8 +94,8 @@ export default function Profile() {
     }
 
     PContents[artifactID].coords = {
-      x: draggable.offsetLeft,
-      y: draggable.offsetTop,
+      x: PXtoVW(draggable.offsetLeft),
+      y: PXtoVH(draggable.offsetTop),
     };
   };
 
@@ -240,7 +257,7 @@ export default function Profile() {
               width: `${
                 currentArtifactCoords
                   ? Math.abs(currentArtifactCoords.left - overlapCoords.x)
-                  : window.innerWidth / 2.2
+                  : window.innerWidth / 2.8
               }px`,
               transform: `rotate(${getDragRotation()}deg)`,
             }}

@@ -3,6 +3,23 @@ import styles from "./Draggable.module.css";
 import CornerBorder from "../Components/NavComponents/CornerBorder";
 import forms from "../Pages/Home/Profile/Forms";
 
+// Input in units of vw
+const VWtoPX = (width) => {
+  return width * window.innerWidth * 0.01;
+};
+// Input in units of vh
+const VHtoPX = (height) => {
+  return height * window.innerHeight * 0.01;
+};
+// Input in units of px
+const PXtoVW = (width) => {
+  return (width / window.innerWidth) * 100;
+};
+// Input in units of px
+const PXtoVH = (height) => {
+  return (height / window.innerHeight) * 100;
+};
+
 export default function Draggable({
   children,
   getNextZIndex,
@@ -139,10 +156,10 @@ export default function Draggable({
       style={{
         zIndex: thisZIndex,
         top: isArtifact
-          ? artifactStartingPos.y
+          ? VHtoPX(artifactStartingPos.y)
           : `${8 + spawnOffset.current * 2}%`,
         left: isArtifact
-          ? artifactStartingPos.x
+          ? VWtoPX(artifactStartingPos.x)
           : `${4 + spawnOffset.current}%`,
         // border: isDragging ? "2px solid #00ff00" : "2px solid #00000000",
       }}

@@ -14,8 +14,35 @@ export default function Hero() {
       setTimeout(() => {
         setBGVideoIsLoading(false); // In case the video is still loading after 8 seconds
       }, 8000);
-    }, 8500);
+    }, 10000);
   }, []);
+
+  const cmdTexts1 = [
+    "> Accessing sky terminal",
+    "> Updating policy...",
+    "> Computer policy update has completed successfully",
+    "> Executing command: 'ksp install'",
+    "> Starting package install...",
+  ];
+
+  const cmdTexts1Timings = [5, 5.4, 5.8, 5.9, 6];
+
+  const cmdTexts2 = [
+    `> Kaito 3.6.0 (default, ${new Date().toLocaleString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    })})`,
+    "> Successfully installed",
+    "> ",
+    "> Preparing...",
+  ];
+
+  const cmdTexts2Timings = [8, 8.1, 8.15, 8.2];
 
   return (
     <div className={styles.HeroRoot}>
@@ -24,6 +51,7 @@ export default function Hero() {
         <>
           {BGVideoIsLoading && <LoadingScreen />}
           <img src={coverPhoto} className={styles.coverPhoto}></img>
+
           <div className={styles.grid}>
             <video
               className={styles.backgroundVideo}
@@ -52,75 +80,111 @@ export default function Hero() {
             </p>
             <p className={styles.Authenticated}>Authenticated</p>
           </div>
+
+          <div className={styles.switchUser}>
+            <ul className={styles.UsersList}>
+              <li
+                className={`${styles.User} ${styles.UserNone}`}
+                style={{
+                  animationDelay: `1.8s`,
+                }}
+              >
+                None{" "}
+                <span
+                  style={{
+                    animationDelay: `1.8s`,
+                  }}
+                >
+                  {"< "}
+                </span>
+              </li>
+              <li
+                className={`${styles.User} ${styles.UserGuest}`}
+                style={{
+                  animationDelay: `1.8s`,
+                }}
+              >
+                Guest{" "}
+                <span
+                  style={{
+                    animationDelay: `1.8s`,
+                  }}
+                >
+                  {"< "}
+                </span>
+              </li>
+              <li
+                className={`${styles.User} ${styles.UserAdmin}`}
+                style={{
+                  animationDelay: `1.95s`,
+                }}
+              >
+                Admin{" "}
+                <span
+                  style={{
+                    animationDelay: `1.95s`,
+                  }}
+                >
+                  {"< "}
+                </span>
+              </li>
+            </ul>
+            <div className={styles.SignInCont}>
+              <div className={styles.SignInItem}>
+                USERNAME:
+                <div className={styles.InputTextWrapper}>
+                  <p className={`${styles.InputText} ${styles.InputTextUser}`}>
+                    Kaito Sugimura
+                  </p>
+                </div>
+              </div>
+              <div className={styles.SignInItem}>
+                PASSWORD:
+                <div className={styles.InputTextWrapper}>
+                  <p className={`${styles.InputText} ${styles.InputTextPass}`}>
+                    *********
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className={styles.commandPrompt}>
             <div className={styles.cmdT1}>
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "2.4s",
-                }}
-              >
-                {">"} net access sky terminal
-              </p>
-              <br />
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "2.6s",
-                }}
-              >
-                Access is denied.
-              </p>
-              <br />
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "3.2s",
-                }}
-              >
-                {">"} /force
-              </p>
-              <br />
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "3.3s",
-                }}
-              >
-                Updating policy...
-              </p>
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "3.8s",
-                }}
-              >
-                Computer policy update has completed successfully.
-              </p>
-              <br />
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "4.3s",
-                }}
-              >
-                {">"} Install 'Kaito Sugimura'
-              </p>
-              <br />
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "4.5s",
-                }}
-              >
-                Starting package install..
-              </p>
+              {cmdTexts1.map((text, index) => {
+                return (
+                  <div className={styles.cmdLineWrapper} key={index}>
+                    <p
+                      className={styles.cmdLine}
+                      style={{
+                        animation: `${styles.typing} 0.1s forwards ${cmdTexts1Timings[index]}s`,
+                      }}
+                    >
+                      {text}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
             <div className={styles.progressBar}>
               <div className={styles.progressFill}></div>
             </div>
             <div className={styles.cmdT2}>
-              <p
+              {cmdTexts2.map((text, index) => {
+                return (
+                  <div className={styles.cmdLineWrapper} key={index}>
+                    <p
+                      className={styles.cmdLine}
+                      style={{
+                        animation: `${styles.typing} 0.1s forwards ${cmdTexts2Timings[index]}s`,
+                      }}
+                    >
+                      {text}
+                    </p>
+                  </div>
+                );
+              })}
+              {/* <p
                 className={styles.cmdLine}
                 style={{
                   animationDelay: "6.2s",
@@ -153,7 +217,7 @@ export default function Hero() {
                 }}
               >
                 Replacing package...
-              </p>
+              </p> */}
             </div>
           </div>
         </>

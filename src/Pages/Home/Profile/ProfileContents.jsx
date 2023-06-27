@@ -15,8 +15,8 @@ export default {
     date: <>09/2020 — 04/2024</>,
     icon: "/Home/Icons/School.svg",
     coords: {
-      x: window.innerWidth / 1.75,
-      y: window.innerHeight / 4.3,
+      x: 57,
+      y: 25,
     },
     contents: {
       ["About"]: (
@@ -121,8 +121,8 @@ export default {
     date: <>09/2020 — now</>,
     icon: "/Home/Icons/SelfStudy.svg",
     coords: {
-      x: window.innerWidth / 1.36,
-      y: window.innerHeight / 4.3,
+      x: 73.5,
+      y: 25,
     },
     contents: {
       ["About"]: (
@@ -207,8 +207,8 @@ export default {
     date: <></>,
     icon: "/Home/Icons/BriefCase.svg",
     coords: {
-      x: window.innerWidth / 1.75,
-      y: window.innerHeight / 1.88,
+      x: 57,
+      y: 55,
     },
     contents: {
       ["About"]: (
@@ -257,8 +257,8 @@ export default {
     date: <>09/2020 — 04/2024</>,
     icon: "/Home/Icons/Trophy.svg",
     coords: {
-      x: window.innerWidth / 1.36,
-      y: window.innerHeight / 1.88,
+      x: 73.5,
+      y: 55,
     },
     contents: {
       ["About"]: <About
