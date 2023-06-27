@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { HomeLoadContext } from "../Pages/Home/Home";
 
-const ImageComponent = ({ src, alt = "Image", style = null }) => {
+const ImageComponent = ({ src, alt = "Image", style = null, className }) => {
   const { addLoadObj, markLoadObj } = useContext(HomeLoadContext);
 
   useEffect(() => {
@@ -12,6 +12,7 @@ const ImageComponent = ({ src, alt = "Image", style = null }) => {
     <img
       src={src}
       alt={alt}
+      className={className}
       style={style}
       onDragStart={(e) => {
         e.preventDefault();

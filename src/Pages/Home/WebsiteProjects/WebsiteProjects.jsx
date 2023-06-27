@@ -5,6 +5,7 @@ import SectionContainer from "../../../Components/SectionContainer";
 import SelectedView from "./Window/SelectedView";
 import FrameOverlay from "./Window/FrameOverlay";
 import { SoundContext } from "../../../Context/SoundContext";
+import ImageComponent from "../../../Tools/ImageComponent";
 
 export default function WebsiteProjects() {
   const { playSFX } = useContext(SoundContext);
@@ -253,13 +254,14 @@ export default function WebsiteProjects() {
                             )}
                           </>
                         )}
-                        <img
+                        {/* <img
                           className={styles.frameImage}
                           src={`/Home/WebsiteProjects/${content.imageFileName}`}
                           onDragStart={(e) => {
                             e.preventDefault();
                           }}
-                        />
+                        /> */}
+                        <ImageComponent src={`/Home/WebsiteProjects/${content.imageFileName}`} className={styles.frameImage}/>
                       </div>
                     </div>
                   </div>

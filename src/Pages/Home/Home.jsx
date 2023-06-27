@@ -21,7 +21,7 @@ export default function Home() {
   // Context variables (May be moved to a separate file if needed)
   const isScrollable = useRef(false);
   const [HomeLoadOk, setHomeLoadOk] = useState(false);
-  const loadingObjectsSet = useRef(new Set());
+  const loadingObjectsSet = useRef(new Set(["initDialog"]));
 
   const addLoadObj = (obj) => {
     loadingObjectsSet.current.add(obj);
@@ -29,7 +29,7 @@ export default function Home() {
 
   const markLoadObj = (obj) => {
     loadingObjectsSet.current.delete(obj);
-    if(loadingObjectsSet.current.size == 0) {
+    if (loadingObjectsSet.current.size == 0) {
       onAllFilesLoaded();
     }
   };
@@ -63,6 +63,7 @@ export default function Home() {
   const handleEventFinished = () => {
     setCurrentDialogID(null);
     setScrollable(true);
+    markLoadObj("initDialog");
   };
 
   const setScrollable = (value) => {
