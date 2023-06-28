@@ -25,9 +25,7 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
       >
         <CornerBorder style={BorderStyle} />
         {!navIsOpen && (
-          <div
-            className={`${styles.cameraUIMainContainer}`}
-          >
+          <div className={`${styles.cameraUIMainContainer}`}>
             <div
               className={`${styles.MainSection} ${
                 initDone ? styles.MainSectionDefault : styles.MainSectionAnim
@@ -51,6 +49,50 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
             </p>
           )}
         </div>
+        {initDone && (
+          <div className={styles.SSList}>
+            <a
+              className={styles.SSItem}
+              href="https://www.youtube.com/@sugimurakaito"
+              target="_blank"
+            >
+              <img
+                src="/Home/Icons/SS/Youtube.svg"
+                className={styles.SSImage}
+                onDrag={(e) => {
+                  e.preventDefault();
+                }}
+              />
+            </a>
+            <a
+              className={styles.SSItem}
+              href="https://github.com/KaitoSugimura"
+              target="_blank"
+            >
+              <img
+                src="/Home/Icons/SS/Github.svg"
+                className={styles.SSImage}
+                onDrag={(e) => {
+                  e.preventDefault();
+                }}
+              />
+            </a>
+
+            <a
+              className={styles.SSItem}
+              href="https://www.linkedin.com/in/kaito-sugimura-622209226/"
+              target="_blank"
+            >
+              <img
+                src="/Home/Icons/SS/Linkedin.svg"
+                className={styles.SSImage}
+                onDrag={(e) => {
+                  e.preventDefault();
+                }}
+              />
+            </a>
+          </div>
+        )}
         <div className={styles.cameraUIBottomLeftContainer}>
           {initDone ? (
             <>

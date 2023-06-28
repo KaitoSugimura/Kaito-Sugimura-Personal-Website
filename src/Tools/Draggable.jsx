@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styles from "./Draggable.module.css";
 import CornerBorder from "../Components/NavComponents/CornerBorder";
 import forms from "../Pages/Home/Profile/Forms";
+import { SoundContext } from "../Context/SoundContext";
 
 // Input in units of vw
 const VWtoPX = (width) => {
@@ -35,6 +36,7 @@ export default function Draggable({
   onDragEnd = (doNothing, dn, d) => {},
   onDragStart = (doNothing, dn) => {},
 }) {
+  const {playSFX} = useContext(SoundContext);
   const initialPos = useRef({ x: 0, y: 0 });
   const initialContPos = useRef({ x: 0, y: 0 });
   const spawnOffset = useRef(getSetSpawnOffset(-1));
@@ -102,6 +104,7 @@ export default function Draggable({
     });
     setIsDragging(true);
     onDragStart(dragRootRef.current, artifactID);
+    playSFX("artifactPickup");
   };
 
   const handleMouseUp = (event) => {
@@ -130,6 +133,7 @@ export default function Draggable({
       // Dropped artifact
       setOverlapID((prev) => {
         if (prev === null) {
+          playSFX("EquipArtifact");
           dragRef.style.left = `${centerCoords.x - dragRef.offsetWidth / 2}px`;
           dragRef.style.top = `${centerCoords.y - dragRef.offsetHeight / 2}px`;
           // setOpenForms((prev) => {
@@ -144,6 +148,7 @@ export default function Draggable({
       onDragEnd(dragRootRef.current, artifactID, false);
     }
     setIsDragging(false);
+    playSFX("artifactDrop");
   };
 
   return (

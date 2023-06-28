@@ -72,8 +72,8 @@ export default function WebsiteProjects() {
     if (canToggleSelectedView.current) {
       canToggleSelectedView.current = false;
       setSelectedView((prev) => {
-        if (!prev) playSFX("PaperFlip");
-        else playSFX("Spray");
+        if (!prev) playSFX("MetalClick");
+        else playSFX("BackClick");
         return !prev;
       });
       setTimeout(() => {

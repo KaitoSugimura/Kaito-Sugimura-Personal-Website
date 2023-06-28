@@ -241,3 +241,38 @@
     opacity: 1;
   }
 }
+
+
+.SSList{
+  filter: invert(1);
+  position: absolute;
+  top: 7vmin;
+  right: 3vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+
+  opacity: 0.75;
+}
+
+.SSItem{
+  width: 3vh;
+  height: 3vh; 
+
+  -moz-user-select: -moz-all;
+  -khtml-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+  pointer-events: all;
+
+  cursor: pointer;
+}
+
+.SSImage{
+  width: 100%;
+  height: 100%;
+
+}

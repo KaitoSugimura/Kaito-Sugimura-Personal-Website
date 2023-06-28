@@ -6,25 +6,27 @@ import forms from "./Forms";
 import PContents from "./ProfileContents";
 import MouseIcon from "/Tools/Mouse.svg";
 import { scrollContext } from "../Home";
+import { SoundContext } from "../../../Context/SoundContext";
 
-  // Input in units of vw
-  const VWtoPX = (width) => {
-    return width * window.innerWidth * 0.01;
-  };
-  // Input in units of vh
-  const VHtoPX = (height) => {
-    return height * window.innerHeight * 0.01;
-  };
-  // Input in units of px
-  const PXtoVW = (width) => {
-    return width / window.innerWidth * 100;
-  }
-  // Input in units of px
-  const PXtoVH = (height) => {
-    return height / window.innerHeight * 100;
-  }
+// Input in units of vw
+const VWtoPX = (width) => {
+  return width * window.innerWidth * 0.01;
+};
+// Input in units of vh
+const VHtoPX = (height) => {
+  return height * window.innerHeight * 0.01;
+};
+// Input in units of px
+const PXtoVW = (width) => {
+  return (width / window.innerWidth) * 100;
+};
+// Input in units of px
+const PXtoVH = (height) => {
+  return (height / window.innerHeight) * 100;
+};
 
 export default function Profile() {
+  const { playSFX } = useContext(SoundContext);
   const { setScrollable } = useContext(scrollContext);
   const nextZIndex = useRef(0);
   const [overlapID, setOverlapID] = useState(null);
@@ -146,7 +148,13 @@ export default function Profile() {
                         content[0] == currentContent && styles.selected
                       }`}
                       onClick={() => {
-                        setCurrentContent(content[0]);
+                        setCurrentContent((prev) => {
+                          if (prev != content[0]) {
+                            playSFX("ProfileClick");
+                            return content[0];
+                          }
+                          return prev;
+                        });
                       }}
                       key={index}
                     >

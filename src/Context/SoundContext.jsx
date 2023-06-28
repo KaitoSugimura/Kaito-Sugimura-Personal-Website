@@ -1,12 +1,19 @@
 import { createContext, useEffect, useRef, useState } from "react";
-import DialogClick from "/Dialog/Sound/DialogClick.wav";
+// Music
 import defaultBGM from "/Dialog/Music/Anima_Circulation.mp3";
 import profileBGM from "/Dialog/Music/Flutter.mp3";
 import projectsBGM from "/Dialog/Music/Bouquet.mp3";
+import WarmLoopBGM from "/Dialog/Music/WarmLoop.wav";
+// Sound
+import DialogClick from "/Dialog/Sound/DialogClick.wav";
 import ButtonClick from "/Dialog/Sound/click-button.mp3";
-import PaperFlip from "/Dialog/Sound/page-flipping-foley-sound.mp3";
+import MetalClick from "/Dialog/Sound/MetalClick.wav";
 import MenuOpen from "/Dialog/Sound/interface-soft-abbreviated-click.mp3";
-import Spray from "/Dialog/Sound/the-aerosol-spray.mp3";
+import BackClick from "/Dialog/Sound/BackClick.wav";
+import EquipArtifact from "/Dialog/Sound/EquipArtifact.wav";
+import artifactPickup from "/Dialog/Sound/ArtifactPickup.wav";
+import artifactDrop from "/Dialog/Sound/ArtifactDrop.wav";
+import ProfileClick from "/Dialog/Sound/ProfileClick.wav";
 
 export const SoundContext = createContext();
 
@@ -35,14 +42,26 @@ export const SoundContextProvider = ({ children }) => {
       case "ButtonClick":
         playPath = ButtonClick;
         break;
-      case "PaperFlip":
-        playPath = PaperFlip;
+      case "MetalClick":
+        playPath = MetalClick;
         break;
       case "MenuOpen":
         playPath = MenuOpen;
         break;
-      case "Spray":
-        playPath = Spray;
+      case "BackClick":
+        playPath = BackClick;
+        break;
+      case "EquipArtifact":
+        playPath = EquipArtifact;
+        break;
+      case "artifactPickup":
+        playPath = artifactPickup;
+        break;
+      case "artifactDrop":
+        playPath = artifactDrop;
+        break;
+      case "ProfileClick":
+        playPath = ProfileClick;
         break;
     }
     if (playPath == null) {
@@ -72,6 +91,9 @@ export const SoundContextProvider = ({ children }) => {
         break;
       case "projects":
         audioRef.current.src = projectsBGM;
+        break;
+      case "warmLoop":
+        audioRef.current.src = WarmLoopBGM;
         break;
     }
 

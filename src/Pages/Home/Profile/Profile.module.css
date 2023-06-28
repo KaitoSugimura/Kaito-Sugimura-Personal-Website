@@ -10,38 +10,43 @@
   --AchievementsColor: #ba9a32b7;
 }
 
-.education{
+.education {
   background-color: var(--EducationColor);
 }
 
-.selfStudy{
+.selfStudy {
   background-color: var(--SelfStudyColor);
 }
 
-.experience{
+.experience {
   background-color: var(--ExperienceColor);
 }
 
-.achievements{
+.achievements {
   background-color: var(--AchievementsColor);
 }
 
 .UofCItemRoot {
   border: none;
-  border: 1px solid white;
-  height: 8.5vw;
-  width: 8.5vw;
+  border: 0.6vw solid white;
+  height: 7.5vw;
+  width: 7.5vw;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  box-shadow: -0.6vw 0.8vw 0.5vw rgba(0, 0, 0, 0.354);
 }
 
 .UofCLogoImage {
-  height: 7.5vw;
-  width: 7.5vw;
+  height: 8.5vw;
+  width: 8.5vw;
   border: none;
   opacity: 0.95;
+  margin: 1.75vw 0 0 1.75vw;
+
+  z-index: 100;
 
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -84,7 +89,7 @@
     var(--EducationColor) 10%,
     #ff000000 75%
   );
-  animation: ripple 1s ease-in forwards;
+  animation: ripple 0.8s ease-in forwards;
   z-index: -1;
 }
 
@@ -160,7 +165,6 @@
   align-items: center;
 
   color: white;
-  
 }
 
 .title {
