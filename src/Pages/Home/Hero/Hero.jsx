@@ -1,12 +1,34 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Hero.module.css";
 import BGVideo from "/Backgrounds/HeroBGVideo.mp4";
 import LoadingScreen from "../../../Components/LoadingScreen";
 import coverPhoto from "/Dialog/Pictures/Cover.png";
+import { SoundContext } from "../../../Context/SoundContext";
+
 
 export default function Hero() {
+  const {playSFX} = useContext(SoundContext);
   const [UserAuthenticated, setUserAuthenticated] = useState(false);
   const [BGVideoIsLoading, setBGVideoIsLoading] = useState(true);
+
+  const CmdRef = useRef(null);
+  const animation = document.querySelector(styles.commandPrompt);
+
+    useEffect(()=>{
+      const CMDAnimPlayHandle = (e) => {
+        if(e.animationName === styles.typing){
+          playSFX("BackClick")
+        }
+        console.log(e.animationName)
+      }
+  
+      if(CmdRef.current){
+        console.log("cmd ref exists")
+        CmdRef.current.addEventListener('animationstart', CMDAnimPlayHandle);
+      }
+
+      return () => {CmdRef.current.removeEventListener('animationstart', CMDAnimPlayHandle);}
+    }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -89,7 +111,7 @@ export default function Hero() {
                   animationDelay: `1.8s`,
                 }}
               >
-                None{" "}
+                None
                 <span
                   style={{
                     animationDelay: `1.8s`,
@@ -149,7 +171,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className={styles.commandPrompt}>
+          <div className={styles.commandPrompt} ref={CmdRef}>
             <div className={styles.cmdT1}>
               {cmdTexts1.map((text, index) => {
                 return (
