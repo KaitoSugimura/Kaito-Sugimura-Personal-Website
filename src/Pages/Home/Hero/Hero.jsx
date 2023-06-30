@@ -11,23 +11,63 @@ export default function Hero() {
   const [UserAuthenticated, setUserAuthenticated] = useState(false);
   const [BGVideoIsLoading, setBGVideoIsLoading] = useState(true);
 
-  const CmdRef = useRef(null);
+  const RootRef = useRef(null);
   const animation = document.querySelector(styles.commandPrompt);
 
+const nextTimelineIndex = useRef(1);
+
+const setNextTimeout = () =>{
+  if(animTimeline[nextTimelineIndex.current])
+  setTimeout(animTimeline[nextTimelineIndex.current][0],animTimeline[nextTimelineIndex.current][1] )
+  nextTimelineIndex.current += 1;
+}
+
+  const AuthOpen = () =>{
+    console.log("Auth openned")
+    playSFX("MetalClick")
+    setNextTimeout();
+  }
+
+  const SelectUser = () => {
+    console.log("Select user")
+    playSFX("EquipArtifact")
+    setNextTimeout();
+  }
+
+  const animTimeline = [
+    [AuthOpen, 0],
+    [SelectUser, 1200]
+  ]
+
     useEffect(()=>{
-      const CMDAnimPlayHandle = (e) => {
-        if(e.animationName === styles.typing){
-          playSFX("BackClick")
+      const AnimPlayHandle = (e) => {
+        switch(e.animationName){
+          case styles.typing:
+            playSFX("BackClick");
+            break;
+          case styles.open:
+            // playSFX("MenuOpen");
+            break;
+          case styles.fill:
+            playSFX(null)
+            break;
+          case styles.typingInput:
+            playSFX("Typing");
+            break;
+          case styles.select:
+            playSFX("MetalClick")
+            break;
+
         }
-        console.log(e.animationName)
-      }
-  
-      if(CmdRef.current){
-        console.log("cmd ref exists")
-        CmdRef.current.addEventListener('animationstart', CMDAnimPlayHandle);
       }
 
-      return () => {CmdRef.current.removeEventListener('animationstart', CMDAnimPlayHandle);}
+      AuthOpen();
+  
+      if(RootRef.current){
+        RootRef.current.addEventListener('animationstart', AnimPlayHandle);
+      }
+
+      return () => {RootRef.current.removeEventListener('animationstart', AnimPlayHandle);}
     }, []);
 
   useEffect(() => {
@@ -92,7 +132,7 @@ export default function Hero() {
           </p>
         </>
       ) : (
-        <>
+        <div ref={RootRef}>
           <div className={styles.backgroundImage}></div>
           <div className={styles.Warning}></div>
           {/* Seperated to make things stable */}
@@ -171,7 +211,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className={styles.commandPrompt} ref={CmdRef}>
+          <div className={styles.commandPrompt}>
             <div className={styles.cmdT1}>
               {cmdTexts1.map((text, index) => {
                 return (
@@ -242,7 +282,7 @@ export default function Hero() {
               </p> */}
             </div>
           </div>
-        </>
+        </div >
       )}
     </div>
   );
