@@ -15,6 +15,7 @@ import artifactPickup from "/Dialog/Sound/ArtifactPickup.wav";
 import artifactDrop from "/Dialog/Sound/ArtifactDrop.wav";
 import ProfileClick from "/Dialog/Sound/ProfileClick.wav";
 import Typing from "/Dialog/Sound/UI/Typing.wav";
+import BarFill from "/Dialog/Sound/UI/BarFill.wav";
 
 export const SoundContext = createContext();
 
@@ -64,8 +65,11 @@ export const SoundContextProvider = ({ children }) => {
       case "ProfileClick":
         playPath = ProfileClick;
         break;
-        case "Typing":
+      case "Typing":
         playPath = Typing;
+        break;
+      case "BarFill":
+        playPath = BarFill;
         break;
     }
     if (playPath == null) {

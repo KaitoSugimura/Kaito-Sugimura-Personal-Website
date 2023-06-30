@@ -16,6 +16,8 @@ export default function Hero() {
 
 const nextTimelineIndex = useRef(1);
 
+
+
 const setNextTimeout = () =>{
   if(animTimeline[nextTimelineIndex.current])
   setTimeout(animTimeline[nextTimelineIndex.current][0],animTimeline[nextTimelineIndex.current][1] )
@@ -24,20 +26,20 @@ const setNextTimeout = () =>{
 
   const AuthOpen = () =>{
     console.log("Auth openned")
-    playSFX("MetalClick")
+    // playSFX("MetalClick")
     setNextTimeout();
   }
 
   const SelectUser = () => {
     console.log("Select user")
-    playSFX("EquipArtifact")
+    // playSFX("EquipArtifact")
     setNextTimeout();
   }
-
   const animTimeline = [
     [AuthOpen, 0],
     [SelectUser, 1200]
   ]
+
 
     useEffect(()=>{
       const AnimPlayHandle = (e) => {
@@ -46,10 +48,13 @@ const setNextTimeout = () =>{
             playSFX("BackClick");
             break;
           case styles.open:
-            // playSFX("MenuOpen");
+            playSFX("MenuOpen");
+            break;
+          case styles.warningInit:
+            playSFX("MenuOpen");
             break;
           case styles.fill:
-            playSFX(null)
+            playSFX("NewUser")
             break;
           case styles.typingInput:
             playSFX("Typing");
