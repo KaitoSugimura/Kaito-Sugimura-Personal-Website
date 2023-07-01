@@ -18,19 +18,24 @@ export default function Hero() {
         playSFX("BackClick");
         break;
       case styles.open:
-        playSFX("MenuOpen");
+        playSFX("AuthOpen");
         break;
       case styles.warningInit:
-        playSFX("MenuOpen");
+        playSFX("WarningInit");
         break;
-      case styles.fill:
-        playSFX("NewUser");
+      case styles.select:
+        playSFX("Select");
+        break;
+      case styles.authenticated:
+        playSFX("Welcome");
         break;
       case styles.typingInput:
         playSFX("Typing");
         break;
-      case styles.select:
-        playSFX("MetalClick");
+      case styles.barFill:
+        playSFX("BarFill");
+        break;
+      default:
         break;
     }
   };
@@ -48,11 +53,11 @@ export default function Hero() {
   useEffect(() => {
     setTimeout(() => {
       setUserAuthenticated(true);
-      // RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
+      RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
       setTimeout(() => {
         setBGVideoIsLoading(false); // In case the video is still loading after 8 seconds
       }, 8000);
-    }, 10000);
+    }, 9500);
   }, []);
 
   const cmdTexts1 = [

@@ -22,6 +22,7 @@ html {
   color: #1c1e21;
   direction: ltr;
   line-height: 1.34;
+  height: -webkit-fill-available;
 }
 
 img {
@@ -42,6 +43,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  height: -webkit-fill-available;
 }
 
 code {

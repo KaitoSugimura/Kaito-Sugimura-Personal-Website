@@ -225,13 +225,13 @@
 
 .progressFill {
   background-color: white;
-  animation: fill 1.2s forwards;
+  animation: barFill 1.2s forwards;
   animation-delay: 6.6s;
   width: 0%;
   height: 100%;
 }
 
-@keyframes fill {
+@keyframes barFill {
   0% {
     width: 0%;
   }
@@ -495,6 +495,7 @@
     background-color: white;
   }
 }
+
 
 @keyframes removeText {
   0% {

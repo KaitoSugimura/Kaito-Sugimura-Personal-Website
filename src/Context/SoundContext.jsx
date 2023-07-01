@@ -16,6 +16,12 @@ import artifactDrop from "/Dialog/Sound/ArtifactDrop.wav";
 import ProfileClick from "/Dialog/Sound/ProfileClick.wav";
 import Typing from "/Dialog/Sound/UI/Typing.wav";
 import BarFill from "/Dialog/Sound/UI/BarFill.wav";
+import AuthOpen from "/Dialog/Sound/UI/AuthOpen.wav";
+import Authenticated from "/Dialog/Sound/UI/Authenticated.wav";
+import WarningInit from "/Dialog/Sound/UI/WarningInit.wav";
+import Welcome from "/Dialog/Sound/UI/Welcome.wav";
+import Select from "/Dialog/Sound/UI/Select.wav";
+import SelectConfirm from "/Dialog/Sound/UI/SelectConfirm.wav";
 
 const soundList = {
   DialogClick: DialogClick,
@@ -29,6 +35,12 @@ const soundList = {
   ProfileClick: ProfileClick,
   Typing: Typing,
   BarFill: BarFill,
+  Authenticated: Authenticated,
+  WarningInit: WarningInit,
+  Welcome: Welcome,
+  Select: Select,
+  SelectConfirm: SelectConfirm,
+  AuthOpen: AuthOpen,
 };
 
 export const SoundContext = createContext();
