@@ -140,7 +140,7 @@ export default function Home() {
     };
 
     window.addEventListener("wheel", handleScroll);
-    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
     window.addEventListener("touchstart", handleTouchStart);
 
     return () => {
