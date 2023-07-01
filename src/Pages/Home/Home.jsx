@@ -150,7 +150,12 @@ export default function Home() {
 
   return (
     <scrollContext.Provider value={{ setScrollable }}>
-      <div className={styles.HomeScroller}>
+      <div
+        className={styles.HomeScroller}
+        style={{
+          height: `${window.innerHeight}px`,
+        }}
+      >
         <HorizontalEnjoyer />
         {currentDialogID != null ? (
           <DialogMain

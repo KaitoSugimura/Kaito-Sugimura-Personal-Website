@@ -1,8 +1,10 @@
 .HomeScroller {
   overflow: hidden;
   width: 100vw;
-  height: 100vh;
+ /* Height set in js */
   z-index: 0;
+
+  overscroll-behavior: contain;
 }
 
 .HomeRoot {
