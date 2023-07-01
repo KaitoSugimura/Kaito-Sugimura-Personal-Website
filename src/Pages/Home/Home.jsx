@@ -99,6 +99,7 @@ export default function Home() {
     };
 
     const handleTouchMove = (event) => {
+      event.preventDefault();
       const touch = event.touches[0];
       const currentY = touch.pageY;
       const currentTime = Date.now();
