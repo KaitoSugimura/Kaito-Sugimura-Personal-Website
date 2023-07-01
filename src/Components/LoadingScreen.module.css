@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   background-color: black;
   z-index: 1000;
@@ -52,10 +52,10 @@
 }
 
 @keyframes slimeAnim {
-    0% {
-      left: -5vw;
-    }
-    100% {
-        left: 100vw;
-    }
+  0% {
+    left: -5vw;
   }
+  100% {
+    left: 100vw;
+  }
+}

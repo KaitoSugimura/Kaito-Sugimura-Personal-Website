@@ -88,7 +88,12 @@ export default function Hero() {
   const cmdTexts2Timings = [8, 8.1, 8.15, 8.2];
 
   return (
-    <div className={styles.HeroRoot}>
+    <div
+      className={styles.HeroRoot}
+      style={{
+        height: `${window.innerHeight}px`,
+      }}
+    >
       <div className={styles.blackBackground}></div>
       {UserAuthenticated ? (
         <>

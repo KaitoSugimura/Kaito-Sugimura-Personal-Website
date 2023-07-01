@@ -1,6 +1,6 @@
 .sideButtonsRoot {
   position: fixed;
-  height: 100vh;
+  height: 100%;
   top: 0;
   right: calc(5vmin - 1rem);
   z-index: 9;

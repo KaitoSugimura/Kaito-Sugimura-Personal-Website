@@ -9,7 +9,6 @@ export default function HorizontalEnjoyer() {
   useEffect(() => {
     const resizeHandle = () => {
       setIsVertical(window.innerWidth < window.innerHeight);
-      documenmt.body.style.height = `${window.innerHeight}px`;
     };
 
     window.addEventListener("resize", resizeHandle);

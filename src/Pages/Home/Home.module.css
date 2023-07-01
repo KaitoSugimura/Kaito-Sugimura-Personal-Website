@@ -1,15 +1,16 @@
 .HomeScroller {
   overflow: hidden;
   width: 100vw;
- /* Height set in js */
+  /* Height set in js */
   z-index: 0;
+
 
   overscroll-behavior: contain;
 }
 
 .HomeRoot {
   overflow-x: hidden;
-  font-weight: 300;
+  font-weight: 300; 
   font-family: "Nunito Sans", sans-serif;
   z-index: 0;
 }

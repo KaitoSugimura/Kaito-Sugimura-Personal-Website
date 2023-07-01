@@ -179,7 +179,7 @@ export default function Home() {
                 id={section.title}
                 key={section.title}
                 style={{
-                  transform: `translateY(-${currentSection * 100}vh)`,
+                  transform: `translateY(-${currentSection * window.innerHeight}px)`,
                   transition: "transform 0.3s ease-in-out",
                 }}
               >

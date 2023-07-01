@@ -1,7 +1,7 @@
 .ButtonsContainer {
   position: fixed;
   /* width: 30vw; */
-  height: 100vh;
+  height: 100%;
   top: 0;
   left: 1.5vmin;
   z-index: 102;

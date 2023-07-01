@@ -1,7 +1,7 @@
 .DialogRoot {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   top: 0;
   left: 0;
   z-index: 100;
@@ -39,7 +39,7 @@
   pointer-events: all;
 }
 
-.SkipContainer span{
+.SkipContainer span {
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
@@ -58,7 +58,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   -moz-user-select: -moz-all;
   -khtml-user-select: all;
   -webkit-user-select: all;
@@ -131,7 +131,7 @@
   }
 }
 
-.DialogImage{
+.DialogImage {
   position: absolute;
   bottom: 0;
   right: 5%;
@@ -143,5 +143,4 @@
   z-index: -1;
 
   opacity: 0.8;
-
 }

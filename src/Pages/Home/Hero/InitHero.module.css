@@ -1,7 +1,7 @@
 .HeroRoot {
   position: relative;
   width: 100vw;
-  height: 100vh;
+ /* Height defined in js */
 
   overflow: hidden;
 
@@ -15,7 +15,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-image: url("/Backgrounds/Sphere.jpg");
   border: none;
 

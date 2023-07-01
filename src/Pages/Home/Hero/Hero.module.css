@@ -1,7 +1,7 @@
 .HeroRoot {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  /* Height defined in js */
 
   overflow: hidden;
 
@@ -48,7 +48,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   background-color: black;
   z-index: -11;
@@ -59,7 +59,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-image: url("/Backgrounds/Sphere.jpg");
   border: none;
 
@@ -74,7 +74,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   z-index: -10;
 }
 
@@ -91,7 +91,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   z-index: 1000;
 
   background-image: url("/Grid.png");
@@ -495,7 +495,6 @@
     background-color: white;
   }
 }
-
 
 @keyframes removeText {
   0% {
