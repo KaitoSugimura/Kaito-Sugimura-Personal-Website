@@ -255,7 +255,7 @@ export default function WebsiteProjects() {
                         )}
                         <img
                           className={styles.frameImage}
-                          src={`/Home/WebsiteProjects/${content.imageFileName}`}
+                          src={content.imageMain}
                           onDragStart={(e) => {
                             e.preventDefault();
                           }}

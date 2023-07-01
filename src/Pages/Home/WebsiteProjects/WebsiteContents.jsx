@@ -1,5 +1,45 @@
-// Main Image file must be put in /public/Home/WebsiteProjects/
-// Extra images file must be put in /public/Home/WebsiteProjects/Extra
+// Main Images
+import ImSlimeMainImage from "/Home/WebsiteProjects/ImSlimeMain.jpg";
+import CoinDozerMainImage from "/Home/WebsiteProjects/CoinDozerGame.jpg";
+import KaitoWebsite2MainImage from "/Home/WebsiteProjects/KaitoWebsite2.jpg";
+import ImmortalMainImage from "/Home/WebsiteProjects/Immortal.jpg";
+import NoLongerMeMainImage from "/Home/WebsiteProjects/NoLongerMe.webp";
+import PythonBasicsMainImage from "/Home/WebsiteProjects/HackYourLearningMain.jpg";
+import BlenderMainImage from "/Home/WebsiteProjects/Blender.jpg";
+import BruhGameMainImage from "/Home/WebsiteProjects/BruhGame.jpg";
+import ScuffedRPGAdventuresMainImage from "/Home/WebsiteProjects/ScuffedRPGAdventures.jpg";
+import KaitoWebsiteMainImage from "/Home/WebsiteProjects/KaitoWebsite.jpg";
+// Sub Images
+import ImSlimeE1 from "/Home/WebsiteProjects/Extra/ImSlimeE1.jpg";
+import ImSlimeE2 from "/Home/WebsiteProjects/Extra/ImSlimeE2.jpg";
+import ImSlimeE3 from "/Home/WebsiteProjects/Extra/ImSlimeE3.jpg";
+import CoinDozerGameE1 from "/Home/WebsiteProjects/Extra/CoinDozerGameE1.jpg";
+import CoinDozerGameE2 from "/Home/WebsiteProjects/Extra/CoinDozerGameE2.jpg";
+import CoinDozerGameE3 from "/Home/WebsiteProjects/Extra/CoinDozerGameE3.jpg";
+import KaitoWebsite2E1 from "/Home/WebsiteProjects/Extra/KaitoWebsite2E1.jpg";
+import KaitoWebsite2E2 from "/Home/WebsiteProjects/Extra/KaitoWebsite2E2.jpg";
+import KaitoWebsite2E3 from "/Home/WebsiteProjects/Extra/KaitoWebsite2E3.jpg";
+import ImmortalE1 from "/Home/WebsiteProjects/Extra/ImmortalE1.jpg";
+import ImmortalE2 from "/Home/WebsiteProjects/Extra/ImmortalE2.jpg";
+import ImmortalE3 from "/Home/WebsiteProjects/Extra/ImmortalE3.jpg";
+import NoLongerMeE1 from "/Home/WebsiteProjects/Extra/NoLongerMeE1.jpg";
+import NoLongerMeE2 from "/Home/WebsiteProjects/Extra/NoLongerMeE2.jpg";
+import NoLongerMeE3 from "/Home/WebsiteProjects/Extra/NoLongerMeE3.jpg";
+import PythonBasicsE1 from "/Home/WebsiteProjects/Extra/PythonBasicsE1.jpg";
+import PythonBasicsE2 from "/Home/WebsiteProjects/Extra/PythonBasicsE2.jpg";
+import PythonBasicsE3 from "/Home/WebsiteProjects/Extra/PythonBasicsE3.jpg";
+import BlenderE1 from "/Home/WebsiteProjects/Extra/BlenderE1.jpg";
+import BlenderE2 from "/Home/WebsiteProjects/Extra/BlenderE2.jpg";
+import BlenderE3 from "/Home/WebsiteProjects/Extra/BlenderE3.jpg";
+import BruhGameE1 from "/Home/WebsiteProjects/Extra/BruhGameE1.jpg";
+import BruhGameE2 from "/Home/WebsiteProjects/Extra/BruhGameE2.jpg";
+import BruhGameE3 from "/Home/WebsiteProjects/Extra/BruhGameE3.jpg";
+import ScuffedRPGAdventuresE1 from "/Home/WebsiteProjects/Extra/ScuffedRPGAdventuresE1.jpg";
+import ScuffedRPGAdventuresE2 from "/Home/WebsiteProjects/Extra/ScuffedRPGAdventuresE2.jpg";
+import ScuffedRPGAdventuresE3 from "/Home/WebsiteProjects/Extra/ScuffedRPGAdventuresE3.jpg";
+import KaitoWebsiteE1 from "/Home/WebsiteProjects/Extra/KaitoWebsiteE1.jpg";
+import KaitoWebsiteE2 from "/Home/WebsiteProjects/Extra/KaitoWebsiteE2.jpg";
+import KaitoWebsiteE3 from "/Home/WebsiteProjects/Extra/KaitoWebsiteE3.jpg";
 
 export default [
   {
@@ -8,8 +48,8 @@ export default [
     youtubeID: "F0mAtFBdw5w",
     websiteLink: null,
     logoPath: "React.png",
-    imageFileName: "ImSlimeMain.jpg",
-    extraImages: ["ImSlimeE1.jpg", "ImSlimeE2.jpg", "ImSlimeE3.jpg"],
+    imageMain: ImSlimeMainImage,
+    extraImages: [ImSlimeE1, ImSlimeE2, ImSlimeE3],
   },
   {
     title: "Zekka",
@@ -17,12 +57,8 @@ export default [
     youtubeID: "J1YpuKkc3ng",
     websiteLink: null,
     logoPath: "UEWhite.png",
-    imageFileName: "CoinDozerGame.jpg",
-    extraImages: [
-      "CoinDozerGameE1.jpg",
-      "CoinDozerGameE2.jpg",
-      "CoinDozerGameE3.jpg",
-    ],
+    imageMain: CoinDozerMainImage,
+    extraImages: [CoinDozerGameE1, CoinDozerGameE2, CoinDozerGameE3],
   },
   {
     title: "My Portfolio V2",
@@ -30,12 +66,8 @@ export default [
     youtubeID: "0saw1cGIl1A",
     websiteLink: "https://kaitosugimura.github.io/",
     logoPath: "JavaScript.png",
-    imageFileName: "KaitoWebsite2.jpg",
-    extraImages: [
-      "KaitoWebsite2E1.jpg",
-      "KaitoWebsite2E2.jpg",
-      "KaitoWebsite2E3.jpg",
-    ],
+    imageMain: KaitoWebsite2MainImage,
+    extraImages: [KaitoWebsite2E1, KaitoWebsite2E2, KaitoWebsite2E3],
   },
 
   {
@@ -44,8 +76,8 @@ export default [
     youtubeID: "ra7FCriWLSk",
     websiteLink: null,
     logoPath: "UEWhite.png",
-    imageFileName: "Immortal.jpg",
-    extraImages: ["ImmortalE1.jpg", "ImmortalE2.jpg", "ImmortalE3.jpg"],
+    imageMain: ImmortalMainImage,
+    extraImages: [ImmortalE1, ImmortalE2, ImmortalE3],
   },
   {
     title: "NoLongerMe",
@@ -53,8 +85,8 @@ export default [
     youtubeID: "oTfJH3pV1Is",
     websiteLink: null,
     logoPath: "UEWhite.png",
-    imageFileName: "NoLongerMe.webp",
-    extraImages: ["NoLongerMeE1.jpg", "NoLongerMeE2.jpg", "NoLongerMeE3.jpg"],
+    imageMain: NoLongerMeMainImage,
+    extraImages: [NoLongerMeE1, NoLongerMeE2, NoLongerMeE3],
   },
   {
     title: "Python Basics",
@@ -62,12 +94,8 @@ export default [
     youtubeID: "mWL9KU680SY",
     websiteLink: null,
     logoPath: "Unity.png",
-    imageFileName: "HackYourLearningMain.jpg",
-    extraImages: [
-      "PythonBasicsE1.jpg",
-      "PythonBasicsE2.jpg",
-      "PythonBasicsE3.jpg",
-    ],
+    imageMain: PythonBasicsMainImage,
+    extraImages: [PythonBasicsE1, PythonBasicsE2, PythonBasicsE3],
   },
   {
     title: "Blender Modeling",
@@ -75,8 +103,8 @@ export default [
     youtubeID: "rabyhOKTWmA",
     websiteLink: null,
     logoPath: "Blender.png",
-    imageFileName: "Blender.jpg",
-    extraImages: ["BlenderE1.jpg", "BlenderE2.jpg", "BlenderE3.jpg"],
+    imageMain: BlenderMainImage,
+    extraImages: [BlenderE1, BlenderE2, BlenderE3],
   },
   {
     title: "Bruh",
@@ -84,8 +112,8 @@ export default [
     youtubeID: "cOpqK3E2y80",
     websiteLink: null,
     logoPath: "Unity.png",
-    imageFileName: "BruhGame.jpg",
-    extraImages: ["BruhGameE1.jpg", "BruhGameE2.jpg", "BruhGameE3.jpg"],
+    imageMain: BruhGameMainImage,
+    extraImages: [BruhGameE1, BruhGameE2, BruhGameE3],
   },
   {
     title: "Scuffed RPG",
@@ -93,8 +121,12 @@ export default [
     youtubeID: "psYUcK-L7qE",
     websiteLink: null,
     logoPath: "Unity.png",
-    imageFileName: "ScuffedRPGAdventures.jpg",
-    extraImages: ["ScuffedRPGAdventuresE1.jpg", "ScuffedRPGAdventuresE2.jpg", "ScuffedRPGAdventuresE3.jpg"],
+    imageMain: ScuffedRPGAdventuresMainImage,
+    extraImages: [
+      ScuffedRPGAdventuresE1,
+      ScuffedRPGAdventuresE2,
+      ScuffedRPGAdventuresE3,
+    ],
   },
   {
     title: "My first Website",
@@ -103,11 +135,7 @@ export default [
     websiteLink:
       "https://kaitosugimura.github.io/Archive_KaitoSugimura.github.io/",
     logoPath: "JavaScript.png",
-    imageFileName: "KaitoWebsite.jpg",
-    extraImages: [
-      "KaitoWebsiteE1.jpg",
-      "KaitoWebsiteE2.jpg",
-      "KaitoWebsiteE3.jpg",
-    ],
+    imageMain: KaitoWebsiteMainImage,
+    extraImages: [KaitoWebsiteE1, KaitoWebsiteE2, KaitoWebsiteE3],
   },
 ];

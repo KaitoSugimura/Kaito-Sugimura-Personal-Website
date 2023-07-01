@@ -5,49 +5,50 @@ import LoadingScreen from "../../../Components/LoadingScreen";
 import coverPhoto from "/Dialog/Pictures/Cover.png";
 import { SoundContext } from "../../../Context/SoundContext";
 
-
 export default function Hero() {
-  const {playSFX} = useContext(SoundContext);
+  const { playSFX } = useContext(SoundContext);
   const [UserAuthenticated, setUserAuthenticated] = useState(false);
   const [BGVideoIsLoading, setBGVideoIsLoading] = useState(true);
 
   const RootRef = useRef(null);
 
-    useEffect(()=>{
-      const AnimPlayHandle = (e) => {
-        switch(e.animationName){
-          case styles.typing:
-            playSFX("BackClick");
-            break;
-          case styles.open:
-            playSFX("MenuOpen");
-            break;
-          case styles.warningInit:
-            playSFX("MenuOpen");
-            break;
-          case styles.fill:
-            playSFX("NewUser")
-            break;
-          case styles.typingInput:
-            playSFX("Typing");
-            break;
-          case styles.select:
-            playSFX("MetalClick")
-            break;
+  const AnimPlayHandle = (e) => {
+    switch (e.animationName) {
+      case styles.typing:
+        playSFX("BackClick");
+        break;
+      case styles.open:
+        playSFX("MenuOpen");
+        break;
+      case styles.warningInit:
+        playSFX("MenuOpen");
+        break;
+      case styles.fill:
+        playSFX("NewUser");
+        break;
+      case styles.typingInput:
+        playSFX("Typing");
+        break;
+      case styles.select:
+        playSFX("MetalClick");
+        break;
+    }
+  };
 
-        }
-      }
-  
-      if(RootRef.current){
-        RootRef.current.addEventListener('animationstart', AnimPlayHandle);
-      }
+  useEffect(() => {
+    if (RootRef.current) {
+      RootRef.current.addEventListener("animationstart", AnimPlayHandle);
+    }
 
-      return () => {RootRef.current.removeEventListener('animationstart', AnimPlayHandle);}
-    }, []);
+    return () => {
+      RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
+    };
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
       setUserAuthenticated(true);
+      // RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
       setTimeout(() => {
         setBGVideoIsLoading(false); // In case the video is still loading after 8 seconds
       }, 8000);
@@ -257,7 +258,7 @@ export default function Hero() {
               </p> */}
             </div>
           </div>
-        </div >
+        </div>
       )}
     </div>
   );

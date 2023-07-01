@@ -54,15 +54,15 @@ export default function SelectedView({ index, sectionRatio }) {
           </div>
 
           <img
-            src={`/Home/WebsiteProjects/Extra/${extraImages[0]}`}
+            src={extraImages[0]}
             className={`${styles.showcaseGeneral} ${styles.showcaseImage1}`}
           ></img>
           <img
-            src={`/Home/WebsiteProjects/Extra/${extraImages[1]}`}
+            src={extraImages[1]}
             className={`${styles.showcaseGeneral} ${styles.showcaseImage2}`}
           ></img>
           <img
-            src={`/Home/WebsiteProjects/Extra/${extraImages[2]}`}
+            src={extraImages[2]}
             className={`${styles.showcaseGeneral} ${styles.showcaseImage3}`}
           ></img>
           <div className={styles.id}>
