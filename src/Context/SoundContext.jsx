@@ -17,6 +17,20 @@ import ProfileClick from "/Dialog/Sound/ProfileClick.wav";
 import Typing from "/Dialog/Sound/UI/Typing.wav";
 import BarFill from "/Dialog/Sound/UI/BarFill.wav";
 
+const soundList = {
+  DialogClick: DialogClick,
+  ButtonClick: ButtonClick,
+  MetalClick: MetalClick,
+  MenuOpen: MenuOpen,
+  BackClick: BackClick,
+  EquipArtifact: EquipArtifact,
+  artifactPickup: artifactPickup,
+  artifactDrop: artifactDrop,
+  ProfileClick: ProfileClick,
+  Typing: Typing,
+  BarFill: BarFill,
+};
+
 export const SoundContext = createContext();
 
 export const SoundContextProvider = ({ children }) => {
@@ -36,49 +50,12 @@ export const SoundContextProvider = ({ children }) => {
   };
 
   const playSFX = (sfxName) => {
-    let playPath = null;
-    switch (sfxName) {
-      case "DialogClick":
-        playPath = DialogClick;
-        break;
-      case "ButtonClick":
-        playPath = ButtonClick;
-        break;
-      case "MetalClick":
-        playPath = MetalClick;
-        break;
-      case "MenuOpen":
-        playPath = MenuOpen;
-        break;
-      case "BackClick":
-        playPath = BackClick;
-        break;
-      case "EquipArtifact":
-        playPath = EquipArtifact;
-        break;
-      case "artifactPickup":
-        playPath = artifactPickup;
-        break;
-      case "artifactDrop":
-        playPath = artifactDrop;
-        break;
-      case "ProfileClick":
-        playPath = ProfileClick;
-        break;
-      case "Typing":
-        playPath = Typing;
-        break;
-      case "BarFill":
-        playPath = BarFill;
-        break;
+    const playPath = soundList[sfxName];
+    if (playPath) {
+      const audio = new Audio(playPath);
+      audio.volume = audioRef.current.volume;
+      audio.play();
     }
-    if (playPath == null) {
-      return;
-    }
-
-    const audio = new Audio(playPath);
-    audio.volume = audioRef.current.volume;
-    audio.play();
   };
 
   const playMusic = (musicName) => {

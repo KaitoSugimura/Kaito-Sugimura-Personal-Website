@@ -12,34 +12,6 @@ export default function Hero() {
   const [BGVideoIsLoading, setBGVideoIsLoading] = useState(true);
 
   const RootRef = useRef(null);
-  const animation = document.querySelector(styles.commandPrompt);
-
-const nextTimelineIndex = useRef(1);
-
-
-
-const setNextTimeout = () =>{
-  if(animTimeline[nextTimelineIndex.current])
-  setTimeout(animTimeline[nextTimelineIndex.current][0],animTimeline[nextTimelineIndex.current][1] )
-  nextTimelineIndex.current += 1;
-}
-
-  const AuthOpen = () =>{
-    console.log("Auth openned")
-    // playSFX("MetalClick")
-    setNextTimeout();
-  }
-
-  const SelectUser = () => {
-    console.log("Select user")
-    // playSFX("EquipArtifact")
-    setNextTimeout();
-  }
-  const animTimeline = [
-    [AuthOpen, 0],
-    [SelectUser, 1200]
-  ]
-
 
     useEffect(()=>{
       const AnimPlayHandle = (e) => {
@@ -65,8 +37,6 @@ const setNextTimeout = () =>{
 
         }
       }
-
-      AuthOpen();
   
       if(RootRef.current){
         RootRef.current.addEventListener('animationstart', AnimPlayHandle);
