@@ -149,7 +149,6 @@
   cursor: pointer;
 
   position: relative;
-  box-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
 .SelectButton::before {
@@ -161,36 +160,22 @@
   left: 0;
   z-index: -1;
   background: linear-gradient(rgba(0, 0, 0, 0.184), rgba(0, 0, 0, 0.896));
-  transition: all 0.3s ease-in-out;
 }
 
-.SelectButton::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: -1;
+.SelectButton:hover::before {
   background: linear-gradient(
     rgba(76, 158, 181, 0.184),
-    rgba(76, 165, 189, 0.896)
+    rgba(11, 72, 81, 0.7)
   );
-  opacity: 0;
-}
-.SelectButton:hover::before {
-  opacity: 0.5;
-}
-.SelectButton:hover::after {
-  opacity: 0.5;
 }
 
 .SelectButton:active:before {
-  opacity: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.184),
+    rgba(3, 28, 32, 0.7)
+  );
 }
-.SelectButton:active::after {
-  opacity: 1;
-}
+
 
 .SelectButton p {
   -moz-user-select: -moz-none;

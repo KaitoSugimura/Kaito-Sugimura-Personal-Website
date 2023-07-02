@@ -55,7 +55,6 @@ export default function Draggable({
   };
 
   const handleMouseMove = useRef((event) => {
-    event.preventDefault();
     const dragCont = dragRootRef.current;
     const { clientX, clientY } = (event.touches && event.touches[0]) || event;
     const newX = clientX - initialPos.current.x + initialContPos.current.x;
@@ -81,7 +80,6 @@ export default function Draggable({
   });
 
   const handleMouseDown = (event) => {
-    event.preventDefault();
     const { clientX, clientY } = (event.touches && event.touches[0]) || event;
     initialPos.current = { x: clientX, y: clientY };
     initialContPos.current = {
@@ -110,7 +108,6 @@ export default function Draggable({
   };
 
   const handleMouseUp = (event) => {
-    event.preventDefault();
     document.removeEventListener(
       deviceIsTouch ? "touchmove" : "mousemove",
       handleMouseMove.current

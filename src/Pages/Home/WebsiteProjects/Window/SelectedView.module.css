@@ -202,11 +202,10 @@
 
 .playVideoIcon {
   width: 2.5vw;
-  filter: invert(1) drop-shadow(0px 0px 0.2vw rgb(0, 0, 0));
+
 }
 
 .playMovieIcon {
   width: 2.5vw;
-  filter: invert(1);
   margin-right: 0.3vw;
 }

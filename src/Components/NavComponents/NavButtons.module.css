@@ -37,15 +37,13 @@
   width: max(7vmin, 4rem);
   height: max(7vmin, 4rem);
   cursor: pointer;
-  transition: all 0.4s;
+  transition: transform 0.4s;
   background-color: transparent;
   border: none;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.31));
 
   -moz-user-select: -moz-all;
   -khtml-user-select: all;
@@ -58,7 +56,6 @@
 .SettingsIcon {
   width: 80%;
   height: 80%;
-  filter: invert(100%);
 }
 
 .TopLeft,
@@ -66,7 +63,7 @@
 .BottomLeft,
 .BottomRight {
   position: absolute;
-  transition: all 0.3s;
+  transition: width 0.3s, height 0.3s;
 }
 
 .OpenNavButton:hover .TopLeft {

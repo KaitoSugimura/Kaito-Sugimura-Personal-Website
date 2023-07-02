@@ -43,7 +43,7 @@
   height: 8.5vw;
   width: 8.5vw;
   border: none;
-  opacity: 0.95;
+
   margin: 1.75vw 0 0 1.75vw;
 
   z-index: 100;
@@ -213,7 +213,7 @@
 .NavListItem {
   font-size: 2rem;
   position: relative;
-  transition: all 0.15s;
+  transition: transition 0.15s;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 
@@ -333,7 +333,6 @@
   );
 
   animation: silk 2s infinite linear;
-  /* filter: blur(2px) brightness(1.2); */
   opacity: 0;
 }
 

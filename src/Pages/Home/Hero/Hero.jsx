@@ -46,14 +46,18 @@ export default function Hero() {
     }
 
     return () => {
-      RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
+      if (RootRef.current) {
+        RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
+      }
     };
   }, []);
 
   useEffect(() => {
     setTimeout(() => {
       setUserAuthenticated(true);
-      RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
+      if (RootRef.current) {
+        RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
+      }
       setTimeout(() => {
         setBGVideoIsLoading(false); // In case the video is still loading after 8 seconds
       }, 8000);

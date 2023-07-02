@@ -21,11 +21,10 @@
 
   height: max(4vmin, 2.5rem);
   background: transparent;
-  filter: invert(100%) drop-shadow(0 0 10px rgb(24, 24, 24));
   border: none;
   z-index: 100;
   cursor: pointer;
-
+  color: white;
   font-size: 2vh;
   display: flex;
   justify-content: center;

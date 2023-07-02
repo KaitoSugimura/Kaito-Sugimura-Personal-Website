@@ -207,9 +207,9 @@ export default function WebsiteProjects() {
                         transition: mouseIsDown.current
                           ? "none"
                           : `transform 0.3s ease-in-out`,
-                        filter: `brightness(${
-                          1 - Math.max(0, Math.min(getAbsPosIndex(index), 0.4))
-                        })`,
+                        // filter: `brightness(${
+                        //   1 - Math.max(0, Math.min(getAbsPosIndex(index), 0.4))
+                        // })`,
                       }}
                     >
                       <FrameOverlay
