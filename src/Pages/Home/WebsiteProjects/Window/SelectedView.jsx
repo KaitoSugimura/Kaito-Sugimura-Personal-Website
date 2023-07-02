@@ -26,7 +26,7 @@ export default function SelectedView({ index, sectionRatio }) {
   return (
     <>
       {showModal && (
-        <PopUpContainer handleCloseModal={handleCloseModal} videoId={videoId} />
+        <PopUpContainer handleCloseModal={handleCloseModal} videoId={videoId} key={`Popup${index}`} id={index} />
       )}
         <div
           className={styles.SelectedViewRoot}
@@ -34,6 +34,7 @@ export default function SelectedView({ index, sectionRatio }) {
             width: `${sectionRatio.width}vw`,
             height: `${sectionRatio.height}vw`,
           }}
+          key={`ViewRoot${index}`}
         >
           <div className={styles.PopUpRoot}></div>
           <div className={styles.videoContainer} onClick={handleOpenModal}>

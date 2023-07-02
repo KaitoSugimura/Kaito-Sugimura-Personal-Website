@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useCallback, useContext, useRef, useState } from "react";
 import styles from "./Draggable.module.css";
 import CornerBorder from "../Components/NavComponents/CornerBorder";
 import forms from "../Pages/Home/Profile/Forms";
@@ -54,7 +54,7 @@ export default function Draggable({
     borderWidth: "2px",
   };
 
-  const handleMouseMove = useRef((event) => {
+  const handleMouseMove = useCallback((event) => {
     const dragCont = dragRootRef.current;
     const { clientX, clientY } = (event.touches && event.touches[0]) || event;
     const newX = clientX - initialPos.current.x + initialContPos.current.x;
@@ -93,7 +93,7 @@ export default function Draggable({
     );
     document.addEventListener(
       deviceIsTouch ? "touchmove" : "mousemove",
-      handleMouseMove.current
+      handleMouseMove
     );
     setThisZIndex(getNextZIndex());
     setOverlapID((prev) => {
@@ -110,7 +110,7 @@ export default function Draggable({
   const handleMouseUp = (event) => {
     document.removeEventListener(
       deviceIsTouch ? "touchmove" : "mousemove",
-      handleMouseMove.current
+      handleMouseMove
     );
     document.removeEventListener(
       deviceIsTouch ? "touchend" : "mouseup",
