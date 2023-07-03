@@ -1,14 +1,14 @@
 // Main Images
-import ImSlimeMainImage from "/Home/WebsiteProjects/ImSlimeMain.jpg";
-import CoinDozerMainImage from "/Home/WebsiteProjects/CoinDozerGame.jpg";
-import KaitoWebsite2MainImage from "/Home/WebsiteProjects/KaitoWebsite2.jpg";
-import ImmortalMainImage from "/Home/WebsiteProjects/Immortal.jpg";
+import ImSlimeMainImage from "/Home/WebsiteProjects/ImSlimeMain.webp";
+import CoinDozerMainImage from "/Home/WebsiteProjects/CoinDozerGame.webp";
+import KaitoWebsite2MainImage from "/Home/WebsiteProjects/KaitoWebsite2.webp";
+import ImmortalMainImage from "/Home/WebsiteProjects/Immortal.webp";
 import NoLongerMeMainImage from "/Home/WebsiteProjects/NoLongerMe.webp";
-import PythonBasicsMainImage from "/Home/WebsiteProjects/HackYourLearningMain.jpg";
-import BlenderMainImage from "/Home/WebsiteProjects/Blender.jpg";
-import BruhGameMainImage from "/Home/WebsiteProjects/BruhGame.jpg";
-import ScuffedRPGAdventuresMainImage from "/Home/WebsiteProjects/ScuffedRPGAdventures.jpg";
-import KaitoWebsiteMainImage from "/Home/WebsiteProjects/KaitoWebsite.jpg";
+import PythonBasicsMainImage from "/Home/WebsiteProjects/HackYourLearningMain.webp";
+import BlenderMainImage from "/Home/WebsiteProjects/Blender.webp";
+import BruhGameMainImage from "/Home/WebsiteProjects/BruhGame.webp";
+import ScuffedRPGAdventuresMainImage from "/Home/WebsiteProjects/ScuffedRPGAdventures.webp";
+import KaitoWebsiteMainImage from "/Home/WebsiteProjects/KaitoWebsite.webp";
 // Sub Images
 import ImSlimeE1 from "/Home/WebsiteProjects/Extra/ImSlimeE1.jpg";
 import ImSlimeE2 from "/Home/WebsiteProjects/Extra/ImSlimeE2.jpg";
