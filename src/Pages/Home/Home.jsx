@@ -150,7 +150,7 @@ export default function Home() {
   }, [initDone]);
 
   return (
-    <scrollContext.Provider value={{ setScrollable }}>
+    <scrollContext.Provider value={{ setScrollable, currentSection }}>
       <div
         className={styles.HomeScroller}
         style={{

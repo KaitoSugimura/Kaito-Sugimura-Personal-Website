@@ -5,9 +5,11 @@ import SectionContainer from "../../../Components/SectionContainer";
 import SelectedView from "./Window/SelectedView";
 import FrameOverlay from "./Window/FrameOverlay";
 import { SoundContext } from "../../../Context/SoundContext";
+import { scrollContext } from "../Home";
 
 export default function WebsiteProjects() {
   const { playSFX } = useContext(SoundContext);
+  const { setScrollable } = useContext(scrollContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const initialIndexRef = useRef(0);
   const MouseXInitialRef = useRef(0);
@@ -87,6 +89,7 @@ export default function WebsiteProjects() {
     const diff = clientX - MouseXInitialRef.current;
     if (Math.abs(diff) > 25) {
       isDragging.current = true;
+      setScrollable(false);
     }
 
     let newIndex =
@@ -104,6 +107,7 @@ export default function WebsiteProjects() {
   }, []);
 
   const handleMouseUp = (event) => {
+    setScrollable(true);
     document.removeEventListener(
       deviceIsTouch ? "touchmove" : "mousemove",
       handleMouseMove
@@ -206,7 +210,7 @@ export default function WebsiteProjects() {
                     transform: `translate3d(${
                       getPosIndex(index) * 100
                     }%, 0, ${-(
-                      getAbsPosIndex(index) * 400
+                      getAbsPosIndex(index) * window.innerWidth *0.2
                     )}px) rotateX(0deg) rotateY(${
                       -getPosIndex(index) * 25
                     }deg) `,

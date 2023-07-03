@@ -4,13 +4,27 @@ import BGVideo from "/Backgrounds/HeroBGVideo.mp4";
 import LoadingScreen from "../../../Components/LoadingScreen";
 import coverPhoto from "/Dialog/Pictures/Cover.png";
 import { SoundContext } from "../../../Context/SoundContext";
+import { scrollContext } from "../Home";
 
 export default function Hero() {
   const { playSFX } = useContext(SoundContext);
+  const { currentSection } = useContext(scrollContext);
   const [UserAuthenticated, setUserAuthenticated] = useState(false);
   const [BGVideoIsLoading, setBGVideoIsLoading] = useState(true);
 
   const RootRef = useRef(null);
+
+  useEffect(() => {
+    if (currentSection != 0 && !UserAuthenticated) {
+      setUserAuthenticated(true);
+      if (RootRef.current) {
+        RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
+      }
+      setTimeout(() => {
+        setBGVideoIsLoading(false); // In case the video is still loading after 8 seconds
+      }, 8000);
+    }
+  }, [currentSection]);
 
   const AnimPlayHandle = (e) => {
     switch (e.animationName) {
@@ -61,7 +75,7 @@ export default function Hero() {
       setTimeout(() => {
         setBGVideoIsLoading(false); // In case the video is still loading after 8 seconds
       }, 8000);
-    }, 9500);
+    }, 9000);
   }, []);
 
   const cmdTexts1 = [

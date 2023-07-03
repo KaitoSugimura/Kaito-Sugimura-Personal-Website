@@ -50,7 +50,7 @@
 .id {
   position: absolute;
   bottom: 8%;
-  left: -10%;
+  right: 81%;
 
   color: white;
   margin: 1rem;
@@ -77,6 +77,8 @@
   font-size: 2vw;
   transform: translateY(10%);
   padding: 0 2vw;
+
+  white-space: nowrap;
 }
 
 .loading {
@@ -98,6 +100,8 @@
 .showcaseGeneral {
   position: absolute;
   object-fit: cover;
+
+  box-shadow: 2px 2px 8px rgba(189, 225, 227, 0.305);
 }
 
 .showcaseImage1 {
@@ -132,12 +136,7 @@
 
   width: 47%;
   height: 15%;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.35) 20%,
-    rgba(0, 0, 0, 0.926)
-  );
-
+  background-color: rgb(0, 0, 0, 0.8);
   z-index: 10;
 
   -moz-user-select: -moz-all;
@@ -151,11 +150,7 @@
 }
 
 .videoContainer:hover{
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.3) 20%,
-    rgba(0, 0, 0, 0.87)
-  );
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
 }
 
 
@@ -176,9 +171,9 @@
 }
 
 .videoImage {
-  height: 85%;
+  height: 90%;
   aspect-ratio: 16/9;
-  margin-left: 2%;
+  margin-left: 1%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
