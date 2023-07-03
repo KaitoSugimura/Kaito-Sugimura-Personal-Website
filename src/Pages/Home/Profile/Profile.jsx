@@ -86,14 +86,13 @@ export default function Profile() {
     setScrollable(true);
     if (hasSet) {
       setFinishedFirstQuest(true);
-    } else if (!finishedFirstQuest) {
-      setCurrentArtifactCoords({
-        left: draggable.offsetLeft,
-        top: draggable.offsetTop,
-        width: draggable.offsetWidth,
-        height: draggable.offsetHeight,
-      });
     }
+    setCurrentArtifactCoords({
+      left: draggable.offsetLeft,
+      top: draggable.offsetTop,
+      width: draggable.offsetWidth,
+      height: draggable.offsetHeight,
+    });
 
     PContents[artifactID].coords = {
       x: PXtoVW(draggable.offsetLeft),
@@ -103,6 +102,16 @@ export default function Profile() {
 
   const onDragStart = (draggable, artifactID) => {
     setScrollable(false);
+
+    if (!finishedFirstQuest) {
+      setCurrentArtifactCoords({
+        left: draggable.offsetLeft,
+        top: draggable.offsetTop,
+        width: draggable.offsetWidth,
+        height: draggable.offsetHeight,
+      });
+    }
+
     setCurrentContent("About");
   };
 
@@ -180,38 +189,29 @@ export default function Profile() {
           }}
         >
           <div className={styles.indicatorCont}></div>
-          {overlapID && <div className={styles.rippleEffect}></div>}
+          {overlapID && (
+            <div
+              className={styles.rippleEffect}
+              style={{
+                background: `radial-gradient(circle at 50%, ${PContents[overlapID].LabelColor},  #111c4cb7 14%, #ff000000 75%)`,
+              }}
+            ></div>
+          )}
         </div>
 
         {overlapID == null && (
-          <div className={styles.artifactsContainer}>
-            <div className={`${styles.artifactTextCont} ${styles.education}`}>
-              <div className={styles.pos}>
-                <span className={styles.artifactsNum}>00</span>
-                <p className={styles.artifactsText}>Education</p>
-              </div>
-            </div>
-            <div className={`${styles.artifactTextCont} ${styles.selfStudy}`}>
-              <div className={styles.pos}>
-                <span className={styles.artifactsNum}>01</span>
-                <p className={styles.artifactsText}>Self Study</p>
-              </div>
-            </div>
-            <div className={`${styles.artifactTextCont} ${styles.experience}`}>
-              <div className={styles.pos}>
-                <span className={styles.artifactsNum}>02</span>
-                <p className={styles.artifactsText}>Experience</p>
-              </div>
-            </div>
-            <div
-              className={`${styles.artifactTextCont} ${styles.achievements}`}
-            >
-              <div className={styles.pos}>
-                <span className={styles.artifactsNum}>03</span>
-                <p className={styles.artifactsText}>Achievements</p>
-              </div>
-            </div>
-          </div>
+          <button
+            className={styles.resetPosition}
+            onClick={() => {
+              Object.entries(PContents).forEach((section) => {
+                section[1].coords = section[1].InitCoords;
+              });
+              setCurrentArtifactCoords(null);
+              setFinishedFirstQuest(false);
+            }}
+          >
+            Reset artifacts
+          </button>
         )}
 
         {PContents &&
@@ -240,10 +240,26 @@ export default function Profile() {
                   </div>
                 </Draggable>
               )}
+
+              {overlapID == null && (
+                <div
+                  className={styles.LabelCont}
+                  style={{
+                    top: `calc(${section[1].InitCoords.y}% + 10vw)`,
+                    left: `calc(${section[1].InitCoords.x}% - 2.5vw)`,
+                    backgroundColor: `${section[1].LabelColor}`,
+                  }}
+                >
+                  <div className={styles.pos}>
+                    <span className={styles.artifactsNum}>0{index}</span>
+                    <p className={styles.artifactsText}>{section[1].type}</p>
+                  </div>
+                </div>
+              )}
             </React.Fragment>
           ))}
 
-        {Object.entries(openForms).map((formPair) => (
+        {Object.entries(openForms).map((formPair, index) => (
           <React.Fragment key={formPair[0]}>
             <Draggable
               getNextZIndex={getNextZIndex}
@@ -255,6 +271,37 @@ export default function Profile() {
             </Draggable>
           </React.Fragment>
         ))}
+
+        {/* {overlapID == null && (
+          <div className={styles.artifactsContainer}>
+            <div className={`${styles.artifactTextCont} ${styles.education}`}>
+              <div className={styles.pos}>
+                <span className={styles.artifactsNum}>00</span>
+                <p className={styles.artifactsText}>Education</p>
+              </div>
+            </div>
+            <div className={`${styles.artifactTextCont} ${styles.selfStudy}`}>
+              <div className={styles.pos}>
+                <span className={styles.artifactsNum}>01</span>
+                <p className={styles.artifactsText}>Self Study</p>
+              </div>
+            </div>
+            <div className={`${styles.artifactTextCont} ${styles.experience}`}>
+              <div className={styles.pos}>
+                <span className={styles.artifactsNum}>02</span>
+                <p className={styles.artifactsText}>Experience</p>
+              </div>
+            </div>
+            <div
+              className={`${styles.artifactTextCont} ${styles.achievements}`}
+            >
+              <div className={styles.pos}>
+                <span className={styles.artifactsNum}>03</span>
+                <p className={styles.artifactsText}>Achievements</p>
+              </div>
+            </div>
+          </div>
+        )} */}
 
         {!finishedFirstQuest && (
           <div

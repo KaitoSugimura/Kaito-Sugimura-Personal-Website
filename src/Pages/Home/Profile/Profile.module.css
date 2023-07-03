@@ -3,27 +3,6 @@
   height: 100%;
   border: none;
   position: relative;
-
-  --EducationColor: #111c4cb7;
-  --SelfStudyColor: #22a364b7;
-  --ExperienceColor: #730039b7;
-  --AchievementsColor: #ba9a32b7;
-}
-
-.education {
-  background-color: var(--EducationColor);
-}
-
-.selfStudy {
-  background-color: var(--SelfStudyColor);
-}
-
-.experience {
-  background-color: var(--ExperienceColor);
-}
-
-.achievements {
-  background-color: var(--AchievementsColor);
 }
 
 .UofCItemRoot {
@@ -83,13 +62,14 @@
 .rippleEffect {
   position: absolute;
 
-  background: radial-gradient(
+  /* background: radial-gradient(
     circle at 50%,
-    var(--EducationColor),
-    var(--EducationColor) 10%,
+    #111c4cb7,
+    #111c4cb7 10%,
     #ff000000 75%
-  );
-  animation: ripple 0.8s ease-in forwards;
+  ); */
+  color:     #11608eb7;
+  animation: ripple 0.6s ease-in forwards;
   z-index: -1;
 }
 
@@ -99,8 +79,8 @@
     height: 0;
   }
   100% {
-    width: 150%;
-    height: 150%;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -416,6 +396,19 @@
   width: 100%;
 }
 
+.LabelCont{
+  position: fixed;
+  height: 1.5vw;
+  width: 14vw;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
 .pos {
   position: absolute;
   bottom: 35%;
@@ -455,4 +448,24 @@
   font-size: 1.5vw;
   color: white;
   text-align: center;
+}
+
+.resetPosition{
+  position: absolute;
+  bottom: 3.5vw;
+  right: 3.5vw;
+  padding: 1vh 1vw;
+  font-size: 1vw;
+
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.768);
+
+  
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
 }

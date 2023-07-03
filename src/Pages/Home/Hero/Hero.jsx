@@ -119,7 +119,7 @@ export default function Hero() {
           <img src={coverPhoto} className={styles.coverPhoto}></img>
 
           <div className={styles.grid}>
-            {/* <video
+            <video
               className={styles.backgroundVideo}
               onLoadedData={() => {
                 setBGVideoIsLoading(false);
@@ -128,7 +128,7 @@ export default function Hero() {
               autoPlay
               muted
               loop
-            /> */}
+            />
           </div>
           <h1 className={styles.name}>Kaito Sugimura</h1>
           <p className={styles.catchphrase}>

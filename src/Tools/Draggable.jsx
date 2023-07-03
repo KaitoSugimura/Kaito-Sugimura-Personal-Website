@@ -161,10 +161,10 @@ export default function Draggable({
       style={{
         zIndex: thisZIndex,
         top: isArtifact
-          ? VHtoPX(artifactStartingPos.y)
+          ? `${VHtoPX(artifactStartingPos.y)}px`
           : `${8 + spawnOffset.current * 2}%`,
         left: isArtifact
-          ? VWtoPX(artifactStartingPos.x)
+          ? `${VWtoPX(artifactStartingPos.x)}px`
           : `${4 + spawnOffset.current}%`,
         // border: isDragging ? "2px solid #00ff00" : "2px solid #00000000",
       }}

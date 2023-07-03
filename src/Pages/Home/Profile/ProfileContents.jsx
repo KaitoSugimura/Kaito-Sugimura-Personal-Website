@@ -5,6 +5,8 @@ import Topic from "./Layouts/Topic";
 
 export default {
   UofC: {
+    type: "Education",
+    LabelColor: "#11608eb7",
     title: (
       <>
         Bachelor of Science <br />
@@ -15,8 +17,12 @@ export default {
     date: <>09/2020 — 04/2024</>,
     icon: "/Home/Icons/School.svg",
     coords: {
-      x: 57,
-      y: 25,
+      x: 55,
+      y: 22,
+    },
+    InitCoords: {
+      x: 55,
+      y: 22,
     },
     contents: {
       ["About"]: (
@@ -116,13 +122,19 @@ export default {
   },
 
   SelfStudy: {
+    type: "Self Learn",
+    LabelColor: "#189257b7",
     title: <>Self-Taught Developer</>,
     subTitle: <>3 years of dedication, more to come</>,
     date: <>09/2020 — now</>,
     icon: "/Home/Icons/SelfStudy.svg",
     coords: {
       x: 73.5,
-      y: 25,
+      y: 22,
+    },
+    InitCoords: {
+      x: 73.5,
+      y: 22,
     },
     contents: {
       ["About"]: (
@@ -145,7 +157,7 @@ export default {
             "React & Firebase",
           ]}
           dates={[
-            "Codecademy | 07/2021 – 07/2021",
+            "Codecademy | 07/2221 – 07/2021",
             "Codecademy | 08/2021 – 08/2021",
             "Udemy | 10/2022 – 10/2022",
             "Udemy | 02/2023 – 05/2023",
@@ -202,12 +214,18 @@ export default {
   },
 
   Experience: {
+    type: "Experience",
+    LabelColor: "#730039b7",
     title: <>Work experience</>,
     subTitle: <>Part time, Full time, and Volunteering</>,
     date: <></>,
     icon: "/Home/Icons/BriefCase.svg",
     coords: {
-      x: 57,
+      x: 55,
+      y: 55,
+    },
+    InitCoords: {
+      x: 55,
       y: 55,
     },
     contents: {
@@ -252,6 +270,8 @@ export default {
   },
 
   Achievements: {
+    type: "Achievements",
+    LabelColor: "#ba9a32b7",
     title: <>Achievements</>,
     subTitle: <>Grade: 3.957/4 GPA, 4th year</>,
     date: <>09/2020 — 04/2024</>,
@@ -260,12 +280,18 @@ export default {
       x: 73.5,
       y: 55,
     },
+    InitCoords: {
+      x: 73.5,
+      y: 55,
+    },
     contents: {
-      ["About"]: <About
-      title={`"Try everything"`}
+      ["About"]: (
+        <About
+          title={`"Try everything"`}
           desc={`My mother always says "The reason you can't do it is because you haven't tried it yet". It's a motto I live by.`}
           image={"/Home/Profile/About/Volunteer.jpg"}
-      />,
+        />
+      ),
     },
   },
 };
