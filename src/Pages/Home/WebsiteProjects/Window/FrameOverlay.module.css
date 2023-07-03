@@ -41,8 +41,8 @@
 
 .leftBottom {
   position: absolute;
-  bottom: 10%;
-  left: -0.5%;
+  bottom: 11%;
+  left: -14%;
   width: 65%;
   height: 6.2vw;
 
@@ -58,7 +58,7 @@
   animation: opacityChange 0.3s ease-in;
 
   /* transition: transform 0.3s ease-in-out; */
-  transform: rotateY(20deg);
+  transform: rotateY(30deg);
 
   -moz-user-select: -moz-none;
   -khtml-user-select: none;

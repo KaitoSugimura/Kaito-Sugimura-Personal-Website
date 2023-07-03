@@ -21,8 +21,8 @@ export default function Hero() {
         RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
       }
       setTimeout(() => {
-        setBGVideoIsLoading(false); // In case the video is still loading after 8 seconds
-      }, 8000);
+        setBGVideoIsLoading(false); // In case the video is still loading after 30 seconds
+      }, 30000);
     }
   }, [currentSection]);
 
@@ -73,8 +73,8 @@ export default function Hero() {
         RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
       }
       setTimeout(() => {
-        setBGVideoIsLoading(false); // In case the video is still loading after 8 seconds
-      }, 8000);
+        setBGVideoIsLoading(false); // In case the video is still loading after 30 seconds
+      }, 30000);
     }, 9000);
   }, []);
 
@@ -119,7 +119,7 @@ export default function Hero() {
           <img src={coverPhoto} className={styles.coverPhoto}></img>
 
           <div className={styles.grid}>
-            <video
+            {/* <video
               className={styles.backgroundVideo}
               onLoadedData={() => {
                 setBGVideoIsLoading(false);
@@ -128,7 +128,7 @@ export default function Hero() {
               autoPlay
               muted
               loop
-            />
+            /> */}
           </div>
           <h1 className={styles.name}>Kaito Sugimura</h1>
           <p className={styles.catchphrase}>
