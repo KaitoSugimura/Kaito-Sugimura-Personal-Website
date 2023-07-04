@@ -102,10 +102,10 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
           ) : (
             <>
               <div className={styles.typingWrapping1}>
-                <p>Administrator</p>
+                <p>System access</p>
               </div>
               <div className={styles.typingWrapping2}>
-                <p>System access granted</p>
+                <p>Initialization complete</p>
               </div>
             </>
           )}
