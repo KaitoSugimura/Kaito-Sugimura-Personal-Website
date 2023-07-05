@@ -5,23 +5,23 @@ import profileBGM from "/Dialog/Music/Flutter.mp3";
 import projectsBGM from "/Dialog/Music/Bouquet.mp3";
 import WarmLoopBGM from "/Dialog/Music/WarmLoop.wav";
 // Sound
-import DialogClick from "/Dialog/Sound/DialogClick.wav";
+import DialogClick from "/Dialog/Sound/DialogClick.mp3";
 import ButtonClick from "/Dialog/Sound/click-button.mp3";
-import MetalClick from "/Dialog/Sound/MetalClick.wav";
-import MenuOpen from "/Dialog/Sound/interface-soft-abbreviated-click.mp3";
-import BackClick from "/Dialog/Sound/BackClick.wav";
-import EquipArtifact from "/Dialog/Sound/EquipArtifact.wav";
-import artifactPickup from "/Dialog/Sound/ArtifactPickup.wav";
-import artifactDrop from "/Dialog/Sound/ArtifactDrop.wav";
-import ProfileClick from "/Dialog/Sound/ProfileClick.wav";
-import Typing from "/Dialog/Sound/UI/Typing.wav";
-import BarFill from "/Dialog/Sound/UI/BarFill.wav";
-import AuthOpen from "/Dialog/Sound/UI/AuthOpen.wav";
-import Authenticated from "/Dialog/Sound/UI/Authenticated.wav";
-import WarningInit from "/Dialog/Sound/UI/WarningInit.wav";
-import Welcome from "/Dialog/Sound/UI/Welcome.wav";
-import Select from "/Dialog/Sound/UI/Select.wav";
-import SelectConfirm from "/Dialog/Sound/UI/SelectConfirm.wav";
+import MetalClick from "/Dialog/Sound/MetalClick.mp3";
+import MenuOpen from "/Dialog/Sound/MenuOpen.mp3";
+import BackClick from "/Dialog/Sound/BackClick.mp3";
+import EquipArtifact from "/Dialog/Sound/EquipArtifact.mp3";
+import artifactPickup from "/Dialog/Sound/ArtifactPickup.mp3";
+import artifactDrop from "/Dialog/Sound/ArtifactDrop.mp3";
+import ProfileClick from "/Dialog/Sound/ProfileClick.mp3";
+import Typing from "/Dialog/Sound/UI/Typing.mp3";
+import BarFill from "/Dialog/Sound/UI/BarFill.mp3";
+import AuthOpen from "/Dialog/Sound/UI/AuthOpen.mp3";
+import Authenticated from "/Dialog/Sound/UI/Authenticated.mp3";
+import WarningInit from "/Dialog/Sound/UI/WarningInit.mp3";
+import Welcome from "/Dialog/Sound/UI/Welcome.mp3";
+import Select from "/Dialog/Sound/UI/Select.mp3";
+import SelectConfirm from "/Dialog/Sound/UI/SelectConfirm.mp3";
 
 const soundList = {
   DialogClick: DialogClick,
