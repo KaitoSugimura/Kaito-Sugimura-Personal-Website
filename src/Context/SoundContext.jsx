@@ -1,6 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
 // Music
-import defaultBGM from "/Dialog/Music/Anima_Circulation.mp3";
+import defaultBGM from "/Dialog/Music/MainMusic.mp3";
 import profileBGM from "/Dialog/Music/Flutter.mp3";
 import projectsBGM from "/Dialog/Music/Bouquet.mp3";
 import WarmLoopBGM from "/Dialog/Music/WarmLoop.wav";

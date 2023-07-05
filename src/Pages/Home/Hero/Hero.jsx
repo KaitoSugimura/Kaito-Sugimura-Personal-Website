@@ -137,7 +137,10 @@ export default function Hero() {
         </>
       ) : (
         <div ref={RootRef}>
-          <div className={styles.backgroundImage}></div>
+          <img
+            src="/Backgrounds/Sphere.jpg"
+            className={styles.backgroundImage}
+          ></img>
           <div className={styles.Warning}></div>
           {/* Seperated to make things stable */}
           <div className={styles.WarningInnerText}>
