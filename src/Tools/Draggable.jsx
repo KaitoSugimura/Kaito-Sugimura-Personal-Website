@@ -41,7 +41,10 @@ export default function Draggable({
   const initialContPos = useRef({ x: 0, y: 0 });
   const spawnOffset = useRef(getSetSpawnOffset(-1));
   const dragRootRef = useRef(null);
-  const deviceIsTouch = false;
+  const deviceIsTouch =
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0;
   const [thisZIndex, setThisZIndex] = useState(getNextZIndex());
   const [isDragging, setIsDragging] = useState(false);
 
