@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./Navigation.module.css";
 import Sections from "../Pages/Home/HomeTableOfContents.jsx";
 import CameraUI from "./NavComponents/CameraUI";
@@ -16,7 +16,8 @@ export default function Navigation({
 
   return (
     <div className={styles.navigationRoot} ref={rootRef}>
-      <div className={styles.BackgroundPannel}></div>
+      {!initDone && <div className={styles.backFilter}></div>}
+
       {initDone && (
         <SoundSetting
           style={{

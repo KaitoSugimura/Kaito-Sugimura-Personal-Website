@@ -1,6 +1,6 @@
 import styles from "./InitHero.module.css";
 
-export default function Hero({ currentDialogID }) {
+export default function Hero() {
   return (
     <div className={styles.HeroRoot}
     style={{
@@ -8,7 +8,6 @@ export default function Hero({ currentDialogID }) {
     }}
     >
       <div className={styles.backgroundImage}>
-        {currentDialogID == null && <div className={styles.backFilter}></div>}
       </div>
     </div>
   );

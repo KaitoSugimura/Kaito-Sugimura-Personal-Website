@@ -397,7 +397,7 @@
 }
 
 .LabelCont{
-  position: fixed;
+  position: absolute;
   height: 1.5vw;
   width: 14vw;
 
