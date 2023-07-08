@@ -15,10 +15,7 @@ export default function WebsiteProjects() {
   const MouseXInitialRef = useRef(0);
   const isDragging = useRef(false);
   const mouseIsDown = useRef(false);
-  const deviceIsTouch =
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    navigator.msMaxTouchPoints > 0;
+  const deviceIsTouch = false;
   const cachedIndex = useRef(-1);
   const cachedDif = useRef(0);
   // Do not use setter her, please use toggleSelectedView

@@ -7,10 +7,7 @@ export default function XDragScroller({ style, children, setIsDragging }) {
   const MouseXPrevRef = useRef(0);
   const containerRef = useRef(null);
   const [clickedOnce, setClickedOnce] = useState(false);
-  const deviceIsTouch =
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    navigator.msMaxTouchPoints > 0;
+  const deviceIsTouch = false;
 
   const setFalseTimeoutRef = useRef(null);
 
