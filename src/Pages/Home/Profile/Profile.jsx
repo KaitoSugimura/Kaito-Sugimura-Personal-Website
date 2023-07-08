@@ -45,16 +45,16 @@ export default function Profile() {
   const [currentArtifactCoords, setCurrentArtifactCoords] = useState(null);
   const [finishedFirstQuest, setFinishedFirstQuest] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setOverlapCoords(getOverlapCoords());
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setOverlapCoords(getOverlapCoords());
+  //   };
 
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   window.addEventListener("resize", handleResize);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   const getSetSpawnOffset = (offset) => {
     // If offset < 0 then get else set

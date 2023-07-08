@@ -6,17 +6,17 @@ export default function HorizontalEnjoyer() {
     window.innerWidth < window.innerHeight
   );
 
-  useEffect(() => {
-    const resizeHandle = () => {
-      setIsVertical(window.innerWidth < window.innerHeight);
-    };
+  // useEffect(() => {
+  //   const resizeHandle = () => {
+  //     setIsVertical(window.innerWidth < window.innerHeight);
+  //   };
 
-    window.addEventListener("resize", resizeHandle);
+  //   window.addEventListener("resize", resizeHandle);
 
-    return () => {
-      window.removeEventListener("resize", resizeHandle);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", resizeHandle);
+  //   };
+  // }, []);
 
   // screen.orientation.addEventListener("change", function (e) {
   //   setIsVertical(window.innerWidth < window.innerHeight);
@@ -24,7 +24,7 @@ export default function HorizontalEnjoyer() {
 
   return (
     <>
-      {isVertical && (
+      {/* {isVertical && (
         <div className={styles.HoriRoot}>
           <p className={styles.message}>
             Please tilt/adjust your device/screen Horizontally for optimal
@@ -32,7 +32,7 @@ export default function HorizontalEnjoyer() {
           </p>
           <img className={styles.Image} src="/Home/Horizontal.png"></img>
         </div>
-      )}
+      )} */}
     </>
   );
 }

@@ -29,25 +29,25 @@ export default function WebsiteProjects() {
   const sectionDefaultWidth = 70; // Specify width
   const [sectionRatio, setSectionRatio] = useState({ width: 0, height: 0 });
 
-  useEffect(() => {
-    function handleResize() {
-      // Ratio is 16:9
-      let width = sectionDefaultWidth;
-      let height = sectionDefaultWidth * 0.5625;
-      const ratio = window.innerHeight / window.innerWidth;
-      if (ratio < 0.5625) {
-        width = width * (ratio / 0.5625);
-        height = width * 0.5625;
-      }
-      setSectionRatio({ width: width, height: height });
-    }
-    window.addEventListener("resize", handleResize);
-    handleResize();
+  // useEffect(() => {
+  //   function handleResize() {
+  //     // Ratio is 16:9
+  //     let width = sectionDefaultWidth;
+  //     let height = sectionDefaultWidth * 0.5625;
+  //     const ratio = window.innerHeight / window.innerWidth;
+  //     if (ratio < 0.5625) {
+  //       width = width * (ratio / 0.5625);
+  //       height = width * 0.5625;
+  //     }
+  //     setSectionRatio({ width: width, height: height });
+  //   }
+  //   window.addEventListener("resize", handleResize);
+  //   handleResize();
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
   //RATIO CALCULATION END
 
   const getPosIndex = (index) => {
