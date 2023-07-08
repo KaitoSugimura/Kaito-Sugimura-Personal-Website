@@ -138,9 +138,9 @@ export default function Home() {
       TouchMoveStartTime.current = Date.now();
     };
 
-    window.addEventListener("wheel", handleScroll);
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart);
+    // window.addEventListener("wheel", handleScroll);
+    // window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    // window.addEventListener("touchstart", handleTouchStart);
 
     return () => {
       window.removeEventListener("wheel", handleScroll);
@@ -180,7 +180,9 @@ export default function Home() {
                 id={section.title}
                 key={section.title}
                 style={{
-                  transform: `translateY(-${currentSection * window.innerHeight}px)`,
+                  transform: `translateY(-${
+                    currentSection * window.innerHeight
+                  }px)`,
                   transition: "transform 0.3s ease-in-out",
                 }}
               >
