@@ -175,8 +175,12 @@ export default function WebsiteProjects() {
             e.preventDefault();
           }}
         >
-
-            <SelectedView index={parseInt(currentIndex)} sectionRatio={sectionRatio} />
+          {selectedView && (
+            <SelectedView
+              index={parseInt(currentIndex)}
+              sectionRatio={sectionRatio}
+            />
+          )}
 
           <div className={styles.WebsiteOuterFrame}>
             {Contents.map((content, index) => (
@@ -184,27 +188,29 @@ export default function WebsiteProjects() {
                 key={index}
                 className={styles.FrameContainer}
                 style={
-                  (selectedView ? getPosIndex(index) == 0 : true)
-                    ? {
-                        zIndex: Math.round(-(getAbsPosIndex(index) * 10)),
-                        transition: mouseIsDown.current
-                          ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
-                          : `z-index 0.3s ease-in-out, opacity 0.3s ease-in, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
-                        transform: selectedView
-                          ? `translate(calc(-50% - ${
-                              sectionRatio.width / 2.25
-                            }vw), -50%)`
-                          : "translate(-50%, -50%)",
-                        width: `${getSelectedWidth(index)}vw`,
-                        height: `${getSelectedHeight(index)}vw`,
-                      }
-                    : {
-                        opacity: 0,
-                        visibility: "hidden",
-                        width: `${sectionRatio.width * 0.5}vw`,
-                        height: `${sectionRatio.height * 0.5}vw`,
-                        transform: "translate(-50%, -50%)",
-                      }
+                  // (selectedView ? getPosIndex(index) == 0 : true)
+                  //   ?
+                  {
+                    zIndex: Math.round(-(getAbsPosIndex(index) * 10)),
+                    transition: mouseIsDown.current
+                      ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
+                      : `z-index 0.3s ease-in-out, opacity 0.3s ease-in, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
+                    transform:
+                      selectedView && getPosIndex(index) == 0
+                        ? `translate(calc(-50% - ${
+                            sectionRatio.width / 2.25
+                          }vw), -50%)`
+                        : "translate(-50%, -50%)",
+                    width: `${getSelectedWidth(index)}vw`,
+                    height: `${getSelectedHeight(index)}vw`,
+                  }
+                  // : {
+                  //     opacity: 0,
+                  //     visibility: "hidden",
+                  //     width: `${sectionRatio.width * 0.5}vw`,
+                  //     height: `${sectionRatio.height * 0.5}vw`,
+                  //     transform: "translate(-50%, -50%)",
+                  //   }
                 }
               >
                 <div
@@ -246,7 +252,7 @@ export default function WebsiteProjects() {
                     }}
                     onClick={() => {
                       if (!isDragging.current) {
-                        if (currentIndex == index) {
+                        if (parseInt(currentIndex) == index) {
                           toggleSelectedView();
                         } else if (!selectedView) {
                           setCurrentIndex(index);
