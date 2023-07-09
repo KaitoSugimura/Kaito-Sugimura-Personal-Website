@@ -200,7 +200,8 @@ export default function WebsiteProjects() {
                         ? `translate(calc(-50% - ${
                             sectionRatio.width / 2.25
                           }vw), -50%)`
-                        : "translate(-50%, -50%)",
+                        : 
+                        "translate(-50%, -50%)",
                     width: `${getSelectedWidth(index)}vw`,
                     height: `${getSelectedHeight(index)}vw`,
                   }
