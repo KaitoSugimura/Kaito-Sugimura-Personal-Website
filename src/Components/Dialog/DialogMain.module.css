@@ -16,8 +16,8 @@
 
 .SkipContainer {
   position: absolute;
-  top: 4vh;
-  right: 4vh;
+  top: 5vh;
+  right: 2.5vw;
 
   height: max(4vmin, 2.5rem);
   background: transparent;
@@ -135,7 +135,7 @@
   bottom: 0;
   right: 0;
   width: auto;
-  height: 90%;
+  height: 94%;
 
   object-fit: cover;
   object-position: center;

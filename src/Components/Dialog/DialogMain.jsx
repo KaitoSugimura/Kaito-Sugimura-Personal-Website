@@ -36,8 +36,8 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
     <div className={styles.DialogRoot}>
       <SoundSetting
         style={{
-          top: "4vh",
-          left: "4vh",
+          top: "5vh",
+          left: "2.5vw",
         }}
       />
       <button className={styles.SkipContainer} onClick={skipDialog}>
@@ -60,15 +60,16 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
             </p>
           )}
         </div>
-        {currentTextNo < Dialogs[DialogID].length && Dialogs[DialogID][currentTextNo].image && (
-          <img
-            src={`/Dialog/Pictures/${Dialogs[DialogID][currentTextNo].image}`}
-            className={styles.DialogImage}
-            onDrag={(e) => {
-              e.preventDefault();
-            }}
-          ></img>
-        )}
+        {currentTextNo < Dialogs[DialogID].length &&
+          Dialogs[DialogID][currentTextNo].image && (
+            <img
+              src={`/Dialog/Pictures/${Dialogs[DialogID][currentTextNo].image}`}
+              className={styles.DialogImage}
+              onDrag={(e) => {
+                e.preventDefault();
+              }}
+            ></img>
+          )}
       </div>
     </div>
   );

@@ -89,7 +89,7 @@
   left: 0;
   width: 100vw;
   height: 100%;
-  z-index: 1000;
+  z-index: 10;
 
   background-image: url("/Grid.png");
   background-size: 4px 4px;
@@ -395,7 +395,7 @@
   background-color: rgba(0, 0, 0, 0.746);
   opacity: 0;
 
-  z-index: 100;
+  z-index: 10;
 }
 
 @keyframes switchUser {

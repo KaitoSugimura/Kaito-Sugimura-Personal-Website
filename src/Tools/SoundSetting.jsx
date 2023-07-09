@@ -7,13 +7,7 @@ export default function SoundSetting({ style }) {
   const previousVolume = useRef(volume);
 
   return (
-    <div
-      className={styles.SoundSetting}
-      style={style}
-      onDrag={(e) => {
-        e.preventDefault();
-      }}
-    >
+    <div className={styles.SoundSetting} style={style}>
       <button
         className={styles.SoundButton}
         onClick={() => {

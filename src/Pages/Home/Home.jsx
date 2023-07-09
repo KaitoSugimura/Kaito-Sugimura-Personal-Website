@@ -131,7 +131,8 @@ export default function Home() {
               <div key={section.title}>{section.XML}</div>
             )
           )} */}
-          {Sections[currentSection].XML}
+
+          {!initDone ? <InitHero /> : Sections[currentSection].XML}
         </div>
       </div>
     </scrollContext.Provider>

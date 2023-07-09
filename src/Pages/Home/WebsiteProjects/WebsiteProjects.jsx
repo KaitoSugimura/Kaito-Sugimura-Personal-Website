@@ -27,27 +27,29 @@ export default function WebsiteProjects() {
 
   //RATIO CALCULATION
   const sectionDefaultWidth = 70; // Specify width
-  const [sectionRatio, setSectionRatio] = useState({ width: 0, height: 0 });
+  const getSectionRatio = () => {
+    // Ratio is 16:9
+    let width = sectionDefaultWidth;
+    let height = sectionDefaultWidth * 0.5625;
+    const ratio = window.innerHeight / window.innerWidth;
+    if (ratio < 0.5625) {
+      width = width * (ratio / 0.5625);
+      height = width * 0.5625;
+    }
+    return { width: width, height: height };
+  };
+  const [sectionRatio, setSectionRatio] = useState(getSectionRatio());
 
-  // useEffect(() => {
-  //   function handleResize() {
-  //     // Ratio is 16:9
-  //     let width = sectionDefaultWidth;
-  //     let height = sectionDefaultWidth * 0.5625;
-  //     const ratio = window.innerHeight / window.innerWidth;
-  //     if (ratio < 0.5625) {
-  //       width = width * (ratio / 0.5625);
-  //       height = width * 0.5625;
-  //     }
-  //     setSectionRatio({ width: width, height: height });
-  //   }
-  //   window.addEventListener("resize", handleResize);
-  //   handleResize();
+  useEffect(() => {
+    function handleResize() {
+      setSectionRatio(getSectionRatio());
+    }
+    window.addEventListener("resize", handleResize);
 
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   //RATIO CALCULATION END
 
   const getPosIndex = (index) => {
@@ -78,9 +80,10 @@ export default function WebsiteProjects() {
         else playSFX("BackClick");
         return !prev;
       });
-      setTimeout(() => {
-        canToggleSelectedView.current = true;
-      }, 200);
+      // setTimeout(() => {
+      //   canToggleSelectedView.current = true;
+      // }, 200);
+      canToggleSelectedView.current = true;
     }
   };
 
@@ -147,7 +150,7 @@ export default function WebsiteProjects() {
     return (mouseIsDown.current && isDragging.current) ||
       selectedView ||
       getAbsPosIndex(index) > 0.5
-      ? sectionRatio.width / 2
+      ? sectionRatio.width * 0.5
       : sectionRatio.width / 1.35;
   };
 
@@ -155,7 +158,7 @@ export default function WebsiteProjects() {
     return (mouseIsDown.current && isDragging.current) ||
       selectedView ||
       getAbsPosIndex(index) > 0.5
-      ? sectionRatio.height / 2
+      ? sectionRatio.height * 0.5
       : sectionRatio.height / 1.35;
   };
 
@@ -196,11 +199,11 @@ export default function WebsiteProjects() {
                         height: `${getSelectedHeight(index)}vw`,
                       }
                     : {
-                      opacity: 0,
+                        opacity: 0,
                         visibility: "hidden",
-                        width: `${sectionRatio.width / 2}vw`,
-                        height: `${sectionRatio.height / 2}vw`,
-                        transform:"translate(-50%, -50%)",
+                        width: `${sectionRatio.width * 0.5}vw`,
+                        height: `${sectionRatio.height * 0.5}vw`,
+                        transform: "translate(-50%, -50%)",
                       }
                 }
               >
@@ -210,7 +213,9 @@ export default function WebsiteProjects() {
                     transform: `translate3d(${
                       getPosIndex(index) * 100
                     }%, 0, ${-(
-                      getAbsPosIndex(index) * window.innerWidth *0.2
+                      getAbsPosIndex(index) *
+                      window.innerWidth *
+                      0.2
                     )}px) rotateX(0deg) rotateY(${
                       -getPosIndex(index) * 25
                     }deg) `,
