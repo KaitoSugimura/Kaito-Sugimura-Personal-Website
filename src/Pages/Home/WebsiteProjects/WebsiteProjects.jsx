@@ -175,9 +175,9 @@ export default function WebsiteProjects() {
             e.preventDefault();
           }}
         >
-          {selectedView && (
-            <SelectedView index={currentIndex} sectionRatio={sectionRatio} />
-          )}
+
+            <SelectedView index={parseInt(currentIndex)} sectionRatio={sectionRatio} />
+
           <div className={styles.WebsiteOuterFrame}>
             {Contents.map((content, index) => (
               <div

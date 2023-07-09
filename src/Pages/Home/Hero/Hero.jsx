@@ -112,7 +112,6 @@ export default function Hero() {
         height: `${window.innerHeight}px`,
       }}
     >
-      <div className={styles.blackBackground}></div>
       {UserAuthenticated ? (
         <>
           {BGVideoIsLoading && <LoadingScreen />}

@@ -119,20 +119,21 @@ export default function Home() {
 
         <div
           className={styles.HomeRoot}
-          // style={{
-          //   transform: `translateY(-${currentSection * window.innerHeight}px)`,
-          //   transition: "transform 0.3s ease-in-out",
-          // }}
+          style={{
+            transform: `translateY(-${currentSection * window.innerHeight}px)`,
+            transition: "transform 0.3s ease-in-out",
+          }}
         >
-          {/* {Sections.map((section, index) =>
-            !initDone && index == 0 ? (
-              <InitHero key={index} />
-            ) : (
-              <div key={section.title}>{section.XML}</div>
-            )
-          )} */}
-
-          {!initDone ? <InitHero /> : Sections[currentSection].XML}
+          {Sections.map((section, index) => (
+            <React.Fragment key={section.title}>
+              {!initDone && index == 0 ? (
+                <InitHero />
+              ) : (
+                React.cloneElement(section.XML, {isFocus: index == currentSection})
+              )}
+            </React.Fragment>
+          ))}
+          {/* {!initDone ? <InitHero /> : Sections[currentSection].XML} */}
         </div>
       </div>
     </scrollContext.Provider>
