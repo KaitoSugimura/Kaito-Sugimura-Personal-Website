@@ -201,8 +201,7 @@ export default function WebsiteProjects() {
                         ? `translate(calc(-50% - ${
                             sectionRatio.width / 2.25
                           }vw), -50%)`
-                        : 
-                        "translate(-50%, -50%)",
+                        : "translate(-50%, -50%)",
                     width: `${getSelectedWidth(index)}vw`,
                     height: `${getSelectedHeight(index)}vw`,
                   }
@@ -225,9 +224,7 @@ export default function WebsiteProjects() {
                       window.innerWidth *
                       0.2
                     )}px)
-                     rotateX(0deg) rotateY(${
-                      -getPosIndex(index) * 25
-                    }deg) 
+                     rotateX(0deg) rotateY(${-getPosIndex(index) * 25}deg) 
                     `,
                     transition: mouseIsDown.current
                       ? "none"
@@ -292,20 +289,18 @@ export default function WebsiteProjects() {
             ))}
           </div>
         </div>
-        <div className={styles.SelectContainer}>
-          <button
-            className={styles.SelectButton}
-            onClick={() => {
-              toggleSelectedView();
-              playSFX("DialogClick");
-            }}
-          >
-            <p>{selectedView ? "Close View" : "View Selected"}</p>
-            <span className={styles.leftTriangle}></span>
-            <span className={styles.rightTriangle}></span>
-          </button>
-        </div>
       </div>
+      <button
+        className={styles.SelectButton}
+        onClick={() => {
+          toggleSelectedView();
+          playSFX("DialogClick");
+        }}
+      >
+        <p>{selectedView ? "Close View" : "View Selected"}</p>
+        <span className={styles.leftTriangle}></span>
+        <span className={styles.rightTriangle}></span>
+      </button>
     </SectionContainer>
   );
 }
