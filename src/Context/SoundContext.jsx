@@ -62,6 +62,7 @@ export const SoundContextProvider = ({ children }) => {
   };
 
   const playSFX = (sfxName) => {
+    if (volume == 0) return;
     const playPath = soundList[sfxName];
     if (playPath) {
       const audio = new Audio(playPath);
@@ -71,7 +72,7 @@ export const SoundContextProvider = ({ children }) => {
   };
 
   const playMusic = (musicName) => {
-    if (musicName == null || audioRef.current == null) {
+    if (musicName == null || audioRef.current == null || volume == 0) {
       return;
     }
     if (musicName === "resume") {

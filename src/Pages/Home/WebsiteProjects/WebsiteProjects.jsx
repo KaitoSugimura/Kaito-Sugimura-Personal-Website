@@ -19,8 +19,6 @@ export default function WebsiteProjects() {
     "ontouchstart" in window ||
     navigator.maxTouchPoints > 0 ||
     navigator.msMaxTouchPoints > 0;
-  const cachedIndex = useRef(-1);
-  const cachedDif = useRef(0);
   // Do not use setter her, please use toggleSelectedView
   const [selectedView, setSelectedView] = useState(false);
   const canToggleSelectedView = useRef(true);
@@ -44,7 +42,7 @@ export default function WebsiteProjects() {
     function handleResize() {
       setSectionRatio(getSectionRatio());
     }
-    // window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -54,26 +52,24 @@ export default function WebsiteProjects() {
 
   const getPosIndex = useCallback(
     (index) => {
-      if (cachedIndex.current === index) {
-        return cachedDif.current;
-      }
       let dif = index - currentIndex;
-      const div2 = Contents.length / 2;
+      const div2 = Contents.length * 0.5;
       if (dif > div2) {
         dif -= Contents.length;
       } else if (dif < -div2) {
         dif += Contents.length;
       }
-      cachedIndex.current = index;
-      cachedDif.current = +dif;
       return +dif;
     },
     [currentIndex]
   );
 
-  const getAbsPosIndex = (index) => {
-    return Math.abs(getPosIndex(index));
-  };
+  const getAbsPosIndex = useCallback(
+    (index) => {
+      return Math.abs(getPosIndex(index));
+    },
+    [currentIndex]
+  );
 
   const toggleSelectedView = useCallback(() => {
     if (canToggleSelectedView.current) {
@@ -129,31 +125,34 @@ export default function WebsiteProjects() {
     });
   }, []);
 
-  const handleMouseDown = (event) => {
-    isDragging.current = false;
-    if (!canToggleSelectedView.current) return;
-    if (selectedView) return;
-    mouseIsDown.current = true;
+  const handleMouseDown = useCallback(
+    (event) => {
+      isDragging.current = false;
+      if (!canToggleSelectedView.current) return;
+      if (selectedView) return;
+      mouseIsDown.current = true;
 
-    const { clientX } = (event.touches && event.touches[0]) || event;
-    MouseXInitialRef.current = clientX;
-    initialIndexRef.current = currentIndex;
+      const { clientX } = (event.touches && event.touches[0]) || event;
+      MouseXInitialRef.current = clientX;
+      initialIndexRef.current = currentIndex;
 
-    document.addEventListener(
-      deviceIsTouch ? "touchend" : "mouseup",
-      handleMouseUp
-    );
-    document.addEventListener(
-      deviceIsTouch ? "touchmove" : "mousemove",
-      handleMouseMove
-    );
-  };
+      document.addEventListener(
+        deviceIsTouch ? "touchend" : "mouseup",
+        handleMouseUp
+      );
+      document.addEventListener(
+        deviceIsTouch ? "touchmove" : "mousemove",
+        handleMouseMove
+      );
+    },
+    [selectedView, currentIndex]
+  );
 
   const getSelectedWidth = useCallback(
     (index) => {
       return sectionRatio.width * 0.5;
 
-      // (mouseIsDown.current && isDragging.current) ||
+      // return (mouseIsDown.current && isDragging.current) ||
       //   selectedView ||
       //   getAbsPosIndex(index) > 0.5
       //   ? sectionRatio.width * 0.5
@@ -166,7 +165,7 @@ export default function WebsiteProjects() {
   const getSelectedHeight = useCallback(
     (index) => {
       return sectionRatio.height * 0.5;
-      // (mouseIsDown.current && isDragging.current) ||
+      // return (mouseIsDown.current && isDragging.current) ||
       //   selectedView ||
       //   getAbsPosIndex(index) > 0.5
       //   ? sectionRatio.height * 0.5
