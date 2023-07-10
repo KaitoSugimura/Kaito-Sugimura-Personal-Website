@@ -196,10 +196,9 @@ export default function WebsiteProjects() {
                 key={index}
                 className={styles.FrameContainer}
                 style={
-                  // (selectedView ? getPosIndex(index) == 0 : true)
-                  //   ?
                   {
                     opacity: selectedView && getPosIndex(index) !== 0 ? 0 : 1,
+                    WebkitTransform: "translateZ(0)",
                     zIndex: `${Math.round(-(getAbsPosIndex(index) * 10))}`,
                     transition: mouseIsDown.current
                       ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
@@ -213,13 +212,7 @@ export default function WebsiteProjects() {
                     width: `${getSelectedWidth(index)}vw`,
                     height: `${getSelectedHeight(index)}vw`,
                   }
-                  // : {
-                  //     opacity: 0,
-                  //     visibility: "hidden",
-                  //     width: `${sectionRatio.width * 0.5}vw`,
-                  //     height: `${sectionRatio.height * 0.5}vw`,
-                  //     transform: "translate(-50%, -50%)",
-                  //   }
+
                 }
               >
                 <div
