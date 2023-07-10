@@ -53,9 +53,9 @@ export default function WebsiteProjects() {
   //RATIO CALCULATION END
 
   const getPosIndex = (index) => {
-    if (cachedIndex.current === index) {
-      return cachedDif.current;
-    }
+    // if (cachedIndex.current === index) {
+    //   return cachedDif.current;
+    // }
     let dif = index - currentIndex;
     const div2 = Contents.length / 2;
     if (dif > div2) {
@@ -64,8 +64,8 @@ export default function WebsiteProjects() {
       dif += Contents.length;
     }
     cachedIndex.current = index;
-    cachedDif.current = parseInt(dif);
-    return parseInt(dif);
+    cachedDif.current = +dif;
+    return +dif;
   };
 
   const getAbsPosIndex = (index) => {
@@ -182,7 +182,7 @@ export default function WebsiteProjects() {
             />
           )} */}
 
-          <div className={styles.WebsiteOuterFrame}>
+          <div className={styles.WebsiteOuterFrame}><div className={styles.temp}> {selectedView?"true":"false"}</div>
             {Contents.map((content, index) => (
               <div
                 key={index}
@@ -191,11 +191,12 @@ export default function WebsiteProjects() {
                   // (selectedView ? getPosIndex(index) == 0 : true)
                   //   ?
                   {
-                    opacity: selectedView && getPosIndex(index) != 0 ? 0 : 1,
+                    opacity:
+                      selectedView && getPosIndex(index) != 0 ? "0" : "1",
                     zIndex: Math.round(-(getAbsPosIndex(index) * 10)),
                     transition: mouseIsDown.current
                       ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
-                      : `z-index 0.3s ease-in-out,  transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
+                      : `z-index 0.3s ease-in-out, opacity 0.3s ease-in, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
                     transform:
                       selectedView && getPosIndex(index) == 0
                         ? `translate(calc(-50% - ${
