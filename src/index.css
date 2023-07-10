@@ -211,7 +211,7 @@ body::-webkit-scrollbar-track {
 @font-face {
   font-family: "Consolas";
   src: url("/Fonts/Consolas/Consolas.eot");
-  src: local("/Fonts/Consolas/Consolas"),
+  src: local("Consolas"),
     url("/Fonts/Consolas/Consolas.eot?#iefix") format("embedded-opentype"),
     url("/Fonts/Consolas/Consolas.woff2") format("woff2"),
     url("/Fonts/Consolas/Consolas.woff") format("woff"),
@@ -223,7 +223,7 @@ body::-webkit-scrollbar-track {
 @font-face {
   font-family: "Consolas";
   src: url("/Fonts/Consolas/Consolas-Italic.eot");
-  src: local("/Fonts/Consolas/Consolas Italic"),
+  src: local("Consolas Italic"),
     local("/Fonts/Consolas/Consolas-Italic"),
     url("/Fonts/Consolas/Consolas-Italic.eot?#iefix")
       format("embedded-opentype"),
@@ -237,7 +237,7 @@ body::-webkit-scrollbar-track {
 @font-face {
   font-family: "Consolas";
   src: url("/Fonts/Consolas/Consolas-BoldItalic.eot");
-  src: local("/Fonts/Consolas/Consolas Bold Italic"),
+  src: local("Consolas Bold Italic"),
     local("/Fonts/Consolas/Consolas-BoldItalic"),
     url("/Fonts/Consolas/Consolas-BoldItalic.eot?#iefix")
       format("embedded-opentype"),
@@ -251,7 +251,7 @@ body::-webkit-scrollbar-track {
 @font-face {
   font-family: "Consolas";
   src: url("/Fonts/Consolas/Consolas-Bold.eot");
-  src: local("/Fonts/Consolas/Consolas Bold"),
+  src: local("Consolas Bold"),
     local("/Fonts/Consolas/Consolas-Bold"),
     url("/Fonts/Consolas/Consolas-Bold.eot?#iefix") format("embedded-opentype"),
     url("/Fonts/Consolas/Consolas-Bold.woff2") format("woff2"),

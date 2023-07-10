@@ -8,7 +8,7 @@
   /* animation: init 10s forwards; */
 
   font-weight: 400;
-  font-family: "Roboto", monospace;
+  font-family: "Roboto", "Consolas", monospace;
   font-size: 1vw;
 
   -moz-user-select: -moz-none;
@@ -42,8 +42,6 @@
     background-color: transparent;
   }
 } */
-
-
 
 .backgroundImage {
   position: absolute;
