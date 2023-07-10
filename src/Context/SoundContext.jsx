@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useEffect, useRef, useState } from "react";
 // Music
 import defaultBGM from "/Dialog/Music/MainMusic.mp3";
 import profileBGM from "/Dialog/Music/Flutter.mp3";
@@ -57,6 +57,7 @@ export const SoundContextProvider = ({ children }) => {
       SFXRef.current.volume = volume;
       audioRef.current.currentTime = currentTimeRef.current;
       if (volume == 0) audioRef.current.pause();
+      else audioRef.current.play();
     }
   }, [volume]);
 
@@ -64,41 +65,47 @@ export const SoundContextProvider = ({ children }) => {
     currentTimeRef.current = audioRef.current.currentTime;
   };
 
-  const playSFX = (sfxName) => {
-    if (volume == 0) return;
-    const playPath = soundList[sfxName];
-    if (playPath) {
-      SFXRef.current.src = playPath;
-      SFXRef.current.play();
-    }
-  };
+  const playSFX = useCallback(
+    (sfxName) => {
+      if (volume == 0) return;
+      const playPath = soundList[sfxName];
+      if (playPath) {
+        SFXRef.current.src = playPath;
+        SFXRef.current.play();
+      }
+    },
+    [volume]
+  );
 
-  const playMusic = (musicName) => {
-    if (musicName == null || audioRef.current == null || volume == 0) {
-      return;
-    }
-    if (musicName === "resume") {
-      audioRef.current.currentTime = currentTimeRef.current;
+  const playMusic = useCallback(
+    (musicName) => {
+      if (musicName == null || audioRef.current == null || volume == 0) {
+        return;
+      }
+      if (musicName === "resume") {
+        audioRef.current.currentTime = currentTimeRef.current;
+        audioRef.current.play();
+        return;
+      }
+      switch (musicName) {
+        case "main":
+          audioRef.current.src = defaultBGM;
+          break;
+        case "profile":
+          audioRef.current.src = profileBGM;
+          break;
+        case "projects":
+          audioRef.current.src = projectsBGM;
+          break;
+        case "warmLoop":
+          audioRef.current.src = WarmLoopBGM;
+          break;
+      }
+
       audioRef.current.play();
-      return;
-    }
-    switch (musicName) {
-      case "main":
-        audioRef.current.src = defaultBGM;
-        break;
-      case "profile":
-        audioRef.current.src = profileBGM;
-        break;
-      case "projects":
-        audioRef.current.src = projectsBGM;
-        break;
-      case "warmLoop":
-        audioRef.current.src = WarmLoopBGM;
-        break;
-    }
-
-    audioRef.current.play();
-  };
+    },
+    [volume]
+  );
 
   const stopMusic = () => {
     if (audioRef.current == null) {
@@ -118,7 +125,6 @@ export const SoundContextProvider = ({ children }) => {
       }}
     >
       <audio
-        src={defaultBGM}
         ref={audioRef}
         loop="loop"
         onTimeUpdate={handleTimeUpdate}
