@@ -150,28 +150,24 @@ export default function WebsiteProjects() {
 
   const getSelectedWidth = useCallback(
     (index) => {
-      return sectionRatio.width * 0.5;
-
-      // return (mouseIsDown.current && isDragging.current) ||
-      //   selectedView ||
-      //   getAbsPosIndex(index) > 0.5
-      //   ? sectionRatio.width * 0.5
-      //   :
-      //   sectionRatio.width / 1.35;
+      return (mouseIsDown.current && isDragging.current) ||
+        selectedView ||
+        getAbsPosIndex(index) > 0.5
+        ? sectionRatio.width * 0.5
+        : sectionRatio.width / 1.35;
     },
-    [sectionRatio]
+    [sectionRatio, selectedView, currentIndex]
   );
 
   const getSelectedHeight = useCallback(
     (index) => {
-      return sectionRatio.height * 0.5;
-      // return (mouseIsDown.current && isDragging.current) ||
-      //   selectedView ||
-      //   getAbsPosIndex(index) > 0.5
-      //   ? sectionRatio.height * 0.5
-      //   : sectionRatio.height / 1.35;
+      return (mouseIsDown.current && isDragging.current) ||
+        selectedView ||
+        getAbsPosIndex(index) > 0.5
+        ? sectionRatio.height * 0.5
+        : sectionRatio.height / 1.35;
     },
-    [sectionRatio]
+    [sectionRatio, selectedView, currentIndex]
   );
 
   return (
@@ -260,12 +256,10 @@ export default function WebsiteProjects() {
                     }`}
                     style={{
                       width: `${
-                        // selectedView && getPosIndex(index) == 0 ? 100 :
-                        85
+                        selectedView && getPosIndex(index) == 0 ? 100 : 85
                       }%`,
                       height: `${
-                        // selectedView && getPosIndex(index) == 0 ? 100 :
-                        85
+                        selectedView && getPosIndex(index) == 0 ? 100 : 85
                       }%`,
                       // left: selectedView ? "0%" : "7.5%",
                     }}
