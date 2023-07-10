@@ -53,9 +53,9 @@ export default function WebsiteProjects() {
   //RATIO CALCULATION END
 
   const getPosIndex = (index) => {
-    // if (cachedIndex.current === index) {
-    //   return cachedDif.current;
-    // }
+    if (cachedIndex.current === index) {
+      return cachedDif.current;
+    }
     let dif = index - currentIndex;
     const div2 = Contents.length / 2;
     if (dif > div2) {
@@ -232,7 +232,7 @@ export default function WebsiteProjects() {
                       : `transform 0.3s ease-in-out`,
                   }}
                 >
-                  <FrameOverlay
+                  {/* <FrameOverlay
                     index={index}
                     content={content}
                     currentABSPos={getAbsPosIndex(index)}
@@ -240,7 +240,7 @@ export default function WebsiteProjects() {
                     mouseDownAndDragging={
                       mouseIsDown.current && isDragging.current
                     }
-                  />
+                  /> */}
                   <div
                     className={`${styles.clickWrapper} ${
                       selectedView && getPosIndex(index) != 0
@@ -254,7 +254,7 @@ export default function WebsiteProjects() {
                       height: `${
                         selectedView && getPosIndex(index) == 0 ? 100 : 85
                       }%`,
-                      left: selectedView ? "0%" : "7.5%",
+                      // left: selectedView ? "0%" : "7.5%",
                     }}
                     onClick={() => {
                       if (!isDragging.current) {
@@ -270,17 +270,44 @@ export default function WebsiteProjects() {
                     {!selectedView && (
                       <>
                         {index == 0 && (
-                          <div className={styles.Ribbon}>
-                            <p className={styles.Newest}>Newest</p>
+                          <div className={styles.RibbonOverlay}>
+                            <div className={styles.Ribbon}>
+                              <p className={styles.Newest}>Newest</p>
+                            </div>
                           </div>
                         )}
                         {index == Contents.length - 1 && (
-                          <div className={styles.Ribbon}>
-                            <p className={styles.Oldest}>Oldest</p>
+                          <div className={styles.RibbonOverlay}>
+                            <div className={styles.Ribbon}>
+                              <p className={styles.Oldest}>Oldest</p>
+                            </div>
                           </div>
                         )}
+
+                        <div className={styles.FrameOverlay}>
+                          {!(mouseIsDown.current && isDragging.current) &&
+                            0 == getAbsPosIndex(index) && (
+                              <div className={styles.leftBottom}>
+                                <h1 className={styles.title}>
+                                  {content.title}
+                                </h1>
+                                <p className={styles.desc}>{content.desc}</p>
+                              </div>
+                            )}
+
+                          <div className={styles.frameLogoCenterer}>
+                            <img
+                              className={styles.frameLogo}
+                              src={`/Home/WebsiteProjects/Logos/${content.logoPath}`}
+                              onDragStart={(e) => {
+                                e.preventDefault();
+                              }}
+                            />
+                          </div>
+                        </div>
                       </>
                     )}
+
                     <img
                       className={styles.frameImage}
                       src={content.imageMain}

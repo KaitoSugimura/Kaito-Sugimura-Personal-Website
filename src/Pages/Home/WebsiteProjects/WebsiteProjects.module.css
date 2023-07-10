@@ -51,8 +51,6 @@
   pointer-events: none;
 }
 
-
-
 .FrameContainer {
   position: absolute;
   top: 0;
@@ -80,6 +78,10 @@
   height: 100%;
   z-index: 1;
 
+  display: flex;
+  justify-content: center;
+  align-items: start;
+
   border: none;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -87,11 +89,12 @@
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+
+  /* background-color: red; */
 }
 
 .clickWrapper {
-  position: absolute;
-  left: 7.5%;
+  position: relative;
   width: 85%;
   height: 85%;
   border: none;
@@ -102,9 +105,8 @@
   user-select: all;
   pointer-events: all;
 
-  transition: width 0.3s ease-in-out, height 0.3s ease-in-out,
-    left 0.3s ease-in-out;
-  overflow: hidden;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+  /* overflow: hidden; */
 }
 
 .frameImage {
@@ -118,9 +120,114 @@
   user-select: none;
   pointer-events: none;
   z-index: 0;
-  box-shadow: 0.8vw 0.2vw 0.4vw rgba(0, 0, 0, 0.2);
 }
 
+.RibbonOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.FrameOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  border: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+
+  -webkit-perspective: 125vh;
+  perspective: 125vh;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.leftBottom {
+  position: absolute;
+  bottom: 2%;
+  left: -26%;
+  width: 65%;
+  height: 6.5vw;
+  line-height: 1.3;
+
+  color: white;
+  border-left: solid 0.3vw rgba(255, 255, 255, 0.95);
+  padding-left: 1vw;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0) 80%
+  );
+
+  transform: rotateY(30deg);
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.title {
+  font-size: 2.2vw;
+  font-weight: 600;
+  line-height: 1.3;
+
+  margin-top: 0.2vw;
+  white-space: nowrap;
+  align-self: flex-end;
+}
+
+.desc {
+  line-height: 1.1;
+
+  font-size: 1.2vw;
+  font-weight: 400;
+}
+
+.frameLogoCenterer {
+  position: absolute;
+  bottom: -13%;
+  right: 1.5%;
+  width: 0;
+  height: 12vw;
+  transform: translateX(50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frameLogo {
+  width: 12vw;
+  height: auto;
+
+  border: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+}
 
 .SelectButton {
   position: absolute;
