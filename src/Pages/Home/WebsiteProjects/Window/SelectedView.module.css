@@ -1,6 +1,5 @@
-
 .SelectedViewRoot {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-31%, -50%);
@@ -20,12 +19,12 @@
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translate(-41%, -60%) scale(0.9);
+    transform: translate(-41%, -60%);
   }
 
   100% {
     opacity: 1;
-    transform: translate(-31%, -50%) scale(1);
+    transform: translate(-31%, -50%);
   }
 }
 
@@ -131,10 +130,9 @@
   cursor: pointer;
 }
 
-.videoContainer:hover{
+.videoContainer:hover {
   background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
 }
-
 
 .videoContainerRemoveSelect {
   display: flex;
@@ -182,7 +180,6 @@
 
 .playVideoIcon {
   width: 2vw;
-
 }
 
 .playMovieIcon {

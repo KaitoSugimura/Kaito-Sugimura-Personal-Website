@@ -22,10 +22,19 @@ export default function Hero({ isfocus }) {
         RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
       }
     }
-    if(!isfocus){
-      setBGVideoIsLoading(true)
+    if (!isfocus) {
+      setBGVideoIsLoading(true);
     }
   }, [currentSection]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setUserAuthenticated(true);
+      if (RootRef.current) {
+        RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
+      }
+    }, 9000);
+  }, []);
 
   const AnimPlayHandle = (e) => {
     switch (e.animationName) {
@@ -111,7 +120,9 @@ export default function Hero({ isfocus }) {
               <video
                 className={styles.backgroundVideo}
                 onLoadedData={() => {
-                  setBGVideoIsLoading(false);
+                  setTimeout(() => {
+                    setBGVideoIsLoading(false);
+                  }, 300);
                 }}
                 autoPlay
                 muted

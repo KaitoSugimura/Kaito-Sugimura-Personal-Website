@@ -48,11 +48,13 @@ export const SoundContext = createContext();
 export const SoundContextProvider = ({ children }) => {
   const [volume, setVolume] = useState(0.5);
   const audioRef = useRef(null);
+  const SFXRef = useRef(null);
   const currentTimeRef = useRef(0);
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume;
+      SFXRef.current.volume = volume;
       audioRef.current.currentTime = currentTimeRef.current;
       if (volume == 0) audioRef.current.pause();
     }
@@ -66,9 +68,8 @@ export const SoundContextProvider = ({ children }) => {
     if (volume == 0) return;
     const playPath = soundList[sfxName];
     if (playPath) {
-      const audio = new Audio(playPath);
-      audio.volume = audioRef.current.volume;
-      audio.play();
+      SFXRef.current.src = playPath;
+      SFXRef.current.play();
     }
   };
 
@@ -122,6 +123,7 @@ export const SoundContextProvider = ({ children }) => {
         loop="loop"
         onTimeUpdate={handleTimeUpdate}
       />
+      <audio ref={SFXRef} />
       {children}
     </SoundContext.Provider>
   );
