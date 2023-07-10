@@ -86,9 +86,9 @@ export default function Home() {
       TouchMoveStartY.current = touch.pageY;
     };
 
-    // window.addEventListener("wheel", handleScroll);
-    // window.addEventListener("touchstart", handleTouchStart);
-    // window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("wheel", handleScroll);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
       window.removeEventListener("wheel", handleScroll);

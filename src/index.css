@@ -49,8 +49,8 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, /Fonts/Consolas/Consolas,
+    "Courier New", monospace;
 }
 
 body::-webkit-scrollbar {
@@ -210,46 +210,53 @@ body::-webkit-scrollbar-track {
 
 @font-face {
   font-family: "Consolas";
-  src: url("Consolas.eot");
-  src: local("Consolas"), url("Consolas.eot?#iefix") format("embedded-opentype"),
-    url("Consolas.woff2") format("woff2"), url("Consolas.woff") format("woff"),
-    url("Consolas.ttf") format("truetype");
+  src: url("/Fonts/Consolas/Consolas.eot");
+  src: local("/Fonts/Consolas/Consolas"),
+    url("/Fonts/Consolas/Consolas.eot?#iefix") format("embedded-opentype"),
+    url("/Fonts/Consolas/Consolas.woff2") format("woff2"),
+    url("/Fonts/Consolas/Consolas.woff") format("woff"),
+    url("/Fonts/Consolas/Consolas.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Consolas";
-  src: url("Consolas-Italic.eot");
-  src: local("Consolas Italic"), local("Consolas-Italic"),
-    url("Consolas-Italic.eot?#iefix") format("embedded-opentype"),
-    url("Consolas-Italic.woff2") format("woff2"),
-    url("Consolas-Italic.woff") format("woff"),
-    url("Consolas-Italic.ttf") format("truetype");
+  src: url("/Fonts/Consolas/Consolas-Italic.eot");
+  src: local("/Fonts/Consolas/Consolas Italic"),
+    local("/Fonts/Consolas/Consolas-Italic"),
+    url("/Fonts/Consolas/Consolas-Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/Consolas/Consolas-Italic.woff2") format("woff2"),
+    url("/Fonts/Consolas/Consolas-Italic.woff") format("woff"),
+    url("/Fonts/Consolas/Consolas-Italic.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Consolas";
-  src: url("Consolas-BoldItalic.eot");
-  src: local("Consolas Bold Italic"), local("Consolas-BoldItalic"),
-    url("Consolas-BoldItalic.eot?#iefix") format("embedded-opentype"),
-    url("Consolas-BoldItalic.woff2") format("woff2"),
-    url("Consolas-BoldItalic.woff") format("woff"),
-    url("Consolas-BoldItalic.ttf") format("truetype");
+  src: url("/Fonts/Consolas/Consolas-BoldItalic.eot");
+  src: local("/Fonts/Consolas/Consolas Bold Italic"),
+    local("/Fonts/Consolas/Consolas-BoldItalic"),
+    url("/Fonts/Consolas/Consolas-BoldItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/Fonts/Consolas/Consolas-BoldItalic.woff2") format("woff2"),
+    url("/Fonts/Consolas/Consolas-BoldItalic.woff") format("woff"),
+    url("/Fonts/Consolas/Consolas-BoldItalic.ttf") format("truetype");
   font-weight: bold;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Consolas";
-  src: url("Consolas-Bold.eot");
-  src: local("Consolas Bold"), local("Consolas-Bold"),
-    url("Consolas-Bold.eot?#iefix") format("embedded-opentype"),
-    url("Consolas-Bold.woff2") format("woff2"),
-    url("Consolas-Bold.woff") format("woff"),
-    url("Consolas-Bold.ttf") format("truetype");
+  src: url("/Fonts/Consolas/Consolas-Bold.eot");
+  src: local("/Fonts/Consolas/Consolas Bold"),
+    local("/Fonts/Consolas/Consolas-Bold"),
+    url("/Fonts/Consolas/Consolas-Bold.eot?#iefix") format("embedded-opentype"),
+    url("/Fonts/Consolas/Consolas-Bold.woff2") format("woff2"),
+    url("/Fonts/Consolas/Consolas-Bold.woff") format("woff"),
+    url("/Fonts/Consolas/Consolas-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
