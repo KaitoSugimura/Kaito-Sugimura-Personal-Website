@@ -148,27 +148,29 @@ export default function WebsiteProjects() {
     [selectedView, currentIndex]
   );
 
-  const getSelectedWidth = useCallback(
-    (index) => {
-      return (mouseIsDown.current && isDragging.current) ||
-        selectedView ||
-        getAbsPosIndex(index) > 0.5
-        ? sectionRatio.width * 0.5
-        : sectionRatio.width / 1.35;
-    },
-    [sectionRatio, selectedView, currentIndex]
-  );
+  // const getSelectedWidth = useCallback(
+  //   (index) => {
+  //     return sectionRatio.width * 0.5;
+  //     return (mouseIsDown.current && isDragging.current) ||
+  //       selectedView ||
+  //       getAbsPosIndex(index) > 0.5
+  //       ? sectionRatio.width * 0.5
+  //       : sectionRatio.width / 1.35;
+  //   },
+  //   [sectionRatio, selectedView, currentIndex]
+  // );
 
-  const getSelectedHeight = useCallback(
-    (index) => {
-      return (mouseIsDown.current && isDragging.current) ||
-        selectedView ||
-        getAbsPosIndex(index) > 0.5
-        ? sectionRatio.height * 0.5
-        : sectionRatio.height / 1.35;
-    },
-    [sectionRatio, selectedView, currentIndex]
-  );
+  // const getSelectedHeight = useCallback(
+  //   (index) => {
+  //     return sectionRatio.height * 0.5;
+  //     return (mouseIsDown.current && isDragging.current) ||
+  //       selectedView ||
+  //       getAbsPosIndex(index) > 0.5
+  //       ? sectionRatio.height * 0.5
+  //       : sectionRatio.height / 1.35;
+  //   },
+  //   [sectionRatio, selectedView, currentIndex]
+  // );
 
   return (
     <SectionContainer image={"/Backgrounds/DarkFlames.jpg"}>
@@ -201,7 +203,7 @@ export default function WebsiteProjects() {
                   // WebkitBackfaceVisibility: "hidden",
                   zIndex: `${Math.round(-(getAbsPosIndex(index) * 10))}`,
                   transition: mouseIsDown.current
-                    ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
+                    ? "width 0.3s ease-in-out, opacity 0.3s ease-in-out, height 0.3s ease-in-out"
                     : `z-index 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
                   transform:
                     selectedView && getPosIndex(index) == 0
@@ -209,8 +211,8 @@ export default function WebsiteProjects() {
                           sectionRatio.width / 2.25
                         }vw), -50%)`
                       : "translate(-50%, -50%)",
-                  width: `${getSelectedWidth(index)}vw`,
-                  height: `${getSelectedHeight(index)}vw`,
+                  width: `${sectionRatio.width * 0.5}vw`,
+                  height: `${sectionRatio.height * 0.5}vw`,
                 }}
               >
                 <div
@@ -247,10 +249,16 @@ export default function WebsiteProjects() {
                     }`}
                     style={{
                       width: `${
-                        selectedView && getPosIndex(index) == 0 ? 100 : 85
+                        (selectedView && getPosIndex(index) == 0) ||
+                        getPosIndex(index) == 0
+                          ? 100
+                          : 85
                       }%`,
                       height: `${
-                        selectedView && getPosIndex(index) == 0 ? 100 : 85
+                        (selectedView && getPosIndex(index) == 0) ||
+                        getPosIndex(index) == 0
+                          ? 100
+                          : 85
                       }%`,
                       // left: selectedView ? "0%" : "7.5%",
                     }}
