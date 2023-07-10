@@ -147,19 +147,23 @@ export default function WebsiteProjects() {
   };
 
   const getSelectedWidth = (index) => {
-    return (mouseIsDown.current && isDragging.current) ||
-      selectedView ||
-      getAbsPosIndex(index) > 0.5
-      ? sectionRatio.width * 0.5
-      : sectionRatio.width / 1.35;
+    return sectionRatio.width * 0.5;
+
+    // (mouseIsDown.current && isDragging.current) ||
+    //   selectedView ||
+    //   getAbsPosIndex(index) > 0.5
+    //   ? sectionRatio.width * 0.5
+    //   :
+    //   sectionRatio.width / 1.35;
   };
 
   const getSelectedHeight = (index) => {
-    return (mouseIsDown.current && isDragging.current) ||
-      selectedView ||
-      getAbsPosIndex(index) > 0.5
-      ? sectionRatio.height * 0.5
-      : sectionRatio.height / 1.35;
+    return sectionRatio.height * 0.5;
+    // (mouseIsDown.current && isDragging.current) ||
+    //   selectedView ||
+    //   getAbsPosIndex(index) > 0.5
+    //   ? sectionRatio.height * 0.5
+    //   : sectionRatio.height / 1.35;
   };
 
   return (
@@ -191,8 +195,7 @@ export default function WebsiteProjects() {
                   // (selectedView ? getPosIndex(index) == 0 : true)
                   //   ?
                   {
-                    opacity:
-                      selectedView && getPosIndex(index) !== 0 ? 0 : 1,
+                    opacity: selectedView && getPosIndex(index) !== 0 ? 0 : 1,
                     zIndex: `${Math.round(-(getAbsPosIndex(index) * 10))}`,
                     transition: mouseIsDown.current
                       ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
@@ -249,10 +252,12 @@ export default function WebsiteProjects() {
                     }`}
                     style={{
                       width: `${
-                        selectedView && getPosIndex(index) == 0 ? 100 : 85
+                        // selectedView && getPosIndex(index) == 0 ? 100 :
+                        85
                       }%`,
                       height: `${
-                        selectedView && getPosIndex(index) == 0 ? 100 : 85
+                        // selectedView && getPosIndex(index) == 0 ? 100 :
+                        85
                       }%`,
                       // left: selectedView ? "0%" : "7.5%",
                     }}
