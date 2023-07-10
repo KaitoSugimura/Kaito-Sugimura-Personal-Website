@@ -44,7 +44,7 @@ export default function WebsiteProjects() {
     function handleResize() {
       setSectionRatio(getSectionRatio());
     }
-    window.addEventListener("resize", handleResize);
+    // window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
