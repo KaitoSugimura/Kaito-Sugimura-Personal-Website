@@ -128,7 +128,7 @@ export default function Home() {
                 <InitHero />
               ) : (
                 React.cloneElement(section.XML, {
-                  isFocus: index == currentSection,
+                  isfocus: (index == currentSection).toString(),
                 })
               )}
             </React.Fragment>

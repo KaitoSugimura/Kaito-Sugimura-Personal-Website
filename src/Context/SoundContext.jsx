@@ -54,6 +54,7 @@ export const SoundContextProvider = ({ children }) => {
     if (audioRef.current) {
       audioRef.current.volume = volume;
       audioRef.current.currentTime = currentTimeRef.current;
+      if (volume == 0) audioRef.current.pause();
     }
   }, [volume]);
 

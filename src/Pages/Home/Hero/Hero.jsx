@@ -6,7 +6,8 @@ import coverPhoto from "/Dialog/Pictures/Cover.png";
 import { SoundContext } from "../../../Context/SoundContext";
 import { scrollContext } from "../Home";
 
-export default function Hero({ isFocus }) {
+export default function Hero({ isfocus }) {
+  isfocus = isfocus === "true";
   const { playSFX } = useContext(SoundContext);
   const { currentSection } = useContext(scrollContext);
   const [UserAuthenticated, setUserAuthenticated] = useState(false);
@@ -20,9 +21,9 @@ export default function Hero({ isFocus }) {
       if (RootRef.current) {
         RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
       }
-      // setTimeout(() => {
-      //   setBGVideoIsLoading(false); // In case the video is still loading after 30 seconds
-      // }, 30000);
+    }
+    if(!isfocus){
+      setBGVideoIsLoading(true)
     }
   }, [currentSection]);
 
@@ -66,18 +67,6 @@ export default function Hero({ isFocus }) {
     };
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setUserAuthenticated(true);
-      if (RootRef.current) {
-        RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
-      }
-      // setTimeout(() => {
-      //   setBGVideoIsLoading(false); // In case the video is still loading after 30 seconds
-      // }, 30000);
-    }, 9000);
-  }, []);
-
   const cmdTexts1 = [
     "> Accessing sky terminal",
     "> Updating policy...",
@@ -117,7 +106,7 @@ export default function Hero({ isFocus }) {
           {BGVideoIsLoading && <LoadingScreen />}
           <img src={coverPhoto} className={styles.coverPhoto}></img>
 
-          {isFocus ? (
+          {isfocus ? (
             <div className={styles.grid}>
               <video
                 className={styles.backgroundVideo}
