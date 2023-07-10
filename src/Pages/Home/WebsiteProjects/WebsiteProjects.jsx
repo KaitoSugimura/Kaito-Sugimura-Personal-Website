@@ -192,7 +192,7 @@ export default function WebsiteProjects() {
                   //   ?
                   {
                     opacity:
-                      selectedView && getPosIndex(index) != 0 ? "0" : "1",
+                      selectedView && getPosIndex(index) !== 0 ? 0 : 1,
                     zIndex: `${Math.round(-(getAbsPosIndex(index) * 10))}`,
                     transition: mouseIsDown.current
                       ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
