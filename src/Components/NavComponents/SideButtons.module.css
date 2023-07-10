@@ -40,15 +40,16 @@
 
 .selected,
 .buttonPaddingWrapper:hover .sectionButtonBorder {
-  border: 2px solid rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 1);
 }
 
 .ButtonInnerColor {
-  background-color: rgba(255, 255, 255, 0.609);
+  background-color: rgba(255, 255, 255, 0.709);
   width: 75%;
   height: 75%;
   border-radius: 2rem;
   display: none;
+  z-index: 1;
 }
 
 .buttonPaddingWrapper:hover .ButtonInnerColor {
@@ -57,7 +58,7 @@
 
 .selected .ButtonInnerColor {
   display: block;
-  background-color: rgba(255, 255, 255, 0.996);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .flex {
@@ -70,8 +71,28 @@
 
 .sectionName {
   margin-right: 0.3vw;
-  color: rgba(255, 255, 255, 0.761);
+  color: rgba(255, 255, 255, 1);
   display: none;
+
+  position: relative;
+}
+
+/* background drop */
+.sectionName:before {
+  content: "";
+  position: absolute;
+  width: 300%;
+  height: 175%;
+  transform: translate(-30%, -22%);
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.8) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .buttonPaddingWrapper:hover + .sectionName {

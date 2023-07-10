@@ -1,4 +1,4 @@
-import styles from "./SideButtons.module.css";
+  import styles from "./SideButtons.module.css";
 import Sections from "../../Pages/Home/HomeTableOfContents.jsx";
 
 export default function SideButtons({

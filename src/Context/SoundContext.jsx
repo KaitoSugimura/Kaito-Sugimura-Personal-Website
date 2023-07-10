@@ -3,7 +3,6 @@ import { createContext, useCallback, useEffect, useRef, useState } from "react";
 import defaultBGM from "/Dialog/Music/MainMusic.mp3";
 import profileBGM from "/Dialog/Music/Flutter.mp3";
 import projectsBGM from "/Dialog/Music/Bouquet.mp3";
-import WarmLoopBGM from "/Dialog/Music/WarmLoop.wav";
 // Sound
 import DialogClick from "/Dialog/Sound/DialogClick.mp3";
 import ButtonClick from "/Dialog/Sound/click-button.mp3";
@@ -50,6 +49,33 @@ export const SoundContextProvider = ({ children }) => {
   const audioRef = useRef(null);
   const SFXRef = useRef(null);
   const currentTimeRef = useRef(0);
+
+  useEffect(() => {
+    const loadSound = (soundFile) => {
+      return new Promise((resolve, reject) => {
+        const audio = new Audio(soundFile);
+        audio.addEventListener('canplaythrough', () => {
+          resolve(soundFile);
+        });
+        audio.addEventListener('error', () => {
+          reject(new Error(`Error loading sound: ${soundFile}`));
+        });
+        audio.load();
+      });
+    };
+
+    const loadAllSounds = async () => {
+      try {
+        const promises = soundList.map(loadSound);
+        const loadedSounds = await Promise.all(promises);
+        setLoadedSounds(loadedSounds);
+      } catch (error) {
+        console.error('Error loading sounds:', error);
+      }
+    };
+
+    loadAllSounds();
+  }, []);
 
   useEffect(() => {
     if (audioRef.current) {
