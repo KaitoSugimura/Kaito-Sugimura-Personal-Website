@@ -49,8 +49,8 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, /Fonts/Consolas/Consolas,
-    "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, "Consolas", "Courier New",
+    monospace;
 }
 
 body::-webkit-scrollbar {
@@ -223,8 +223,7 @@ body::-webkit-scrollbar-track {
 @font-face {
   font-family: "Consolas";
   src: url("/Fonts/Consolas/Consolas-Italic.eot");
-  src: local("Consolas Italic"),
-    local("/Fonts/Consolas/Consolas-Italic"),
+  src: local("Consolas Italic"), local("/Fonts/Consolas/Consolas-Italic"),
     url("/Fonts/Consolas/Consolas-Italic.eot?#iefix")
       format("embedded-opentype"),
     url("/Fonts/Consolas/Consolas-Italic.woff2") format("woff2"),
@@ -251,8 +250,7 @@ body::-webkit-scrollbar-track {
 @font-face {
   font-family: "Consolas";
   src: url("/Fonts/Consolas/Consolas-Bold.eot");
-  src: local("Consolas Bold"),
-    local("/Fonts/Consolas/Consolas-Bold"),
+  src: local("Consolas Bold"), local("/Fonts/Consolas/Consolas-Bold"),
     url("/Fonts/Consolas/Consolas-Bold.eot?#iefix") format("embedded-opentype"),
     url("/Fonts/Consolas/Consolas-Bold.woff2") format("woff2"),
     url("/Fonts/Consolas/Consolas-Bold.woff") format("woff"),

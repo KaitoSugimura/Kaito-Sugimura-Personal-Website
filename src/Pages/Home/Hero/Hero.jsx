@@ -72,9 +72,9 @@ export default function Hero() {
       if (RootRef.current) {
         RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
       }
-      setTimeout(() => {
-        setBGVideoIsLoading(false); // In case the video is still loading after 30 seconds
-      }, 30000);
+      // setTimeout(() => {
+      //   setBGVideoIsLoading(false); // In case the video is still loading after 30 seconds
+      // }, 30000);
     }, 9000);
   }, []);
 
