@@ -195,25 +195,23 @@ export default function WebsiteProjects() {
               <div
                 key={index}
                 className={styles.FrameContainer}
-                style={
-                  {
-                    opacity: selectedView && getPosIndex(index) !== 0 ? 0 : 1,
-                    WebkitTransform: "translateZ(0)",
-                    zIndex: `${Math.round(-(getAbsPosIndex(index) * 10))}`,
-                    transition: mouseIsDown.current
-                      ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
-                      : `z-index 0.3s ease-in-out, opacity 0.3s ease-in, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
-                    transform:
-                      selectedView && getPosIndex(index) == 0
-                        ? `translate(calc(-50% - ${
-                            sectionRatio.width / 2.25
-                          }vw), -50%)`
-                        : "translate(-50%, -50%)",
-                    width: `${getSelectedWidth(index)}vw`,
-                    height: `${getSelectedHeight(index)}vw`,
-                  }
-
-                }
+                style={{
+                  opacity: selectedView && getPosIndex(index) !== 0 ? 0 : 1,
+                  WebkitTransform: "translateZ(0)",
+                  WebkitBackfaceVisibility: "hidden",
+                  zIndex: `${Math.round(-(getAbsPosIndex(index) * 10))}`,
+                  transition: mouseIsDown.current
+                    ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
+                    : `z-index 0.3s ease-in-out, opacity 0.3s ease-in, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
+                  transform:
+                    selectedView && getPosIndex(index) == 0
+                      ? `translate(calc(-50% - ${
+                          sectionRatio.width / 2.25
+                        }vw), -50%)`
+                      : "translate(-50%, -50%)",
+                  width: `${getSelectedWidth(index)}vw`,
+                  height: `${getSelectedHeight(index)}vw`,
+                }}
               >
                 <div
                   className={`${styles.FrameInner}`}
