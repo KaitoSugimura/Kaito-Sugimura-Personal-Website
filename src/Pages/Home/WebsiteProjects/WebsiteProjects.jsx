@@ -175,12 +175,12 @@ export default function WebsiteProjects() {
             e.preventDefault();
           }}
         >
-          {/* {selectedView && (
+          {selectedView && (
             <SelectedView
               index={parseInt(currentIndex)}
               sectionRatio={sectionRatio}
             />
-          )} */}
+          )}
 
           <div className={styles.WebsiteOuterFrame}>
             {Contents.map((content, index) => (
@@ -193,7 +193,7 @@ export default function WebsiteProjects() {
                   {
                     opacity:
                       selectedView && getPosIndex(index) != 0 ? "0" : "1",
-                    zIndex: Math.round(-(getAbsPosIndex(index) * 10)),
+                    zIndex: `${Math.round(-(getAbsPosIndex(index) * 10))}`,
                     transition: mouseIsDown.current
                       ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
                       : `z-index 0.3s ease-in-out, opacity 0.3s ease-in, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
@@ -242,7 +242,11 @@ export default function WebsiteProjects() {
                     }
                   />
                   <div
-                    className={styles.clickWrapper}
+                    className={`${styles.clickWrapper} ${
+                      selectedView && getPosIndex(index) != 0
+                        ? "NoUserSelect"
+                        : ""
+                    }`}
                     style={{
                       width: `${
                         selectedView && getPosIndex(index) == 0 ? 100 : 85

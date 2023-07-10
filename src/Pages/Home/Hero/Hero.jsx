@@ -6,7 +6,7 @@ import coverPhoto from "/Dialog/Pictures/Cover.png";
 import { SoundContext } from "../../../Context/SoundContext";
 import { scrollContext } from "../Home";
 
-export default function Hero() {
+export default function Hero({ isFocus }) {
   const { playSFX } = useContext(SoundContext);
   const { currentSection } = useContext(scrollContext);
   const [UserAuthenticated, setUserAuthenticated] = useState(false);
@@ -117,19 +117,24 @@ export default function Hero() {
           {BGVideoIsLoading && <LoadingScreen />}
           <img src={coverPhoto} className={styles.coverPhoto}></img>
 
-          <div className={styles.grid}>
-            <video
-              className={styles.backgroundVideo}
-              onLoadedData={() => {
-                setBGVideoIsLoading(false);
-              }}
-              autoPlay
-              muted
-              loop
-            >
-              <source src={BGVideo} type="video/mp4" />
-            </video>
-          </div>
+          {isFocus ? (
+            <div className={styles.grid}>
+              <video
+                className={styles.backgroundVideo}
+                onLoadedData={() => {
+                  setBGVideoIsLoading(false);
+                }}
+                autoPlay
+                muted
+                loop
+              >
+                <source src={BGVideo} type="video/mp4" />
+              </video>
+            </div>
+          ) : (
+            <div className={styles.blackBackground}></div>
+          )}
+
           <h1 className={styles.name}>Kaito Sugimura</h1>
           <p className={styles.catchphrase}>
             Unleashing Immersive Worlds through Programming and Creativity
