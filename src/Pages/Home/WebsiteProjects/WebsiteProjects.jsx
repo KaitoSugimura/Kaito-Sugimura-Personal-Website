@@ -182,7 +182,7 @@ export default function WebsiteProjects() {
             />
           )} */}
 
-          <div className={styles.WebsiteOuterFrame}><div className={styles.temp}> {selectedView?"true":"false"}</div>
+          <div className={styles.WebsiteOuterFrame}>
             {Contents.map((content, index) => (
               <div
                 key={index}
