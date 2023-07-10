@@ -10,11 +10,11 @@ export const scrollContext = createContext();
 export default function Home() {
   // Context variables (May be moved to a separate file if needed)
   const isScrollable = useRef(false);
+  const scrollTimerOn = useRef(false);
 
   const [currentSection, setCurrentSection] = useState(0);
   // const { playMusic } = useContext(SoundContext);
   const TouchMoveStartY = useRef(0);
-  const TouchMoveStartTime = useRef(0);
 
   const [initDone, setInitDone] = useState(false);
 
@@ -37,8 +37,15 @@ export default function Home() {
   // }, [currentSection]);
 
   useEffect(() => {
+    const startScrollTimer = () => {
+      scrollTimerOn.current = true;
+      setTimeout(() => {
+        scrollTimerOn.current = false;
+      }, 300);
+    };
+
     const handleScroll = (event) => {
-      if (isScrollable.current && initDone) {
+      if (isScrollable.current && !scrollTimerOn.current && initDone) {
         setCurrentSection((prev) => {
           if (event.deltaY > 0) {
             return Math.min(Math.max(++prev, 0), Sections.length - 1);
@@ -46,10 +53,7 @@ export default function Home() {
             return Math.min(Math.max(--prev, 0), Sections.length - 1);
           }
         });
-        isScrollable.current = false;
-        setTimeout(() => {
-          isScrollable.current = true;
-        }, 300);
+        startScrollTimer();
       }
     };
 
@@ -57,40 +61,34 @@ export default function Home() {
       event.preventDefault();
       const touch = event.touches[0];
       const currentY = touch.pageY;
-      const currentTime = Date.now();
 
       const deltaY = currentY - TouchMoveStartY.current;
-      const deltaTime = currentTime - TouchMoveStartTime.current;
 
-      const velocityY = deltaY / deltaTime;
-
-      TouchMoveStartY.current = touch.pageY;
-      TouchMoveStartTime.current = currentTime;
-
-      if (isScrollable.current && Math.abs(velocityY) > 0.5 && initDone) {
+      if (
+        isScrollable.current &&
+        !scrollTimerOn.current &&
+        Math.abs(deltaY) > window.innerHeight * 0.2 &&
+        initDone
+      ) {
         setCurrentSection((prev) => {
-          if (velocityY < 0.5) {
+          if (deltaY < 0) {
             return Math.min(Math.max(++prev, 0), Sections.length - 1);
-          } else if (velocityY > 0.5) {
+          } else {
             return Math.min(Math.max(--prev, 0), Sections.length - 1);
           }
         });
-        isScrollable.current = false;
-        setTimeout(() => {
-          isScrollable.current = true;
-        }, 300);
+        startScrollTimer();
       }
     };
 
     const handleTouchStart = (event) => {
       const touch = event.touches[0];
       TouchMoveStartY.current = touch.pageY;
-      TouchMoveStartTime.current = Date.now();
     };
 
-    // window.addEventListener("wheel", handleScroll);
-    // window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    // window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("wheel", handleScroll);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
       window.removeEventListener("wheel", handleScroll);
@@ -121,7 +119,7 @@ export default function Home() {
           className={styles.HomeRoot}
           style={{
             transform: `translateY(-${currentSection * window.innerHeight}px)`,
-            transition: "transform 0.3s ease-in-out",
+            transition: "transform 0.3s ease-out",
           }}
         >
           {Sections.map((section, index) => (
@@ -129,7 +127,9 @@ export default function Home() {
               {!initDone && index == 0 ? (
                 <InitHero />
               ) : (
-                React.cloneElement(section.XML, {isFocus: index == currentSection})
+                React.cloneElement(section.XML, {
+                  isFocus: index == currentSection,
+                })
               )}
             </React.Fragment>
           ))}

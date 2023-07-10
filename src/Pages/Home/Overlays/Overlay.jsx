@@ -28,7 +28,6 @@ export default function Overlay({
   }, [currentSection]);
 
   const scrollEventHandler = (sectionNo) => {
-    console.log("AAAAAAAAAAA SCROLLED");
     if (events.current.Project1 && Sections[sectionNo].title == "Projects") {
       events.current.Project1 = false;
       OpenDialogWithDelay("Projects1");
