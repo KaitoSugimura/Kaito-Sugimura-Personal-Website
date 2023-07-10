@@ -52,27 +52,30 @@ export default function WebsiteProjects() {
   }, []);
   //RATIO CALCULATION END
 
-  const getPosIndex = (index) => {
-    if (cachedIndex.current === index) {
-      return cachedDif.current;
-    }
-    let dif = index - currentIndex;
-    const div2 = Contents.length / 2;
-    if (dif > div2) {
-      dif -= Contents.length;
-    } else if (dif < -div2) {
-      dif += Contents.length;
-    }
-    cachedIndex.current = index;
-    cachedDif.current = +dif;
-    return +dif;
-  };
+  const getPosIndex = useCallback(
+    (index) => {
+      if (cachedIndex.current === index) {
+        return cachedDif.current;
+      }
+      let dif = index - currentIndex;
+      const div2 = Contents.length / 2;
+      if (dif > div2) {
+        dif -= Contents.length;
+      } else if (dif < -div2) {
+        dif += Contents.length;
+      }
+      cachedIndex.current = index;
+      cachedDif.current = +dif;
+      return +dif;
+    },
+    [currentIndex]
+  );
 
   const getAbsPosIndex = (index) => {
     return Math.abs(getPosIndex(index));
   };
 
-  const toggleSelectedView = () => {
+  const toggleSelectedView = useCallback(() => {
     if (canToggleSelectedView.current) {
       canToggleSelectedView.current = false;
       setSelectedView((prev) => {
@@ -85,7 +88,7 @@ export default function WebsiteProjects() {
       // }, 200);
       canToggleSelectedView.current = true;
     }
-  };
+  }, []);
 
   const handleMouseMove = useCallback((event) => {
     const { clientX } = (event.touches && event.touches[0]) || event;
@@ -109,7 +112,7 @@ export default function WebsiteProjects() {
     });
   }, []);
 
-  const handleMouseUp = (event) => {
+  const handleMouseUp = useCallback((event) => {
     setScrollable(true);
     document.removeEventListener(
       deviceIsTouch ? "touchmove" : "mousemove",
@@ -124,7 +127,7 @@ export default function WebsiteProjects() {
     setCurrentIndex((prev) => {
       return Math.round(prev) % Contents.length;
     });
-  };
+  }, []);
 
   const handleMouseDown = (event) => {
     isDragging.current = false;
@@ -146,25 +149,31 @@ export default function WebsiteProjects() {
     );
   };
 
-  const getSelectedWidth = (index) => {
-    return sectionRatio.width * 0.5;
+  const getSelectedWidth = useCallback(
+    (index) => {
+      return sectionRatio.width * 0.5;
 
-    // (mouseIsDown.current && isDragging.current) ||
-    //   selectedView ||
-    //   getAbsPosIndex(index) > 0.5
-    //   ? sectionRatio.width * 0.5
-    //   :
-    //   sectionRatio.width / 1.35;
-  };
+      // (mouseIsDown.current && isDragging.current) ||
+      //   selectedView ||
+      //   getAbsPosIndex(index) > 0.5
+      //   ? sectionRatio.width * 0.5
+      //   :
+      //   sectionRatio.width / 1.35;
+    },
+    [sectionRatio]
+  );
 
-  const getSelectedHeight = (index) => {
-    return sectionRatio.height * 0.5;
-    // (mouseIsDown.current && isDragging.current) ||
-    //   selectedView ||
-    //   getAbsPosIndex(index) > 0.5
-    //   ? sectionRatio.height * 0.5
-    //   : sectionRatio.height / 1.35;
-  };
+  const getSelectedHeight = useCallback(
+    (index) => {
+      return sectionRatio.height * 0.5;
+      // (mouseIsDown.current && isDragging.current) ||
+      //   selectedView ||
+      //   getAbsPosIndex(index) > 0.5
+      //   ? sectionRatio.height * 0.5
+      //   : sectionRatio.height / 1.35;
+    },
+    [sectionRatio]
+  );
 
   return (
     <SectionContainer image={"/Backgrounds/DarkFlames.jpg"}>
