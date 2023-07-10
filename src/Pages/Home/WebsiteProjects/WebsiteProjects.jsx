@@ -175,12 +175,12 @@ export default function WebsiteProjects() {
             e.preventDefault();
           }}
         >
-          {selectedView && (
+          {/* {selectedView && (
             <SelectedView
               index={parseInt(currentIndex)}
               sectionRatio={sectionRatio}
             />
-          )}
+          )} */}
 
           <div className={styles.WebsiteOuterFrame}>
             {Contents.map((content, index) => (
@@ -223,9 +223,11 @@ export default function WebsiteProjects() {
                       getAbsPosIndex(index) *
                       window.innerWidth *
                       0.2
-                    )}px) rotateX(0deg) rotateY(${
+                    )}px)
+                     rotateX(0deg) rotateY(${
                       -getPosIndex(index) * 25
-                    }deg) `,
+                    }deg) 
+                    `,
                     transition: mouseIsDown.current
                       ? "none"
                       : `transform 0.3s ease-in-out`,
