@@ -123,11 +123,12 @@ export default function Hero() {
               onLoadedData={() => {
                 setBGVideoIsLoading(false);
               }}
-              src={BGVideo}
               autoPlay
               muted
               loop
-            />
+            >
+              <source src={BGVideo} type="video/mp4" />
+            </video>
           </div>
           <h1 className={styles.name}>Kaito Sugimura</h1>
           <p className={styles.catchphrase}>
