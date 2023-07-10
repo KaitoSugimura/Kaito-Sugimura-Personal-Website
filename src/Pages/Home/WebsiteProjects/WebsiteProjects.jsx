@@ -197,12 +197,12 @@ export default function WebsiteProjects() {
                 className={styles.FrameContainer}
                 style={{
                   opacity: selectedView && getPosIndex(index) !== 0 ? 0 : 1,
-                  WebkitTransform: "translateZ(0)",
-                  WebkitBackfaceVisibility: "hidden",
+                  // WebkitTransform: "translateZ(0)",
+                  // WebkitBackfaceVisibility: "hidden",
                   zIndex: `${Math.round(-(getAbsPosIndex(index) * 10))}`,
                   transition: mouseIsDown.current
                     ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
-                    : `z-index 0.3s ease-in-out, opacity 0.3s ease-in, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
+                    : `z-index 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out`,
                   transform:
                     selectedView && getPosIndex(index) == 0
                       ? `translate(calc(-50% - ${
