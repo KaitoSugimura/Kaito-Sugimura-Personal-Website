@@ -33,7 +33,7 @@ export default function Hero({ isfocus }) {
       if (RootRef.current) {
         RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
       }
-    }, 9000);
+    }, 5200);
   }, []);
 
   const AnimPlayHandle = (e) => {
@@ -112,8 +112,23 @@ export default function Hero({ isfocus }) {
     >
       {UserAuthenticated ? (
         <>
-          {BGVideoIsLoading && <LoadingScreen />}
-          <img src={coverPhoto} className={styles.coverPhoto}></img>
+          {BGVideoIsLoading ? (
+            <>
+              <LoadingScreen backgroundColor={"rgba(0, 0, 0, 0.428)"} />
+              <img
+                src="/Backgrounds/Sphere.jpg"
+                className={styles.backgroundImage}
+              ></img>
+            </>
+          ) : (
+            <>
+              <img src={coverPhoto} className={styles.coverPhoto}></img>
+              <h1 className={styles.name}>Kaito Sugimura</h1>
+              <p className={styles.catchphrase}>
+                Unleashing Immersive Worlds through Programming and Creativity
+              </p>
+            </>
+          )}
 
           {isfocus ? (
             <div className={styles.grid}>
@@ -134,11 +149,6 @@ export default function Hero({ isfocus }) {
           ) : (
             <div className={styles.blackBackground}></div>
           )}
-
-          <h1 className={styles.name}>Kaito Sugimura</h1>
-          <p className={styles.catchphrase}>
-            Unleashing Immersive Worlds through Programming and Creativity
-          </p>
         </>
       ) : (
         <div ref={RootRef}>
@@ -223,7 +233,7 @@ export default function Hero({ isfocus }) {
             </div>
           </div>
 
-          <div className={styles.commandPrompt}>
+          {/* <div className={styles.commandPrompt}>
             <div className={styles.cmdT1}>
               {cmdTexts1.map((text, index) => {
                 return (
@@ -258,42 +268,9 @@ export default function Hero({ isfocus }) {
                   </div>
                 );
               })}
-              {/* <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "6.2s",
-                }}
-              >
-                Successfully installed.
-              </p>
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "6.3s",
-                }}
-              >
-                Would you like to replace the current package? (Y/N)
-              </p>
-              <br />
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "6.8s",
-                }}
-              >
-                {"> Y"}
-              </p>
-              <br />
-              <p
-                className={styles.cmdLine}
-                style={{
-                  animationDelay: "7s",
-                }}
-              >
-                Replacing package...
-              </p> */}
+  
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
