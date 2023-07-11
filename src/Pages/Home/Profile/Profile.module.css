@@ -39,8 +39,8 @@
 
 .indicatorCont {
   background-color: rgba(242, 242, 242, 0.548);
-  height: 9.9vmax;
-  width: 9.9vmax;
+  height: 9.9vw;
+  width: 9.9vw;
   box-shadow: 0 0 4rem rgba(255, 254, 254, 0.31);
 }
 
@@ -89,14 +89,14 @@
   top: 0;
   left: 26vw;
 
-  width: 125rem;
+  width: 65vw;
   height: 100%;
 
   border: none;
   z-index: 1;
 
   display: grid;
-  grid-template-columns: 55rem 1fr;
+  grid-template-columns: 40% 1fr;
   grid-template-rows: 45% 1fr;
   justify-content: start;
   align-items: end;
@@ -136,7 +136,7 @@
   margin-bottom: 15%;
   background-color: rgba(229, 229, 229, 0.24);
 
-  height: 6rem;
+  height: 6vh;
 
   border: none;
 
@@ -175,7 +175,6 @@
   align-self: start;
 
   border: none;
-
   color: white;
 
   display: flex;
@@ -188,14 +187,16 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  font-family: "Blender pro";
 }
 
 .NavListItem {
-  font-size: 2rem;
+  font-size: 3vh;
   position: relative;
   transition: transition 0.15s;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
 
   cursor: pointer;
 }
@@ -247,7 +248,7 @@
 }
 
 .contentBox {
-  margin-left: 5rem;
+  /* margin-left: 5rem; */
   align-self: center;
   grid-row: 1/3;
   grid-column: 2/3;

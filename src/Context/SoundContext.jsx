@@ -70,7 +70,6 @@ export const SoundContextProvider = ({ children }) => {
       const playPath = soundList[sfxName];
       if (playPath) {
         SFXRef.current.src = playPath;
-        SFXRef.current.load();
         SFXRef.current.play();
       }
     },
