@@ -51,33 +51,6 @@ export const SoundContextProvider = ({ children }) => {
   const currentTimeRef = useRef(0);
 
   useEffect(() => {
-    const loadSound = (soundFile) => {
-      return new Promise((resolve, reject) => {
-        const audio = new Audio(soundFile);
-        audio.addEventListener('canplaythrough', () => {
-          resolve(soundFile);
-        });
-        audio.addEventListener('error', () => {
-          reject(new Error(`Error loading sound: ${soundFile}`));
-        });
-        audio.load();
-      });
-    };
-
-    const loadAllSounds = async () => {
-      try {
-        const promises = soundList.map(loadSound);
-        const loadedSounds = await Promise.all(promises);
-        setLoadedSounds(loadedSounds);
-      } catch (error) {
-        console.error('Error loading sounds:', error);
-      }
-    };
-
-    loadAllSounds();
-  }, []);
-
-  useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume;
       SFXRef.current.volume = volume;
@@ -97,6 +70,7 @@ export const SoundContextProvider = ({ children }) => {
       const playPath = soundList[sfxName];
       if (playPath) {
         SFXRef.current.src = playPath;
+        SFXRef.current.load();
         SFXRef.current.play();
       }
     },
