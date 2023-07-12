@@ -1,5 +1,6 @@
 import About from "./Layouts/About";
 import Topic from "./Layouts/Topic";
+import Work from "./Layouts/Work";
 
 // THE MAIN PAGE SHOULD BE CALL About
 
@@ -236,34 +237,56 @@ export default {
           image={"/Home/Profile/About/Volunteer.jpg"}
         />
       ),
-      ["PCB soldering and Product packaging"]: (
-        <Topic
-          title={"PCB soldering and Product packaging"}
-          subtitle={"Matrix Orbital"}
+      ["Thousand Hour Games"]: (
+        <Work
+          title={"Game Programmer and Quality Assurance"}
+          subtitle={"Thousand Hour Games"}
           topic={"Courses Taken"}
           img={"/Home/Icons/Topic/Git.svg"}
-          list={["The Ultimate Git Course"]}
-          dates={["Udemy | 06/2022 – 06/2022"]}
+          list={[
+            "Developed and polished the main combat of Gates of Everforge.",
+            "Collaborated and brainstormed game concepts, design elements, key features with the team.",
+            "Optimized and refactored code for better performance and readability.",
+          ]}
+          dates={["April 2023 - Present"]}
         />
       ),
-      ["Retail Clerk"]: (
-        <Topic
-          title={"PCB soldering and Product packaging"}
+      ["Matrix Orbital"]: (
+        <Work
+          title={"Soldering Technician (Seasonal)"}
           subtitle={"Matrix Orbital"}
+          Work={"Courses Taken"}
+          img={"/Home/Icons/Topic/Git.svg"}
+          list={[
+            "Uploaded software and assured quality assurance for a 500 display per week throughput.",
+            "Soldered, Inspected and Packaged over 1,500 displays and made delivery deadlines over a one-month period.",
+            "Actively participated in safety initiatives to ensure workplace safety.",
+          ]}
+          dates={["August 2017 - August 2021"]}
+        />
+      ),
+      ["Loblaws"]: (
+        <Work
+          title={"Sales Associate"}
+          subtitle={"Loblaws"}
           topic={"Courses Taken"}
           img={"/Home/Icons/Topic/Git.svg"}
-          list={["The Ultimate Git Course"]}
-          dates={["Udemy | 06/2022 – 06/2022"]}
+          list={[
+            "Greeted customers as they entered the store and ensuring a pleasant customer shopping experience.",
+            "Maintained knowledge of current sales and promotions and adhered to policies regarding payment and exchanges.",
+            "Maintained detailed records of stock levels of over 150 items.",
+          ]}
+          dates={["September 2019 - March 2020"]}
         />
       ),
       ["Summer camp volunteering"]: (
-        <Topic
-          title={"PCB soldering and Product packaging"}
-          subtitle={"Matrix Orbital"}
+        <Work
+          title={"Summer camp volunteer"}
+          subtitle={"The City of Calgary Recreation"}
           topic={"Courses Taken"}
           img={"/Home/Icons/Topic/Git.svg"}
-          list={["The Ultimate Git Course"]}
-          dates={["Udemy | 06/2022 – 06/2022"]}
+          list={["Leading groups and looking after small children in the camp.", "Thinking of fun games for children.", "Learn communication and organization skills with peer volunteers and leaders."]}
+          dates={["August 2015 & August 2016"]}
         />
       ),
     },
@@ -273,8 +296,8 @@ export default {
     type: "Achievements",
     LabelColor: "#ba9a32b7",
     title: <>Achievements</>,
-    subTitle: <>Grade: 3.957/4 GPA, 4th year</>,
-    date: <>09/2020 — 04/2024</>,
+    subTitle: <>This section is still work in progress</>,
+    date: null,
     icon: "/Home/Icons/Trophy.svg",
     coords: {
       x: 73.5,
@@ -289,7 +312,7 @@ export default {
         <About
           title={`"Try everything"`}
           desc={`My mother always says "The reason you can't do it is because you haven't tried it yet". It's a motto I live by.`}
-          image={"/Home/Profile/About/Volunteer.jpg"}
+          image={"/Home/Profile/About/KarateWin.jpg"}
         />
       ),
     },

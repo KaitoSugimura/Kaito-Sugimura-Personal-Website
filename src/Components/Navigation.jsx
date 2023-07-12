@@ -1,16 +1,18 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styles from "./Navigation.module.css";
 import Sections from "../Pages/Home/HomeTableOfContents.jsx";
 import CameraUI from "./NavComponents/CameraUI";
 import NavButtons from "./NavComponents/NavButtons";
 import SideButtons from "./NavComponents/SideButtons";
 import SoundSetting from "../Tools/SoundSetting";
+import { SoundContext } from "../Context/SoundContext";
 
 export default function Navigation({
   scrollTo,
   currentSectionIndex,
   initDone,
 }) {
+  const {playSFX} = useContext(SoundContext);
   const [navIsOpen, setNavIsOpen] = useState(false);
   const rootRef = useRef(null);
 
@@ -56,6 +58,7 @@ export default function Navigation({
             className={styles.backgroundPanel}
             onClick={() => {
               setNavIsOpen(false);
+              playSFX("MenuOpen");
             }}
           ></div>
         )}

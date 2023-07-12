@@ -80,7 +80,7 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
 
             <a
               className={styles.SSItem}
-              href="https://www.linkedin.com/in/kaito-sugimura-622209226/"
+              href="https://www.linkedin.com/in/kaitosugimura/"
               target="_blank"
             >
               <img

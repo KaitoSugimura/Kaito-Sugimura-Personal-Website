@@ -1,0 +1,65 @@
+.TopicRoot {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+
+  padding-left: 3vw;
+}
+
+.date{
+  display: block;
+  text-align: right;
+  font-size: 1.1vw;
+  font-weight: 300;
+}
+
+.subTitle {
+  display: block;
+  font-size: 1.6vw;
+  font-weight: 100;
+  color: rgb(235, 235, 235);
+
+  margin-top: 1.5vh;
+}
+
+.title {
+  display: block;
+  font-size: 1.6vw;
+  color: white;
+}
+
+.list {
+  font-size: 1.2vw;
+  line-height: 1.5;
+  width: 100%;
+
+  border: none;
+  color: white;
+
+  padding-left: 1vw;
+  padding-top: 3vh;
+}
+
+.listItem {
+  padding-top: 1vh;
+  width: 100%;
+  overflow: hidden;
+}
+.dot {
+  display: inline;
+  padding-right: 1vw;
+}
+.itemText {
+  display: block;
+  transform: translateY(100%);
+  animation: comeUp 0.15s ease-in-out forwards;
+}
+
+@keyframes comeUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
