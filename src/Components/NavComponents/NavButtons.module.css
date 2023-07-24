@@ -1,9 +1,9 @@
 .ButtonsContainer {
   position: fixed;
   /* width: 30vw; */
-  height: 100%;
-  top: 0;
-  left: 1.5vmin;
+  height: 34%;
+  top: 33%;
+  left: 1vmin;
   z-index: 102;
 
   gap: 2rem;
@@ -22,6 +22,10 @@
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 7.5vh;
+  padding: 0 0.5vmin;
 }
 
 @keyframes init {

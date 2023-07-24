@@ -261,6 +261,11 @@ export default function WebsiteProjects() {
                           : 85
                       }%`,
                       // left: selectedView ? "0%" : "7.5%",
+
+                      filter: `brightness(${1-Math.min(getAbsPosIndex(index), 0.8)*0.3})`,
+                      transition: mouseIsDown.current
+                      ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
+                      : `width 0.3s ease-in-out, height 0.3s ease-in-out, filter 0.3s ease-in-out`,
                     }}
                     onClick={() => {
                       if (!isDragging.current) {

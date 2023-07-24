@@ -1,8 +1,9 @@
 .sideButtonsRoot {
   position: fixed;
-  height: 100%;
-  top: 0;
-  right: calc(5vmin - 1rem);
+  width: 3rem;
+  top: 50%;
+  right: calc(5vmin - 1.5rem);
+  transform: translateY(-50%);
   z-index: 9;
 
   display: flex;
@@ -18,6 +19,10 @@
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 7.5vh;
+  padding: 5vh 0.5rem;
 }
 @keyframes init {
   0% {

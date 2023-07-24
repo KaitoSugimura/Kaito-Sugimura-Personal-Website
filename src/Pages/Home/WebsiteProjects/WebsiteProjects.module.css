@@ -105,7 +105,6 @@
   user-select: all;
   pointer-events: all;
 
-  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
   /* overflow: hidden; */
 }
 
