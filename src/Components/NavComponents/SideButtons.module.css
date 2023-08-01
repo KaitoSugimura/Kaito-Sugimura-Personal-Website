@@ -20,9 +20,9 @@
   user-select: none;
   pointer-events: none;
 
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 7.5vh;
-  padding: 5vh 0.5rem;
+  padding: 0.5rem 0.5rem;
 }
 @keyframes init {
   0% {
