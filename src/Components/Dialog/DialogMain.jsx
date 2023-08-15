@@ -36,8 +36,8 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
     <div className={styles.DialogRoot}>
       <SoundSetting
         style={{
-          top: "5vh",
-          left: "2.5vw",
+          top: "7vmin",
+          left: "10vmin",
         }}
       />
       <button className={styles.SkipContainer} onClick={skipDialog}>
@@ -52,13 +52,18 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
       </button>
       <div className={styles.DialogClickArea} onClick={handleDialogClick}>
         <div className={styles.DialogContainer}>
-          <div className={styles.DownTriangle}></div>
           {currentTextNo < Dialogs[DialogID].length && (
-            <p className={styles.DialogText} key={currentTextNo}>
-              {Dialogs[DialogID][currentTextNo].text}
-              {playMusic(Dialogs[DialogID][currentTextNo].music)}
-            </p>
+            <>
+              {/* <h1 className={styles.DialogSpeakerName}>{
+              Dialogs[DialogID][currentTextNo].speaker}</h1> */}
+              <p className={styles.DialogText} key={currentTextNo}>
+                <span>{Dialogs[DialogID][currentTextNo].speaker+": "}</span>
+                {Dialogs[DialogID][currentTextNo].text}
+                {playMusic(Dialogs[DialogID][currentTextNo].music)}
+              </p>
+            </>
           )}
+          <div className={styles.DownTriangle}></div>
         </div>
         {currentTextNo < Dialogs[DialogID].length &&
           Dialogs[DialogID][currentTextNo].image && (

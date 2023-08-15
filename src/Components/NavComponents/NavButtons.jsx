@@ -13,7 +13,10 @@ export default function NavButtons({ navIsOpen, setNavIsOpen }) {
   };
 
   return (
-    <div className={styles.ButtonsContainer}>
+    <div
+      className={styles.ButtonsContainer}
+      style={{ backgroundColor: navIsOpen ? "none" : "rgba(0, 0, 0, 0.1)" }}
+    >
       <button
         className={styles.OpenNavButton}
         onClick={() => {

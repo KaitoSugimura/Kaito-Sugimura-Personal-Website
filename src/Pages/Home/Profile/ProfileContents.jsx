@@ -126,7 +126,7 @@ export default {
     type: "Self Learn",
     LabelColor: "#189257b7",
     title: <>Self-Taught Developer</>,
-    subTitle: <>3 years of dedication, more to come</>,
+    subTitle: <>3 years of learning, more to come</>,
     date: <>09/2020 — now</>,
     icon: "/Home/Icons/SelfStudy.svg",
     coords: {
@@ -258,7 +258,7 @@ export default {
           Work={"Courses Taken"}
           img={"/Home/Icons/Topic/Git.svg"}
           list={[
-            "Uploaded software and assured quality assurance for a 500 display per week throughput.",
+            "Assured quality assurance for a 500 display per week throughput.",
             "Soldered, Inspected and Packaged over 1,500 displays and made delivery deadlines over a one-month period.",
             "Actively participated in safety initiatives to ensure workplace safety.",
           ]}

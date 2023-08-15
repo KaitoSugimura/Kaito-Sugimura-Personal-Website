@@ -116,7 +116,7 @@ export default function Hero({ isfocus }) {
             <>
               <LoadingScreen backgroundColor={"rgba(0, 0, 0, 0.428)"} />
               <img
-                src="/Backgrounds/Sphere.jpg"
+                src="/Backgrounds/Sphere.webp"
                 className={styles.backgroundImage}
               ></img>
             </>
@@ -153,7 +153,7 @@ export default function Hero({ isfocus }) {
       ) : (
         <div ref={RootRef}>
           <img
-            src="/Backgrounds/Sphere.jpg"
+            src="/Backgrounds/Sphere.webp"
             className={styles.backgroundImage}
           ></img>
           <div className={styles.Warning}></div>

@@ -258,3 +258,11 @@ body::-webkit-scrollbar-track {
   font-weight: bold;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Helixa";
+  src: url("/Fonts/Helixa/Helixa-Light.ttf");
+  src: url("/Fonts/Helixa/Helixa-Light.otf");
+  font-weight: normal;
+  font-style: normal;
+}

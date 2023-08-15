@@ -5,6 +5,7 @@
   top: 0;
   left: 0;
   z-index: 100;
+  background-color: rgba(0, 0, 0, 0.1);
 
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -16,16 +17,17 @@
 
 .SkipContainer {
   position: absolute;
-  top: 5vh;
-  right: 2.5vw;
+  top: 7vmin;
+  right: 10vmin;
 
-  height: max(4vmin, 2.5rem);
+  height: max(5vmin, 2.5rem);
   background: transparent;
   border: none;
   z-index: 100;
   cursor: pointer;
   color: white;
-  font-size: 2vh;
+  font-size: 3vmin;
+  font-family: "Helixa", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,7 +51,8 @@
 
 .SkipIcon {
   width: max(4vmin, 2.5rem);
-  height: 100%;
+  height: max(4vmin, 2.5rem);
+  padding-top: 5%;
 }
 
 .DialogClickArea {
@@ -72,23 +75,51 @@
   left: 0;
   width: 100%;
   height: 28vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-top: 0.3vh solid rgba(255, 255, 255, 0.3);
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+  font-family: "Helixa", sans-serif;
+  z-index: 100;
+}
+
+.DialogContainer:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+  z-index: -1;
+}
+
+.DialogSpeakerName {
+  color: white;
+  position: absolute;
+  top: -6vh;
+  left: 4vw;
+
+  font-size: 3.5vh;
+  font-weight: 300;
 }
 
 .DialogText {
   font-size: 4vmin;
   color: white;
-  padding: 3.5vh 0 0 4vw;
+  padding: 4vh 0 0 15vw;
 
-  animation: typing 2s steps(50, end);
+  animation: typing 1s steps(50, end);
   overflow: hidden;
   white-space: nowrap;
+}
+
+.DialogText span {
+  color: rgb(154, 243, 255);
 }
 
 @keyframes typing {
@@ -107,10 +138,10 @@
 
   width: 0;
   height: 0;
-  border-left: 2.5vh solid transparent;
-  border-right: 2.5vh solid transparent;
+  border-left: 1.65vh solid transparent;
+  border-right: 1.65vh solid transparent;
 
-  border-top: 2.5vh solid rgba(255, 255, 255, 0.854);
+  border-top: 2vh solid rgba(255, 255, 255, 0.854);
 
   animation: floating 1s ease-in infinite;
 }

@@ -1,13 +1,16 @@
-  import styles from "./SideButtons.module.css";
+import styles from "./SideButtons.module.css";
 import Sections from "../../Pages/Home/HomeTableOfContents.jsx";
 
 export default function SideButtons({
   navIsOpen,
   scrollTo,
-  currentSectionIndex
+  currentSectionIndex,
 }) {
   return (
-    <div className={`${styles.sideButtonsRoot}`}>
+    <div
+      className={`${styles.sideButtonsRoot}`}
+      style={{ backgroundColor: navIsOpen ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.1)" }}
+    >
       {!navIsOpen &&
         Sections.map((section, index) => (
           <div className={styles.flex} key={index}>
