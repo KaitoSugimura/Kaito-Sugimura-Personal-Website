@@ -248,24 +248,32 @@ export default function WebsiteProjects() {
                         : ""
                     }`}
                     style={{
-                      width: `${
-                        (selectedView && getPosIndex(index) == 0) ||
-                        getPosIndex(index) == 0
-                          ? 100
-                          : 85
-                      }%`,
-                      height: `${
-                        (selectedView && getPosIndex(index) == 0) ||
-                        getPosIndex(index) == 0
-                          ? 100
-                          : 85
-                      }%`,
+                      // width: `${
+                      //   (selectedView && getPosIndex(index) == 0) ||
+                      //   getPosIndex(index) == 0
+                      //     ? 100
+                      //     : 85
+                      // }%`,
+                      // height: `${
+                      //   (selectedView && getPosIndex(index) == 0) ||
+                      //   getPosIndex(index) == 0
+                      //     ? 100
+                      //     : 85
+                      // }%`,
                       // left: selectedView ? "0%" : "7.5%",
-
-                      filter: `brightness(${1-Math.min(getAbsPosIndex(index), 0.8)*0.3})`,
+                      transform: `scale(${
+                        getPosIndex(index) == 0
+                          ? selectedView
+                            ? 1
+                            : 1.25
+                          : 0.85
+                      })`,
+                      filter: `brightness(${
+                        1 - Math.min(getAbsPosIndex(index), 0.8) * 0.3
+                      })`,
                       transition: mouseIsDown.current
-                      ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
-                      : `width 0.3s ease-in-out, height 0.3s ease-in-out, filter 0.3s ease-in-out`,
+                        ? "transform 0.3s ease-in-out"
+                        : `transform 0.3s ease-in-out, filter 0.3s ease-in-out`,
                     }}
                     onClick={() => {
                       if (!isDragging.current) {
@@ -294,28 +302,6 @@ export default function WebsiteProjects() {
                             </div>
                           </div>
                         )}
-
-                        <div className={styles.FrameOverlay}>
-                          {!(mouseIsDown.current && isDragging.current) &&
-                            0 == getAbsPosIndex(index) && (
-                              <div className={styles.leftBottom}>
-                                <h1 className={styles.title}>
-                                  {content.title}
-                                </h1>
-                                <p className={styles.desc}>{content.desc}</p>
-                              </div>
-                            )}
-
-                          <div className={styles.frameLogoCenterer}>
-                            <img
-                              className={styles.frameLogo}
-                              src={`/Home/WebsiteProjects/Logos/${content.logoPath}`}
-                              onDragStart={(e) => {
-                                e.preventDefault();
-                              }}
-                            />
-                          </div>
-                        </div>
                       </>
                     )}
 
@@ -333,6 +319,26 @@ export default function WebsiteProjects() {
           </div>
         </div>
       </div>
+
+      {!selectedView && Contents[currentIndex] && (
+        <div className={styles.FrameOverlay}>
+          <div className={styles.leftBottom}>
+            <h1 className={styles.title}>{Contents[currentIndex].title}</h1>
+            <p className={styles.desc}>{Contents[currentIndex].desc}</p>
+          </div>
+
+          <div className={styles.frameLogoCenterer}>
+            <img
+              className={styles.frameLogo}
+              src={`/Home/WebsiteProjects/Logos/${Contents[currentIndex].logoPath}`}
+              onDragStart={(e) => {
+                e.preventDefault();
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       <button
         className={styles.SelectButton}
         onClick={() => {
