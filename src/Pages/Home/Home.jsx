@@ -11,6 +11,7 @@ export default function Home() {
   // Context variables (May be moved to a separate file if needed)
   const isScrollable = useRef(false);
   const scrollTimerOn = useRef(false);
+  const dialogRef = useRef(null);
 
   const [currentSection, setCurrentSection] = useState(0);
   // const { playMusic } = useContext(SoundContext);
@@ -28,6 +29,10 @@ export default function Home() {
   const setScrollable = (value) => {
     isScrollable.current = value;
   };
+
+  const openDialogWithCallback = (id, callback) => {
+    dialogRef.current.openDialogWithCallback(id, callback);
+  }
 
   // useEffect(() => {
   //   // Most likely not going to play music with this method (deprecated)
@@ -98,7 +103,7 @@ export default function Home() {
   }, [initDone]);
 
   return (
-    <scrollContext.Provider value={{ setScrollable, currentSection }}>
+    <scrollContext.Provider value={{ setScrollable, currentSection, openDialogWithCallback }}>
       <div
         className={styles.HomeScroller}
         style={{
@@ -113,6 +118,7 @@ export default function Home() {
           initDone={initDone}
           setScrollable={setScrollable}
           setInitDone={setInitDone}
+          ref={dialogRef}
         />
 
         <div

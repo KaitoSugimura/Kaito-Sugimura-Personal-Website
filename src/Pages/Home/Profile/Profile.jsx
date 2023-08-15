@@ -7,6 +7,7 @@ import PContents from "./ProfileContents";
 import MouseIcon from "/Tools/Mouse.svg";
 import { scrollContext } from "../Home";
 import { SoundContext } from "../../../Context/SoundContext";
+import Sections from "../HomeTableOfContents.jsx";
 
 // Input in units of vw
 const VWtoPX = (width) => {
@@ -27,7 +28,8 @@ const PXtoVH = (height) => {
 
 export default function Profile() {
   const { playSFX } = useContext(SoundContext);
-  const { setScrollable } = useContext(scrollContext);
+  const { setScrollable, currentSection, openDialogWithCallback } =
+    useContext(scrollContext);
   const nextZIndex = useRef(0);
   const [overlapID, setOverlapID] = useState(null);
   const getOverlapCoords = () => {
@@ -44,6 +46,13 @@ export default function Profile() {
 
   const [currentArtifactCoords, setCurrentArtifactCoords] = useState(null);
   const [finishedFirstQuest, setFinishedFirstQuest] = useState(false);
+
+  const [DialogEvents, setDialogEvents] = useState({ initDialog: true });
+  if (DialogEvents.initDialog && Sections[currentSection].title == "Profile") {
+    openDialogWithCallback("Profile1", () => {
+      setDialogEvents({ initDialog: false });
+    });
+  }
 
   // useEffect(() => {
   //   const handleResize = () => {
@@ -303,7 +312,7 @@ export default function Profile() {
           </div>
         )} */}
 
-        {!finishedFirstQuest && (
+        {!finishedFirstQuest && !DialogEvents.initDialog && (
           <div
             className={styles.dragIndicator}
             style={{

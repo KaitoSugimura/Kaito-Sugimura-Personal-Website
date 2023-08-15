@@ -6,10 +6,12 @@ import SelectedView from "./Window/SelectedView";
 import FrameOverlay from "./Window/FrameOverlay";
 import { SoundContext } from "../../../Context/SoundContext";
 import { scrollContext } from "../Home";
+import Sections from "../HomeTableOfContents.jsx";
 
 export default function WebsiteProjects() {
   const { playSFX } = useContext(SoundContext);
-  const { setScrollable } = useContext(scrollContext);
+  const { setScrollable, currentSection, openDialogWithCallback } =
+    useContext(scrollContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const initialIndexRef = useRef(0);
   const MouseXInitialRef = useRef(0);
@@ -37,6 +39,16 @@ export default function WebsiteProjects() {
     return { width: width, height: height };
   };
   const [sectionRatio, setSectionRatio] = useState(getSectionRatio());
+
+  const [DialogEvents, setDialogEvents] = useState({ initDialog: true });
+  if (
+    DialogEvents.initDialog &&
+    Sections[currentSection].title == "Projects"
+  ) {
+    openDialogWithCallback("Projects1", () => {
+      setDialogEvents({ initDialog: false });
+    });
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -320,25 +332,27 @@ export default function WebsiteProjects() {
         </div>
       </div>
 
-      {!selectedView && Contents[currentIndex] && (
-        <div className={styles.FrameOverlay}>
-          <h1 className={styles.BackTitle}>{Contents[currentIndex].title}</h1>
-          <div className={styles.leftBottom}>
-            <h1 className={styles.title}>{Contents[currentIndex].title}</h1>
-            <p className={styles.desc}>{Contents[currentIndex].desc}</p>
-          </div>
+      {!selectedView &&
+        Contents[currentIndex] &&
+        !DialogEvents.initDialog && (
+          <div className={styles.FrameOverlay}>
+            <h1 className={styles.BackTitle}>{Contents[currentIndex].title}</h1>
+            <div className={styles.leftBottom}>
+              <h1 className={styles.title}>{Contents[currentIndex].title}</h1>
+              <p className={styles.desc}>{Contents[currentIndex].desc}</p>
+            </div>
 
-          <div className={styles.frameLogoCenterer}>
-            <img
-              className={styles.frameLogo}
-              src={`/Home/WebsiteProjects/Logos/${Contents[currentIndex].logoPath}`}
-              onDragStart={(e) => {
-                e.preventDefault();
-              }}
-            />
+            <div className={styles.frameLogoCenterer}>
+              <img
+                className={styles.frameLogo}
+                src={`/Home/WebsiteProjects/Logos/${Contents[currentIndex].logoPath}`}
+                onDragStart={(e) => {
+                  e.preventDefault();
+                }}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       <button
         className={styles.SelectButton}

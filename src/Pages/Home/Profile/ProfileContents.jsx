@@ -310,8 +310,8 @@ export default {
     contents: {
       ["About"]: (
         <About
-          title={`"Try everything"`}
-          desc={`My mother always says "The reason you can't do it is because you haven't tried it yet". It's a motto I live by.`}
+          title={`Not updated yet`}
+          desc={`Still tba`}
           image={"/Home/Profile/About/KarateWin.jpg"}
         />
       ),
