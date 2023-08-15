@@ -80,7 +80,7 @@ export default [
     extraImages: [ImmortalE1, ImmortalE2, ImmortalE3],
   },
   {
-    title: "NoLongerMe",
+    title: "No Longer Me",
     desc: "Game jam entry",
     youtubeID: "oTfJH3pV1Is",
     websiteLink: null,

@@ -322,6 +322,7 @@ export default function WebsiteProjects() {
 
       {!selectedView && Contents[currentIndex] && (
         <div className={styles.FrameOverlay}>
+          <h1 className={styles.BackTitle}>{Contents[currentIndex].title}</h1>
           <div className={styles.leftBottom}>
             <h1 className={styles.title}>{Contents[currentIndex].title}</h1>
             <p className={styles.desc}>{Contents[currentIndex].desc}</p>
