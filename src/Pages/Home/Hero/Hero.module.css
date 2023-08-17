@@ -515,7 +515,7 @@
   font-size: 1vw;
   overflow: hidden;
   white-space: nowrap;
-  font-family: "Consolas";
+  font-family: "Helixa", sans-serif;
 
   animation: open 0.2s forwards 2.4s ease-out;
 }

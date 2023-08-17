@@ -19,6 +19,25 @@ export default function Home() {
 
   const [initDone, setInitDone] = useState(false);
 
+  const [renderOkayPositive, forceRerender] = useState(Date.now());
+
+  useEffect(() => {
+    const resizeHandle = () => {
+      if (window.innerWidth <= window.innerHeight) {
+        forceRerender(-1);
+      } else {
+        // Should prevent rerender if screen size is unchanged
+        forceRerender(window.innerWidth*window.innerHeight);
+      }
+    };
+
+    window.addEventListener("resize", resizeHandle);
+
+    return () => {
+      window.removeEventListener("resize", resizeHandle);
+    };
+  }, []);
+
   // Scroll
   const scrollTo = (index) => {
     if (isScrollable.current && initDone) {
@@ -32,7 +51,7 @@ export default function Home() {
 
   const openDialogWithCallback = (id, callback) => {
     dialogRef.current.openDialogWithCallback(id, callback);
-  }
+  };
 
   // useEffect(() => {
   //   // Most likely not going to play music with this method (deprecated)
@@ -103,14 +122,16 @@ export default function Home() {
   }, [initDone]);
 
   return (
-    <scrollContext.Provider value={{ setScrollable, currentSection, openDialogWithCallback }}>
+    <scrollContext.Provider
+      value={{ setScrollable, currentSection, openDialogWithCallback }}
+    >
       <div
         className={styles.HomeScroller}
         style={{
           height: `${window.innerHeight}px`,
         }}
       >
-        {/* <HorizontalEnjoyer /> */}
+        {renderOkayPositive < 0 && <HorizontalEnjoyer />}
 
         <Overlay
           scrollTo={scrollTo}
