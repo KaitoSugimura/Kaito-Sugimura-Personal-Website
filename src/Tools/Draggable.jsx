@@ -119,10 +119,10 @@ export default function Draggable({
     );
 
     const dragRef = dragRootRef.current;
-    const left = dragRef.offsetLeft;
-    const top = dragRef.offsetTop;
-    const right = left + dragRef.offsetWidth;
-    const bottom = top + dragRef.offsetHeight;
+    const left = dragRef.offsetLeft - 10;
+    const top = dragRef.offsetTop - 10;
+    const right = left + dragRef.offsetWidth + 20;
+    const bottom = top + dragRef.offsetHeight + 20;
 
     if (
       isArtifact &&
