@@ -46,7 +46,7 @@ export default {
     },
     {
       speaker: "Kaito",
-      text: "Also a self taught Game Developer and frontend Web Developer!",
+      text: "Also a self taught Game Developer and Frontend Web Developer!",
       music: null,
       image: "Smile.webp",
     },
