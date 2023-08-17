@@ -38,7 +38,8 @@ export default function Profile() {
       y: VHtoPX(50),
     };
   };
-  const [overlapCoords, setOverlapCoords] = useState(getOverlapCoords());
+  const overlapCoords = getOverlapCoords();
+  // const [overlapCoords, setOverlapCoords] = useState(getOverlapCoords());
   const [openForms, setOpenForms] = useState({});
   const [currentContent, setCurrentContent] = useState("About");
   const spawnOffset = useRef(-1);
