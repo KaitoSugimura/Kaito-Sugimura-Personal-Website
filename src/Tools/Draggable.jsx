@@ -36,15 +36,16 @@ export default function Draggable({
   onDragEnd = (doNothing, dn, d) => {},
   onDragStart = (doNothing, dn) => {},
 }) {
-  const {playSFX} = useContext(SoundContext);
+  const { playSFX } = useContext(SoundContext);
   const initialPos = useRef({ x: 0, y: 0 });
   const initialContPos = useRef({ x: 0, y: 0 });
   const spawnOffset = useRef(getSetSpawnOffset(-1));
   const dragRootRef = useRef(null);
-  const deviceIsTouch =
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    navigator.msMaxTouchPoints > 0;
+  const currentEventTouch = useRef(false);
+  // const deviceIsTouch =
+  //   "ontouchstart" in window ||
+  //   navigator.maxTouchPoints > 0 ||
+  //   navigator.msMaxTouchPoints > 0;
   const [thisZIndex, setThisZIndex] = useState(getNextZIndex());
   const [isDragging, setIsDragging] = useState(false);
 
@@ -88,11 +89,11 @@ export default function Draggable({
     };
 
     document.addEventListener(
-      deviceIsTouch ? "touchend" : "mouseup",
+      currentEventTouch.current ? "touchend" : "mouseup",
       handleMouseUp
     );
     document.addEventListener(
-      deviceIsTouch ? "touchmove" : "mousemove",
+      currentEventTouch.current ? "touchmove" : "mousemove",
       handleMouseMove
     );
     setThisZIndex(getNextZIndex());
@@ -109,11 +110,11 @@ export default function Draggable({
 
   const handleMouseUp = (event) => {
     document.removeEventListener(
-      deviceIsTouch ? "touchmove" : "mousemove",
+      currentEventTouch.current ? "touchmove" : "mousemove",
       handleMouseMove
     );
     document.removeEventListener(
-      deviceIsTouch ? "touchend" : "mouseup",
+      currentEventTouch.current ? "touchend" : "mouseup",
       handleMouseUp
     );
 
@@ -185,8 +186,17 @@ export default function Draggable({
       )}
       <div
         className={styles.dragArea}
-        onMouseDown={deviceIsTouch ? null : handleMouseDown}
-        onTouchStart={deviceIsTouch ? handleMouseDown : null}
+        onMouseDown={(event) => {
+          currentEventTouch.current = false;
+          handleMouseDown(event);
+        }}
+        onTouchStart={(event) => {
+          currentEventTouch.current = true;
+          handleMouseDown(event);
+        }}
+        onDragStart={(e) => {
+          e.preventDefault();
+        }}
       >
         {isDragging && <CornerBorder style={StaticBorder} />}
         {children}

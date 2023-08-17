@@ -17,10 +17,11 @@ export default function WebsiteProjects() {
   const MouseXInitialRef = useRef(0);
   const isDragging = useRef(false);
   const mouseIsDown = useRef(false);
-  const deviceIsTouch =
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    navigator.msMaxTouchPoints > 0;
+  const currentEventTouch = useRef(false);
+  // const deviceIsTouch =
+  //   "ontouchstart" in window ||
+  //   navigator.maxTouchPoints > 0 ||
+  //   navigator.msMaxTouchPoints > 0;
   // Do not use setter her, please use toggleSelectedView
   const [selectedView, setSelectedView] = useState(false);
   const canToggleSelectedView = useRef(true);
@@ -41,10 +42,7 @@ export default function WebsiteProjects() {
   const [sectionRatio, setSectionRatio] = useState(getSectionRatio());
 
   const [DialogEvents, setDialogEvents] = useState({ initDialog: true });
-  if (
-    DialogEvents.initDialog &&
-    Sections[currentSection].title == "Projects"
-  ) {
+  if (DialogEvents.initDialog && Sections[currentSection].title == "Projects") {
     openDialogWithCallback("Projects1", () => {
       setDialogEvents({ initDialog: false });
     });
@@ -123,11 +121,11 @@ export default function WebsiteProjects() {
   const handleMouseUp = useCallback((event) => {
     setScrollable(true);
     document.removeEventListener(
-      deviceIsTouch ? "touchmove" : "mousemove",
+      currentEventTouch.current ? "touchmove" : "mousemove",
       handleMouseMove
     );
     document.removeEventListener(
-      deviceIsTouch ? "touchend" : "mouseup",
+      currentEventTouch.current ? "touchend" : "mouseup",
       handleMouseUp
     );
 
@@ -149,11 +147,11 @@ export default function WebsiteProjects() {
       initialIndexRef.current = currentIndex;
 
       document.addEventListener(
-        deviceIsTouch ? "touchend" : "mouseup",
+        currentEventTouch.current ? "touchend" : "mouseup",
         handleMouseUp
       );
       document.addEventListener(
-        deviceIsTouch ? "touchmove" : "mousemove",
+        currentEventTouch.current ? "touchmove" : "mousemove",
         handleMouseMove
       );
     },
@@ -191,8 +189,14 @@ export default function WebsiteProjects() {
           className={`${styles.WebsiteFrameContainer} ${
             selectedView ? "NoUserSelect" : ""
           }`}
-          onMouseDown={deviceIsTouch ? null : handleMouseDown}
-          onTouchStart={deviceIsTouch ? handleMouseDown : null}
+          onMouseDown={(event) => {
+            currentEventTouch.current = false;
+            handleMouseDown(event);
+          }}
+          onTouchStart={(event) => {
+            currentEventTouch.current = true;
+            handleMouseDown(event);
+          }}
           onDragStart={(e) => {
             e.preventDefault();
           }}
@@ -332,27 +336,25 @@ export default function WebsiteProjects() {
         </div>
       </div>
 
-      {!selectedView &&
-        Contents[currentIndex] &&
-        !DialogEvents.initDialog && (
-          <div className={styles.FrameOverlay}>
-            <h1 className={styles.BackTitle}>{Contents[currentIndex].title}</h1>
-            <div className={styles.leftBottom}>
-              <h1 className={styles.title}>{Contents[currentIndex].title}</h1>
-              <p className={styles.desc}>{Contents[currentIndex].desc}</p>
-            </div>
-
-            <div className={styles.frameLogoCenterer}>
-              <img
-                className={styles.frameLogo}
-                src={`/Home/WebsiteProjects/Logos/${Contents[currentIndex].logoPath}`}
-                onDragStart={(e) => {
-                  e.preventDefault();
-                }}
-              />
-            </div>
+      {!selectedView && Contents[currentIndex] && !DialogEvents.initDialog && (
+        <div className={styles.FrameOverlay}>
+          <h1 className={styles.BackTitle}>{Contents[currentIndex].title}</h1>
+          <div className={styles.leftBottom}>
+            <h1 className={styles.title}>{Contents[currentIndex].title}</h1>
+            <p className={styles.desc}>{Contents[currentIndex].desc}</p>
           </div>
-        )}
+
+          <div className={styles.frameLogoCenterer}>
+            <img
+              className={styles.frameLogo}
+              src={`/Home/WebsiteProjects/Logos/${Contents[currentIndex].logoPath}`}
+              onDragStart={(e) => {
+                e.preventDefault();
+              }}
+            />
+          </div>
+        </div>
+      )}
 
       <button
         className={styles.SelectButton}
