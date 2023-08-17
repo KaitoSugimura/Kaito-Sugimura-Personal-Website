@@ -19,7 +19,7 @@ export default function Home() {
 
   const [initDone, setInitDone] = useState(false);
 
-  const [renderOkayPositive, forceRerender] = useState(Date.now());
+  const [renderOkayPositive, forceRerender] = useState(0);
 
   useEffect(() => {
     const resizeHandle = () => {
