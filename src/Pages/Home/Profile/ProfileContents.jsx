@@ -237,6 +237,20 @@ export default {
           image={"/Home/Profile/About/Volunteer.jpg"}
         />
       ),
+      ["PureWeb"]: (
+        <Work
+          title={"Software Developer Intern"}
+          subtitle={"PureWeb"}
+          topic={"Courses Taken"}
+          img={"/Home/Icons/Topic/Git.svg"}
+          list={[
+            "Led the complete redesign and implementation of a customer-facing website console, improving user experience and driving engagement.",
+            "Partnered with stakeholders to conceptualize and execute an overhaul, delivering demos and presentations to the company.",
+            "Diagnosed and resolved critical security vulnerabilities on company servers, ensuring compliance and safeguarding sensitive data.",
+          ]}
+          dates={["Aug 2023 - Aug 2024"]}
+        />
+      ),
       ["Thousand Hour Games"]: (
         <Work
           title={"Game Programmer and Quality Assurance"}
@@ -285,7 +299,11 @@ export default {
           subtitle={"The City of Calgary Recreation"}
           topic={"Courses Taken"}
           img={"/Home/Icons/Topic/Git.svg"}
-          list={["Leading groups and looking after small children in the camp.", "Thinking of fun games for children.", "Learn communication and organization skills with peer volunteers and leaders."]}
+          list={[
+            "Leading groups and looking after small children in the camp.",
+            "Thinking of fun games for children.",
+            "Learn communication and organization skills with peer volunteers and leaders.",
+          ]}
           dates={["August 2015 & August 2016"]}
         />
       ),
