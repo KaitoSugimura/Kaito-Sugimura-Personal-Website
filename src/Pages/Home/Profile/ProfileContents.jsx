@@ -31,7 +31,7 @@ export default {
         <About
           title={"University of Calgary"}
           desc={`Graduated in May 2025 with a Louise McKinney Scholarship, four consecutive years on the Dean's List, and awarded a Letter of Merit.`}
-          image={"/Photos/UofC.jpg"}
+          image={"/Home/Profile/About/Grad.jpg"}
         />
       ),
       ["Software Engineering"]: (
