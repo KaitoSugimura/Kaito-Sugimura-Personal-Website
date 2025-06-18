@@ -112,7 +112,7 @@
     height: 3.6vw;
     top: 3.5vmin;
   }
-  50%{
+  50% {
     top: 3.5vmin;
   }
   60% {
@@ -244,8 +244,7 @@
   }
 }
 
-
-.SSList{
+.SSList {
   position: absolute;
   top: 7vmin;
   right: 3vh;
@@ -257,9 +256,9 @@
   opacity: 0.75;
 }
 
-.SSItem{
+.SSItem {
   width: 3vh;
-  height: 3vh; 
+  height: 3vh;
 
   -moz-user-select: -moz-all;
   -khtml-user-select: all;
@@ -272,8 +271,7 @@
   cursor: pointer;
 }
 
-.SSImage{
+.SSImage {
   width: 100%;
   height: 100%;
-
 }

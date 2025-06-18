@@ -9,7 +9,9 @@ export default function SideButtons({
   return (
     <div
       className={`${styles.sideButtonsRoot}`}
-      style={{ backgroundColor: navIsOpen ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.1)" }}
+      style={{
+        backgroundColor: navIsOpen ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.4)",
+      }}
     >
       {!navIsOpen &&
         Sections.map((section, index) => (

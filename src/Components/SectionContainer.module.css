@@ -1,6 +1,6 @@
 .SectionRoot {
   width: 100vw;
-/* Height def in js */
+  /* Height def in js */
 
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,6 +23,6 @@
   /* background-position: contain; */
   background-image: url("/Grid.png");
   background-size: 4px 4px;
-  opacity: 0.6;
+  opacity: 0.45;
   z-index: -10;
 }

@@ -145,7 +145,7 @@ export default function Profile() {
   };
 
   return (
-    <SectionContainer image={"Backgrounds/Classroom.jpg"}>
+    <SectionContainer image={"Backgrounds/Buildings.jpg"}>
       <div className={styles.ProfileRoot}>
         {/* Development */}
         {overlapID &&

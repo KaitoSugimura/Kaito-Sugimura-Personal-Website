@@ -82,7 +82,9 @@
   position: absolute;
   object-fit: cover;
 
-  box-shadow: 2px 2px 8px rgba(189, 225, 227, 0.305);
+  border-radius: 4px;
+
+  box-shadow: 1px 1px 4px rgba(189, 225, 227, 0.2);
 }
 
 .showcaseImage1 {

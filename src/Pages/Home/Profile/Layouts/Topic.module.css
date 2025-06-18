@@ -192,8 +192,7 @@
   justify-content: space-between;
 }
 
-
-.listItem span{
+.listItem span {
   color: rgb(235, 235, 235);
   font-size: 1.8vh;
 }

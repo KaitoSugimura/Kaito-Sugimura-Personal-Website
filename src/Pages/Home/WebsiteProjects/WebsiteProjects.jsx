@@ -183,11 +183,11 @@ export default function WebsiteProjects() {
   // );
 
   return (
-    <SectionContainer image={"/Backgrounds/DarkFlames.jpg"}>
+    <SectionContainer image={"/Backgrounds/City.jpg"}>
       <div className={styles.WebsiteProjectsRoot}>
         <div
           className={`${styles.WebsiteFrameContainer} ${
-            selectedView ? "NoUserSelect" : ""
+            selectedView ? `NoUserSelect ${styles.selectedView}` : ""
           }`}
           onMouseDown={(event) => {
             currentEventTouch.current = false;

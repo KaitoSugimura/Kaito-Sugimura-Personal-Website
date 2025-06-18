@@ -40,7 +40,7 @@ export default {
     },
     {
       speaker: "Kaito",
-      text: "A Software Engineering student at the University of Calgary.",
+      text: "A Software Engineering graduate from the University of Calgary.",
       music: null,
       image: "Talk2.webp",
     },

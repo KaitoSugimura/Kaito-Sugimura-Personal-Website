@@ -115,17 +115,19 @@ export default function Hero({ isfocus }) {
           {BGVideoIsLoading ? (
             <>
               <LoadingScreen backgroundColor={"rgba(0, 0, 0, 0.428)"} />
-              <img
-                src="/Backgrounds/Sphere.webp"
-                className={styles.backgroundImage}
-              ></img>
+              <div className={styles.grid}>
+                <img
+                  src="/Backgrounds/Mountains.jpg"
+                  className={styles.backgroundImage}
+                ></img>
+              </div>
             </>
           ) : (
             <>
               <img src={coverPhoto} className={styles.coverPhoto}></img>
               <h1 className={styles.name}>Kaito Sugimura</h1>
               <p className={styles.catchphrase}>
-                Unleashing Immersive Worlds through Programming and Creativity
+                I think normally you'd put some cool catchphrase here
               </p>
             </>
           )}
@@ -152,10 +154,13 @@ export default function Hero({ isfocus }) {
         </>
       ) : (
         <div ref={RootRef}>
-          <img
-            src="/Backgrounds/Sphere.webp"
-            className={styles.backgroundImage}
-          ></img>
+          <div className={styles.grid}>
+            <img
+              src="/Backgrounds/Mountains.jpg"
+              className={styles.backgroundImage}
+            ></img>
+          </div>
+
           <div className={styles.Warning}></div>
           {/* Seperated to make things stable */}
           <div className={styles.WarningInnerText}>
