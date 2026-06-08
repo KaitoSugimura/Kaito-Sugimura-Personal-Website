@@ -47,7 +47,7 @@
   top: 0;
   left: 0;
 
-  font-size: 5rem;
+  font-size: clamp(1.5rem, 7vmin, 5rem);
   transition: all 0.2s;
 
   z-index: 101;
@@ -109,13 +109,13 @@
 
   color: white;
   transition: all 0.4s;
-  width: 80rem;
+  width: min(80rem, 90vw);
 }
 
 .listItem {
   position: relative;
   width: 100%;
-  padding: 1rem 0;
+  padding: clamp(0.35rem, 1.5vmin, 1rem) 0;
   cursor: pointer;
 
   -moz-user-select: -moz-all;

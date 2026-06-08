@@ -263,6 +263,20 @@ export default {
           image={"/Home/Profile/About/Volunteer.jpg"}
         />
       ),
+      ["Finofo"]: (
+        <Work
+          title={"Senior Software Engineer"}
+          subtitle={"Finofo"}
+          topic={"Courses Taken"}
+          img={"/Home/Icons/Topic/Git.svg"}
+          list={[
+            "Promoted from Front-End Engineer to Senior Software Engineer within my first year.",
+            "Designed, built, and shipped customer-facing features across the platform, with a focus on UI/UX, performance, and reliability.",
+            "Collaborated closely with design, product, and backend teams to deliver new functionality from concept to production.",
+          ]}
+          dates={["Jul 2025 - Present"]}
+        />
+      ),
       ["PureWeb"]: (
         <Work
           title={"Software Developer Intern"}

@@ -40,13 +40,13 @@ export default {
     },
     {
       speaker: "Kaito",
-      text: "A Software Engineering graduate from the University of Calgary.",
+      text: "I'm a software engineer based in Calgary, building for the web full-time.",
       music: null,
       image: "Talk2.webp",
     },
     {
       speaker: "Kaito",
-      text: "Also a self taught Game Developer and Frontend Web Developer!",
+      text: "And on the side, a self taught Game Developer!",
       music: null,
       image: "Smile.webp",
     },
