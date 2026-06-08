@@ -1,7 +1,6 @@
-import { useCallback, useContext, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styles from "./Draggable.module.css";
 import CornerBorder from "../Components/NavComponents/CornerBorder";
-import forms from "../Pages/Home/Profile/Forms";
 import { SoundContext } from "../Context/SoundContext";
 
 // Input in units of vw
@@ -12,14 +11,6 @@ const VWtoPX = (width) => {
 const VHtoPX = (height) => {
   return height * window.innerHeight * 0.01;
 };
-// Input in units of px
-const PXtoVW = (width) => {
-  return (width / window.innerWidth) * 100;
-};
-// Input in units of px
-const PXtoVH = (height) => {
-  return (height / window.innerHeight) * 100;
-};
 
 export default function Draggable({
   children,
@@ -28,6 +19,7 @@ export default function Draggable({
   artifactStartingPos = { x: 0, y: 0 },
   centerCoords = null,
   artifactID = null,
+  formKey = null,
   setOverlapID = (doNothing) => {},
   setOpenForms = (doNothing) => {},
   getSetSpawnOffset = (returnZero) => {
@@ -55,7 +47,7 @@ export default function Draggable({
     borderWidth: "2px",
   };
 
-  const handleMouseMove = useCallback((event) => {
+  const handleMouseMove = (event) => {
     const dragCont = dragRootRef.current;
     const { clientX, clientY } = (event.touches && event.touches[0]) || event;
     const newX = clientX - initialPos.current.x + initialContPos.current.x;
@@ -78,7 +70,7 @@ export default function Draggable({
           : window.innerHeight - 50
       )
     )}px`;
-  });
+  };
 
   const handleMouseDown = (event) => {
     const { clientX, clientY } = (event.touches && event.touches[0]) || event;
@@ -175,8 +167,9 @@ export default function Draggable({
           className={styles.deleteButton}
           onClick={(e) => {
             setOpenForms((prev) => {
-              delete prev[id];
-              return { ...prev };
+              const next = { ...prev };
+              delete next[formKey];
+              return next;
             });
             getSetSpawnOffset(spawnOffset.current);
           }}

@@ -347,7 +347,7 @@
 
   position: absolute;
   top: 50%;
-  left: 0;
+  left: -0.1vh;
   transform: translateY(-50%);
 }
 
@@ -361,7 +361,7 @@
 
   position: absolute;
   top: 50%;
-  right: 0;
+  right: -0.1vh;
   transform: translateY(-50%);
 }
 

@@ -14,28 +14,32 @@ export default function Home() {
   const dialogRef = useRef(null);
 
   const [currentSection, setCurrentSection] = useState(0);
-  // const { playMusic } = useContext(SoundContext);
   const TouchMoveStartY = useRef(0);
 
   const [initDone, setInitDone] = useState(false);
 
-  const [renderOkayPositive, forceRerender] = useState(0);
+  // Swap InitHero for the real terminal a beat after initDone, so the HUD title
+  // gets to play its typewriter/caret animation before the terminal appears.
+  const [terminalReady, setTerminalReady] = useState(false);
+  useEffect(() => {
+    if (!initDone) return;
+    const timer = setTimeout(() => setTerminalReady(true), 200);
+    return () => clearTimeout(timer);
+  }, [initDone]);
+
+  // Prompt the user to rotate when the viewport is taller than it is wide.
+  const [isPortrait, setIsPortrait] = useState(false);
 
   useEffect(() => {
-    const resizeHandle = () => {
-      if (window.innerWidth <= window.innerHeight) {
-        forceRerender(-1);
-      } else {
-        // Should prevent rerender if screen size is unchanged
-        forceRerender(window.innerWidth*window.innerHeight);
-      }
+    const handleResize = () => {
+      setIsPortrait(window.innerWidth <= window.innerHeight);
     };
 
-    window.addEventListener("resize", resizeHandle);
-    resizeHandle();
+    window.addEventListener("resize", handleResize);
+    handleResize();
 
     return () => {
-      window.removeEventListener("resize", resizeHandle);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -126,13 +130,8 @@ export default function Home() {
     <scrollContext.Provider
       value={{ setScrollable, currentSection, openDialogWithCallback }}
     >
-      <div
-        className={styles.HomeScroller}
-        style={{
-          height: `${window.innerHeight}px`,
-        }}
-      >
-        {renderOkayPositive < 0 && <HorizontalEnjoyer />}
+      <div className={styles.HomeScroller} style={{ height: "100dvh" }}>
+        {isPortrait && <HorizontalEnjoyer />}
 
         <Overlay
           scrollTo={scrollTo}
@@ -146,13 +145,13 @@ export default function Home() {
         <div
           className={styles.HomeRoot}
           style={{
-            transform: `translateY(-${currentSection * window.innerHeight}px)`,
+            transform: `translateY(calc(${currentSection} * -100dvh))`,
             transition: "transform 0.3s ease-out",
           }}
         >
           {Sections.map((section, index) => (
             <React.Fragment key={section.title}>
-              {!initDone && index == 0 ? (
+              {!terminalReady && index == 0 ? (
                 <InitHero />
               ) : (
                 React.cloneElement(section.XML, {
@@ -161,7 +160,6 @@ export default function Home() {
               )}
             </React.Fragment>
           ))}
-          {/* {!initDone ? <InitHero /> : Sections[currentSection].XML} */}
         </div>
       </div>
     </scrollContext.Provider>

@@ -3,7 +3,6 @@ import Contents from "./WebsiteContents";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import SectionContainer from "../../../Components/SectionContainer";
 import SelectedView from "./Window/SelectedView";
-import FrameOverlay from "./Window/FrameOverlay";
 import { SoundContext } from "../../../Context/SoundContext";
 import { scrollContext } from "../Home";
 import Sections from "../HomeTableOfContents.jsx";
@@ -18,11 +17,7 @@ export default function WebsiteProjects() {
   const isDragging = useRef(false);
   const mouseIsDown = useRef(false);
   const currentEventTouch = useRef(false);
-  // const deviceIsTouch =
-  //   "ontouchstart" in window ||
-  //   navigator.maxTouchPoints > 0 ||
-  //   navigator.msMaxTouchPoints > 0;
-  // Do not use setter her, please use toggleSelectedView
+  // Do not use this setter directly, please use toggleSelectedView
   const [selectedView, setSelectedView] = useState(false);
   const canToggleSelectedView = useRef(true);
 
@@ -42,11 +37,19 @@ export default function WebsiteProjects() {
   const [sectionRatio, setSectionRatio] = useState(getSectionRatio());
 
   const [DialogEvents, setDialogEvents] = useState({ initDialog: true });
-  if (DialogEvents.initDialog && Sections[currentSection].title == "Projects") {
-    openDialogWithCallback("Projects1", () => {
-      setDialogEvents({ initDialog: false });
-    });
-  }
+  const initDialogOpened = useRef(false);
+  useEffect(() => {
+    if (
+      !initDialogOpened.current &&
+      DialogEvents.initDialog &&
+      Sections[currentSection].title == "Projects"
+    ) {
+      initDialogOpened.current = true;
+      openDialogWithCallback("Projects1", () => {
+        setDialogEvents({ initDialog: false });
+      });
+    }
+  }, [currentSection]);
 
   useEffect(() => {
     function handleResize() {
@@ -158,30 +161,6 @@ export default function WebsiteProjects() {
     [selectedView, currentIndex]
   );
 
-  // const getSelectedWidth = useCallback(
-  //   (index) => {
-  //     return sectionRatio.width * 0.5;
-  //     return (mouseIsDown.current && isDragging.current) ||
-  //       selectedView ||
-  //       getAbsPosIndex(index) > 0.5
-  //       ? sectionRatio.width * 0.5
-  //       : sectionRatio.width / 1.35;
-  //   },
-  //   [sectionRatio, selectedView, currentIndex]
-  // );
-
-  // const getSelectedHeight = useCallback(
-  //   (index) => {
-  //     return sectionRatio.height * 0.5;
-  //     return (mouseIsDown.current && isDragging.current) ||
-  //       selectedView ||
-  //       getAbsPosIndex(index) > 0.5
-  //       ? sectionRatio.height * 0.5
-  //       : sectionRatio.height / 1.35;
-  //   },
-  //   [sectionRatio, selectedView, currentIndex]
-  // );
-
   return (
     <SectionContainer image={"/Backgrounds/City.jpg"}>
       <div className={styles.WebsiteProjectsRoot}>
@@ -215,8 +194,6 @@ export default function WebsiteProjects() {
                 className={styles.FrameContainer}
                 style={{
                   opacity: selectedView && getPosIndex(index) !== 0 ? 0 : 1,
-                  // WebkitTransform: "translateZ(0)",
-                  // WebkitBackfaceVisibility: "hidden",
                   zIndex: `${Math.round(-(getAbsPosIndex(index) * 10))}`,
                   transition: mouseIsDown.current
                     ? "width 0.3s ease-in-out, height 0.3s ease-in-out"
@@ -248,15 +225,6 @@ export default function WebsiteProjects() {
                       : `transform 0.3s ease-in-out`,
                   }}
                 >
-                  {/* <FrameOverlay
-                    index={index}
-                    content={content}
-                    currentABSPos={getAbsPosIndex(index)}
-                    selectedView={selectedView}
-                    mouseDownAndDragging={
-                      mouseIsDown.current && isDragging.current
-                    }
-                  /> */}
                   <div
                     className={`${styles.clickWrapper} ${
                       selectedView && getPosIndex(index) != 0
@@ -264,19 +232,6 @@ export default function WebsiteProjects() {
                         : ""
                     }`}
                     style={{
-                      // width: `${
-                      //   (selectedView && getPosIndex(index) == 0) ||
-                      //   getPosIndex(index) == 0
-                      //     ? 100
-                      //     : 85
-                      // }%`,
-                      // height: `${
-                      //   (selectedView && getPosIndex(index) == 0) ||
-                      //   getPosIndex(index) == 0
-                      //     ? 100
-                      //     : 85
-                      // }%`,
-                      // left: selectedView ? "0%" : "7.5%",
                       transform: `scale(${
                         getPosIndex(index) == 0
                           ? selectedView

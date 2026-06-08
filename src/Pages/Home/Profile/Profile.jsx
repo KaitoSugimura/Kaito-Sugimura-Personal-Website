@@ -49,11 +49,19 @@ export default function Profile() {
   const [finishedFirstQuest, setFinishedFirstQuest] = useState(false);
 
   const [DialogEvents, setDialogEvents] = useState({ initDialog: true });
-  if (DialogEvents.initDialog && Sections[currentSection].title == "Profile") {
-    openDialogWithCallback("Profile1", () => {
-      setDialogEvents({ initDialog: false });
-    });
-  }
+  const initDialogOpened = useRef(false);
+  useEffect(() => {
+    if (
+      !initDialogOpened.current &&
+      DialogEvents.initDialog &&
+      Sections[currentSection].title == "Profile"
+    ) {
+      initDialogOpened.current = true;
+      openDialogWithCallback("Profile1", () => {
+        setDialogEvents({ initDialog: false });
+      });
+    }
+  }, [currentSection]);
 
   // useEffect(() => {
   //   const handleResize = () => {
@@ -274,6 +282,7 @@ export default function Profile() {
             <Draggable
               getNextZIndex={getNextZIndex}
               artifactID={formPair[1]}
+              formKey={formPair[0]}
               setOpenForms={setOpenForms}
               getSetSpawnOffset={getSetSpawnOffset}
             >

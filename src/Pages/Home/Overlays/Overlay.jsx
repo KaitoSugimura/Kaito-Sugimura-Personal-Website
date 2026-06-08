@@ -22,9 +22,11 @@ const Overlay = forwardRef(
       setCurrentDialogID(null);
       setScrollable(true);
       if (!initDone) {
+        // Matches the title box expand (initiationTitle, 4.5s in CameraUI) so the
+        // typed title + terminal UI come in right as the box finishes — no dead pause.
         setTimeout(() => {
           setInitDone(true);
-        }, 5000);
+        }, 4500);
       }
 
       if(callbackFunction.current){

@@ -7,9 +7,9 @@ import { SoundContext } from "../../Context/SoundContext";
 export default function NavButtons({ navIsOpen, setNavIsOpen }) {
   const { playSFX } = useContext(SoundContext);
   const BorderStyle = {
-    width: navIsOpen ? "15%" : "30%",
-    height: navIsOpen ? "15%" : "30%",
-    borderWidth: "1px",
+    width: navIsOpen ? "18%" : "28%",
+    height: navIsOpen ? "18%" : "28%",
+    borderWidth: "2px",
   };
 
   return (

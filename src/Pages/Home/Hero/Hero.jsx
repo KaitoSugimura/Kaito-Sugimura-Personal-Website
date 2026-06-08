@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import styles from "./Hero.module.css";
 import BGVideo from "/Backgrounds/HeroBGVideo.mp4";
 import LoadingScreen from "../../../Components/LoadingScreen";
@@ -15,101 +15,66 @@ export default function Hero({ isfocus }) {
 
   const RootRef = useRef(null);
 
+  const AnimPlayHandle = useCallback(
+    (e) => {
+      switch (e.animationName) {
+        case styles.typing:
+          playSFX("BackClick");
+          break;
+        case styles.open:
+          playSFX("AuthOpen");
+          break;
+        case styles.warningInit:
+          playSFX("WarningInit");
+          break;
+        case styles.select:
+          playSFX("Select");
+          break;
+        case styles.authenticated:
+          playSFX("Welcome");
+          break;
+        case styles.typingInput:
+          playSFX("Typing");
+          break;
+        case styles.barFill:
+          playSFX("BarFill");
+          break;
+        default:
+          break;
+      }
+    },
+    [playSFX]
+  );
+
   useEffect(() => {
     if (currentSection != 0 && !UserAuthenticated) {
       setUserAuthenticated(true);
-      if (RootRef.current) {
-        RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
-      }
     }
     if (!isfocus) {
       setBGVideoIsLoading(true);
     }
   }, [currentSection]);
 
+  // After the intro animation finishes, mark the user as authenticated. Once
+  // authenticated the intro DOM unmounts, which removes its animation listener.
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setUserAuthenticated(true);
-      if (RootRef.current) {
-        RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
-      }
     }, 5200);
+    return () => clearTimeout(timer);
   }, []);
-
-  const AnimPlayHandle = (e) => {
-    switch (e.animationName) {
-      case styles.typing:
-        playSFX("BackClick");
-        break;
-      case styles.open:
-        playSFX("AuthOpen");
-        break;
-      case styles.warningInit:
-        playSFX("WarningInit");
-        break;
-      case styles.select:
-        playSFX("Select");
-        break;
-      case styles.authenticated:
-        playSFX("Welcome");
-        break;
-      case styles.typingInput:
-        playSFX("Typing");
-        break;
-      case styles.barFill:
-        playSFX("BarFill");
-        break;
-      default:
-        break;
-    }
-  };
 
   useEffect(() => {
-    if (RootRef.current) {
-      RootRef.current.addEventListener("animationstart", AnimPlayHandle);
-    }
-
+    const root = RootRef.current;
+    if (!root) return;
+    root.addEventListener("animationstart", AnimPlayHandle);
     return () => {
-      if (RootRef.current) {
-        RootRef.current.removeEventListener("animationstart", AnimPlayHandle);
-      }
+      root.removeEventListener("animationstart", AnimPlayHandle);
     };
-  }, []);
-
-  const cmdTexts1 = [
-    "> Accessing sky terminal",
-    "> Updating policy...",
-    "> Computer policy update has completed successfully",
-    "> Executing command: 'ksp install'",
-    "> Starting package install...",
-  ];
-
-  const cmdTexts1Timings = [5, 5.4, 5.8, 5.9, 6];
-
-  const cmdTexts2 = [
-    `> Kaito 3.6.0 (default, ${new Date().toLocaleString("en-US", {
-      month: "short",
-      day: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    })})`,
-    "> Successfully installed",
-    "> ",
-    "> Preparing...",
-  ];
-
-  const cmdTexts2Timings = [8, 8.1, 8.15, 8.2];
+  }, [AnimPlayHandle]);
 
   return (
-    <div
-      className={styles.HeroRoot}
-      style={{
-        height: `${window.innerHeight}px`,
-      }}
-    >
+    <div className={styles.HeroRoot} style={{ height: "100dvh" }}>
       {UserAuthenticated ? (
         <>
           {BGVideoIsLoading ? (
@@ -237,45 +202,6 @@ export default function Hero({ isfocus }) {
               </div>
             </div>
           </div>
-
-          {/* <div className={styles.commandPrompt}>
-            <div className={styles.cmdT1}>
-              {cmdTexts1.map((text, index) => {
-                return (
-                  <div className={styles.cmdLineWrapper} key={index}>
-                    <p
-                      className={styles.cmdLine}
-                      style={{
-                        animation: `${styles.typing} 0.1s forwards ${cmdTexts1Timings[index]}s`,
-                      }}
-                    >
-                      {text}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-            <div className={styles.progressBar}>
-              <div className={styles.progressFill}></div>
-            </div>
-            <div className={styles.cmdT2}>
-              {cmdTexts2.map((text, index) => {
-                return (
-                  <div className={styles.cmdLineWrapper} key={index}>
-                    <p
-                      className={styles.cmdLine}
-                      style={{
-                        animation: `${styles.typing} 0.1s forwards ${cmdTexts2Timings[index]}s`,
-                      }}
-                    >
-                      {text}
-                    </p>
-                  </div>
-                );
-              })}
-  
-            </div>
-          </div> */}
         </div>
       )}
     </div>

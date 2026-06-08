@@ -1,9 +1,60 @@
 import styles from "./CameraUI.module.css";
 import CornerBorder from "./CornerBorder";
 import Sections from "../../Pages/Home/HomeTableOfContents.jsx";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+// Reveals `text` one character at a time, terminal style. Returns the partial
+// string plus whether it's still printing so the caret can show only while typing.
+//
+// The first reveal after mount types immediately (boot title, and the remount
+// after a dialog closes). A title change while already mounted waits `startDelay`
+// before typing — longer than the dialog open delay (300ms in Overlay) — so when
+// scrolling onto a section that opens a dialog, the HUD unmounts before the title
+// ever appears instead of flashing the title for a moment first.
+function useTypewriter(text, { speed = 65, startDelay = 400 } = {}) {
+  const [display, setDisplay] = useState("");
+  const [typing, setTyping] = useState(false);
+  const hasTypedRef = useRef(false);
+
+  useEffect(() => {
+    if (text == null) {
+      setDisplay("");
+      setTyping(false);
+      return;
+    }
+
+    const delay = hasTypedRef.current ? startDelay : 0;
+    hasTypedRef.current = true;
+
+    setDisplay("");
+    setTyping(false);
+    let i = 0;
+    let interval;
+    const startTimer = setTimeout(() => {
+      setTyping(true);
+      interval = setInterval(() => {
+        i++;
+        setDisplay(text.slice(0, i));
+        if (i >= text.length) {
+          clearInterval(interval);
+          setTyping(false);
+        }
+      }, speed);
+    }, delay);
+
+    return () => {
+      clearTimeout(startTimer);
+      if (interval) clearInterval(interval);
+    };
+  }, [text, speed, startDelay]);
+
+  return { display, typing };
+}
 
 export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
+  const sectionTitle = initDone ? Sections[currentSectionIndex].title : null;
+  const { display: typedTitle, typing } = useTypewriter(sectionTitle);
+
   const BorderStyle = {
     width: navIsOpen ? "12vmin" : "22vmin",
     height: navIsOpen ? "12vmin" : "22vmin",
@@ -34,9 +85,14 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
               <CornerBorder style={StaticBorder} />
               <div className={styles.MainSectionBackground}>
                 <p className={styles.MainSectionText}>
-                  {initDone
-                    ? Sections[currentSectionIndex].title
-                    : "Initializing"}
+                  {initDone ? (
+                    <>
+                      {typedTitle}
+                      {typing && <span className={styles.titleCaret}></span>}
+                    </>
+                  ) : (
+                    "Initializing"
+                  )}
                 </p>
               </div>
             </div>

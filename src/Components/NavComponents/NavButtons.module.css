@@ -48,8 +48,7 @@
   justify-content: center;
   align-items: center;
 
-  background-color: rgba(49, 49, 49, 0.3);
-  box-shadow: 0px 0px 1px 4px rgba(18, 18, 18, 0.3);
+  background-color: rgba(20, 20, 20, 0.55);
 
   -moz-user-select: -moz-all;
   -khtml-user-select: all;
@@ -60,8 +59,14 @@
 }
 
 .SettingsIcon {
-  width: 80%;
-  height: 80%;
+  width: 50%;
+  height: 50%;
+  opacity: 0.9;
+  transition: opacity 0.3s;
+}
+
+.OpenNavButton:hover .SettingsIcon {
+  opacity: 1;
 }
 
 .TopLeft,

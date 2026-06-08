@@ -183,11 +183,11 @@ export default {
             "AWS Certified Developer Associate",
           ]}
           dates={[
-            "Codecademy | 07/2221 – 07/2021",
+            "Codecademy | 07/2021 – 07/2021",
             "Codecademy | 08/2021 – 08/2021",
             "Udemy | 10/2022 – 10/2022",
             "Udemy | 02/2023 – 05/2023",
-            "Udemy | 08/2024 – 87/2024",
+            "Udemy | 08/2024 – 08/2024",
           ]}
         />
       ),
@@ -309,7 +309,7 @@ export default {
         <Work
           title={"Soldering Technician (Seasonal)"}
           subtitle={"Matrix Orbital"}
-          Work={"Courses Taken"}
+          topic={"Courses Taken"}
           img={"/Home/Icons/Topic/Git.svg"}
           list={[
             "Assured quality assurance for displays.",

@@ -6,7 +6,7 @@ export default function SectionContainer({ image, children }) {
       className={styles.SectionRoot}
       style={{
         backgroundImage: `url(${image})`,
-        height: `${window.innerHeight}px`,
+        height: "100dvh",
       }}
     >
       {children}

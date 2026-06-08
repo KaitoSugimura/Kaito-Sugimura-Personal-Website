@@ -12,10 +12,10 @@ export default {
         Bachelor of Science in Software Engineering
       </h2>
       <h3 className={styles.University}>University of Calgary</h3>
-      <small className={styles.date}>09/2020 - 04/2024</small>
+      <small className={styles.date}>09/2020 - 06/2025</small>
       <p>
-        <strong>Grade:</strong> 3.957/4 GPA, 3rd year <br />
-        <strong>Predicted year of graduation:</strong> 2025
+        <strong>Grade:</strong> 3.942/4 GPA <br />
+        <strong>Graduated:</strong> 2025
       </p>
       <h4>
         <strong>Courses Taken</strong>

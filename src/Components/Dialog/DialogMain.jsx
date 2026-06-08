@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./DialogMain.module.css";
 import Dialogs from "./Dialogs";
 import { SoundContext } from "../../Context/SoundContext";
@@ -7,6 +7,15 @@ import SoundSetting from "../../Tools/SoundSetting";
 export default function DialogMain({ DialogID, eventFinishedCallback }) {
   const { playSFX, playMusic } = useContext(SoundContext);
   const [currentTextNo, setCurrentTextNo] = useState(0);
+
+  // Play the music cue (if any) for the current dialog line. Kept in an effect
+  // so it doesn't fire as a side effect during render.
+  const currentLine = Dialogs[DialogID]?.[currentTextNo];
+  useEffect(() => {
+    if (currentLine?.music) {
+      playMusic(currentLine.music);
+    }
+  }, [DialogID, currentTextNo]);
 
   const handleDialogClick = () => {
     playSFX("DialogClick");
@@ -57,9 +66,8 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
               {/* <h1 className={styles.DialogSpeakerName}>{
               Dialogs[DialogID][currentTextNo].speaker}</h1> */}
               <p className={styles.DialogText} key={currentTextNo}>
-                <span>{Dialogs[DialogID][currentTextNo].speaker+": "}</span>
+                <span>{Dialogs[DialogID][currentTextNo].speaker + ": "}</span>
                 {Dialogs[DialogID][currentTextNo].text}
-                {playMusic(Dialogs[DialogID][currentTextNo].music)}
               </p>
             </>
           )}

@@ -109,7 +109,7 @@
 
   color: white;
   transition: all 0.4s;
-  width: min(80rem, 90vw);
+  width: min(80rem, 65vw);
 }
 
 .listItem {

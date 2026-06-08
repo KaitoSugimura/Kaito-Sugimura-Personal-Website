@@ -56,7 +56,7 @@ export const SoundContextProvider = ({ children }) => {
       SFXRef.current.volume = volume;
       audioRef.current.currentTime = currentTimeRef.current;
       if (volume == 0) audioRef.current.pause();
-      else audioRef.current.play();
+      else audioRef.current.play().catch(() => {});
     }
   }, [volume]);
 
@@ -70,7 +70,7 @@ export const SoundContextProvider = ({ children }) => {
       const playPath = soundList[sfxName];
       if (playPath) {
         SFXRef.current.src = playPath;
-        SFXRef.current.play();
+        SFXRef.current.play().catch(() => {});
       }
     },
     [volume]
@@ -83,7 +83,7 @@ export const SoundContextProvider = ({ children }) => {
       }
       if (musicName === "resume") {
         audioRef.current.currentTime = currentTimeRef.current;
-        audioRef.current.play();
+        audioRef.current.play().catch(() => {});
         return;
       }
       switch (musicName) {
@@ -96,12 +96,9 @@ export const SoundContextProvider = ({ children }) => {
         case "projects":
           audioRef.current.src = projectsBGM;
           break;
-        case "warmLoop":
-          audioRef.current.src = WarmLoopBGM;
-          break;
       }
 
-      audioRef.current.play();
+      audioRef.current.play().catch(() => {});
     },
     [volume]
   );

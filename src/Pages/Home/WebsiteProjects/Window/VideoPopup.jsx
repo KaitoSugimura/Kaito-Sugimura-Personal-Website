@@ -3,27 +3,24 @@ import styles from "./VideoPopup.module.css";
 import Modal from "react-modal";
 import YouTube from "react-youtube";
 
-export default function VideoPopup({ handleCloseModal, videoId, id }) {
+// Bind the modal to the app root for accessibility (hides background from
+// screen readers while open and silences react-modal's setAppElement warning).
+const appRoot = document.getElementById("root");
+if (appRoot) {
+  Modal.setAppElement(appRoot);
+}
 
+export default function VideoPopup({ handleCloseModal, videoId }) {
   return (
-    // Not sure if React supports dialog elements yet so making my own
-    // <div className={styles.PopUpRoot}></div>
     <Modal
       isOpen={true}
       onRequestClose={handleCloseModal}
-      contentLabel="Example Modal"
+      contentLabel="Project video"
       className={styles.Modal}
       overlayClassName={styles.Overlay}
-      id={id}
-      key={id}
     >
       <div className={styles.youtubeVideo}>
-        <YouTube
-          videoId={videoId}
-          onReady={() => {
-            setIsLoading(false);
-          }}
-        />
+        <YouTube videoId={videoId} />
       </div>
     </Modal>
   );

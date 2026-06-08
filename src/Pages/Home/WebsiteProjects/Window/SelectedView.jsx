@@ -47,7 +47,7 @@ export default function SelectedView({ index, sectionRatio }) {
             <div
               className={styles.videoImage}
               style={{
-                backgroundImage: `url(http://img.youtube.com/vi/${videoId}/0.jpg)`,
+                backgroundImage: `url(https://img.youtube.com/vi/${videoId}/0.jpg)`,
               }}
             >
               <img src={PlayVideoIcon} className={styles.playVideoIcon}></img>
