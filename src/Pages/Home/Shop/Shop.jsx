@@ -13,6 +13,34 @@ const gSigned = (n) => `${n >= 0 ? "+" : "−"}${Math.abs(Math.round(n))}g`;
 const LAST_TRADING_DAY = CONFIG.victoryDay - 1; // win = survive to the morning of victoryDay
 const portraitSrc = (p) => `/Dialog/Pictures/${p}.webp`;
 
+// ---- persistent records (best run, wins, unlocked story) ---------------------
+const RECORDS_KEY = "kaitosCurios.records.v1";
+const DEFAULT_RECORDS = {
+  bestGold: 0,
+  bestRapport: 0,
+  bestDay: 0,
+  bestStreak: 0,
+  wins: 0,
+  runs: 0,
+  lore: [], // indices of RAPPORT_TIERS the player has ever unlocked
+};
+function loadRecords() {
+  try {
+    const raw = localStorage.getItem(RECORDS_KEY);
+    if (raw) return { ...DEFAULT_RECORDS, ...JSON.parse(raw) };
+  } catch {
+    /* storage unavailable or corrupt — fall back to a fresh record */
+  }
+  return { ...DEFAULT_RECORDS };
+}
+function saveRecords(r) {
+  try {
+    localStorage.setItem(RECORDS_KEY, JSON.stringify(r));
+  } catch {
+    /* storage unavailable (private mode / blocked) — best-effort only */
+  }
+}
+
 export default function Shop({ isfocus }) {
   isfocus = isfocus === "true";
   const { setScrollable, currentSection, openDialogWithCallback } =
@@ -24,8 +52,61 @@ export default function Shop({ isfocus }) {
     createRun(seedRef.current)
   );
 
-  // "How to play" panel — a quick, friendly rundown of the core loop.
+  // "How to play" panel + "Kaito's story" codex.
   const [showHelp, setShowHelp] = useState(false);
+  const [showCodex, setShowCodex] = useState(false);
+
+  // Persistent records (best run, win count, unlocked story) survive across runs
+  // and page loads. The engine stays pure; persistence lives here.
+  const recordsRef = useRef(null);
+  if (recordsRef.current === null) recordsRef.current = loadRecords();
+  const [records, setRecords] = useState(recordsRef.current);
+  const [newRecords, setNewRecords] = useState(null);
+
+  // Bank a story beat the moment it's revealed, so the codex remembers it.
+  useEffect(() => {
+    if (!state.pendingTier) return;
+    const idx = RAPPORT_TIERS.indexOf(state.pendingTier);
+    if (idx < 0 || recordsRef.current.lore.includes(idx)) return;
+    const next = { ...recordsRef.current, lore: [...recordsRef.current.lore, idx] };
+    recordsRef.current = next;
+    setRecords(next);
+    saveRecords(next);
+  }, [state.pendingTier]);
+
+  // Bank end-of-run stats once per run, flagging anything that beat a best.
+  const endRecorded = useRef(false);
+  useEffect(() => {
+    const terminal = state.phase === "win" || state.phase === "over";
+    if (!terminal) {
+      endRecorded.current = false; // armed again for the next run
+      return;
+    }
+    if (endRecorded.current) return;
+    endRecorded.current = true;
+    const prev = recordsRef.current;
+    const finalGold = state.stats.finalGold ?? state.gold;
+    const flags = {
+      gold: finalGold > prev.bestGold,
+      rapport: state.stats.bestRapport > prev.bestRapport,
+      day: state.stats.daysSurvived > prev.bestDay,
+      streak: state.stats.bestStreak > prev.bestStreak,
+      firstWin: state.phase === "win" && prev.wins === 0,
+    };
+    const next = {
+      ...prev,
+      bestGold: Math.max(prev.bestGold, finalGold),
+      bestRapport: Math.max(prev.bestRapport, state.stats.bestRapport),
+      bestDay: Math.max(prev.bestDay, state.stats.daysSurvived),
+      bestStreak: Math.max(prev.bestStreak, state.stats.bestStreak),
+      wins: prev.wins + (state.phase === "win" ? 1 : 0),
+      runs: prev.runs + 1,
+    };
+    recordsRef.current = next;
+    setRecords(next);
+    setNewRecords(flags);
+    saveRecords(next);
+  }, [state.phase, state.gold, state.stats]);
 
   // Intro dialog on first focus (same pattern as the other sections).
   const [dialogState, setDialogState] = useState({ initDialog: true });
@@ -76,12 +157,32 @@ export default function Shop({ isfocus }) {
             <span className={styles.hudDayGoal}>&nbsp;/ {LAST_TRADING_DAY}</span>
           </span>
           <span className={styles.hudGold} title="Coin on hand">{g(state.gold)}</span>
+          {state.streak >= 2 && (
+            <span
+              className={styles.streakChip}
+              title={`Hot streak — ${state.streak} profitable flips in a row. Each one adds a bigger tip; a loss cools it off.`}
+            >
+              <span className={styles.streakFlame} aria-hidden="true">🔥</span>
+              <b>×{state.streak}</b>
+            </span>
+          )}
         </div>
         <div className={styles.hudRight}>
           <span className={styles.hudRent}>
             RENT&nbsp;<b>{g(state.rent)}</b>
           </span>
           <Rapport state={state} />
+          <button
+            className={styles.helpBtn}
+            onClick={() => {
+              playSFX("MenuOpen");
+              setShowCodex(true);
+            }}
+            aria-label="Kaito's story"
+            title="Kaito's story"
+          >
+            📖
+          </button>
           <button
             className={styles.helpBtn}
             onClick={() => {
@@ -172,9 +273,17 @@ export default function Shop({ isfocus }) {
         <Backstory tier={state.pendingTier} dispatch={dispatch} />
       )}
       {(state.phase === "over" || state.phase === "win") && (
-        <RunEnd state={state} dispatch={dispatch} />
+        <RunEnd
+          state={state}
+          dispatch={dispatch}
+          records={records}
+          newRecords={newRecords}
+        />
       )}
       {showHelp && <HelpPanel onClose={() => setShowHelp(false)} />}
+      {showCodex && (
+        <Codex lore={records.lore} onClose={() => setShowCodex(false)} />
+      )}
 
       <Toast toast={state.toast} />
     </div>
@@ -369,12 +478,29 @@ function HaggleModal({ state, dispatch, playSFX }) {
               <div className={styles.dealBig}>
                 {buy ? "BOUGHT" : "SOLD"} for <b>{g(h.price)}</b>
               </div>
+              {!buy && (
+                <div
+                  className={`${styles.dealProfit} ${
+                    h.profit >= 0 ? styles.profitPos : styles.profitNeg
+                  }`}
+                >
+                  {h.profit >= 0 ? "Profit " : "Loss "}
+                  {gSigned(h.profit)}
+                </div>
+              )}
+              {!buy && h.tip > 0 && (
+                <div className={styles.tipNote}>
+                  <span aria-hidden="true">🔥</span> Hot-streak tip <b>+{g(h.tip)}</b>
+                  &nbsp;· {h.streak} in a row
+                </div>
+              )}
               {h.rapportGain >= 2 && (
                 <div className={styles.rapportNote}>♥ Kaito warms to you — rapport up</div>
               )}
               <button
                 className={styles.btnPrimary}
                 onClick={() => dispatch({ type: "CLOSE_HAGGLE" })}
+                autoFocus
               >
                 Continue
               </button>
@@ -483,6 +609,13 @@ function DayEnd({ state, dispatch }) {
       <div className={styles.panel}>
         <h2 className={styles.panelTitle}>CLOSING TIME — DAY {state.day}</h2>
         <div className={styles.ledger}>
+          {state.dayDeals > 0 && (
+            <Line
+              k={`Sold today (${state.dayDeals} ${state.dayDeals === 1 ? "deal" : "deals"})`}
+              v={`+${g(state.dayTakings)}`}
+              good
+            />
+          )}
           <Line k="Coin on hand" v={g(state.gold)} />
           <Line k="Rent due" v={g(state.rent)} warn={!canPay} />
           <Line k="After rent" v={g(state.gold - state.rent)} warn={!canPay} />
@@ -518,8 +651,11 @@ function Backstory({ tier, dispatch }) {
   );
 }
 
-function RunEnd({ state, dispatch }) {
+function RunEnd({ state, dispatch, records, newRecords }) {
   const win = state.phase === "win";
+  const nr = newRecords || {};
+  const finalGold = state.stats.finalGold ?? state.gold;
+  const storyCount = records ? records.lore.length : 0;
   return (
     <div className={styles.overlay}>
       <div className={`${styles.panel} ${win ? styles.winPanel : styles.overPanel}`}>
@@ -536,14 +672,25 @@ function RunEnd({ state, dispatch }) {
             : "Couldn't make rent. Kaito waves you off with a sympathetic smile — the shop's doors will always be open."}
         </p>
         <div className={styles.ledger}>
-          <Line k="Days survived" v={state.stats.daysSurvived || state.day} />
+          <Line k="Days survived" v={String(state.stats.daysSurvived)} badge={nr.day} />
+          <Line k="Coin in hand" v={g(finalGold)} badge={nr.gold} />
           <Line k="Coin earned" v={g(state.stats.earned)} />
-          <Line k="Best rapport" v={String(state.stats.bestRapport)} />
+          <Line k="Best rapport" v={`♥ ${state.stats.bestRapport}`} badge={nr.rapport} />
+          <Line k="Longest streak" v={`🔥 ${state.stats.bestStreak}`} badge={nr.streak} />
           <Line k="Deals struck" v={String(state.stats.deals)} />
         </div>
+        {records && (
+          <p className={styles.recordsLine}>
+            Best run {g(records.bestGold)} · {records.wins}{" "}
+            {records.wins === 1 ? "win" : "wins"} in {records.runs}{" "}
+            {records.runs === 1 ? "run" : "runs"} · story {storyCount}/
+            {RAPPORT_TIERS.length}
+          </p>
+        )}
         <button
           className={styles.btnPrimary}
           onClick={() => dispatch({ type: "RESTART", seed: (Date.now() >>> 0) || 1 })}
+          autoFocus
         >
           New run
         </button>
@@ -610,11 +757,73 @@ function HelpPanel({ onClose }) {
   );
 }
 
-function Line({ k, v, warn }) {
+function Codex({ lore, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  return (
+    <div className={styles.overlay} onClick={onClose}>
+      <div
+        className={`${styles.panel} ${styles.codexPanel}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Kaito's story"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h2 className={styles.panelTitle}>KAITO&rsquo;S STORY</h2>
+        <p className={styles.codexSub}>
+          {lore.length} of {RAPPORT_TIERS.length} memories earned — win his trust to
+          hear more.
+        </p>
+        <div className={styles.codexList}>
+          {RAPPORT_TIERS.map((t, i) => {
+            const got = lore.includes(i);
+            return (
+              <div
+                key={t.at}
+                className={`${styles.codexCard} ${got ? "" : styles.codexLocked}`}
+              >
+                {got ? (
+                  <img
+                    className={styles.codexPortrait}
+                    src={portraitSrc(t.portrait)}
+                    alt=""
+                    draggable={false}
+                  />
+                ) : (
+                  <div className={styles.codexLockIcon} aria-hidden="true">
+                    🔒
+                  </div>
+                )}
+                <div className={styles.codexText}>
+                  <div className={styles.codexCardTitle}>
+                    {got ? t.title : "A memory not yet shared"}
+                  </div>
+                  <p>{got ? `“${t.text}”` : `Reach ♥${t.at} rapport to unlock.`}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <button className={styles.btnPrimary} onClick={onClose} autoFocus>
+          Close
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function Line({ k, v, warn, good, badge }) {
   return (
     <div className={styles.line}>
-      <span>{k}</span>
-      <span className={warn ? styles.lineWarn : ""}>{v}</span>
+      <span>
+        {k}
+        {badge && <span className={styles.newBadge}>★ BEST</span>}
+      </span>
+      <span className={warn ? styles.lineWarn : good ? styles.lineGood : ""}>{v}</span>
     </div>
   );
 }
