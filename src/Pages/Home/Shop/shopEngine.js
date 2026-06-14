@@ -341,7 +341,8 @@ function completeBuy(state, price, rng) {
   }
   const next = { ...state };
   next.gold = state.gold - price;
-  next.bag = [...state.bag, { ...h.inst }];
+  // remember what we paid so the bag can show real profit/loss on resale
+  next.bag = [...state.bag, { ...h.inst, paid: price }];
   next.shelf = state.shelf.filter((s) => s.uid !== h.inst.uid);
   next.stats = { ...state.stats, spent: state.stats.spent + price, deals: state.stats.deals + 1 };
   // fair buyers (who pay Kaito a healthy margin) earn more goodwill
@@ -460,6 +461,23 @@ function ackBackstory(state) {
   setFace(next, rng, "greet", null);
   if (next.event) toast(next, `${next.event.title}: ${next.event.text}`);
   return next;
+}
+
+// --- pure UI selectors --------------------------------------------------------
+// Today's demand entry for a category (or null). Drives the shelf "flip" markers.
+export function wantFor(state, category) {
+  return state.wants.find((w) => w.category === category) || null;
+}
+
+// What a bag item is worth selling back to Kaito *today*, and the profit on it.
+// `ceil` is the most he'd ever pay; the haggled price lands between his opening
+// offer and this. `estProfit` compares that best case against what we paid.
+export function sellProjection(state, inst) {
+  const w = wantFor(state, inst.category);
+  const wanted = !!w;
+  const ceil = round(inst.value * (wanted ? 1 + w.bonus : CONFIG.dumpFactor));
+  const basis = inst.paid != null ? inst.paid : inst.value;
+  return { wanted, bonus: wanted ? w.bonus : 0, ceil, basis, estProfit: ceil - basis };
 }
 
 // --- public reducer -----------------------------------------------------------

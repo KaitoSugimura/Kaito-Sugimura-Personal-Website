@@ -130,6 +130,14 @@ export const EVENTS = [
   { id: "collector", title: "A Collector Visits", text: "A curio collector is in town — relics & curios pay big.", effect: { categoryWant: ["Curio", "Relic"], wantBonus: 0.35 } },
 ];
 
+// ---- short, player-facing labels for each perk (used in the rapport preview) -
+export const PERK_LABELS = {
+  appraise: "Appraising eye",
+  patience: "+1 Patience",
+  slot: "+2 Bag slots",
+  discount: "Friend's discount",
+};
+
 // ---- rapport tiers: perks + a real piece of Kaito's story ---------------------
 // Crossing a threshold (cumulative rapport) reveals a backstory card on the next
 // day-break and applies its perk. `portrait` is a /Dialog/Pictures/*.webp name.

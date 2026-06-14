@@ -77,6 +77,10 @@
   font-size: 1.9vmin;
   color: var(--gold);
 }
+.hudDayGoal {
+  color: #b9a583;
+  font-weight: 700;
+}
 
 .hudGold {
   font-weight: 800;
@@ -120,10 +124,45 @@
   background: linear-gradient(90deg, var(--amber), var(--gold));
   transition: width 0.4s ease;
 }
-.rapportTier {
-  font-size: 1.4vmin;
-  font-weight: 800;
+.rapportCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25vmin;
+}
+.rapportNext {
+  font-size: 1.15vmin;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #d8c4a0;
+  white-space: nowrap;
+}
+.rapportFull {
+  background: linear-gradient(90deg, var(--gold), #fff2cf, var(--gold));
+  box-shadow: 0 0 6px rgba(244, 207, 115, 0.85);
+}
+
+.helpBtn {
+  width: 3vmin;
+  height: 3vmin;
+  min-width: 3vmin;
+  border-radius: 50%;
+  border: 1.5px solid rgba(244, 207, 115, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   color: var(--gold);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.8vmin;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+.helpBtn:hover {
+  background: rgba(244, 207, 115, 0.18);
+  transform: translateY(-1px);
+}
+.helpBtn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
 }
 
 /* ---- stage ---- */
@@ -339,6 +378,29 @@
   opacity: 0.5;
   filter: saturate(0.6);
 }
+/* shelf item whose category Kaito wants today — a same-day flip opportunity */
+.shelfWanted {
+  border-color: var(--green);
+  box-shadow: 0 4px 0 rgba(60, 122, 94, 0.45);
+}
+.shelfWanted:hover {
+  box-shadow: 0 7px 0 rgba(60, 122, 94, 0.5);
+}
+.flipTag {
+  position: absolute;
+  top: -0.9vmin;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--green);
+  color: #fff;
+  font-size: 1vmin;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.2vmin 0.7vmin;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
 .icon {
   width: 7vmin;
   height: 7vmin;
@@ -414,6 +476,17 @@
 .bagCard .icon {
   width: 5.4vmin;
   height: 5.4vmin;
+}
+.bagProfit {
+  font-size: 1.5vmin;
+  font-weight: 800;
+  line-height: 1;
+}
+.profitPos {
+  color: #2f6b48;
+}
+.profitNeg {
+  color: var(--red);
 }
 .bagEmpty {
   flex: 0 0 auto;
@@ -827,6 +900,55 @@
   font-size: 1.7vmin;
   line-height: 1.5;
   color: #e9d9b8;
+}
+
+/* ---- how-to-play ---- */
+.helpPanel {
+  border-color: var(--amber);
+  text-align: left;
+  align-items: stretch;
+  width: min(620px, 94%);
+  max-height: 88%;
+  overflow: auto;
+}
+.helpPanel .panelTitle {
+  text-align: center;
+}
+.helpLede {
+  font-size: 1.7vmin;
+  line-height: 1.5;
+  color: #e9d9b8;
+  text-align: center;
+}
+.helpList {
+  display: flex;
+  flex-direction: column;
+  gap: 1vmin;
+  font-size: 1.6vmin;
+  line-height: 1.45;
+  color: var(--cream);
+}
+.helpList li {
+  position: relative;
+  padding-left: 1.8vmin;
+}
+.helpList li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+}
+.helpList b {
+  color: var(--gold);
+}
+.helpStar {
+  color: #7ec699;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.helpHeart {
+  color: var(--red);
+  font-weight: 800;
 }
 
 /* ---- toast ---- */

@@ -1,14 +1,16 @@
 import { useContext, useEffect, useReducer, useRef, useState } from "react";
 import styles from "./Shop.module.css";
 import { ItemIcon } from "./itemIcons";
-import { reduce, createRun, bagSlots } from "./shopEngine";
-import { RARITY } from "./shopData";
+import { reduce, createRun, bagSlots, sellProjection, wantFor } from "./shopEngine";
+import { RARITY, CONFIG, RAPPORT_TIERS, PERK_LABELS } from "./shopData";
 import { scrollContext } from "../scrollContext";
 import { SoundContext } from "../../../Context/SoundContext";
 import Sections from "../HomeTableOfContents.jsx";
 
 const SECTION_TITLE = "Shop";
 const g = (n) => `${Math.round(n)}g`;
+const gSigned = (n) => `${n >= 0 ? "+" : "−"}${Math.abs(Math.round(n))}g`;
+const LAST_TRADING_DAY = CONFIG.victoryDay - 1; // win = survive to the morning of victoryDay
 const portraitSrc = (p) => `/Dialog/Pictures/${p}.webp`;
 
 export default function Shop({ isfocus }) {
@@ -21,6 +23,9 @@ export default function Shop({ isfocus }) {
   const [state, dispatch] = useReducer(reduce, undefined, () =>
     createRun(seedRef.current)
   );
+
+  // "How to play" panel — a quick, friendly rundown of the core loop.
+  const [showHelp, setShowHelp] = useState(false);
 
   // Intro dialog on first focus (same pattern as the other sections).
   const [dialogState, setDialogState] = useState({ initDialog: true });
@@ -43,8 +48,10 @@ export default function Shop({ isfocus }) {
       setScrollable(true);
       return;
     }
-    setScrollable(state.phase === "shop");
-  }, [isfocus, state.phase, setScrollable]);
+    // Only let page-snap scrolling through when the player is idly browsing the
+    // shelf — never while a modal, the help panel, or a story beat is up.
+    setScrollable(state.phase === "shop" && !showHelp);
+  }, [isfocus, state.phase, showHelp, setScrollable]);
 
   // Fire the sound cue the engine requested on its last transition.
   const lastSfx = useRef(0);
@@ -64,14 +71,28 @@ export default function Shop({ isfocus }) {
       {/* top HUD — kept to the far edges so the site's centered section title shows through */}
       <div className={styles.hud}>
         <div className={styles.hudLeft}>
-          <span className={styles.hudDay}>DAY {state.day}</span>
-          <span className={styles.hudGold}>{g(state.gold)}</span>
+          <span className={styles.hudDay}>
+            DAY {state.day}
+            <span className={styles.hudDayGoal}>&nbsp;/ {LAST_TRADING_DAY}</span>
+          </span>
+          <span className={styles.hudGold} title="Coin on hand">{g(state.gold)}</span>
         </div>
         <div className={styles.hudRight}>
           <span className={styles.hudRent}>
             RENT&nbsp;<b>{g(state.rent)}</b>
           </span>
           <Rapport state={state} />
+          <button
+            className={styles.helpBtn}
+            onClick={() => {
+              playSFX("MenuOpen");
+              setShowHelp(true);
+            }}
+            aria-label="How to play"
+            title="How to play"
+          >
+            ?
+          </button>
         </div>
       </div>
 
@@ -92,6 +113,7 @@ export default function Shop({ isfocus }) {
                 key={it.uid}
                 item={it}
                 appraise={state.perks.appraise}
+                want={wantFor(state, it.category)}
                 affordable={state.gold >= it.floor && state.bag.length < slots}
                 onClick={() => {
                   playSFX("MetalClick");
@@ -119,14 +141,14 @@ export default function Shop({ isfocus }) {
                 key={it.uid}
                 item={it}
                 appraise={state.perks.appraise}
-                wanted={state.wants.some((w) => w.category === it.category)}
+                proj={sellProjection(state, it)}
                 onClick={() => {
                   playSFX("MetalClick");
                   dispatch({ type: "START_HAGGLE", side: "sell", uid: it.uid });
                 }}
               />
             ) : (
-              <div key={`empty-${i}`} className={styles.bagEmpty} />
+              <div key={`empty-${i}`} className={styles.bagEmpty} aria-hidden="true" />
             );
           })}
         </div>
@@ -152,6 +174,7 @@ export default function Shop({ isfocus }) {
       {(state.phase === "over" || state.phase === "win") && (
         <RunEnd state={state} dispatch={dispatch} />
       )}
+      {showHelp && <HelpPanel onClose={() => setShowHelp(false)} />}
 
       <Toast toast={state.toast} />
     </div>
@@ -160,14 +183,32 @@ export default function Shop({ isfocus }) {
 
 // ---- HUD bits ----------------------------------------------------------------
 function Rapport({ state }) {
-  const pct = Math.min(100, (state.rapport / 110) * 100);
+  const next = RAPPORT_TIERS[state.tier];
+  const prevAt = state.tier > 0 ? RAPPORT_TIERS[state.tier - 1].at : 0;
+  // Fill the bar across the *current* tier's span so progress to the next perk
+  // reads at a glance (full + glowing once you've befriended him completely).
+  const span = next ? next.at - prevAt : 1;
+  const pct = next
+    ? Math.max(0, Math.min(100, ((state.rapport - prevAt) / span) * 100))
+    : 100;
+  const caption = next
+    ? `${state.rapport} / ${next.at} → ${PERK_LABELS[next.perk] || "a perk"}`
+    : "Trusted friend ♥";
   return (
-    <div className={styles.rapport} title={`Rapport ${state.rapport}`}>
+    <div
+      className={styles.rapport}
+      title={`Rapport ${state.rapport}. Deal fairly to earn Kaito's trust and unlock perks & his story.`}
+    >
       <span className={styles.rapportHeart}>♥</span>
-      <span className={styles.rapportBar}>
-        <span className={styles.rapportFill} style={{ width: `${pct}%` }} />
+      <span className={styles.rapportCol}>
+        <span className={styles.rapportBar}>
+          <span
+            className={`${styles.rapportFill} ${next ? "" : styles.rapportFull}`}
+            style={{ width: `${pct}%` }}
+          />
+        </span>
+        <span className={styles.rapportNext}>{caption}</span>
       </span>
-      <span className={styles.rapportTier}>Lv{state.tier}</span>
     </div>
   );
 }
@@ -215,14 +256,26 @@ function rarityPip(rarity) {
   return RARITY[rarity] ? RARITY[rarity].hue : "#8a7a5c";
 }
 
-function ShelfItem({ item, appraise, affordable, onClick }) {
+function ShelfItem({ item, appraise, want, affordable, onClick }) {
+  const flipHint = want
+    ? ` In demand today — Kaito buys ${item.category} back at +${Math.round(
+        want.bonus * 100
+      )}%. Buy low, flip it before close.`
+    : "";
   return (
     <button
-      className={`${styles.card} ${affordable ? "" : styles.cardLocked}`}
+      className={`${styles.card} ${want ? styles.shelfWanted : ""} ${
+        affordable ? "" : styles.cardLocked
+      }`}
       onClick={onClick}
       disabled={!affordable}
-      title={item.flavor}
+      title={item.flavor + flipHint}
     >
+      {want && (
+        <span className={styles.flipTag} aria-hidden="true">
+          ★ FLIP +{Math.round(want.bonus * 100)}%
+        </span>
+      )}
       <span
         className={styles.rarityPip}
         style={{ background: rarityPip(item.rarity) }}
@@ -232,18 +285,27 @@ function ShelfItem({ item, appraise, affordable, onClick }) {
       <ItemIcon id={item.id} className={styles.icon} />
       <span className={styles.cardName}>{item.name}</span>
       <span className={styles.cardPrice}>{g(item.ask)}</span>
-      {appraise && <span className={styles.cardWorth}>~{g(item.value)}</span>}
+      {appraise && <span className={styles.cardWorth}>worth ~{g(item.value)}</span>}
     </button>
   );
 }
 
-function BagItem({ item, appraise, wanted, onClick }) {
+function BagItem({ item, appraise, proj, onClick }) {
+  const { wanted, ceil, estProfit } = proj;
+  const profitClass = estProfit >= 0 ? styles.profitPos : styles.profitNeg;
+  const label = wanted
+    ? `${item.name} — in demand today. Sells for up to ~${g(ceil)} (${gSigned(
+        estProfit
+      )} vs the ${g(item.paid)} you paid). Tap to sell.`
+    : `${item.name} — not in demand today; selling now nets ${gSigned(
+        estProfit
+      )}. Hold it for a day Kaito wants ${item.category}. Tap to sell anyway.`;
   return (
     <button
       className={`${styles.card} ${styles.bagCard} ${wanted ? styles.wantedCard : ""}`}
       onClick={onClick}
-      title={item.flavor}
-      aria-label={`${item.name}${wanted ? " — wanted today, sells at a premium" : ""}`}
+      title={label}
+      aria-label={label}
     >
       {wanted && <span className={styles.wantedTag}>★ WANTED</span>}
       <span
@@ -254,7 +316,8 @@ function BagItem({ item, appraise, wanted, onClick }) {
       />
       <ItemIcon id={item.id} className={styles.icon} />
       <span className={styles.cardName}>{item.name}</span>
-      {appraise && <span className={styles.cardWorth}>~{g(item.value)}</span>}
+      <span className={`${styles.bagProfit} ${profitClass}`}>{gSigned(estProfit)}</span>
+      {appraise && <span className={styles.cardWorth}>worth ~{g(item.value)}</span>}
     </button>
   );
 }
@@ -483,6 +546,64 @@ function RunEnd({ state, dispatch }) {
           onClick={() => dispatch({ type: "RESTART", seed: (Date.now() >>> 0) || 1 })}
         >
           New run
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function HelpPanel({ onClose }) {
+  // Close on Escape for keyboard users.
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  return (
+    <div className={styles.overlay} onClick={onClose}>
+      <div
+        className={`${styles.panel} ${styles.helpPanel}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="How to play Kaito's Curios"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h2 className={styles.panelTitle}>HOW TO PLAY</h2>
+        <p className={styles.helpLede}>
+          You&rsquo;re a travelling trader; Kaito runs the curio shop. Turn a profit
+          and survive the rent &mdash; deal kindly and he&rsquo;ll let you in on who he
+          really is.
+        </p>
+        <ul className={styles.helpList}>
+          <li>
+            <b>Buy low.</b> Tap something on Kaito&rsquo;s shelf and haggle his price
+            <i> down</i> toward what it&rsquo;s worth.
+          </li>
+          <li>
+            <b>Sell into demand.</b> Each day Kaito pays a premium for a few
+            categories &mdash; the <span className={styles.helpStar}>★ FLIP</span> tag
+            marks them. Buy those and sell them back the same day for profit.
+          </li>
+          <li>
+            <b>Hold the rest.</b> Anything <i>not</i> in demand sells at a loss today, so
+            stash it and wait for a day Kaito wants it.
+          </li>
+          <li>
+            <b>Mind his patience.</b> Lowball him and the dots drain &mdash; at zero he
+            makes one final take-it-or-leave-it offer.
+          </li>
+          <li>
+            <b>Win his trust.</b> Fair, generous deals raise <span className={styles.helpHeart}>♥</span>
+            rapport, unlocking perks and real pieces of Kaito&rsquo;s story.
+          </li>
+          <li>
+            <b>Survive {LAST_TRADING_DAY} days.</b> Rent comes due every night and keeps
+            climbing. Make it to the end and you&rsquo;ve earned a partnership.
+          </li>
+        </ul>
+        <button className={styles.btnPrimary} onClick={onClose} autoFocus>
+          Let&rsquo;s trade
         </button>
       </div>
     </div>
