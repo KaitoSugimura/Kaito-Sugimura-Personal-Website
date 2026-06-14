@@ -18,10 +18,6 @@ export default {
     subTitle: <>Grade: 3.942 out of 4 GPA</>,
     date: <>09/2020 — 06/2025</>,
     icon: "/Home/Icons/School.svg",
-    coords: {
-      x: 55,
-      y: 22,
-    },
     InitCoords: {
       x: 55,
       y: 22,
@@ -153,10 +149,6 @@ export default {
     subTitle: <>3 years of learning, more to come</>,
     date: <>09/2020 — now</>,
     icon: "/Home/Icons/SelfStudy.svg",
-    coords: {
-      x: 73.5,
-      y: 22,
-    },
     InitCoords: {
       x: 73.5,
       y: 22,
@@ -247,10 +239,6 @@ export default {
     subTitle: <>Part time, Full time, and Volunteering</>,
     date: <></>,
     icon: "/Home/Icons/BriefCase.svg",
-    coords: {
-      x: 55,
-      y: 55,
-    },
     InitCoords: {
       x: 55,
       y: 55,
@@ -267,8 +255,6 @@ export default {
         <Work
           title={"Senior Software Engineer"}
           subtitle={"Finofo"}
-          topic={"Courses Taken"}
-          img={"/Home/Icons/Topic/Git.svg"}
           list={[
             "Promoted from Front-End Engineer to Senior Software Engineer within my first year.",
             "Designed, built, and shipped customer-facing features across the platform, with a focus on UI/UX, performance, and reliability.",
@@ -281,8 +267,6 @@ export default {
         <Work
           title={"Software Developer Intern"}
           subtitle={"PureWeb"}
-          topic={"Courses Taken"}
-          img={"/Home/Icons/Topic/Git.svg"}
           list={[
             "Proposed and led a redesign for a customer facing website console. Improving the overall UI/UX, workflow, software optimization and speed.",
             "Worked and collaborated with stakeholders to gather requirements, delivering demos and presentations to the company.",
@@ -295,8 +279,6 @@ export default {
         <Work
           title={"Game Programmer and Quality Assurance"}
           subtitle={"Thousand Hour Games"}
-          topic={"Courses Taken"}
-          img={"/Home/Icons/Topic/Git.svg"}
           list={[
             "Developed and polished the main combat of Gates of Everforge.",
             "Collaborated and brainstormed game concepts, design elements, key features with the team.",
@@ -309,8 +291,6 @@ export default {
         <Work
           title={"Soldering Technician (Seasonal)"}
           subtitle={"Matrix Orbital"}
-          topic={"Courses Taken"}
-          img={"/Home/Icons/Topic/Git.svg"}
           list={[
             "Assured quality assurance for displays.",
             "Soldered, Inspected and Packaged displays.",
@@ -323,8 +303,6 @@ export default {
         <Work
           title={"Sales Associate"}
           subtitle={"Loblaws"}
-          topic={"Courses Taken"}
-          img={"/Home/Icons/Topic/Git.svg"}
           list={[
             "Greeted customers as they entered the store and ensuring a pleasant customer shopping experience.",
             "Maintained knowledge of current sales and promotions and adhered to policies regarding payment and exchanges.",
@@ -337,8 +315,6 @@ export default {
         <Work
           title={"Summer camp volunteer"}
           subtitle={"The City of Calgary Recreation"}
-          topic={"Courses Taken"}
-          img={"/Home/Icons/Topic/Git.svg"}
           list={[
             "Leading groups and looking after small children in the camp.",
             "Thinking of fun games for children.",
@@ -357,10 +333,6 @@ export default {
     subTitle: <>Some of my achievements!</>,
     date: null,
     icon: "/Home/Icons/Trophy.svg",
-    coords: {
-      x: 73.5,
-      y: 55,
-    },
     InitCoords: {
       x: 73.5,
       y: 55,

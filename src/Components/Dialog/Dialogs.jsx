@@ -90,7 +90,7 @@ export default {
     },
     {
       speaker: "Kaito",
-      text: "Looks like you made it to my profile!",
+      text: "Looks like you made it to my projects!",
       music: null,
       image: "Smile.webp",
     },

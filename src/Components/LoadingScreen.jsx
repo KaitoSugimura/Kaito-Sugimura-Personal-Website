@@ -20,7 +20,6 @@ export default function LoadingScreen({ backgroundColor = "#000000" }) {
         <span style={{ animationDelay: `${0.8}s` }}>.</span>
         <span style={{ animationDelay: `${0.9}s` }}>.</span>
       </div>
-      {/* <img src={loadingSlime} className={styles.loadingSlime} style={{animationDuration: `14s`, animationDelay: `${0.7}s`}} ></img> */}
     </div>
   );
 }

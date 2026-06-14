@@ -8,33 +8,32 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
   const { playSFX, playMusic } = useContext(SoundContext);
   const [currentTextNo, setCurrentTextNo] = useState(0);
 
+  // Guard against an unknown DialogID so indexing/`.length` can never throw.
+  const lines = Dialogs[DialogID] ?? [];
+
   // Play the music cue (if any) for the current dialog line. Kept in an effect
   // so it doesn't fire as a side effect during render.
-  const currentLine = Dialogs[DialogID]?.[currentTextNo];
+  const currentLine = lines[currentTextNo];
   useEffect(() => {
     if (currentLine?.music) {
       playMusic(currentLine.music);
     }
-  }, [DialogID, currentTextNo]);
+  }, [currentLine, playMusic]);
 
   const handleDialogClick = () => {
     playSFX("DialogClick");
-    if (currentTextNo + 1 == Dialogs[DialogID].length) {
+    if (currentTextNo + 1 === lines.length) {
       eventFinishedCallback();
     } else {
-      setCurrentTextNo((prev) => {
-        ++prev;
-        return prev;
-      });
+      setCurrentTextNo((prev) => prev + 1);
     }
   };
 
   const skipDialog = () => {
     let musicToPlay = null;
-    for (let i = currentTextNo + 1; i < Dialogs[DialogID].length; ++i) {
-      const obj = Dialogs[DialogID][i];
-      if (obj.music) {
-        musicToPlay = obj.music;
+    for (let i = currentTextNo + 1; i < lines.length; ++i) {
+      if (lines[i].music) {
+        musicToPlay = lines[i].music;
       }
     }
     playMusic(musicToPlay);
@@ -54,6 +53,7 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
         <img
           className={styles.SkipIcon}
           src="/Home/Icons/Skip.svg"
+          alt=""
           onDrag={(e) => {
             e.preventDefault();
           }}
@@ -61,28 +61,24 @@ export default function DialogMain({ DialogID, eventFinishedCallback }) {
       </button>
       <div className={styles.DialogClickArea} onClick={handleDialogClick}>
         <div className={styles.DialogContainer}>
-          {currentTextNo < Dialogs[DialogID].length && (
-            <>
-              {/* <h1 className={styles.DialogSpeakerName}>{
-              Dialogs[DialogID][currentTextNo].speaker}</h1> */}
-              <p className={styles.DialogText} key={currentTextNo}>
-                <span>{Dialogs[DialogID][currentTextNo].speaker + ": "}</span>
-                {Dialogs[DialogID][currentTextNo].text}
-              </p>
-            </>
+          {currentLine && (
+            <p className={styles.DialogText} key={currentTextNo}>
+              <span>{currentLine.speaker + ": "}</span>
+              {currentLine.text}
+            </p>
           )}
           <div className={styles.DownTriangle}></div>
         </div>
-        {currentTextNo < Dialogs[DialogID].length &&
-          Dialogs[DialogID][currentTextNo].image && (
-            <img
-              src={`/Dialog/Pictures/${Dialogs[DialogID][currentTextNo].image}`}
-              className={styles.DialogImage}
-              onDrag={(e) => {
-                e.preventDefault();
-              }}
-            ></img>
-          )}
+        {currentLine && currentLine.image && (
+          <img
+            src={`/Dialog/Pictures/${currentLine.image}`}
+            alt={currentLine.speaker}
+            className={styles.DialogImage}
+            onDrag={(e) => {
+              e.preventDefault();
+            }}
+          ></img>
+        )}
       </div>
     </div>
   );

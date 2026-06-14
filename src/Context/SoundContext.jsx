@@ -1,4 +1,11 @@
-import { createContext, useCallback, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 // Music
 import defaultBGM from "/Dialog/Music/MainMusic.mp3";
 import profileBGM from "/Dialog/Music/Flutter.mp3";
@@ -42,21 +49,32 @@ const soundList = {
   AuthOpen: AuthOpen,
 };
 
+// Stable playback actions (playMusic/stopMusic/playSFX). Kept separate from the
+// volume context so dragging the volume slider re-renders only the slider, not
+// every component that just needs to fire a sound effect.
 export const SoundContext = createContext();
+// Reactive volume state (volume + setVolume) for the sound settings UI.
+export const VolumeContext = createContext();
 
 export const SoundContextProvider = ({ children }) => {
   const [volume, setVolume] = useState(0.5);
+  // Mirror of `volume` so the action callbacks can read the latest value
+  // without listing it as a dependency (keeps the callbacks referentially stable).
+  const volumeRef = useRef(volume);
   const audioRef = useRef(null);
   const SFXRef = useRef(null);
   const currentTimeRef = useRef(0);
 
   useEffect(() => {
+    volumeRef.current = volume;
     if (audioRef.current) {
       audioRef.current.volume = volume;
       SFXRef.current.volume = volume;
       audioRef.current.currentTime = currentTimeRef.current;
-      if (volume == 0) audioRef.current.pause();
-      else audioRef.current.play().catch(() => {});
+      if (volume === 0) audioRef.current.pause();
+      else audioRef.current.play().catch(() => {
+        /* Autoplay can be rejected before user interaction; ignore. */
+      });
     }
   }, [volume]);
 
@@ -64,69 +82,65 @@ export const SoundContextProvider = ({ children }) => {
     currentTimeRef.current = audioRef.current.currentTime;
   };
 
-  const playSFX = useCallback(
-    (sfxName) => {
-      if (volume == 0) return;
-      const playPath = soundList[sfxName];
-      if (playPath) {
-        SFXRef.current.src = playPath;
-        SFXRef.current.play().catch(() => {});
-      }
-    },
-    [volume]
-  );
+  const playSFX = useCallback((sfxName) => {
+    if (volumeRef.current === 0) return;
+    const playPath = soundList[sfxName];
+    if (playPath) {
+      SFXRef.current.src = playPath;
+      SFXRef.current.play().catch(() => {
+        /* Playback can be rejected (e.g. rapid retriggers); ignore. */
+      });
+    }
+  }, []);
 
-  const playMusic = useCallback(
-    (musicName) => {
-      if (musicName == null || audioRef.current == null || volume == 0) {
-        return;
-      }
-      if (musicName === "resume") {
-        audioRef.current.currentTime = currentTimeRef.current;
-        audioRef.current.play().catch(() => {});
-        return;
-      }
-      switch (musicName) {
-        case "main":
-          audioRef.current.src = defaultBGM;
-          break;
-        case "profile":
-          audioRef.current.src = profileBGM;
-          break;
-        case "projects":
-          audioRef.current.src = projectsBGM;
-          break;
-      }
+  const playMusic = useCallback((musicName) => {
+    if (musicName == null || audioRef.current == null || volumeRef.current === 0) {
+      return;
+    }
+    if (musicName === "resume") {
+      audioRef.current.currentTime = currentTimeRef.current;
+      audioRef.current.play().catch(() => {
+        /* Autoplay can be rejected before user interaction; ignore. */
+      });
+      return;
+    }
+    switch (musicName) {
+      case "main":
+        audioRef.current.src = defaultBGM;
+        break;
+      case "profile":
+        audioRef.current.src = profileBGM;
+        break;
+      case "projects":
+        audioRef.current.src = projectsBGM;
+        break;
+    }
 
-      audioRef.current.play().catch(() => {});
-    },
-    [volume]
-  );
+    audioRef.current.play().catch(() => {
+      /* Autoplay can be rejected before user interaction; ignore. */
+    });
+  }, []);
 
-  const stopMusic = () => {
+  const stopMusic = useCallback(() => {
     if (audioRef.current == null) {
       return;
     }
     audioRef.current.pause();
-  };
+  }, []);
+
+  const soundValue = useMemo(
+    () => ({ playMusic, stopMusic, playSFX }),
+    [playMusic, stopMusic, playSFX]
+  );
+  const volumeValue = useMemo(() => ({ volume, setVolume }), [volume]);
 
   return (
-    <SoundContext.Provider
-      value={{
-        volume,
-        setVolume,
-        playMusic,
-        stopMusic,
-        playSFX,
-      }}
-    >
-      <audio
-        ref={audioRef}
-        loop="loop"
-        onTimeUpdate={handleTimeUpdate}
-      />
-      <audio ref={SFXRef} />
-      {children}
+    <SoundContext.Provider value={soundValue}>
+      <VolumeContext.Provider value={volumeValue}>
+        <audio ref={audioRef} loop onTimeUpdate={handleTimeUpdate} />
+        <audio ref={SFXRef} />
+        {children}
+      </VolumeContext.Provider>
     </SoundContext.Provider>
   );
 };

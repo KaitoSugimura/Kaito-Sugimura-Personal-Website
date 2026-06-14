@@ -1,13 +1,6 @@
 import styles from "./Work.module.css";
 
-export default function Work({
-  title,
-  subtitle,
-  topic,
-  img,
-  list,
-  dates = null,
-}) {
+export default function Work({ title, subtitle, list, dates = null }) {
   return (
     <div className={styles.TopicRoot} key={title}>
       <h3 className={styles.date}>{dates}</h3>

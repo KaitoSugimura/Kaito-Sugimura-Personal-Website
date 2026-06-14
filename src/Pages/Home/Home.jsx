@@ -1,11 +1,14 @@
-import React, { createContext, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Home.module.css";
 import Sections from "./HomeTableOfContents.jsx";
 import InitHero from "./Hero/InitHero";
 import HorizontalEnjoyer from "../../Tools/HorizontalEnjoyer";
 import Overlay from "./Overlays/Overlay";
-
-export const scrollContext = createContext();
+import { scrollContext } from "./scrollContext";
+import {
+  TERMINAL_REVEAL_DELAY_MS,
+  SECTION_SCROLL_COOLDOWN_MS,
+} from "../../timings";
 
 export default function Home() {
   // Context variables (May be moved to a separate file if needed)
@@ -23,7 +26,7 @@ export default function Home() {
   const [terminalReady, setTerminalReady] = useState(false);
   useEffect(() => {
     if (!initDone) return;
-    const timer = setTimeout(() => setTerminalReady(true), 200);
+    const timer = setTimeout(() => setTerminalReady(true), TERMINAL_REVEAL_DELAY_MS);
     return () => clearTimeout(timer);
   }, [initDone]);
 
@@ -44,43 +47,36 @@ export default function Home() {
   }, []);
 
   // Scroll
-  const scrollTo = (index) => {
-    if (isScrollable.current && initDone) {
-      setCurrentSection(index);
-    }
-  };
+  const scrollTo = useCallback(
+    (index) => {
+      if (isScrollable.current && initDone) {
+        setCurrentSection(index);
+      }
+    },
+    [initDone]
+  );
 
-  const setScrollable = (value) => {
+  const setScrollable = useCallback((value) => {
     isScrollable.current = value;
-  };
+  }, []);
 
-  const openDialogWithCallback = (id, callback) => {
+  const openDialogWithCallback = useCallback((id, callback) => {
     dialogRef.current.openDialogWithCallback(id, callback);
-  };
-
-  // useEffect(() => {
-  //   // Most likely not going to play music with this method (deprecated)
-  //   setTimeout(() => {
-  //     playMusic(Sections[currentSection].music);
-  //   }, 300);
-  // }, [currentSection]);
+  }, []);
 
   useEffect(() => {
     const startScrollTimer = () => {
       scrollTimerOn.current = true;
       setTimeout(() => {
         scrollTimerOn.current = false;
-      }, 300);
+      }, SECTION_SCROLL_COOLDOWN_MS);
     };
 
     const handleScroll = (event) => {
       if (isScrollable.current && !scrollTimerOn.current && initDone) {
         setCurrentSection((prev) => {
-          if (event.deltaY > 0) {
-            return Math.min(Math.max(++prev, 0), Sections.length - 1);
-          } else {
-            return Math.min(Math.max(--prev, 0), Sections.length - 1);
-          }
+          const next = event.deltaY > 0 ? prev + 1 : prev - 1;
+          return Math.min(Math.max(next, 0), Sections.length - 1);
         });
         startScrollTimer();
       }
@@ -100,11 +96,8 @@ export default function Home() {
         initDone
       ) {
         setCurrentSection((prev) => {
-          if (deltaY < 0) {
-            return Math.min(Math.max(++prev, 0), Sections.length - 1);
-          } else {
-            return Math.min(Math.max(--prev, 0), Sections.length - 1);
-          }
+          const next = deltaY < 0 ? prev + 1 : prev - 1;
+          return Math.min(Math.max(next, 0), Sections.length - 1);
         });
         startScrollTimer();
       }
@@ -126,10 +119,13 @@ export default function Home() {
     };
   }, [initDone]);
 
+  const contextValue = useMemo(
+    () => ({ setScrollable, currentSection, openDialogWithCallback }),
+    [setScrollable, currentSection, openDialogWithCallback]
+  );
+
   return (
-    <scrollContext.Provider
-      value={{ setScrollable, currentSection, openDialogWithCallback }}
-    >
+    <scrollContext.Provider value={contextValue}>
       <div className={styles.HomeScroller} style={{ height: "100dvh" }}>
         {isPortrait && <HorizontalEnjoyer />}
 

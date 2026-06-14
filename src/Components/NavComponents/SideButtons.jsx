@@ -15,7 +15,7 @@ export default function SideButtons({
     >
       {!navIsOpen &&
         Sections.map((section, index) => (
-          <div className={styles.flex} key={index}>
+          <div className={styles.flex} key={section.title}>
             <button
               className={styles.buttonPaddingWrapper}
               onClick={() => {
@@ -24,14 +24,13 @@ export default function SideButtons({
             >
               <div
                 className={`${styles.sectionButtonBorder} ${
-                  index == currentSectionIndex ? styles.selected : ""
+                  index === currentSectionIndex ? styles.selected : ""
                 }`}
-                key={index}
               >
                 <span className={styles.ButtonInnerColor}></span>
               </div>
             </button>
-            <div className={styles.sectionName}>{Sections[index].title} </div>
+            <div className={styles.sectionName}>{section.title} </div>
           </div>
         ))}
     </div>

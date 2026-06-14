@@ -1,9 +1,9 @@
 import React, { useContext, useRef } from "react";
 import styles from "./SoundSetting.module.css";
-import { SoundContext } from "../Context/SoundContext";
+import { VolumeContext } from "../Context/SoundContext";
 
 export default function SoundSetting({ style }) {
-  const { volume, setVolume } = useContext(SoundContext);
+  const { volume, setVolume } = useContext(VolumeContext);
   const previousVolume = useRef(volume);
 
   return (
@@ -11,7 +11,7 @@ export default function SoundSetting({ style }) {
       <button
         className={styles.SoundButton}
         onClick={() => {
-          if (volume == 0) {
+          if (volume === 0) {
             setVolume(previousVolume.current);
           } else {
             setVolume(0);
@@ -19,10 +19,11 @@ export default function SoundSetting({ style }) {
           }
         }}
       >
-        {volume == 0 ? (
+        {volume === 0 ? (
           <img
             className={styles.SoundIcon}
             src="/Home/Icons/SoundOff.svg"
+            alt="Sound off"
             onDrag={(e) => {
               e.preventDefault();
             }}
@@ -31,6 +32,7 @@ export default function SoundSetting({ style }) {
           <img
             className={styles.SoundIcon}
             src="/Home/Icons/Sound.svg"
+            alt="Sound on"
             onDrag={(e) => {
               e.preventDefault();
             }}
@@ -43,7 +45,7 @@ export default function SoundSetting({ style }) {
           type="range"
           min="0"
           max="100"
-          onChange={(e) => setVolume((e.target.value * 0.01).toFixed(2))}
+          onChange={(e) => setVolume(Number((e.target.value * 0.01).toFixed(2)))}
           value={volume * 100}
         />
         <span className={styles.amount}>{Math.round(volume * 100)}%</span>

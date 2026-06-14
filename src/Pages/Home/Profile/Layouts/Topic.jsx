@@ -11,7 +11,7 @@ export default function Topic({
   return (
     <div className={styles.TopicRoot} key={title}>
       <div className={styles.topContainer}>
-        <img className={styles.imageIcon} src={img}></img>
+        <img className={styles.imageIcon} src={img} alt=""></img>
         <div className={styles.circleAnim}></div>
       </div>
       <div className={styles.vertical}>

@@ -4,8 +4,9 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import SectionContainer from "../../../Components/SectionContainer";
 import SelectedView from "./Window/SelectedView";
 import { SoundContext } from "../../../Context/SoundContext";
-import { scrollContext } from "../Home";
+import { scrollContext } from "../scrollContext";
 import Sections from "../HomeTableOfContents.jsx";
+import { activateOnKey } from "../../../a11y";
 
 export default function WebsiteProjects() {
   const { playSFX } = useContext(SoundContext);
@@ -19,7 +20,6 @@ export default function WebsiteProjects() {
   const currentEventTouch = useRef(false);
   // Do not use this setter directly, please use toggleSelectedView
   const [selectedView, setSelectedView] = useState(false);
-  const canToggleSelectedView = useRef(true);
 
   //RATIO CALCULATION
   const sectionDefaultWidth = 70; // Specify width
@@ -49,7 +49,7 @@ export default function WebsiteProjects() {
         setDialogEvents({ initDialog: false });
       });
     }
-  }, [currentSection]);
+  }, [currentSection, DialogEvents.initDialog, openDialogWithCallback]);
 
   useEffect(() => {
     function handleResize() {
@@ -81,47 +81,43 @@ export default function WebsiteProjects() {
     (index) => {
       return Math.abs(getPosIndex(index));
     },
-    [currentIndex]
+    [getPosIndex]
   );
 
   const toggleSelectedView = useCallback(() => {
-    if (canToggleSelectedView.current) {
-      canToggleSelectedView.current = false;
-      setSelectedView((prev) => {
-        if (!prev) playSFX("MetalClick");
-        else playSFX("BackClick");
-        return !prev;
-      });
-      // setTimeout(() => {
-      //   canToggleSelectedView.current = true;
-      // }, 200);
-      canToggleSelectedView.current = true;
-    }
-  }, []);
-
-  const handleMouseMove = useCallback((event) => {
-    const { clientX } = (event.touches && event.touches[0]) || event;
-    const diff = clientX - MouseXInitialRef.current;
-    if (Math.abs(diff) > 25) {
-      isDragging.current = true;
-      setScrollable(false);
-    }
-
-    let newIndex =
-      (initialIndexRef.current - (diff / window.innerWidth) * 5) %
-      Contents.length;
-    if (newIndex < 0) {
-      newIndex = Contents.length + newIndex;
-    }
-    setCurrentIndex((prev) => {
-      if (Math.floor(prev) != Math.floor(newIndex) && isDragging.current) {
-        playSFX("ButtonClick");
-      }
-      return newIndex;
+    setSelectedView((prev) => {
+      if (!prev) playSFX("MetalClick");
+      else playSFX("BackClick");
+      return !prev;
     });
-  }, []);
+  }, [playSFX]);
 
-  const handleMouseUp = useCallback((event) => {
+  const handleMouseMove = useCallback(
+    (event) => {
+      const { clientX } = (event.touches && event.touches[0]) || event;
+      const diff = clientX - MouseXInitialRef.current;
+      if (Math.abs(diff) > 25) {
+        isDragging.current = true;
+        setScrollable(false);
+      }
+
+      let newIndex =
+        (initialIndexRef.current - (diff / window.innerWidth) * 5) %
+        Contents.length;
+      if (newIndex < 0) {
+        newIndex = Contents.length + newIndex;
+      }
+      setCurrentIndex((prev) => {
+        if (Math.floor(prev) !== Math.floor(newIndex) && isDragging.current) {
+          playSFX("ButtonClick");
+        }
+        return newIndex;
+      });
+    },
+    [playSFX, setScrollable]
+  );
+
+  const handleMouseUp = useCallback(() => {
     setScrollable(true);
     document.removeEventListener(
       currentEventTouch.current ? "touchmove" : "mousemove",
@@ -136,12 +132,11 @@ export default function WebsiteProjects() {
     setCurrentIndex((prev) => {
       return Math.round(prev) % Contents.length;
     });
-  }, []);
+  }, [handleMouseMove, setScrollable]);
 
   const handleMouseDown = useCallback(
     (event) => {
       isDragging.current = false;
-      if (!canToggleSelectedView.current) return;
       if (selectedView) return;
       mouseIsDown.current = true;
 
@@ -158,7 +153,7 @@ export default function WebsiteProjects() {
         handleMouseMove
       );
     },
-    [selectedView, currentIndex]
+    [selectedView, currentIndex, handleMouseUp, handleMouseMove]
   );
 
   return (
@@ -231,6 +226,9 @@ export default function WebsiteProjects() {
                         ? "NoUserSelect"
                         : ""
                     }`}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={content.title}
                     style={{
                       transform: `scale(${
                         getPosIndex(index) == 0
@@ -256,6 +254,14 @@ export default function WebsiteProjects() {
                         }
                       }
                     }}
+                    onKeyDown={activateOnKey(() => {
+                      if (parseInt(currentIndex) == index) {
+                        toggleSelectedView();
+                      } else if (!selectedView) {
+                        setCurrentIndex(index);
+                        playSFX("ButtonClick");
+                      }
+                    })}
                   >
                     {!selectedView && (
                       <>
@@ -279,6 +285,7 @@ export default function WebsiteProjects() {
                     <img
                       className={styles.frameImage}
                       src={content.imageMain}
+                      alt={content.title}
                       onDragStart={(e) => {
                         e.preventDefault();
                       }}
@@ -303,6 +310,7 @@ export default function WebsiteProjects() {
             <img
               className={styles.frameLogo}
               src={`/Home/WebsiteProjects/Logos/${Contents[currentIndex].logoPath}`}
+              alt=""
               onDragStart={(e) => {
                 e.preventDefault();
               }}
@@ -315,7 +323,6 @@ export default function WebsiteProjects() {
         className={styles.SelectButton}
         onClick={() => {
           toggleSelectedView();
-          playSFX("DialogClick");
         }}
       >
         <p>{selectedView ? "Close View" : "View Selected"}</p>

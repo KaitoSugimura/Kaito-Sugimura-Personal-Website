@@ -1,7 +1,12 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Draggable.module.css";
 import CornerBorder from "../Components/NavComponents/CornerBorder";
 import { SoundContext } from "../Context/SoundContext";
+
+// Default no-op for optional callback props.
+const noop = () => {
+  /* intentionally empty */
+};
 
 // Input in units of vw
 const VWtoPX = (width) => {
@@ -15,29 +20,22 @@ const VHtoPX = (height) => {
 export default function Draggable({
   children,
   getNextZIndex,
-  isArtifact = false,
   artifactStartingPos = { x: 0, y: 0 },
-  centerCoords = null,
+  centerCoords = { x: 0, y: 0 },
   artifactID = null,
-  formKey = null,
-  setOverlapID = (doNothing) => {},
-  setOpenForms = (doNothing) => {},
-  getSetSpawnOffset = (returnZero) => {
-    return 0;
-  },
-  onDragEnd = (doNothing, dn, d) => {},
-  onDragStart = (doNothing, dn) => {},
+  setOverlapID = noop,
+  onDragEnd = noop,
+  onDragStart = noop,
 }) {
   const { playSFX } = useContext(SoundContext);
   const initialPos = useRef({ x: 0, y: 0 });
   const initialContPos = useRef({ x: 0, y: 0 });
-  const spawnOffset = useRef(getSetSpawnOffset(-1));
   const dragRootRef = useRef(null);
   const currentEventTouch = useRef(false);
-  // const deviceIsTouch =
-  //   "ontouchstart" in window ||
-  //   navigator.maxTouchPoints > 0 ||
-  //   navigator.msMaxTouchPoints > 0;
+  // Track the exact listener references attached on the active drag so they can
+  // be torn down if the component unmounts mid-drag (avoids a leaked listener).
+  const activeMoveRef = useRef(null);
+  const activeUpRef = useRef(null);
   const [thisZIndex, setThisZIndex] = useState(getNextZIndex());
   const [isDragging, setIsDragging] = useState(false);
 
@@ -53,22 +51,12 @@ export default function Draggable({
     const newX = clientX - initialPos.current.x + initialContPos.current.x;
     const newY = clientY - initialPos.current.y + initialContPos.current.y;
     dragCont.style.left = `${Math.max(
-      isArtifact ? 0 : -dragCont.offsetWidth + 50,
-      Math.min(
-        newX,
-        isArtifact
-          ? window.innerWidth - dragCont.offsetWidth
-          : window.innerWidth - 50
-      )
+      0,
+      Math.min(newX, window.innerWidth - dragCont.offsetWidth)
     )}px`;
     dragCont.style.top = `${Math.max(
-      isArtifact ? 0 : -dragCont.offsetHeight + 50,
-      Math.min(
-        newY,
-        isArtifact
-          ? window.innerHeight - dragCont.offsetHeight
-          : window.innerHeight - 50
-      )
+      0,
+      Math.min(newY, window.innerHeight - dragCont.offsetHeight)
     )}px`;
   };
 
@@ -80,6 +68,8 @@ export default function Draggable({
       y: dragRootRef.current.offsetTop,
     };
 
+    activeUpRef.current = handleMouseUp;
+    activeMoveRef.current = handleMouseMove;
     document.addEventListener(
       currentEventTouch.current ? "touchend" : "mouseup",
       handleMouseUp
@@ -100,7 +90,7 @@ export default function Draggable({
     playSFX("artifactPickup");
   };
 
-  const handleMouseUp = (event) => {
+  const handleMouseUp = () => {
     document.removeEventListener(
       currentEventTouch.current ? "touchmove" : "mousemove",
       handleMouseMove
@@ -109,6 +99,8 @@ export default function Draggable({
       currentEventTouch.current ? "touchend" : "mouseup",
       handleMouseUp
     );
+    activeMoveRef.current = null;
+    activeUpRef.current = null;
 
     const dragRef = dragRootRef.current;
     const left = dragRef.offsetLeft - 10;
@@ -117,21 +109,17 @@ export default function Draggable({
     const bottom = top + dragRef.offsetHeight + 20;
 
     if (
-      isArtifact &&
       centerCoords.x > left &&
       centerCoords.x < right &&
       centerCoords.y > top &&
       centerCoords.y < bottom
     ) {
-      // Dropped artifact
+      // Dropped artifact into the equip area
       setOverlapID((prev) => {
         if (prev === null) {
           playSFX("EquipArtifact");
           dragRef.style.left = `${centerCoords.x - dragRef.offsetWidth / 2}px`;
           dragRef.style.top = `${centerCoords.y - dragRef.offsetHeight / 2}px`;
-          // setOpenForms((prev) => {
-          //   return { ...prev, [`${Date.now()}`]: artifactID };
-          // });
           onDragEnd(dragRootRef.current, artifactID, true);
           return artifactID;
         }
@@ -144,6 +132,20 @@ export default function Draggable({
     playSFX("artifactDrop");
   };
 
+  // Tear down any drag listeners still attached if we unmount mid-drag.
+  useEffect(() => {
+    return () => {
+      if (activeMoveRef.current) {
+        document.removeEventListener("mousemove", activeMoveRef.current);
+        document.removeEventListener("touchmove", activeMoveRef.current);
+      }
+      if (activeUpRef.current) {
+        document.removeEventListener("mouseup", activeUpRef.current);
+        document.removeEventListener("touchend", activeUpRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div
       className={styles.DraggableContainer}
@@ -153,30 +155,10 @@ export default function Draggable({
       }}
       style={{
         zIndex: thisZIndex,
-        top: isArtifact
-          ? `${VHtoPX(artifactStartingPos.y)}px`
-          : `${8 + spawnOffset.current * 2}%`,
-        left: isArtifact
-          ? `${VWtoPX(artifactStartingPos.x)}px`
-          : `${4 + spawnOffset.current}%`,
-        // border: isDragging ? "2px solid #00ff00" : "2px solid #00000000",
+        top: `${VHtoPX(artifactStartingPos.y)}px`,
+        left: `${VWtoPX(artifactStartingPos.x)}px`,
       }}
     >
-      {!isArtifact && !isDragging && (
-        <button
-          className={styles.deleteButton}
-          onClick={(e) => {
-            setOpenForms((prev) => {
-              const next = { ...prev };
-              delete next[formKey];
-              return next;
-            });
-            getSetSpawnOffset(spawnOffset.current);
-          }}
-        >
-          <p>X</p>
-        </button>
-      )}
       <div
         className={styles.dragArea}
         onMouseDown={(event) => {

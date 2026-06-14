@@ -26,7 +26,11 @@ export default function NavButtons({ navIsOpen, setNavIsOpen }) {
             : "translateX(0)",
         }}
       >
-        <img src={navIsOpen ? Close : Menu} className={styles.SettingsIcon} />
+        <img
+          src={navIsOpen ? Close : Menu}
+          alt={navIsOpen ? "Close menu" : "Open menu"}
+          className={styles.SettingsIcon}
+        />
         <span className={styles.TopLeft} style={BorderStyle}></span>
         <span className={styles.TopRight} style={BorderStyle}></span>
         <span className={styles.BottomLeft} style={BorderStyle}></span>

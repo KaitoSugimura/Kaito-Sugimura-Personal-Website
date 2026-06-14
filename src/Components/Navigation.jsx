@@ -6,6 +6,7 @@ import NavButtons from "./NavComponents/NavButtons";
 import SideButtons from "./NavComponents/SideButtons";
 import SoundSetting from "../Tools/SoundSetting";
 import { SoundContext } from "../Context/SoundContext";
+import { activateOnKey } from "../a11y";
 
 export default function Navigation({
   scrollTo,
@@ -80,11 +81,17 @@ export default function Navigation({
             {Sections.map((section, index) => (
               <li
                 className={`${styles.NavItem} ${styles.listItem}`}
+                role="button"
+                tabIndex={0}
                 onClick={() => {
                   scrollTo(index);
                   setNavIsOpen(false);
                 }}
-                key={index}
+                onKeyDown={activateOnKey(() => {
+                  scrollTo(index);
+                  setNavIsOpen(false);
+                })}
+                key={section.title}
               >
                 <div className={styles.listInside}>{section.title}</div>
               </li>

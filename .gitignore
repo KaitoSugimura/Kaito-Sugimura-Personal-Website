@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Editor image/backup files (e.g. GIMP/Krita auto-backups) — keep them out of public/
+*~
+*.png~

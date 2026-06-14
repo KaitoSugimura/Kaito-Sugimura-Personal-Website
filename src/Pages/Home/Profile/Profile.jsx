@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import SectionContainer from "../../../Components/SectionContainer";
 import styles from "./Profile.module.css";
 import Draggable from "../../../Tools/Draggable";
-import forms from "./Forms";
 import PContents from "./ProfileContents";
 import MouseIcon from "/Tools/Mouse.svg";
-import { scrollContext } from "../Home";
+import { activateOnKey } from "../../../a11y";
+import { scrollContext } from "../scrollContext";
 import { SoundContext } from "../../../Context/SoundContext";
 import Sections from "../HomeTableOfContents.jsx";
 
@@ -26,24 +26,28 @@ const PXtoVH = (height) => {
   return (height / window.innerHeight) * 100;
 };
 
+// Build a fresh id -> {x, y} map seeded from each artifact's InitCoords. Cloned
+// so dragging never mutates the imported PContents singleton (which would leak
+// positions across navigation and alias coords with InitCoords after a reset).
+const buildInitialArtifactCoords = () =>
+  Object.fromEntries(
+    Object.entries(PContents).map(([id, data]) => [id, { ...data.InitCoords }])
+  );
+
 export default function Profile() {
   const { playSFX } = useContext(SoundContext);
   const { setScrollable, currentSection, openDialogWithCallback } =
     useContext(scrollContext);
   const nextZIndex = useRef(0);
   const [overlapID, setOverlapID] = useState(null);
-  const getOverlapCoords = () => {
-    return {
-      x: VWtoPX(15),
-      y: VHtoPX(50),
-    };
+  const overlapCoords = {
+    x: VWtoPX(15),
+    y: VHtoPX(50),
   };
-  const overlapCoords = getOverlapCoords();
-  // const [overlapCoords, setOverlapCoords] = useState(getOverlapCoords());
-  const [openForms, setOpenForms] = useState({});
+  const [artifactCoords, setArtifactCoords] = useState(
+    buildInitialArtifactCoords
+  );
   const [currentContent, setCurrentContent] = useState("About");
-  const spawnOffset = useRef(-1);
-  const offsetReservations = useRef([]);
 
   const [currentArtifactCoords, setCurrentArtifactCoords] = useState(null);
   const [finishedFirstQuest, setFinishedFirstQuest] = useState(false);
@@ -61,40 +65,7 @@ export default function Profile() {
         setDialogEvents({ initDialog: false });
       });
     }
-  }, [currentSection]);
-
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setOverlapCoords(getOverlapCoords());
-  //   };
-
-  //   window.addEventListener("resize", handleResize);
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
-
-  const getSetSpawnOffset = (offset) => {
-    // If offset < 0 then get else set
-    if (offset < 0) {
-      offsetReservations.current[spawnOffset.current] = true;
-      return spawnOffset.current;
-    } else {
-      offsetReservations.current[offset] = false;
-      let stopIndex = spawnOffset.current;
-      for (let i = spawnOffset.current; i >= 0; --i) {
-        if (offsetReservations.current[i]) {
-          stopIndex = i;
-          break;
-        }
-        if (i === 0) {
-          spawnOffset.current = -1;
-          return;
-        }
-      }
-      spawnOffset.current = stopIndex;
-    }
-  };
+  }, [currentSection, DialogEvents.initDialog, openDialogWithCallback]);
 
   const getNextZIndex = () => {
     return ++nextZIndex.current;
@@ -112,13 +83,16 @@ export default function Profile() {
       height: draggable.offsetHeight,
     });
 
-    PContents[artifactID].coords = {
-      x: PXtoVW(draggable.offsetLeft),
-      y: PXtoVH(draggable.offsetTop),
-    };
+    setArtifactCoords((prev) => ({
+      ...prev,
+      [artifactID]: {
+        x: PXtoVW(draggable.offsetLeft),
+        y: PXtoVH(draggable.offsetTop),
+      },
+    }));
   };
 
-  const onDragStart = (draggable, artifactID) => {
+  const onDragStart = (draggable) => {
     setScrollable(false);
 
     if (!finishedFirstQuest) {
@@ -141,7 +115,7 @@ export default function Profile() {
       Math.atan(
         (window.innerHeight / 2 -
           currentArtifactCoords.top -
-          currentArtifactCoords.width / 2) /
+          currentArtifactCoords.height / 2) /
           (currentArtifactCoords.left - overlapCoords.x)
       ) *
       (-180 / Math.PI);
@@ -174,6 +148,8 @@ export default function Profile() {
                       className={`${styles.NavListItem} ${
                         content[0] == currentContent && styles.selected
                       }`}
+                      role="button"
+                      tabIndex={0}
                       onClick={() => {
                         setCurrentContent((prev) => {
                           if (prev != content[0]) {
@@ -183,6 +159,15 @@ export default function Profile() {
                           return prev;
                         });
                       }}
+                      onKeyDown={activateOnKey(() => {
+                        setCurrentContent((prev) => {
+                          if (prev != content[0]) {
+                            playSFX("ProfileClick");
+                            return content[0];
+                          }
+                          return prev;
+                        });
+                      })}
                       key={index}
                     >
                       {content[0]}
@@ -221,9 +206,7 @@ export default function Profile() {
           <button
             className={styles.resetPosition}
             onClick={() => {
-              Object.entries(PContents).forEach((section) => {
-                section[1].coords = section[1].InitCoords;
-              });
+              setArtifactCoords(buildInitialArtifactCoords());
               setCurrentArtifactCoords(null);
               setFinishedFirstQuest(false);
             }}
@@ -238,18 +221,17 @@ export default function Profile() {
               {(overlapID == null || overlapID == section[0]) && (
                 <Draggable
                   getNextZIndex={getNextZIndex}
-                  isArtifact={true}
-                  artifactStartingPos={section[1].coords}
+                  artifactStartingPos={artifactCoords[section[0]]}
                   centerCoords={overlapCoords}
                   artifactID={section[0]}
                   setOverlapID={setOverlapID}
-                  setOpenForms={setOpenForms}
                   onDragEnd={onDragEnd}
                   onDragStart={onDragStart}
                 >
                   <div className={styles.UofCItemRoot}>
                     <img
                       src={section[1].icon}
+                      alt={`${section[1].type} artifact`}
                       className={styles.UofCLogoImage}
                       onDrag={(event) => {
                         event.preventDefault();
@@ -276,51 +258,6 @@ export default function Profile() {
               )}
             </React.Fragment>
           ))}
-
-        {Object.entries(openForms).map((formPair, index) => (
-          <React.Fragment key={formPair[0]}>
-            <Draggable
-              getNextZIndex={getNextZIndex}
-              artifactID={formPair[1]}
-              formKey={formPair[0]}
-              setOpenForms={setOpenForms}
-              getSetSpawnOffset={getSetSpawnOffset}
-            >
-              {forms[formPair[1]]}
-            </Draggable>
-          </React.Fragment>
-        ))}
-
-        {/* {overlapID == null && (
-          <div className={styles.artifactsContainer}>
-            <div className={`${styles.artifactTextCont} ${styles.education}`}>
-              <div className={styles.pos}>
-                <span className={styles.artifactsNum}>00</span>
-                <p className={styles.artifactsText}>Education</p>
-              </div>
-            </div>
-            <div className={`${styles.artifactTextCont} ${styles.selfStudy}`}>
-              <div className={styles.pos}>
-                <span className={styles.artifactsNum}>01</span>
-                <p className={styles.artifactsText}>Self Study</p>
-              </div>
-            </div>
-            <div className={`${styles.artifactTextCont} ${styles.experience}`}>
-              <div className={styles.pos}>
-                <span className={styles.artifactsNum}>02</span>
-                <p className={styles.artifactsText}>Experience</p>
-              </div>
-            </div>
-            <div
-              className={`${styles.artifactTextCont} ${styles.achievements}`}
-            >
-              <div className={styles.pos}>
-                <span className={styles.artifactsNum}>03</span>
-                <p className={styles.artifactsText}>Achievements</p>
-              </div>
-            </div>
-          </div>
-        )} */}
 
         {!finishedFirstQuest && !DialogEvents.initDialog && (
           <div
@@ -357,7 +294,7 @@ export default function Profile() {
                 }}
               ></div>
             </div>
-            <img className={styles.MouseImage} src={MouseIcon}></img>
+            <img className={styles.MouseImage} src={MouseIcon} alt=""></img>
           </div>
         )}
       </div>

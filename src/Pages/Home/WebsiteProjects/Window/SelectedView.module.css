@@ -130,6 +130,7 @@
   pointer-events: all;
 
   cursor: pointer;
+  text-decoration: none;
 }
 
 .videoContainer:hover {

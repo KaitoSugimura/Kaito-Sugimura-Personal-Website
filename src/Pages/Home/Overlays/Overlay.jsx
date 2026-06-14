@@ -1,12 +1,11 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import DialogMain from "../../../Components/Dialog/DialogMain";
 import Navigation from "../../../Components/Navigation";
-import Sections from "../HomeTableOfContents.jsx";
+import { INTRO_TITLE_EXPAND_MS, DIALOG_OPEN_DELAY_MS } from "../../../timings";
 
 const Overlay = forwardRef(
   ({ scrollTo, setScrollable, currentSection, initDone, setInitDone }, ref) => {
     // Dialog
-    const events = useRef({ Project1: true });
     const [currentDialogID, setCurrentDialogID] = useState("Home1");
     const callbackFunction = useRef(null);
 
@@ -26,7 +25,7 @@ const Overlay = forwardRef(
         // typed title + terminal UI come in right as the box finishes — no dead pause.
         setTimeout(() => {
           setInitDone(true);
-        }, 4500);
+        }, INTRO_TITLE_EXPAND_MS);
       }
 
       if(callbackFunction.current){
@@ -35,22 +34,11 @@ const Overlay = forwardRef(
       }
     };
 
-    // useEffect(() => {
-    //   scrollEventHandler(currentSection);
-    // }, [currentSection]);
-
-    // const scrollEventHandler = (sectionNo) => {
-    //   if (events.current.Profile1 && Sections[sectionNo].title == "Profile") {
-    //     events.current.Profile1 = false;
-    //     OpenDialogWithDelay("Profile1");
-    //   }
-    // };
-
     const OpenDialogWithDelay = (DialogID) => {
       setScrollable(false);
       setTimeout(() => {
         setCurrentDialogID(DialogID);
-      }, 300);
+      }, DIALOG_OPEN_DELAY_MS);
     };
 
     return (

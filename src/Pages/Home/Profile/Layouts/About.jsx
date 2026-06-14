@@ -10,7 +10,7 @@ export default function About({title,desc,image}) {
         <p className={styles.desc}>
           {desc}
         </p>
-        <img className={styles.subjectPicture} src={image}></img>
+        <img className={styles.subjectPicture} src={image} alt={title}></img>
       </div>
     </div>
   );

@@ -111,9 +111,11 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
               className={styles.SSItem}
               href="https://www.youtube.com/@sugimurakaito"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <img
                 src="/Home/Icons/SS/Youtube.svg"
+                alt="YouTube"
                 className={styles.SSImage}
                 onDrag={(e) => {
                   e.preventDefault();
@@ -124,9 +126,11 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
               className={styles.SSItem}
               href="https://github.com/KaitoSugimura"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <img
                 src="/Home/Icons/SS/Github.svg"
+                alt="GitHub"
                 className={styles.SSImage}
                 onDrag={(e) => {
                   e.preventDefault();
@@ -138,9 +142,11 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
               className={styles.SSItem}
               href="https://www.linkedin.com/in/kaitosugimura/"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <img
                 src="/Home/Icons/SS/Linkedin.svg"
+                alt="LinkedIn"
                 className={styles.SSImage}
                 onDrag={(e) => {
                   e.preventDefault();
@@ -150,12 +156,7 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
           </div>
         )}
         <div className={styles.cameraUIBottomLeftContainer}>
-          {initDone ? (
-            <>
-              {/* <p className={styles.fadeInAnim}>Developed from scratch using: REACT JS, CSS, HTML</p>
-              <p className={styles.fadeInAnim}>By: Kaito Sugimura</p> */}
-            </>
-          ) : (
+          {!initDone && (
             <>
               <div className={styles.typingWrapping1}>
                 <p>System access</p>

@@ -6,7 +6,11 @@ export default function HorizontalEnjoyer() {
       <p className={styles.message}>
         Please tilt/adjust your device/screen Horizontally for optimal viewing
       </p>
-      <img className={styles.Image} src="/Home/Horizontal.png"></img>
+      <img
+        className={styles.Image}
+        src="/Home/Horizontal.png"
+        alt="Rotate your device to landscape"
+      ></img>
     </div>
   );
 }

@@ -2,9 +2,10 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import styles from "./Hero.module.css";
 import BGVideo from "/Backgrounds/HeroBGVideo.mp4";
 import LoadingScreen from "../../../Components/LoadingScreen";
-import coverPhoto from "/Dialog/Pictures/Cover.png";
+import coverPhoto from "/Dialog/Pictures/Cover.webp";
 import { SoundContext } from "../../../Context/SoundContext";
-import { scrollContext } from "../Home";
+import { scrollContext } from "../scrollContext";
+import { HERO_INTRO_DURATION_MS } from "../../../timings";
 
 export default function Hero({ isfocus }) {
   isfocus = isfocus === "true";
@@ -47,20 +48,20 @@ export default function Hero({ isfocus }) {
   );
 
   useEffect(() => {
-    if (currentSection != 0 && !UserAuthenticated) {
+    if (currentSection !== 0 && !UserAuthenticated) {
       setUserAuthenticated(true);
     }
     if (!isfocus) {
       setBGVideoIsLoading(true);
     }
-  }, [currentSection]);
+  }, [currentSection, isfocus, UserAuthenticated]);
 
   // After the intro animation finishes, mark the user as authenticated. Once
   // authenticated the intro DOM unmounts, which removes its animation listener.
   useEffect(() => {
     const timer = setTimeout(() => {
       setUserAuthenticated(true);
-    }, 5200);
+    }, HERO_INTRO_DURATION_MS);
     return () => clearTimeout(timer);
   }, []);
 
@@ -83,16 +84,21 @@ export default function Hero({ isfocus }) {
               <div className={styles.grid}>
                 <img
                   src="/Backgrounds/Mountains.jpg"
+                  alt=""
                   className={styles.backgroundImage}
                 ></img>
               </div>
             </>
           ) : (
             <>
-              <img src={coverPhoto} className={styles.coverPhoto}></img>
+              <img
+                src={coverPhoto}
+                alt="Kaito Sugimura"
+                className={styles.coverPhoto}
+              ></img>
               <h1 className={styles.name}>Kaito Sugimura</h1>
               <p className={styles.catchphrase}>
-                I think normally you'd put some cool catchphrase here
+                Software engineer in Calgary, building for the web.
               </p>
             </>
           )}
@@ -101,6 +107,7 @@ export default function Hero({ isfocus }) {
             <div className={styles.grid}>
               <video
                 className={styles.backgroundVideo}
+                poster="/Backgrounds/Mountains.jpg"
                 onLoadedData={() => {
                   setTimeout(() => {
                     setBGVideoIsLoading(false);
@@ -109,6 +116,7 @@ export default function Hero({ isfocus }) {
                 autoPlay
                 muted
                 loop
+                playsInline
               >
                 <source src={BGVideo} type="video/mp4" />
               </video>
@@ -127,10 +135,10 @@ export default function Hero({ isfocus }) {
           </div>
 
           <div className={styles.Warning}></div>
-          {/* Seperated to make things stable */}
+          {/* Separated to make things stable */}
           <div className={styles.WarningInnerText}>
             <p className={styles.unknownUser}>
-              <img src="/Home/Icons/Warning.svg"></img>Unknown User
+              <img src="/Home/Icons/Warning.svg" alt=""></img>Unknown User
             </p>
             <p className={styles.Authenticated}>Authenticated</p>
           </div>
