@@ -175,4 +175,42 @@ export default {
       image: "ThumbsUp.webp",
     },
   ],
+  Shop1: [
+    {
+      speaker: "Kaito",
+      text: "Oh — a customer! Welcome, welcome!",
+      music: "main",
+      image: "Welcome.webp",
+    },
+    {
+      speaker: "Kaito",
+      text: "Step right in. This is my little curio shop.",
+      music: null,
+      image: "WaveOpenNeck.webp",
+    },
+    {
+      speaker: "Kaito",
+      text: "Buy low off my shelf, then sell back whatever the town's after — that's how a trader turns a profit.",
+      music: null,
+      image: "Talk2.webp",
+    },
+    {
+      speaker: "Kaito",
+      text: "Haggle me down, haggle me up... but watch my face. I'm an open book.",
+      music: null,
+      image: "Thinking.webp",
+    },
+    {
+      speaker: "Kaito",
+      text: "Mind the rent — due every evening, and it only climbs. Deal fair and we'll get along just fine.",
+      music: null,
+      image: "Talk1.webp",
+    },
+    {
+      speaker: "Kaito",
+      text: "Right then — let's trade!",
+      music: null,
+      image: "ThumbsUp.webp",
+    },
+  ],
 };
