@@ -143,6 +143,19 @@ export default function Shop({ isfocus }) {
     }
   }, [state.sfx, playSFX]);
 
+  // Briefly flourish the coin counter whenever it ticks up (a sale, a tip).
+  const [goldUp, setGoldUp] = useState(false);
+  const prevGold = useRef(state.gold);
+  useEffect(() => {
+    if (state.gold > prevGold.current) {
+      setGoldUp(true);
+      const id = setTimeout(() => setGoldUp(false), 600);
+      prevGold.current = state.gold;
+      return () => clearTimeout(id);
+    }
+    prevGold.current = state.gold;
+  }, [state.gold]);
+
   const slots = bagSlots(state);
 
   return (
@@ -156,7 +169,12 @@ export default function Shop({ isfocus }) {
             DAY {state.day}
             <span className={styles.hudDayGoal}>&nbsp;/ {LAST_TRADING_DAY}</span>
           </span>
-          <span className={styles.hudGold} title="Coin on hand">{g(state.gold)}</span>
+          <span
+            className={`${styles.hudGold} ${goldUp ? styles.hudGoldUp : ""}`}
+            title="Coin on hand"
+          >
+            {g(state.gold)}
+          </span>
           {state.streak >= 2 && (
             <span
               className={styles.streakChip}
@@ -632,7 +650,7 @@ function DayEnd({ state, dispatch }) {
   const canPay = state.gold >= state.rent;
   return (
     <div className={styles.overlay}>
-      <div className={styles.panel}>
+      <div className={styles.panel} role="dialog" aria-modal="true" aria-label={`End of day ${state.day}`}>
         <h2 className={styles.panelTitle}>CLOSING TIME — DAY {state.day}</h2>
         <div className={styles.ledger}>
           {state.dayDeals > 0 && (
@@ -654,6 +672,7 @@ function DayEnd({ state, dispatch }) {
         <button
           className={styles.btnPrimary}
           onClick={() => dispatch({ type: "SLEEP" })}
+          autoFocus
         >
           {canPay ? "Pay rent & turn in" : "Face the landlord"}
         </button>
@@ -665,11 +684,16 @@ function DayEnd({ state, dispatch }) {
 function Backstory({ tier, dispatch }) {
   return (
     <div className={styles.overlay}>
-      <div className={`${styles.panel} ${styles.storyPanel}`}>
+      <div
+        className={`${styles.panel} ${styles.storyPanel}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={tier.title}
+      >
         <img className={styles.storyPortrait} src={portraitSrc(tier.portrait)} alt="Kaito" draggable={false} />
         <h2 className={styles.storyTitle}>{tier.title}</h2>
         <p className={styles.storyText}>&ldquo;{tier.text}&rdquo;</p>
-        <button className={styles.btnPrimary} onClick={() => dispatch({ type: "ACK_BACKSTORY" })}>
+        <button className={styles.btnPrimary} onClick={() => dispatch({ type: "ACK_BACKSTORY" })} autoFocus>
           Open the shop
         </button>
       </div>
@@ -684,7 +708,12 @@ function RunEnd({ state, dispatch, records, newRecords }) {
   const storyCount = records ? records.lore.length : 0;
   return (
     <div className={styles.overlay}>
-      <div className={`${styles.panel} ${win ? styles.winPanel : styles.overPanel}`}>
+      <div
+        className={`${styles.panel} ${win ? styles.winPanel : styles.overPanel}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={win ? "You win" : "Game over"}
+      >
         <h2 className={styles.panelTitle}>{win ? "A FINE PARTNERSHIP" : "OUT OF BUSINESS"}</h2>
         <img
           className={styles.endPortrait}
