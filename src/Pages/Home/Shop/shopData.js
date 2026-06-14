@@ -54,6 +54,10 @@ export const ITEMS = [
   { id: "crystal-skull", name: "Crystal Skull", category: "Curio", base: 320, rarity: "legendary", flavor: "Definitely not cursed. Definitely." },
   { id: "music-box", name: "Music Box", category: "Curio", base: 175, rarity: "rare", flavor: "Plays a tune nobody remembers." },
   { id: "honey-jar", name: "Honey Jar", category: "Food", base: 24, rarity: "common", flavor: "The bees worked hard for this." },
+  { id: "cheese-wheel", name: "Wheel of Cheese", category: "Food", base: 30, rarity: "common", flavor: "Aged in a cave by someone who cared." },
+  { id: "gold-bangle", name: "Gold Bangle", category: "Trinket", base: 130, rarity: "uncommon", flavor: "Jingles smugly when you haggle." },
+  { id: "carved-mask", name: "Carved Mask", category: "Curio", base: 150, rarity: "rare", flavor: "It watches you back, a little." },
+  { id: "fire-opal", name: "Fire Opal", category: "Gem", base: 250, rarity: "legendary", flavor: "A trapped sunset, faintly warm." },
 ];
 
 export const ITEM_BY_ID = Object.fromEntries(ITEMS.map((i) => [i.id, i]));
