@@ -79,42 +79,54 @@ export const QUIPS = {
     "See anything you fancy?",
     "Browse away, friend — no rush.",
     "That piece? Came in this morning.",
+    "Careful, that one's a favourite of mine.",
+    "Go on, make me an offer.",
   ],
   sellGreet: [
     "Oh? What've you got for me?",
     "Let's see what you're hauling around.",
     "Selling, are we? Show me.",
+    "Hand it over, let's have a look.",
+    "Mm, let's see if it's my kind of thing.",
   ],
   think: [
     "Hmm, you drive a hard bargain...",
     "Ooh, you're good at this.",
     "You're killing me here — but go on.",
     "Let me think... a touch more?",
+    "Tch. You've done this before, haven't you?",
+    "Twisting my arm, you are.",
   ],
   deal: [
     "Deal! Pleasure doing business.",
     "Sold! Enjoy it, now.",
     "Alright, it's yours. Good trade!",
     "Done and done. Come again!",
+    "Shake on it — fair's fair.",
+    "Ha! You've got a knack for this.",
   ],
   annoyed: [
     "Oof, that one stings a little.",
     "Come on now, I've got rent too!",
     "I can't go quite that far, friend.",
+    "You're squeezing the last copper out of me.",
   ],
   insult: [
     "Hah! Are you trying to rob me?",
     "Now that's just rude!",
     "My grandmother haggles kinder than that.",
+    "For that? I'd sooner keep it.",
   ],
   overpay: [
     "Heh, sure, if you insist!",
     "Generous! I like you already.",
+    "Well now, aren't you a gentleman.",
   ],
   walk: [
     "No deal this time. Come back soon!",
     "Maybe next time, friend.",
     "Ah well — door's always open.",
+    "Suit yourself! I'll be here.",
   ],
 };
 
@@ -128,6 +140,10 @@ export const EVENTS = [
   { id: "taxman", title: "The Taxman Cometh", text: "Rent's steeper today. Ouch.", effect: { rentMult: 1.4 } },
   { id: "slow", title: "Slow Day", text: "Quiet streets. Fewer orders, but Kaito's restless.", effect: { fewerWants: 1, patience: 1 } },
   { id: "collector", title: "A Collector Visits", text: "A curio collector is in town — relics & curios pay big.", effect: { categoryWant: ["Curio", "Relic"], wantBonus: 0.35 } },
+  { id: "harvest", title: "Harvest Fair", text: "Stalls overflow — food & potions are flying off the shelves.", effect: { categoryWant: ["Food", "Potion"], wantBonus: 0.28 } },
+  { id: "adventurers", title: "Adventurers in Town", text: "A party's gearing up — tools & scrolls are in high demand.", effect: { categoryWant: ["Tool", "Scroll"], wantBonus: 0.26 } },
+  { id: "boom", title: "Market Boom", text: "Coin's flowing freely. Kaito pays a little more for everything today.", effect: { wantBonus: 0.18, patience: 1 } },
+  { id: "landlordAway", title: "Landlord's Away", text: "The landlord skipped town — tonight's rent is lighter than usual.", effect: { rentMult: 0.7 } },
 ];
 
 // ---- short, player-facing labels for each perk (used in the rapport preview) -

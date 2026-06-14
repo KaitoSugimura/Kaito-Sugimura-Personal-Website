@@ -452,9 +452,25 @@ function HaggleModal({ state, dispatch, playSFX }) {
   const deal = h.status === "deal";
   const canAffordAnchor = !buy || anchor <= gold;
 
+  // Keyboard: Escape backs out (walk while mid-haggle, dismiss once a deal's struck).
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key !== "Escape") return;
+      e.preventDefault();
+      dispatch({ type: deal ? "CLOSE_HAGGLE" : "WALK" });
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [deal, dispatch]);
+
   return (
     <div className={styles.overlay}>
-      <div className={styles.haggle}>
+      <div
+        className={styles.haggle}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${buy ? "Buying" : "Selling"} ${h.inst.name}`}
+      >
         <div className={styles.haggleKaito}>
           <img src={portraitSrc(state.portrait)} alt="Kaito" draggable={false} />
           <p className={styles.haggleQuip}>{state.quip}</p>
@@ -548,10 +564,19 @@ function HaggleModal({ state, dispatch, playSFX }) {
                 max={max}
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    playSFX("ButtonClick");
+                    dispatch({ type: "OFFER", price });
+                  }
+                }}
                 aria-label="Your offer"
               />
               <p className={styles.slideHint}>
-                {buy ? "Talk him down — lower is better" : "Push him up — higher is better"}
+                {buy
+                  ? "Offer below his ask — but lowball him and he'll bristle."
+                  : "Ask above his offer — but push too far and he'll balk."}
               </p>
 
               <div className={styles.haggleBtns}>
@@ -561,6 +586,7 @@ function HaggleModal({ state, dispatch, playSFX }) {
                     playSFX("ButtonClick");
                     dispatch({ type: "OFFER", price });
                   }}
+                  autoFocus
                 >
                   Offer {g(price)}
                 </button>
