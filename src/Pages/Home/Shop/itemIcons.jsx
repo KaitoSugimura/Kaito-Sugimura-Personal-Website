@@ -243,6 +243,56 @@ const ICONS = {
   <circle cx="24" cy="38" r="2" fill="#f7f1e4" opacity="0.6"/>
   <path d="M21 30 Q19 38 22 45" stroke="#f7f1e4" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.45"/>
 </svg>`,
+  "cheese-wheel": `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="32" cy="54" rx="16" ry="3" fill="#000000" opacity="0.12"/>
+  <path d="M12 48 L50 16 L50 44 Q50 48 46 48 Z" fill="#f4cf73" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M12 48 L50 16 L50 23 L21 46 Z" fill="#e0a52b" opacity="0.55"/>
+  <path d="M40 19 Q46 17 50 21 L50 16 Z" fill="#e0a52b" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="34" cy="38" r="3.4" fill="#e0a52b" stroke="#2b2118" stroke-width="1.5"/>
+  <circle cx="43" cy="42" r="2.3" fill="#e0a52b" stroke="#2b2118" stroke-width="1.5"/>
+  <circle cx="41" cy="29" r="2" fill="#e0a52b" stroke="#2b2118" stroke-width="1.5"/>
+  <circle cx="27" cy="44" r="1.8" fill="#e0a52b" stroke="#2b2118" stroke-width="1.5"/>
+  <path d="M16 46 L45 21" stroke="#f7f1e4" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+</svg>`,
+  "gold-bangle": `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="32" cy="55" rx="15" ry="3" fill="#000000" opacity="0.12"/>
+  <ellipse cx="32" cy="37" rx="19" ry="16" fill="#e0a52b" stroke="#2b2118" stroke-width="2"/>
+  <ellipse cx="32" cy="37" rx="11" ry="9" fill="#241a10" stroke="#2b2118" stroke-width="2"/>
+  <ellipse cx="32" cy="37" rx="15" ry="12.5" fill="none" stroke="#f4cf73" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="32,15 36,21 32,27 28,21" fill="#3f6f9e" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <polygon points="32,15 34,21 32,24 30,21" fill="#7ba6cf"/>
+  <circle cx="17" cy="32" r="1.7" fill="#b23b2c" stroke="#2b2118" stroke-width="1.2"/>
+  <circle cx="47" cy="32" r="1.7" fill="#3c7a5e" stroke="#2b2118" stroke-width="1.2"/>
+  <path d="M20 28 A19 16 0 0 1 30 22" stroke="#f7f1e4" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+</svg>`,
+  "carved-mask": `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="32" cy="56" rx="12" ry="3" fill="#000000" opacity="0.12"/>
+  <path d="M32 6 Q48 8 48 30 Q48 52 32 58 Q16 52 16 30 Q16 8 32 6 Z" fill="#6b4a2b" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M32 6 Q42 7 45 19 Q34 16 32 23 Q30 16 19 19 Q22 7 32 6 Z" fill="#7e5a36"/>
+  <path d="M20 24 Q26 21 31 24 M33 24 Q38 21 44 24" stroke="#2b2118" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M22 28 Q26 24 30 28 Q26 31 22 28 Z" fill="#2b2118"/>
+  <path d="M34 28 Q38 24 42 28 Q38 31 34 28 Z" fill="#2b2118"/>
+  <path d="M32 30 L29 40 Q32 42 35 40 Z" fill="#4a3219" stroke="#2b2118" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M26 46 Q32 50 38 46" stroke="#2b2118" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M32 10 L32 19" stroke="#b23b2c" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="24" cy="40" r="1.5" fill="#e0a52b"/>
+  <circle cx="40" cy="40" r="1.5" fill="#e0a52b"/>
+  <path d="M22 12 Q19 22 22 30" stroke="#f7f1e4" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+</svg>`,
+  "fire-opal": `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="32" cy="56" rx="14" ry="3" fill="#000000" opacity="0.12"/>
+  <polygon points="22,18 42,18 50,30 32,40 14,30" fill="#e0722a" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <polygon points="14,30 50,30 32,56" fill="#c4521d" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <polygon points="22,18 32,28 14,30" fill="#f4a05a"/>
+  <polygon points="42,18 32,28 50,30" fill="#cf6322"/>
+  <polygon points="22,18 42,18 32,28" fill="#f4cf73" opacity="0.85"/>
+  <line x1="14" y1="30" x2="32" y2="56" stroke="#2b2118" stroke-width="2" stroke-linecap="round"/>
+  <line x1="50" y1="30" x2="32" y2="56" stroke="#2b2118" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="28" x2="32" y2="56" stroke="#2b2118" stroke-width="1.5" opacity="0.55"/>
+  <line x1="32" y1="28" x2="14" y2="30" stroke="#2b2118" stroke-width="1.5" opacity="0.55"/>
+  <line x1="32" y1="28" x2="50" y2="30" stroke="#2b2118" stroke-width="1.5" opacity="0.55"/>
+  <polygon points="24,20 30,26 22,28" fill="#f7f1e4" opacity="0.5"/>
+</svg>`,
 };
 
 const FALLBACK = `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">

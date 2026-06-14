@@ -165,6 +165,8 @@ function generateDay(state) {
     lastEventId: event ? event.id : state.lastEventId,
     dayPatienceBonus,
     dayTakings: 0,
+    dayDeals: 0,
+    dayStartGold: state.gold,
   };
 }
 
@@ -180,6 +182,7 @@ export function createRun(seed) {
     bag: [],
     rapport: 0,
     tier: 0,
+    streak: 0, // consecutive profitable flips — drives the "hot streak" payoff
     perks: { appraise: false, patience: 0, slots: 0, discount: false },
     mood: "greet",
     portrait: "WaveOpenNeck",
@@ -190,7 +193,7 @@ export function createRun(seed) {
     pendingTier: null,
     dayPatienceBonus: 0,
     dayTakings: 0,
-    stats: { earned: 0, spent: 0, deals: 0, daysSurvived: 0, bestRapport: 0 },
+    stats: { earned: 0, spent: 0, deals: 0, daysSurvived: 0, bestRapport: 0, bestStreak: 0 },
     sfx: { cue: null, n: 0 },
     toast: null,
   };
@@ -341,7 +344,8 @@ function completeBuy(state, price, rng) {
   }
   const next = { ...state };
   next.gold = state.gold - price;
-  next.bag = [...state.bag, { ...h.inst }];
+  // remember what we paid so the bag can show real profit/loss on resale
+  next.bag = [...state.bag, { ...h.inst, paid: price }];
   next.shelf = state.shelf.filter((s) => s.uid !== h.inst.uid);
   next.stats = { ...state.stats, spent: state.stats.spent + price, deals: state.stats.deals + 1 };
   // fair buyers (who pay Kaito a healthy margin) earn more goodwill
@@ -359,14 +363,35 @@ function completeBuy(state, price, rng) {
 function completeSell(state, price, rng) {
   const h = state.haggle;
   const next = { ...state };
-  next.gold = state.gold + price;
+
+  // profit vs. what we paid for it drives the hot-streak chain
+  const basis = h.inst.paid != null ? h.inst.paid : h.inst.value;
+  const profit = price - basis;
+  const streak = profit > 0 ? state.streak + 1 : 0;
+  // each extra flip in a streak earns an escalating "regulars' tip" (capped),
+  // so chaining good flips snowballs in a way you can feel.
+  const tipUnit = Math.max(2, round(h.value * 0.025));
+  const tip = streak >= 2 ? Math.min(streak - 1, 5) * tipUnit : 0;
+  const take = price + tip;
+
+  next.gold = state.gold + take;
   next.bag = state.bag.filter((b) => b.uid !== h.inst.uid);
-  next.stats = { ...state.stats, earned: state.stats.earned + price, deals: state.stats.deals + 1 };
-  next.dayTakings = (state.dayTakings || 0) + price;
+  next.streak = streak;
+  next.dayTakings = (state.dayTakings || 0) + take;
+  next.dayDeals = (state.dayDeals || 0) + 1;
+  next.stats = {
+    ...state.stats,
+    earned: state.stats.earned + take,
+    deals: state.stats.deals + 1,
+    bestStreak: Math.max(state.stats.bestStreak || 0, streak),
+  };
+
   // selling fairly into what Kaito wants builds rapport; gouging to the ceiling doesn't
   let gain = 1;
   if (h.wanted) gain = price <= h.ceil * 0.96 ? 3 : 1;
-  next.haggle = { ...h, status: "deal", price, rapportGain: gain };
+  if (streak >= 3) gain += 1; // word spreads when you're on a roll
+
+  next.haggle = { ...h, status: "deal", price, rapportGain: gain, tip, streak, profit };
   next.rapport = Math.min(140, next.rapport + gain);
   next.stats.bestRapport = Math.max(next.stats.bestRapport, next.rapport);
   setFace(next, rng, "deal", "deal");
@@ -460,6 +485,23 @@ function ackBackstory(state) {
   setFace(next, rng, "greet", null);
   if (next.event) toast(next, `${next.event.title}: ${next.event.text}`);
   return next;
+}
+
+// --- pure UI selectors --------------------------------------------------------
+// Today's demand entry for a category (or null). Drives the shelf "flip" markers.
+export function wantFor(state, category) {
+  return state.wants.find((w) => w.category === category) || null;
+}
+
+// What a bag item is worth selling back to Kaito *today*, and the profit on it.
+// `ceil` is the most he'd ever pay; the haggled price lands between his opening
+// offer and this. `estProfit` compares that best case against what we paid.
+export function sellProjection(state, inst) {
+  const w = wantFor(state, inst.category);
+  const wanted = !!w;
+  const ceil = round(inst.value * (wanted ? 1 + w.bonus : CONFIG.dumpFactor));
+  const basis = inst.paid != null ? inst.paid : inst.value;
+  return { wanted, bonus: wanted ? w.bonus : 0, ceil, basis, estProfit: ceil - basis };
 }
 
 // --- public reducer -----------------------------------------------------------
