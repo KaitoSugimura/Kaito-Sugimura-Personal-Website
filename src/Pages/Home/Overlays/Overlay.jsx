@@ -4,7 +4,7 @@ import Navigation from "../../../Components/Navigation";
 import { INTRO_TITLE_EXPAND_MS, DIALOG_OPEN_DELAY_MS } from "../../../timings";
 
 const Overlay = forwardRef(
-  ({ scrollTo, setScrollable, currentSection, initDone, setInitDone }, ref) => {
+  ({ scrollTo, setScrollable, currentSection, initDone, setInitDone, chromeHidden }, ref) => {
     // Dialog
     const [currentDialogID, setCurrentDialogID] = useState("Home1");
     const callbackFunction = useRef(null);
@@ -53,6 +53,7 @@ const Overlay = forwardRef(
             scrollTo={scrollTo}
             currentSectionIndex={currentSection}
             initDone={initDone}
+            chromeHidden={chromeHidden}
           />
         )}
       </>

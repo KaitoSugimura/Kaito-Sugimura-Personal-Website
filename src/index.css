@@ -68,6 +68,20 @@ body::-webkit-scrollbar-track {
   border: none;
 }
 
+/* Body-level portal layer for full-screen game modals (see index.html). The
+   layer itself ignores pointer events and collapses when empty; each modal
+   re-enables pointer events on its own scrim. z-index sits above the site
+   chrome (.navigationRoot is z-index 100) so modals are never painted over. */
+#overlay-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+#overlay-root:empty {
+  display: none;
+}
+
 /** GLOBAL **/
 .NoUserSelect {
   -moz-user-select: -moz-none;

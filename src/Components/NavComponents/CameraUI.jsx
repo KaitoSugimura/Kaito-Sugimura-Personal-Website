@@ -51,7 +51,7 @@ function useTypewriter(text, { speed = 65, startDelay = 400 } = {}) {
   return { display, typing };
 }
 
-export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
+export default function CameraUI({ navIsOpen, currentSectionIndex, initDone, hideChrome }) {
   const sectionTitle = initDone ? Sections[currentSectionIndex].title : null;
   const { display: typedTitle, typing } = useTypewriter(sectionTitle);
 
@@ -72,7 +72,7 @@ export default function CameraUI({ navIsOpen, currentSectionIndex, initDone }) {
       <div
         className={`${styles.cameraUIContainer} ${
           initDone ? "" : styles.UIanim
-        }`}
+        } ${hideChrome ? styles.chromeHidden : ""}`}
       >
         <CornerBorder style={BorderStyle} />
         {!navIsOpen && (

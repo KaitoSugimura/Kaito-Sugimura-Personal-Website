@@ -4,6 +4,7 @@ import Sections from "./HomeTableOfContents.jsx";
 import InitHero from "./Hero/InitHero";
 import HorizontalEnjoyer from "../../Tools/HorizontalEnjoyer";
 import Overlay from "./Overlays/Overlay";
+import ErrorBoundary from "../../Components/ErrorBoundary";
 import { scrollContext } from "./scrollContext";
 import {
   TERMINAL_REVEAL_DELAY_MS,
@@ -15,11 +16,22 @@ export default function Home() {
   const isScrollable = useRef(false);
   const scrollTimerOn = useRef(false);
   const dialogRef = useRef(null);
+  const homeRootRef = useRef(null);
 
   const [currentSection, setCurrentSection] = useState(0);
   const TouchMoveStartY = useRef(0);
 
   const [initDone, setInitDone] = useState(false);
+
+  // The Shop is a full-screen game; its section collapses the site chrome (HUD
+  // brackets, title, page indicator, socials, nav, sound) so it doesn't clutter
+  // or paint over the game. A reveal toggle inside the Shop flips this back on.
+  // Chrome re-hides automatically every time the player (re)enters the Shop.
+  const isShop = Sections[currentSection]?.title === "Shop";
+  const [chromeHidden, setChromeHidden] = useState(true);
+  useEffect(() => {
+    if (isShop) setChromeHidden(true);
+  }, [isShop]);
 
   // Swap InitHero for the real terminal a beat after initDone, so the HUD title
   // gets to play its typewriter/caret animation before the terminal appears.
@@ -46,6 +58,19 @@ export default function Home() {
     };
   }, []);
 
+  // Keep off-screen sections out of the tab order and unclickable. They sit in
+  // the DOM (translated away), so without `inert` a keyboard user could Tab into
+  // a section that isn't on screen, and stray clicks could hit hidden controls.
+  useEffect(() => {
+    const root = homeRootRef.current;
+    if (!root) return;
+    Array.from(root.children).forEach((child, i) => {
+      child.inert = i !== currentSection;
+    });
+    // terminalReady is included so the effect re-runs when section 0 swaps from
+    // InitHero to the real Hero (fresh DOM node, inert resets to false).
+  }, [currentSection, terminalReady]);
+
   // Scroll
   const scrollTo = useCallback(
     (index) => {
@@ -58,6 +83,14 @@ export default function Home() {
 
   const setScrollable = useCallback((value) => {
     isScrollable.current = value;
+  }, []);
+
+  // Programmatic, unguarded section navigation (unlike scrollTo, which only fires
+  // when free-scrolling is enabled). Used by in-section CTAs — e.g. the Shop's
+  // win-screen "see Kaito's projects" button — that must work even while a Shop
+  // modal has page-snap locked.
+  const goToSection = useCallback((index) => {
+    setCurrentSection(Math.min(Math.max(index, 0), Sections.length - 1));
   }, []);
 
   const openDialogWithCallback = useCallback((id, callback) => {
@@ -83,6 +116,11 @@ export default function Home() {
     };
 
     const handleTouchMove = (event) => {
+      // Only hijack touch scrolling while page-snap is active. When it's locked
+      // off (a modal is open, or pre-init), let the browser scroll normally so
+      // content inside an overlay — the Shop's Codex/Help panels — can scroll on
+      // touch devices instead of being frozen by a blanket preventDefault.
+      if (!isScrollable.current) return;
       event.preventDefault();
       const touch = event.touches[0];
       const currentY = touch.pageY;
@@ -120,8 +158,15 @@ export default function Home() {
   }, [initDone]);
 
   const contextValue = useMemo(
-    () => ({ setScrollable, currentSection, openDialogWithCallback }),
-    [setScrollable, currentSection, openDialogWithCallback]
+    () => ({
+      setScrollable,
+      goToSection,
+      currentSection,
+      openDialogWithCallback,
+      chromeHidden,
+      setChromeHidden,
+    }),
+    [setScrollable, goToSection, currentSection, openDialogWithCallback, chromeHidden]
   );
 
   return (
@@ -135,10 +180,12 @@ export default function Home() {
           initDone={initDone}
           setScrollable={setScrollable}
           setInitDone={setInitDone}
+          chromeHidden={chromeHidden}
           ref={dialogRef}
         />
 
         <div
+          ref={homeRootRef}
           className={styles.HomeRoot}
           style={{
             transform: `translateY(calc(${currentSection} * -100dvh))`,
@@ -146,7 +193,11 @@ export default function Home() {
           }}
         >
           {Sections.map((section, index) => (
-            <React.Fragment key={section.title}>
+            // Each section gets its own boundary so a crash in one (e.g. the
+            // interactive Shop) can't white-screen the whole site. ErrorBoundary
+            // renders its child with no wrapper element, so the snap-scroll inert
+            // logic (one DOM node per section) is unaffected.
+            <ErrorBoundary key={section.title}>
               {!terminalReady && index == 0 ? (
                 <InitHero />
               ) : (
@@ -154,7 +205,7 @@ export default function Home() {
                   isfocus: (index == currentSection).toString(),
                 })
               )}
-            </React.Fragment>
+            </ErrorBoundary>
           ))}
         </div>
       </div>

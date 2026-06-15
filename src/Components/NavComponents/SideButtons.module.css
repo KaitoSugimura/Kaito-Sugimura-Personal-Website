@@ -43,8 +43,15 @@
 }
 
 .selected,
-.buttonPaddingWrapper:hover .sectionButtonBorder {
+.buttonPaddingWrapper:hover .sectionButtonBorder,
+.buttonPaddingWrapper:focus-visible .sectionButtonBorder {
   border: 2px solid rgba(255, 255, 255, 1);
+}
+
+.buttonPaddingWrapper:focus-visible {
+  outline: 2px solid rgba(124, 193, 246, 0.95);
+  outline-offset: 3px;
+  border-radius: 2rem;
 }
 
 .ButtonInnerColor {
@@ -56,7 +63,8 @@
   z-index: 1;
 }
 
-.buttonPaddingWrapper:hover .ButtonInnerColor {
+.buttonPaddingWrapper:hover .ButtonInnerColor,
+.buttonPaddingWrapper:focus-visible .ButtonInnerColor {
   display: block;
 }
 
@@ -99,7 +107,8 @@
   );
 }
 
-.buttonPaddingWrapper:hover + .sectionName {
+.buttonPaddingWrapper:hover + .sectionName,
+.buttonPaddingWrapper:focus-visible + .sectionName {
   display: block;
 }
 

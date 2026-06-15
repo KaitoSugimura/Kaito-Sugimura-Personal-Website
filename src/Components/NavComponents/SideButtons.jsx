@@ -21,6 +21,8 @@ export default function SideButtons({
               onClick={() => {
                 scrollTo(index);
               }}
+              aria-label={`Go to ${section.title}`}
+              aria-current={index === currentSectionIndex ? "true" : undefined}
             >
               <div
                 className={`${styles.sectionButtonBorder} ${

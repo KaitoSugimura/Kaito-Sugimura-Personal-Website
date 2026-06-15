@@ -12,16 +12,22 @@ export default function Navigation({
   scrollTo,
   currentSectionIndex,
   initDone,
+  chromeHidden,
 }) {
   const {playSFX} = useContext(SoundContext);
   const [navIsOpen, setNavIsOpen] = useState(false);
   const rootRef = useRef(null);
 
+  // On the Shop section the site chrome collapses (the Shop owns the screen).
+  // The full menu still opens, so revealing the chrome un-collapses everything.
+  const isShop = Sections[currentSectionIndex]?.title === "Shop";
+  const hideChrome = initDone && isShop && chromeHidden && !navIsOpen;
+
   return (
     <div className={styles.navigationRoot} ref={rootRef}>
       {!initDone && <div className={styles.backFilter}></div>}
 
-      {initDone && (
+      {initDone && !hideChrome && (
         <SoundSetting
           style={{
             top: `7vmin`,
@@ -34,12 +40,13 @@ export default function Navigation({
         navIsOpen={navIsOpen}
         currentSectionIndex={currentSectionIndex}
         initDone={initDone}
+        hideChrome={hideChrome}
       />
 
-      {initDone && (
+      {initDone && !hideChrome && (
         <NavButtons navIsOpen={navIsOpen} setNavIsOpen={setNavIsOpen} />
       )}
-      {initDone && (
+      {initDone && !hideChrome && (
         <SideButtons
           navIsOpen={navIsOpen}
           scrollTo={scrollTo}

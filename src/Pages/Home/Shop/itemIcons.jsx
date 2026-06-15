@@ -293,6 +293,41 @@ const ICONS = {
   <line x1="32" y1="28" x2="50" y2="30" stroke="#2b2118" stroke-width="1.5" opacity="0.55"/>
   <polygon points="24,20 30,26 22,28" fill="#f7f1e4" opacity="0.5"/>
 </svg>`,
+  "bronze-idol": `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="32" cy="56" rx="13" ry="3" fill="#000000" opacity="0.12"/>
+  <rect x="19" y="49" width="26" height="7" rx="2" fill="#6b4a2b" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M22 50 Q19 30 32 12 Q45 30 42 50 Z" fill="#c98a3a" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M24 14 Q32 3 40 14 Q32 18 24 14 Z" fill="#e0a52b" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="32" cy="19" r="8" fill="#e0a52b" stroke="#2b2118" stroke-width="2"/>
+  <circle cx="29" cy="19" r="1.5" fill="#2b2118"/>
+  <circle cx="35" cy="19" r="1.5" fill="#2b2118"/>
+  <path d="M30 23 Q32 25 34 23" stroke="#2b2118" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <path d="M24 31 Q28 35 32 34 Q36 35 40 31" stroke="#2b2118" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <path d="M27 39 H37 M28 44 H36" stroke="#2b2118" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+  <path d="M26 27 Q24 37 26 47" stroke="#f4cf73" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+</svg>`,
+  "rune-stone": `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="32" cy="56" rx="13" ry="3" fill="#000000" opacity="0.12"/>
+  <path d="M20 54 L18 21 Q18 10 32 8 Q46 10 46 21 L44 54 Z" fill="#8a97a3" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M24 51 L23 23 Q23 15 32 14 Q41 15 41 23 L40 51 Z" fill="#9aa6b2" opacity="0.55"/>
+  <path d="M27 22 L27 31 M27 26 L31 22 M27 26 L31 31" stroke="#6fae86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M35 34 L35 43 M35 34 L39 38 L35 39" stroke="#6fae86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M28 46 H34 M31 42 L31 50" stroke="#6fae86" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M22 23 Q22 15 30 13" stroke="#f7f1e4" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <path d="M40 26 L42 33" stroke="#2b2118" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
+</svg>`,
+  "spice-pouch": `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="32" cy="56" rx="14" ry="3" fill="#000000" opacity="0.12"/>
+  <path d="M16 37 Q16 52 32 52 Q48 52 48 37 Q48 25 38 21 L26 21 Q16 25 16 37 Z" fill="#b5763a" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M17 35 Q32 41 47 35 Q48 45 40 49 Q32 53 24 49 Q16 45 17 35 Z" fill="#a8692f" opacity="0.5"/>
+  <path d="M24 21 Q24 14 32 14 Q40 14 40 21 Q40 25 32 25 Q24 25 24 21 Z" fill="#a8692f" stroke="#2b2118" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M22 22 Q32 27 42 22" stroke="#4a3219" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M26 24 L25 30 M30 25 L30 31 M34 25 L34 31 M38 24 L39 30" stroke="#2b2118" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+  <ellipse cx="32" cy="14" rx="5" ry="2.5" fill="#b23b2c" stroke="#2b2118" stroke-width="1.5"/>
+  <circle cx="29" cy="12.5" r="1" fill="#e0722a"/>
+  <circle cx="34" cy="12.5" r="1" fill="#e0722a"/>
+  <path d="M22 33 Q20 43 26 49" stroke="#f4cf73" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+</svg>`,
 };
 
 const FALLBACK = `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
