@@ -1,4 +1,6 @@
 // Main Images
+import CardexMainImage from "/Home/WebsiteProjects/Cardex.webp";
+import GestaltEchoMainImage from "/Home/WebsiteProjects/GestaltEcho.webp";
 import ImSlimeMainImage from "/Home/WebsiteProjects/ImSlimeMain.webp";
 import CoinDozerMainImage from "/Home/WebsiteProjects/CoinDozerGame.webp";
 import KaitoWebsite2MainImage from "/Home/WebsiteProjects/KaitoWebsite2.webp";
@@ -10,6 +12,12 @@ import BruhGameMainImage from "/Home/WebsiteProjects/BruhGame.webp";
 import ScuffedRPGAdventuresMainImage from "/Home/WebsiteProjects/ScuffedRPGAdventures.webp";
 import KaitoWebsiteMainImage from "/Home/WebsiteProjects/KaitoWebsite.webp";
 // Sub Images
+import CardexE1 from "/Home/WebsiteProjects/Extra/CardexE1.jpg";
+import CardexE2 from "/Home/WebsiteProjects/Extra/CardexE2.jpg";
+import CardexE3 from "/Home/WebsiteProjects/Extra/CardexE3.jpg";
+import GestaltEchoE1 from "/Home/WebsiteProjects/Extra/GestaltEchoE1.jpg";
+import GestaltEchoE2 from "/Home/WebsiteProjects/Extra/GestaltEchoE2.jpg";
+import GestaltEchoE3 from "/Home/WebsiteProjects/Extra/GestaltEchoE3.jpg";
 import ImSlimeE1 from "/Home/WebsiteProjects/Extra/ImSlimeE1.jpg";
 import ImSlimeE2 from "/Home/WebsiteProjects/Extra/ImSlimeE2.jpg";
 import ImSlimeE3 from "/Home/WebsiteProjects/Extra/ImSlimeE3.jpg";
@@ -42,6 +50,24 @@ import KaitoWebsiteE2 from "/Home/WebsiteProjects/Extra/KaitoWebsiteE2.jpg";
 import KaitoWebsiteE3 from "/Home/WebsiteProjects/Extra/KaitoWebsiteE3.jpg";
 
 export default [
+  {
+    title: "Gestalt Echo",
+    desc: "Turn-based gacha RPG on Discord & web",
+    youtubeID: null,
+    websiteLink: "https://dev-gestalt-echo.vercel.app/",
+    logoPath: "React.webp",
+    imageMain: GestaltEchoMainImage,
+    extraImages: [GestaltEchoE1, GestaltEchoE2, GestaltEchoE3],
+  },
+  {
+    title: "Cardex",
+    desc: "Grand Archive TCG storefront & binder",
+    youtubeID: null,
+    websiteLink: "https://cardex-jet.vercel.app/",
+    logoPath: "React.webp",
+    imageMain: CardexMainImage,
+    extraImages: [CardexE1, CardexE2, CardexE3],
+  },
   {
     title: "I'm Slime",
     desc: "Online Web Multiplayer Game",

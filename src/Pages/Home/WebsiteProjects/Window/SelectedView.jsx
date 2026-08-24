@@ -111,7 +111,7 @@ export default function SelectedView({ index, sectionRatio }) {
         )}
         <div className={styles.id}>
           <span>
-            0{index}
+            {String(index).padStart(2, "0")}
             {project && <h1>{project.title}</h1>}
           </span>
         </div>
